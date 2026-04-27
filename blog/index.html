@@ -162,13 +162,13 @@
   let allPosts = [];
   let activeFilter = "all";
 
-  fetch("./posts.json")
-    .then(r => r.json())
-    .then(data => { allPosts = data; renderGrid("all"); })
-    .catch(() => {
-      document.getElementById("blog-grid").innerHTML =
-        "<p style='color:var(--gray-500);grid-column:1/-1'>No se pudieron cargar los artículos.</p>";
-    });
+  fetch("/blog/posts.json")
+  .then(r => r.json())
+  .then(data => { allPosts = data; renderGrid("all"); })
+  .catch(() => {
+    document.getElementById("blog-grid").innerHTML =
+      "<p style='color:var(--gray-500);grid-column:1/-1'>No se pudieron cargar los artículos.</p>";
+  });
 
   function renderGrid(filter) {
     const grid = document.getElementById("blog-grid");
