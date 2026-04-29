@@ -170,34 +170,86 @@
       "<p style='color:var(--gray-500);grid-column:1/-1'>No se pudieron cargar los artículos.</p>";
   });
 
-  function renderGrid(filter) {
-    const grid = document.getElementById("blog-grid");
-    const count = document.getElementById("post-count");
-    const filtered = filter === "all" ? allPosts : allPosts.filter(p => p.cat === filter);
-    count.textContent = `${filtered.length} artículo${filtered.length !== 1 ? "s" : ""}`;
-    if (!filtered.length) {
-      grid.innerHTML = "<p style='color:var(--gray-500);grid-column:1/-1'>No hay artículos en esta categoría todavía.</p>";
-      return;
-    }
-    grid.innerHTML = filtered.map(p => `
-      <article class="post-card" data-id="${p.id}" role="button" tabindex="0">
-          <div class="card-thumb">${p.image ? `<img src="${p.image}" alt="${p.tag}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">` : p.emoji}</div>        <div class="card-body">
-          <span class="card-tag">${p.tag}</span>
-          <h2 class="card-title">${p.title}</h2>
-          <p class="card-excerpt">${p.excerpt}</p>
-          <div class="card-meta">
-            <span>${p.date}</span><span class="card-meta-dot"></span><span>${p.readTime} de lectura</span>
-          </div>
-          <span class="card-read-more">Leer artículo
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
-        </div>
-      </article>`).join("");
-    grid.querySelectorAll(".post-card").forEach(c => {
-      c.addEventListener("click", () => openPost(+c.dataset.id));
-      c.addEventListener("keydown", e => { if (e.key === "Enter") openPost(+c.dataset.id); });
-    });
+ const POSTS_PER_PAGE = 9;
+let currentPage = 1;
+let currentFilter = "all";
+
+function renderGrid(filter) {
+  currentFilter = filter;
+  const grid = document.getElementById("blog-grid");
+  const count = document.getElementById("post-count");
+  
+  let filtered = filter === "all" ? allPosts : allPosts.filter(p => p.cat === filter);
+  
+  // Más nuevo primero
+  filtered.sort((a, b) => b.id - a.id);
+  
+  count.textContent = `${filtered.length} artículo${filtered.length !== 1 ? "s" : ""}`;
+  
+  if (!filtered.length) {
+    grid.innerHTML = "<p style='color:var(--gray-500);grid-column:1/-1'>No hay artículos en esta categoría todavía.</p>";
+    renderPagination(0);
+    return;
   }
+
+  const totalPages = Math.ceil(filtered.length / POSTS_PER_PAGE);
+  if (currentPage > totalPages) currentPage = 1;
+  const start = (currentPage - 1) * POSTS_PER_PAGE;
+  const paginated = filtered.slice(start, start + POSTS_PER_PAGE);
+
+  grid.innerHTML = paginated.map(p => `
+    <article class="post-card" data-id="${p.id}" role="button" tabindex="0">
+      <div class="card-thumb">${p.image ? `<img src="${p.image}" alt="${p.tag}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">` : p.emoji}</div>
+      <div class="card-body">
+        <span class="card-tag">${p.tag}</span>
+        <h2 class="card-title">${p.title}</h2>
+        <p class="card-excerpt">${p.excerpt}</p>
+        <div class="card-meta">
+          <span>${p.date}</span><span class="card-meta-dot"></span><span>${p.readTime} de lectura</span>
+        </div>
+        <span class="card-read-more">Leer artículo
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </div>
+    </article>`).join("");
+
+  grid.querySelectorAll(".post-card").forEach(c => {
+    c.addEventListener("click", () => openPost(+c.dataset.id));
+    c.addEventListener("keydown", e => { if (e.key === "Enter") openPost(+c.dataset.id); });
+  });
+
+  renderPagination(totalPages);
+}
+
+function renderPagination(totalPages) {
+  const existing = document.getElementById("pagination");
+  if (existing) existing.remove();
+  if (totalPages <= 1) return;
+
+  const div = document.createElement("div");
+  div.id = "pagination";
+  div.style.cssText = "display:flex;justify-content:center;gap:8px;margin:40px 0 16px;flex-wrap:wrap;";
+
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement("button");
+    btn.textContent = i;
+    btn.style.cssText = `
+      padding:8px 18px;border-radius:50px;cursor:pointer;font-weight:700;font-size:14px;
+      border:1.5px solid var(--navy);
+      background:${i === currentPage ? "var(--navy)" : "transparent"};
+      color:${i === currentPage ? "#fff" : "var(--navy)"};
+      transition:all .2s;
+    `;
+    btn.onclick = () => {
+      currentPage = i;
+      renderGrid(currentFilter);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+    div.appendChild(btn);
+  }
+
+  document.getElementById("blog-grid").after(div);
+}
 
   function openPost(id) {
     const p = allPosts.find(x => x.id === id);
