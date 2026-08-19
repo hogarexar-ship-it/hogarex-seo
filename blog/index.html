@@ -186,6 +186,7 @@
  const POSTS_PER_PAGE = 9;
 let currentPage = 1;
 let currentFilter = "all";
+let paginationRenderedOnce = false;
 
 function renderGrid(filter) {
   currentFilter = filter;
@@ -290,7 +291,10 @@ function renderPagination(totalPages) {
   document.getElementById("blog-grid").after(wrap);
 
   const activeBtn = track.querySelector(".pagination-btn.active");
-  if (activeBtn) activeBtn.scrollIntoView({ inline: "center", block: "nearest" });
+  if (activeBtn && paginationRenderedOnce) {
+    activeBtn.scrollIntoView({ inline: "center", block: "nearest" });
+  }
+  paginationRenderedOnce = true;
 }
 
   function openPost(id) {
