@@ -6,6 +6,7 @@ También regenera sitemap.xml incluyendo las landing pages existentes + una URL 
 
 Uso: python3 generate_pages.py   (ejecutar desde la raíz del repo)
 """
+import base64
 import json
 import os
 import re
@@ -16,7 +17,14 @@ REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
 POSTS_PATH = os.path.join(REPO_ROOT, "blog", "posts.json")
 BLOG_DIR = os.path.join(REPO_ROOT, "blog")
 SITEMAP_PATH = os.path.join(REPO_ROOT, "sitemap.xml")
+LOGO_PATH = os.path.join(REPO_ROOT, "blog", "assets", "logo-white.png")
 SITE_ORIGIN = "https://landing.hogarex.ar"
+
+
+def load_logo_data_uri():
+    with open(LOGO_PATH, "rb") as f:
+        b64 = base64.b64encode(f.read()).decode("ascii")
+    return f"data:image/png;base64,{b64}"
 
 MESES = {
     "enero": "01", "febrero": "02", "marzo": "03", "abril": "04",
@@ -195,8 +203,8 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     body {{ font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--text); min-height: 100vh; }}
     header {{ background: var(--navy); padding: 0 24px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }}
     .header-inner {{ max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }}
-    .logo {{ font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.15rem; color: var(--white); text-decoration: none; letter-spacing: -0.3px; }}
-    .logo span {{ color: var(--yellow); }}
+    .logo {{ display: flex; align-items: center; text-decoration: none; }}
+    .logo img {{ height: 32px; width: auto; display: block; }}
     nav a {{ color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 500; margin-left: 24px; transition: color 0.2s; }}
     nav a:hover, nav a.active {{ color: var(--yellow); }}
     .breadcrumb {{ max-width: 740px; margin: 0 auto; padding: 20px 24px 0; }}
@@ -235,7 +243,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 
 <header>
   <div class="header-inner">
-    <a href="https://hogarex.ar" class="logo">Hogare<span>x</span></a>
+    <a href="https://hogarex.ar" class="logo"><img src="{logo_data_uri}" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar">Inicio</a>
       <a href="https://landing.hogarex.ar/blog" class="active">Blog</a>
@@ -271,7 +279,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 """
 
 
-def render_page(post):
+def render_page(post, logo_data_uri):
     url = f"{SITE_ORIGIN}/blog/{post['slug']}"
     return PAGE_TEMPLATE.format(
         title_esc=html.escape(post["title"]),
@@ -283,10 +291,12 @@ def render_page(post):
         image=post["image"],
         jsonld=build_jsonld(post),
         content=post["content"],
+        logo_data_uri=logo_data_uri,
     )
 
 
 def generate_pages(posts):
+    logo_data_uri = load_logo_data_uri()
     created = 0
     for post in posts:
         slug = post["slug"]
@@ -294,7 +304,7 @@ def generate_pages(posts):
         os.makedirs(page_dir, exist_ok=True)
         page_path = os.path.join(page_dir, "index.html")
         with open(page_path, "w", encoding="utf-8") as f:
-            f.write(render_page(post))
+            f.write(render_page(post, logo_data_uri))
         created += 1
     return created
 
