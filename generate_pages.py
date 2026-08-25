@@ -204,7 +204,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     header {{ background: var(--navy); padding: 0 24px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }}
     .header-inner {{ max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }}
     .logo {{ display: flex; align-items: center; text-decoration: none; }}
-    .logo img {{ height: 32px; width: auto; display: block; }}
+    .logo img {{ height: 36px; width: auto; display: block; }}
     nav a {{ color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 500; margin-left: 24px; transition: color 0.2s; }}
     nav a:hover, nav a.active {{ color: var(--yellow); }}
     .breadcrumb {{ max-width: 740px; margin: 0 auto; padding: 20px 24px 0; }}
