@@ -231,7 +231,9 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     footer {{ background: var(--navy-dark); color: rgba(255,255,255,0.5); text-align: center; padding: 28px 24px; font-size: 0.82rem; }}
     footer a {{ color: var(--yellow); text-decoration: none; }}
     @media (max-width: 600px) {{
-      nav {{ display: none; }}
+      nav {{ display: flex; align-items: center; }}
+      nav a:not(.nav-cta) {{ display: none; }}
+      nav a.nav-cta {{ margin-left: 0; padding: 7px 14px; font-size: 0.8rem; }}
     }}
   </style>
   <script>
@@ -247,7 +249,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     <nav>
       <a href="https://hogarex.ar">Inicio</a>
       <a href="https://landing.hogarex.ar/blog" class="active">Blog</a>
-      <a href="https://hogarex.ar" style="background:var(--yellow);color:var(--navy);padding:8px 18px;border-radius:999px;font-weight:700;font-family:'Sora',sans-serif;margin-left:16px;">Solicitar profesional</a>
+      <a href="https://hogarex.ar" class="nav-cta" style="background:var(--yellow);color:var(--navy);padding:8px 18px;border-radius:999px;font-weight:700;font-family:'Sora',sans-serif;margin-left:16px;">Recibir presupuesto gratis</a>
     </nav>
   </div>
 </header>
