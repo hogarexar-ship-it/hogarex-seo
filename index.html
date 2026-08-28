@@ -85,6 +85,7 @@
     .prof-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
     .prof-av{width:44px;height:44px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#fff;flex-shrink:0}
     .vbadge{display:flex;align-items:center;gap:3px;background:#dcfce7;color:var(--green);font-size:11px;font-weight:700;padding:3px 9px;border-radius:var(--rp)}
+    .vbadge-lic{display:flex;align-items:center;gap:3px;background:var(--blue-bg);color:var(--blue);font-size:11px;font-weight:700;padding:3px 9px;border-radius:var(--rp)}
     .prof-name{font-size:15px;font-weight:700;color:#111827;margin-bottom:2px}
     .prof-rub{font-size:13px;font-weight:600;color:var(--blue);margin-bottom:8px}
     .prof-desc{font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
@@ -351,6 +352,7 @@
 <section class="profesionales">
   <div class="container">
     <p class="sec-label">Profesionales Verificados</p>
+    <p style="text-align:center;font-size:14px;color:var(--t3);margin:-12px 0 24px">Elegís vos: mirá perfil, reseñas y verificaciones antes de contratar.</p>
     <div class="carousel-wrap">
       <button type="button" class="car-btn car-prev" onclick="carScroll(this,-1)" aria-label="Anterior">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -359,40 +361,40 @@
       <div class="prof-card">
         <div class="prof-top">
           <div class="prof-av">LT</div>
-          <span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Verificado</span>
+          <span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span>
         </div>
         <div class="prof-name">Luis Torres</div>
         <div class="prof-rub">Plomero</div>
         <div class="prof-desc">Soy Luis. Realizo trabajos de la construcción y el mantenimiento general de la vivienda. Plomería en general.</div>
         <div class="prof-meta">
           <span class="prof-popular">↑ Popular</span>
-          <span class="prof-loc">📍 Buenos Aires (CABA)</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
         </div>
       </div>
       <div class="prof-card">
         <div class="prof-top">
           <div class="prof-av" style="background:#206ff7">MM</div>
-          <span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Verificado</span>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span><span class="vbadge-lic"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Matrícula verificada</span></div>
         </div>
         <div class="prof-name">Marcelino Martínez</div>
         <div class="prof-rub">Gasista</div>
         <div class="prof-desc">Trabajo de plomero hace 45 años. Soy gasista matriculado puedo reparar artefactos calcular instalaciones.</div>
         <div class="prof-meta">
           <span class="prof-popular">↑ Popular</span>
-          <span class="prof-loc">📍 Buenos Aires (CABA)</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
         </div>
       </div>
       <div class="prof-card">
         <div class="prof-top">
           <div class="prof-av" style="background:#065f46">DF</div>
-          <span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Verificado</span>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span><span class="vbadge-lic"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Matrícula verificada</span></div>
         </div>
         <div class="prof-name">Daniel Figueroa</div>
         <div class="prof-rub">Electricista</div>
         <div class="prof-desc">Soy Electricista matriculado y Técnico en refrigeración, trabajos garantizados y con total seriedad.</div>
         <div class="prof-meta">
           <span class="prof-popular">↑ Popular</span>
-          <span class="prof-loc">📍 Córdoba Capital</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Córdoba Capital</span>
         </div>
       </div>
     </div>

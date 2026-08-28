@@ -107,6 +107,7 @@
     .prof-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
     .prof-av{width:48px;height:48px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;color:#fff;flex-shrink:0}
     .vbadge{display:flex;align-items:center;gap:4px;background:#dcfce7;color:var(--green);font-size:11px;font-weight:700;padding:4px 10px;border-radius:var(--rp)}
+    .vbadge-lic{display:flex;align-items:center;gap:4px;background:var(--blue-bg);color:var(--blue);font-size:11px;font-weight:700;padding:4px 10px;border-radius:var(--rp)}
     .prof-name{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:3px}
     .prof-rub{font-size:13px;font-weight:600;color:var(--blue);margin-bottom:3px}
     .prof-loc{font-size:12px;color:var(--t3);margin-bottom:8px}
@@ -391,11 +392,11 @@
   <div class="container">
     <div class="sec-hd">
       <h2 class="sec-title">Profesionales Destacados</h2>
-      <p class="sec-sub">Vecinos ya contrataron</p>
+      <p class="sec-sub">Elegís vos: mirá perfil, reseñas y verificaciones antes de contratar.</p>
     </div>
     <div class="prof-grid">
       <div class="prof-card">
-        <div class="prof-top"><div class="prof-av">EF</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Verificado</span></div>
+        <div class="prof-top"><div class="prof-av">EF</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span></div>
         <div class="prof-name">Eduardo Flores</div>
         <div class="prof-rub">Carpintero · <span style="color:var(--t3);font-weight:400">Buenos Aires (CABA)</span></div>
         <div class="stars">★★★★★</div>
@@ -404,7 +405,7 @@
         <a href="https://hogarex.ar/solicitud-enviar?rubro=Carpintero&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
       </div>
       <div class="prof-card">
-        <div class="prof-top"><div class="prof-av" style="background:var(--blue)">NS</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Verificado</span></div>
+        <div class="prof-top"><div class="prof-av" style="background:var(--blue)">NS</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span></div>
         <div class="prof-name">Nicolás Suárez</div>
         <div class="prof-rub">Carpintero · <span style="color:var(--t3);font-weight:400">Buenos Aires (GBA)</span></div>
         <div class="stars">★★★★★</div>
@@ -413,7 +414,7 @@
         <a href="https://hogarex.ar/solicitud-enviar?rubro=Carpintero&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
       </div>
       <div class="prof-card">
-        <div class="prof-top"><div class="prof-av" style="background:#065f46">CR</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Verificado</span></div>
+        <div class="prof-top"><div class="prof-av" style="background:#065f46">CR</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span></div>
         <div class="prof-name">Carlos Ríos</div>
         <div class="prof-rub">Carpintero · <span style="color:var(--t3);font-weight:400">CABA</span></div>
         <div class="stars">★★★★★</div>
@@ -437,13 +438,13 @@
     </div>
     <div class="feat-marquee">
       <div class="feat-track">
-        <div class="feat-card"><div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg></div><div><div class="feat-t">Profesionales Verificados</div><div class="feat-d">Validamos identidad y certificados de cada profesional.</div></div></div>
+        <div class="feat-card"><div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg></div><div><div class="feat-t">Profesionales Verificados</div><div class="feat-d">Verificamos la identidad de todos. En electricistas y gasistas, también la matrícula.</div></div></div>
       <div class="feat-card"><div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="feat-t">Cerca tuyo</div><div class="feat-d">Encontrá expertos en tu barrio de CABA.</div></div></div>
       <div class="feat-card"><div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg></div><div><div class="feat-t">Imágenes Reales</div><div class="feat-d">Galerías de trabajos previos de cada profesional.</div></div></div>
       <div class="feat-card"><div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg></div><div><div class="feat-t">Opiniones de Clientes</div><div class="feat-d">Leé reseñas reales antes de contratar.</div></div></div>
       <div class="feat-card"><div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div><div><div class="feat-t">Compará perfiles</div><div class="feat-d">Por precio, reputación o cercanía a tu domicilio.</div></div></div>
       <div class="feat-card"><div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></div><div><div class="feat-t">Presupuestos Múltiples</div><div class="feat-d">Recibí hasta 3 presupuestos con solo un formulario.</div></div></div>
-        <div class="feat-card" aria-hidden="true"><div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg></div><div><div class="feat-t">Profesionales Verificados</div><div class="feat-d">Validamos identidad y certificados de cada profesional.</div></div></div>
+        <div class="feat-card" aria-hidden="true"><div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg></div><div><div class="feat-t">Profesionales Verificados</div><div class="feat-d">Verificamos la identidad de todos. En electricistas y gasistas, también la matrícula.</div></div></div>
       <div class="feat-card" aria-hidden="true"><div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="feat-t">Cerca tuyo</div><div class="feat-d">Encontrá expertos en tu barrio de CABA.</div></div></div>
       <div class="feat-card" aria-hidden="true"><div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg></div><div><div class="feat-t">Imágenes Reales</div><div class="feat-d">Galerías de trabajos previos de cada profesional.</div></div></div>
       <div class="feat-card" aria-hidden="true"><div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg></div><div><div class="feat-t">Opiniones de Clientes</div><div class="feat-d">Leé reseñas reales antes de contratar.</div></div></div>
