@@ -345,6 +345,7 @@
       <h2>Servicios para el hogar en toda la Ciudad de Buenos Aires</h2>
       <p>CABA tiene 48 barrios y cada uno tiene su propia dinámica: no es lo mismo conseguir un electricista en Palermo que en Mataderos, ni un plomero en Recoleta que en La Boca. Por eso Hogarex organiza a sus profesionales verificados por zona, para que la distancia no sea un problema al pedir presupuesto.</p>
       <p>Elegí el rubro que necesitás y después tu barrio, o directamente contanos qué trabajo tenés y tu ubicación: te conectamos con profesionales que ya cubren esa parte de la Ciudad.</p>
+      <p>Hoy tenemos página propia por barrio para Palermo, Belgrano, Recoleta, Villa Crespo, Colegiales y Almagro en cada rubro, y seguimos sumando zonas. El resto de CABA también tiene profesionales verificados disponibles — el formulario de presupuesto toma tu dirección exacta para conectarte igual.</p>
     </div>
   </div>
 </section>
@@ -357,12 +358,54 @@
       <p class="sec-sub">Cada rubro tiene cobertura en los 48 barrios de CABA</p>
     </div>
     <div class="srv-grid">
-      <a href="https://app.hogarex.ar/electricistas/caba" class="srv-card" style="display:block"><div class="srv-ico">⚡</div><div class="srv-name">Electricistas</div><div class="srv-desc">Instalaciones, tableros, certificados y urgencias eléctricas.</div></a>
-      <a href="https://app.hogarex.ar/plomeros/caba" class="srv-card" style="display:block"><div class="srv-ico">💧</div><div class="srv-name">Plomeros</div><div class="srv-desc">Destapes, pérdidas, termotanques y reparaciones de cañerías.</div></a>
-      <a href="https://app.hogarex.ar/gasistas/caba" class="srv-card" style="display:block"><div class="srv-ico">🔥</div><div class="srv-name">Gasistas</div><div class="srv-desc">Instalaciones y certificaciones de gas por matriculados.</div></a>
-      <a href="https://app.hogarex.ar/pintores/caba" class="srv-card" style="display:block"><div class="srv-ico">🖌️</div><div class="srv-name">Pintores</div><div class="srv-desc">Pintura interior, exterior y trabajos de terminación.</div></a>
-      <a href="https://app.hogarex.ar/carpinteros/caba" class="srv-card" style="display:block"><div class="srv-ico">🪚</div><div class="srv-name">Carpinteros</div><div class="srv-desc">Muebles a medida, reparaciones y trabajos en madera.</div></a>
-      <a href="https://app.hogarex.ar/instalaciones/caba" class="srv-card" style="display:block"><div class="srv-ico">🔧</div><div class="srv-name">Instalaciones</div><div class="srv-desc">Montaje de muebles, artefactos y aires acondicionados.</div></a>
+      <a href="https://app.hogarex.ar/electricistas/caba" class="srv-card" style="display:block"><div class="srv-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="srv-name">Electricistas</div><div class="srv-desc">Instalaciones, tableros, certificados y urgencias eléctricas.</div></a>
+      <a href="https://app.hogarex.ar/plomeros/caba" class="srv-card" style="display:block"><div class="srv-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4.97 0 9-3.582 9-8 0-4.418-4.5-10-9-13-4.5 3-9 8.582-9 13 0 4.418 4.03 8 9 8Z"/></svg></div><div class="srv-name">Plomeros</div><div class="srv-desc">Destapes, pérdidas, termotanques y reparaciones de cañerías.</div></a>
+      <a href="https://app.hogarex.ar/gasistas/caba" class="srv-card" style="display:block"><div class="srv-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div><div class="srv-name">Gasistas</div><div class="srv-desc">Instalaciones y certificaciones de gas por matriculados.</div></a>
+      <a href="https://app.hogarex.ar/pintores/caba" class="srv-card" style="display:block"><div class="srv-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="6" x="2" y="2" rx="2"/><path d="M10 8v2a2 2 0 0 1-2 2H5a2 2 0 0 0-2 2v3"/><rect width="4" height="6" x="8" y="16" rx="1"/></svg></div><div class="srv-name">Pintores</div><div class="srv-desc">Pintura interior, exterior y trabajos de terminación.</div></a>
+      <a href="https://app.hogarex.ar/carpinteros/caba" class="srv-card" style="display:block"><div class="srv-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5a2.12 2.12 0 1 1-3-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg></div><div class="srv-name">Carpinteros</div><div class="srv-desc">Muebles a medida, reparaciones y trabajos en madera.</div></a>
+      <a href="https://app.hogarex.ar/instalaciones/caba" class="srv-card" style="display:block"><div class="srv-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="12" y1="12" y2="12"/><line x1="8" x2="3" y1="12" y2="12"/><line x1="21" x2="16" y1="20" y2="20"/><line x1="12" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="16" x2="16" y1="18" y2="22"/></svg></div><div class="srv-name">Instalaciones</div><div class="srv-desc">Montaje de muebles, artefactos y aires acondicionados.</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- PROFESIONALES -->
+<section class="profs">
+  <div class="container">
+    <div class="sec-hd">
+      <h2 class="sec-title">Profesionales verificados en distintos barrios</h2>
+      <p class="sec-sub">Una muestra de quiénes están activos hoy en CABA, en varios rubros.</p>
+    </div>
+    <div class="prof-grid">
+      <div class="prof-card">
+        <div class="prof-top"><div class="prof-av" style="background:#0f766e">SP</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Verificado</span></div>
+        <div class="prof-name">Sofía Paredes</div>
+        <div class="prof-rub">Electricista Matriculada · <span style="color:var(--t3);font-weight:400">Palermo, CABA</span></div>
+        <div class="stars">★★★★★</div>
+        <div class="prof-desc">Instalaciones nuevas y certificados CTPBA. Presupuesto cerrado, sin sorpresas.</div>
+        <div class="prof-pop">↑ Popular</div>
+        <a href="https://hogarex.ar/solicitud-enviar?rubro=Electricista&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top"><div class="prof-av" style="background:var(--blue)">MF</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Verificado</span></div>
+        <div class="prof-name">Martín Ferreyra</div>
+        <div class="prof-rub">Plomero · <span style="color:var(--t3);font-weight:400">Recoleta, CABA</span></div>
+        <div class="stars">★★★★★</div>
+        <div class="prof-desc">Destapes y reparación de pérdidas en edificios antiguos. Diagnóstico sin cargo.</div>
+        <div class="prof-pop">↑ Popular</div>
+        <a href="https://hogarex.ar/solicitud-enviar?rubro=Plomero&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top"><div class="prof-av" style="background:#065f46">GS</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Verificado</span></div>
+        <div class="prof-name">Gabriel Santos</div>
+        <div class="prof-rub">Pintor · <span style="color:var(--t3);font-weight:400">Belgrano, CABA</span></div>
+        <div class="stars">★★★★★</div>
+        <div class="prof-desc">Pintura de interiores y exteriores por metro cuadrado, sin costos ocultos.</div>
+        <div class="prof-pop">↑ Popular</div>
+        <a href="https://hogarex.ar/solicitud-enviar?rubro=Pintor&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:32px">
+      <a href="https://hogarex.ar/busqueda" class="btn-blue">Ver todos los profesionales →</a>
     </div>
   </div>
 </section>
