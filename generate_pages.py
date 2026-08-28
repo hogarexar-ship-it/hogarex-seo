@@ -40,6 +40,14 @@ STATIC_PAGES = [
     ("/carpinteros", "monthly", "1.0"),
     ("/instalaciones", "monthly", "1.0"),
     ("/blog", "daily", "0.9"),
+    # Hub de ciudad cross-rubro y hubs rubro+ciudad
+    ("/caba", "monthly", "0.9"),
+    ("/electricistas/caba", "monthly", "0.9"),
+    ("/plomeros/caba", "monthly", "0.9"),
+    ("/gasistas/caba", "monthly", "0.9"),
+    ("/pintores/caba", "monthly", "0.9"),
+    ("/carpinteros/caba", "monthly", "0.9"),
+    ("/instalaciones/caba", "monthly", "0.9"),
     # Landings barrio+rubro (piloto Palermo y alrededores)
     ("/electricistas/caba/palermo", "monthly", "0.85"),
     ("/electricistas/caba/belgrano", "monthly", "0.85"),
