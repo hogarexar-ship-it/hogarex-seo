@@ -94,10 +94,10 @@
     .srv-price strong{color:var(--navy)}
     /* COMO FUNCIONA */
     .cf{background:#fff}
-    .cf-toggle{display:flex;justify-content:center;gap:6px;margin:0 auto 32px;background:var(--g1);border-radius:var(--rp);padding:6px;max-width:520px}
-    .cf-tab{flex:1;border:none;background:transparent;padding:12px 18px;border-radius:var(--rp);font-size:14px;font-weight:700;color:var(--t3);cursor:pointer;transition:all .2s}
-    .cf-tab.active{background:var(--navy);color:#fff}
     .pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .cf-cta{text-align:center;margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:14px}
+    .cf-alt{font-size:13px;font-weight:600;color:var(--t3);text-decoration:underline;text-underline-offset:3px}
+    .cf-alt:hover{color:var(--blue)}
     .paso{text-align:center}
     .paso-n{width:52px;height:52px;border-radius:50%;background:var(--navy);color:#fff;font-size:20px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
     .paso-t{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:6px}
@@ -120,7 +120,10 @@
     .btn-pedir:hover{background:var(--navy);color:#fff}
     /* POR QUE */
     .pq{background:var(--blue-bg)}
-    .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .feat-marquee{height:300px;overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 24px,#000 calc(100% - 24px),transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 24px,#000 calc(100% - 24px),transparent 100%)}
+    .feat-track{display:flex;flex-direction:column;gap:12px;animation:featScroll 18s linear infinite}
+    .feat-marquee:hover .feat-track{animation-play-state:paused}
+    @keyframes featScroll{0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
     .feat-card{background:#fff;border:1px solid #dbeafe;border-radius:var(--r);padding:20px;display:flex;align-items:flex-start;gap:14px}
     .feat-ico{width:40px;height:40px;background:var(--blue-bg);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
     .feat-t{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:2px}
@@ -185,8 +188,7 @@
       .srv-grid{grid-template-columns:repeat(2,1fr)}
       .pasos{grid-template-columns:repeat(2,1fr)}
       .prof-grid{grid-template-columns:repeat(2,1fr)}
-      .feat-grid{grid-template-columns:repeat(2,1fr)}
-      .cseo-grid{grid-template-columns:1fr}
+            .cseo-grid{grid-template-columns:1fr}
       .sidebar{position:static}
       .ft-grid{grid-template-columns:1fr 1fr}
       .hero-stats{gap:20px}
@@ -229,23 +231,25 @@
       .sec-sub{font-size:14px;margin-bottom:28px}
 
       /* SERVICIOS */
-      .srv-grid{grid-template-columns:1fr;gap:12px}
+      .srv-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:6px;scrollbar-width:none}
+      .srv-grid::-webkit-scrollbar{display:none}
+      .srv-grid > .srv-card{flex:0 0 82%;scroll-snap-align:start}
       .srv-card{padding:20px}
       .srv-ico{width:40px;height:40px;font-size:18px;margin-bottom:10px}
 
       /* COMO FUNCIONA */
-      .cf-toggle{flex-direction:column;max-width:100%}
       .pasos{grid-template-columns:1fr;gap:20px}
       .paso-n{width:44px;height:44px;font-size:18px;margin-bottom:12px}
       .cf .btn-ylg,.cf .btn-ol{width:100%;justify-content:center;text-align:center}
       .cf div[style*="display:flex"]{flex-direction:column;align-items:center}
 
       /* PROFESIONALES */
-      .prof-grid{grid-template-columns:1fr;gap:12px}
-      .prof-card{padding:16px}
+      .prof-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:6px;scrollbar-width:none}
+      .prof-grid::-webkit-scrollbar{display:none}
+      .prof-grid > .prof-card{flex:0 0 82%;scroll-snap-align:start;padding:16px}
 
       /* POR QUE */
-      .feat-grid{grid-template-columns:1fr;gap:10px}
+      .feat-marquee{height:260px}
       .feat-card{padding:16px}
       .pq div[style*="text-align:center"]{margin-top:24px}
       .btn-blue{width:100%;justify-content:center;font-size:14px}
@@ -382,36 +386,19 @@
     <div class="sec-hd">
       <p style="font-size:13px;font-weight:700;color:var(--blue);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;">¿CÓMO FUNCIONA?</p>
       <h2 class="sec-title">Elegí cómo contratar.</h2>
-      <p class="sec-sub">Enviá tu solicitud para recibir presupuestos o buscá en nuestro directorio de profesionales.</p>
+      <p class="sec-sub">Enviá tu solicitud y recibí presupuestos de profesionales verificados en tu zona.</p>
     </div>
-    <div class="cf-toggle">
-      <button type="button" class="cf-tab active" id="cfTabSolicitar" onclick="cfSwitch('solicitar')">Enviar solicitud</button>
-      <button type="button" class="cf-tab" id="cfTabBuscar" onclick="cfSwitch('buscar')">Buscar en el directorio</button>
-    </div>
-    <div class="pasos" id="cfPanelSolicitar">
+    <div class="pasos">
       <div class="paso"><div class="paso-n">1</div><div class="paso-t">Elegí rubro y zona</div><div class="paso-d">Seleccioná el tipo de profesional que necesitás y tu barrio.</div></div>
       <div class="paso"><div class="paso-n">2</div><div class="paso-t">Describí tu trabajo</div><div class="paso-d">Contanos brevemente qué necesitás resolver.</div></div>
       <div class="paso"><div class="paso-n">3</div><div class="paso-t">Recibí hasta 3 presupuestos</div><div class="paso-d">Por WhatsApp, sin intermediarios.</div></div>
     </div>
-    <div class="pasos" id="cfPanelBuscar" style="display:none">
-      <div class="paso"><div class="paso-n">1</div><div class="paso-t">Buscá por rubro y zona</div><div class="paso-d">Filtrá el directorio de profesionales por tu barrio.</div></div>
-      <div class="paso"><div class="paso-n">2</div><div class="paso-t">Elegí el profesional</div><div class="paso-d">El que más te guste según perfil, calificación y reseñas.</div></div>
-      <div class="paso"><div class="paso-n">3</div><div class="paso-t">Contactate directo</div><div class="paso-d">Por WhatsApp. Sin intermediarios, sin comisiones.</div></div>
-    </div>
-    <div style="text-align:center;margin-top:40px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-      <a href="https://hogarex.ar/solicitud-enviar?rubro=Plomero&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-ylg">Recibir Presupuestos</a>
-      <a href="https://hogarex.ar/busqueda" class="btn-ol">Buscar Profesionales</a>
+    <div class="cf-cta">
+      <a href="https://hogarex.ar/solicitud-enviar?rubro=Plomero&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-ylg">Recibir Presupuestos →</a>
+      <a href="https://hogarex.ar/busqueda" class="cf-alt">¿Preferís elegir vos? Mirá el directorio de profesionales →</a>
     </div>
   </div>
 </section>
-<script>
-function cfSwitch(mode){
-  var s=document.getElementById('cfPanelSolicitar'), b=document.getElementById('cfPanelBuscar');
-  var ts=document.getElementById('cfTabSolicitar'), tb=document.getElementById('cfTabBuscar');
-  if(mode==='solicitar'){s.style.display='';b.style.display='none';ts.classList.add('active');tb.classList.remove('active');}
-  else{s.style.display='none';b.style.display='';tb.classList.add('active');ts.classList.remove('active');}
-}
-</script>
 
 <!-- PROFESIONALES -->
 <section class="profs">
@@ -462,13 +449,21 @@ function cfSwitch(mode){
       <h2 class="sec-title">¿Por qué elegir Hogarex?</h2>
       <p class="sec-sub">Todo lo que necesitás para contratar un electricista con tranquilidad</p>
     </div>
-    <div class="feat-grid">
-      <div class="feat-card"><div class="feat-ico">✅</div><div><div class="feat-t">Profesionales Verificados</div><div class="feat-d">Validamos identidad y certificados de cada profesional.</div></div></div>
+    <div class="feat-marquee">
+      <div class="feat-track">
+        <div class="feat-card"><div class="feat-ico">✅</div><div><div class="feat-t">Profesionales Verificados</div><div class="feat-d">Validamos identidad y certificados de cada profesional.</div></div></div>
       <div class="feat-card"><div class="feat-ico">📍</div><div><div class="feat-t">Cerca tuyo</div><div class="feat-d">Encontrá expertos en tu barrio de CABA.</div></div></div>
       <div class="feat-card"><div class="feat-ico">🖼️</div><div><div class="feat-t">Imágenes Reales</div><div class="feat-d">Galerías de trabajos previos de cada profesional.</div></div></div>
       <div class="feat-card"><div class="feat-ico">⭐</div><div><div class="feat-t">Opiniones de Clientes</div><div class="feat-d">Leé reseñas reales antes de contratar.</div></div></div>
       <div class="feat-card"><div class="feat-ico">🔍</div><div><div class="feat-t">Compará perfiles</div><div class="feat-d">Por precio, reputación o cercanía a tu domicilio.</div></div></div>
       <div class="feat-card"><div class="feat-ico">📄</div><div><div class="feat-t">Presupuestos Múltiples</div><div class="feat-d">Recibí hasta 3 presupuestos con solo un formulario.</div></div></div>
+        <div class="feat-card" aria-hidden="true"><div class="feat-ico">✅</div><div><div class="feat-t">Profesionales Verificados</div><div class="feat-d">Validamos identidad y certificados de cada profesional.</div></div></div>
+      <div class="feat-card" aria-hidden="true"><div class="feat-ico">📍</div><div><div class="feat-t">Cerca tuyo</div><div class="feat-d">Encontrá expertos en tu barrio de CABA.</div></div></div>
+      <div class="feat-card" aria-hidden="true"><div class="feat-ico">🖼️</div><div><div class="feat-t">Imágenes Reales</div><div class="feat-d">Galerías de trabajos previos de cada profesional.</div></div></div>
+      <div class="feat-card" aria-hidden="true"><div class="feat-ico">⭐</div><div><div class="feat-t">Opiniones de Clientes</div><div class="feat-d">Leé reseñas reales antes de contratar.</div></div></div>
+      <div class="feat-card" aria-hidden="true"><div class="feat-ico">🔍</div><div><div class="feat-t">Compará perfiles</div><div class="feat-d">Por precio, reputación o cercanía a tu domicilio.</div></div></div>
+      <div class="feat-card" aria-hidden="true"><div class="feat-ico">📄</div><div><div class="feat-t">Presupuestos Múltiples</div><div class="feat-d">Recibí hasta 3 presupuestos con solo un formulario.</div></div></div>
+      </div>
     </div>
     <div style="text-align:center;margin-top:36px">
       <a href="https://hogarex.ar/solicitud-enviar?rubro=Plomero&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-blue">Recibir Presupuestos por WhatsApp</a>
