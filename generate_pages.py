@@ -18,7 +18,7 @@ POSTS_PATH = os.path.join(REPO_ROOT, "blog", "posts.json")
 BLOG_DIR = os.path.join(REPO_ROOT, "blog")
 SITEMAP_PATH = os.path.join(REPO_ROOT, "sitemap.xml")
 LOGO_PATH = os.path.join(REPO_ROOT, "blog", "assets", "logo-white.png")
-SITE_ORIGIN = "https://landing.hogarex.ar"
+SITE_ORIGIN = "https://app.hogarex.ar"
 
 
 def load_logo_data_uri():
@@ -248,7 +248,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     <a href="https://hogarex.ar" class="logo"><img src="{logo_data_uri}" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar">Inicio</a>
-      <a href="https://landing.hogarex.ar/blog" class="active">Blog</a>
+      <a href="https://app.hogarex.ar/blog" class="active">Blog</a>
       <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" style="background:var(--yellow);color:var(--navy);padding:8px 18px;border-radius:999px;font-weight:700;font-family:'Sora',sans-serif;margin-left:16px;">Recibir presupuesto gratis</a>
     </nav>
   </div>
