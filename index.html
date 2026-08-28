@@ -49,7 +49,7 @@
     .nav-qmark{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--g2);display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:13px;font-weight:700;cursor:pointer;flex-shrink:0}
 
     /* ── HERO ── */
-    .hero{background:var(--navy);padding:56px 20px 72px;border-radius:0 0 28px 28px}
+    .hero{background:var(--navy);padding:48px 20px 60px;border-radius:0 0 28px 28px}
     .hero-inner{
       max-width: 780px;
       margin: 0 auto;       
@@ -63,7 +63,7 @@
     .hero-form .btn-hero{flex-shrink:0}
 
     /* ── RUBROS ICONS ── */
-    .rubros-bar{padding:32px 0 24px;background:#fff;border-bottom:1px solid var(--g2)}
+    .rubros-bar{padding:24px 0 20px;background:#fff;border-bottom:1px solid var(--g2)}
     .rubros-row{display:flex;gap:4px;justify-content:center;flex-wrap:wrap}
     .rub-item{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 18px;border-radius:var(--r);cursor:pointer;transition:background .2s;min-width:84px}
     .rub-item:hover{background:var(--blue-bg)}
@@ -78,7 +78,7 @@
     .sec-sub{font-size:15px;color:var(--t3);text-align:center;margin-bottom:32px}
 
     /* ── PROFESIONALES ── */
-    .profesionales{padding:48px 0}
+    .profesionales{padding:40px 0;background:var(--g1)}
     .prof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
     .prof-card{border:1px solid var(--g2);border-radius:var(--rl);padding:20px;background:#fff;transition:box-shadow .2s}
     .prof-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.08)}
@@ -94,9 +94,9 @@
     .prof-loc{color:var(--t3)}
 
     /* ── COMO FUNCIONA ── */
-    .cf-section{padding:56px 0;background:var(--blue-bg)}
+    .cf-section{padding:40px 0;background:#fff}
     .cf-card{width:100%}
-    .cf-card{background:var(--blue);border-radius:var(--rl);overflow:hidden;display:grid;grid-template-columns:1fr 1fr}
+    .cf-card{background:var(--blue);border-radius:var(--rl);overflow:hidden;display:grid;grid-template-columns:1fr 1fr;box-shadow:0 12px 32px rgba(32,111,247,.18)}
     .cf-body{padding:48px;display:flex;flex-direction:column;justify-content:center}
     .cf-eyebrow{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:12px}
     .cf-body h2{font-size:clamp(26px,3.5vw,38px);font-weight:800;color:#fff;line-height:1.15;margin-bottom:14px}
@@ -114,7 +114,7 @@
     .cf-visual-icon{font-size:72px;position:relative;z-index:1;filter:drop-shadow(0 8px 24px rgba(0,0,0,.2))}
 
     /* ── RUBROS POPULARES ── */
-    .trabajos{padding:56px 0;background:var(--g1)}
+    .trabajos{padding:40px 0;background:var(--g1)}
     .trabajos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
     .trab-card{background:#fff;border:1px solid var(--g2);border-radius:var(--rl);transition:box-shadow .2s}
     .trab-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.08)}
@@ -123,7 +123,7 @@
     .trab-desc{font-size:13px;color:var(--t3);line-height:1.55;margin-bottom:16px}
 
     /* ── SOS PROFESIONAL ── */
-    .pro-section{padding:56px 0;background:var(--g1)}
+    .pro-section{padding:40px 0;background:#fff}
     .pro-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
     .pro-visual{
       border-radius:var(--rl);min-height:320px;
@@ -159,7 +159,7 @@
     .btn-navy:hover{opacity:.88}
 
     /* ── REVIEWS ── */
-    .reviews{padding:56px 0;background:#fff}
+    .reviews{padding:40px 0;background:var(--g1)}
     
     .rev-card{border:1px solid var(--g2);border-radius:var(--rl);padding:20px;background:#fff;transition:box-shadow .2s}
     .rev-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.06)}
@@ -168,7 +168,7 @@
     .rev-author{font-size:13px;font-weight:700;color:#111827}
 
     /* ── CTA FINAL ── */
-    .ctaf{padding:64px 0;text-align:center}
+    .ctaf{padding:56px 0;text-align:center}
     .ctaf h2{font-size:clamp(22px,4vw,38px);font-weight:800;color:#111827;margin-bottom:10px;letter-spacing:-.2px}
     .ctaf p{font-size:15px;color:var(--t3);margin-bottom:28px}
     .ctaf-acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
@@ -322,19 +322,19 @@
 <div class="rubros-bar">
   <div class="container">
     <div class="rubros-row">
-      <a href="https://hogarex.ar/busqueda" class="rub-item">
+      <a href="https://hogarex.ar/busqueda?rubro=Electricista" class="rub-item">
         <div class="rub-circle"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
         <span class="rub-name">Electricistas</span>
       </a>
-      <a href="https://hogarex.ar/busqueda" class="rub-item">
+      <a href="https://hogarex.ar/busqueda?rubro=Plomero" class="rub-item">
         <div class="rub-circle"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c3.87 0 7-3.13 7-7 0-4-3-7-7-13-4 6-7 9-7 13 0 3.87 3.13 7 7 7Z"/></svg></div>
         <span class="rub-name">Plomeros</span>
       </a>
-      <a href="https://hogarex.ar/busqueda" class="rub-item">
+      <a href="https://hogarex.ar/busqueda?rubro=Gasista" class="rub-item">
         <div class="rub-circle"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
         <span class="rub-name">Gasistas</span>
       </a>
-      <a href="https://hogarex.ar/busqueda" class="rub-item">
+      <a href="https://hogarex.ar/busqueda?rubro=Pintor" class="rub-item">
         <div class="rub-circle"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3Z"/><path d="M9 8c-2 3-4 3.5-7 4l8 8c2.5-2.5 3-4.5 4-7"/></svg></div>
         <span class="rub-name">Pintores</span>
       </a>
@@ -395,6 +395,97 @@
         <div class="prof-meta">
           <span class="prof-popular">↑ Popular</span>
           <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Córdoba Capital</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <div class="prof-av" style="background:#0f766e">MI</div>
+          <span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span>
+        </div>
+        <div class="prof-name">Matías Ibarra</div>
+        <div class="prof-rub">Pintor</div>
+        <div class="prof-desc">Pintura de interiores y exteriores con acabados prolijos. Presupuesto sin cargo antes de empezar.</div>
+        <div class="prof-meta">
+          <span class="prof-popular">↑ Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <div class="prof-av" style="background:#7c3aed">RF</div>
+          <span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span>
+        </div>
+        <div class="prof-name">Rosana Funes</div>
+        <div class="prof-rub">Carpintero</div>
+        <div class="prof-desc">Muebles y placares a medida. Trabajo con melamina y madera maciza, entrega e instalación incluida.</div>
+        <div class="prof-meta">
+          <span class="prof-popular">↑ Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <div class="prof-av" style="background:#b45309">WC</div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span><span class="vbadge-lic"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Matrícula verificada</span></div>
+        </div>
+        <div class="prof-name">Walter Cabrera</div>
+        <div class="prof-rub">Electricista</div>
+        <div class="prof-desc">Instalaciones y reparaciones eléctricas para casas y comercios. Atiendo urgencias todos los días.</div>
+        <div class="prof-meta">
+          <span class="prof-popular">↑ Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <div class="prof-av" style="background:#be123c">KL</div>
+          <span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span>
+        </div>
+        <div class="prof-name">Karina Loyola</div>
+        <div class="prof-rub">Plomero</div>
+        <div class="prof-desc">Destapes, pérdidas y cambio de grifería. Más de 8 años trabajando en obras y reformas.</div>
+        <div class="prof-meta">
+          <span class="prof-popular">↑ Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Rosario</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <div class="prof-av" style="background:#0e7490">ER</div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span><span class="vbadge-lic"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Matrícula verificada</span></div>
+        </div>
+        <div class="prof-name">Esteban Ruiz</div>
+        <div class="prof-rub">Gasista</div>
+        <div class="prof-desc">Gasista matriculado. Instalaciones, certificados y service de calefones y calderas.</div>
+        <div class="prof-meta">
+          <span class="prof-popular">↑ Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <div class="prof-av" style="background:#4d7c0f">YP</div>
+          <span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span>
+        </div>
+        <div class="prof-name">Yésica Paz</div>
+        <div class="prof-rub">Instalaciones</div>
+        <div class="prof-desc">Cámaras de seguridad, aires acondicionados y redes WiFi. Dejo todo configurado antes de irme.</div>
+        <div class="prof-meta">
+          <span class="prof-popular">↑ Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <div class="prof-av" style="background:#9d174d">NO</div>
+          <span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span>
+        </div>
+        <div class="prof-name">Nahuel Ortega</div>
+        <div class="prof-rub">Pintor</div>
+        <div class="prof-desc">Fachadas, frentes y espacios comerciales. Trabajo con andamio propio y seguro al día.</div>
+        <div class="prof-meta">
+          <span class="prof-popular">↑ Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>CABA</span>
         </div>
       </div>
     </div>

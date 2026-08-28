@@ -63,7 +63,7 @@
     .bc-inner{display:flex;gap:6px;font-size:13px;color:var(--t3)}
     .bc-inner a{color:var(--blue)}.bc-inner a:hover{text-decoration:underline}
     /* HERO */
-    .hero{background:var(--navy);padding:56px 0 80px;border-radius:0 0 32px 32px}
+    .hero{background:var(--navy);padding:56px 0 64px;border-radius:0 0 32px 32px}
     .hero-in{text-align:center;max-width:680px;margin:0 auto}
     .hero h1{font-size:clamp(34px,5vw,56px);font-weight:800;color:#fff;line-height:1.1;letter-spacing:-.5px;margin-bottom:16px}
     .hero-sub{font-size:17px;color:rgba(255,255,255,.75);margin-bottom:32px;line-height:1.6}
@@ -75,9 +75,9 @@
     .rchip{display:flex;align-items:center;gap:6px;border:1.5px solid var(--g2);border-radius:var(--rp);padding:8px 16px;font-size:13px;font-weight:600;color:var(--t2);transition:all .2s;background:#fff}
     .rchip:hover{border-color:var(--navy);color:var(--navy)}
     /* SECTIONS */
-    section{padding:72px 0}
+    section{padding:48px 0}
     .sec-title{font-size:clamp(26px,3.5vw,38px);font-weight:800;color:var(--navy);letter-spacing:-.3px;margin-bottom:8px;line-height:1.15}
-    .sec-sub{font-size:16px;color:var(--t3);margin-bottom:48px}
+    .sec-sub{font-size:16px;color:var(--t3);margin-bottom:32px}
     .sec-hd{text-align:center}
     /* SERVICIOS */
     .servicios{background:var(--g1)}
@@ -342,11 +342,12 @@
 <div class="rbar">
   <div class="container rbar-in">
     <span class="rlbl">Ver también:</span>
+    <a href="https://app.hogarex.ar/electricistas" class="rchip"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Electricistas</a>
     <a href="https://app.hogarex.ar/plomeros" class="rchip"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4.97 0 9-3.582 9-8 0-4.418-4.5-10-9-13-4.5 3-9 8.582-9 13 0 4.418 4.03 8 9 8Z"/></svg> Plomeros</a>
     <a href="https://app.hogarex.ar/gasistas" class="rchip"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg> Gasistas</a>
     <a href="https://app.hogarex.ar/pintores" class="rchip"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14.622 17.897-10.68-2.913"/><path d="M18.376 2.622a1 1 0 1 1 3.002 3.002L17.36 9.643a.5.5 0 0 0 0 .707l.944.944a2.41 2.41 0 0 1 0 3.408l-.944.944a.5.5 0 0 1-.707 0L8.354 7.348a.5.5 0 0 1 0-.707l.944-.944a2.41 2.41 0 0 1 3.408 0l.944.944a.5.5 0 0 0 .707 0z"/><path d="M9 8c-1.804 2.71-3.97 3.46-6.583 3.948a.507.507 0 0 0-.302.819l7.32 8.883a1 1 0 0 0 1.185.204C12.735 20.405 16 16.792 16 15"/></svg> Pintores</a>
     <a href="https://app.hogarex.ar/carpinteros" class="rchip"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5a2.12 2.12 0 1 1-3-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg> Carpinteros</a>
-    <a href="https://app.hogarex.ar/instalaciones" class="rchip" style="border-color:var(--navy);color:var(--navy);font-weight:700;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="12" y1="12" y2="12"/><line x1="8" x2="3" y1="12" y2="12"/><line x1="21" x2="16" y1="20" y2="20"/><line x1="12" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="16" x2="16" y1="18" y2="22"/></svg> Instalaciones</a>
+    <a href="https://app.hogarex.ar/caba/" class="rchip">Ver todos →</a>
   </div>
 </div>
 
@@ -397,29 +398,92 @@
     </div>
     <div class="prof-grid">
       <div class="prof-card">
-        <div class="prof-top"><div class="prof-av">TP</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span></div>
-        <div class="prof-name">Tomás Peralta</div>
-        <div class="prof-rub">Instalador de A/C y climatización · <span style="color:var(--t3);font-weight:400">Buenos Aires (CABA)</span></div>
+        <div class="prof-top"><div class="prof-av">TA</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span></div>
+        <div class="prof-name">Tomás Alonso</div>
+        <div class="prof-rub">Técnico en Instalaciones · <span style="color:var(--t3);font-weight:400">Palermo, CABA</span></div>
         <div class="stars">★★★★★</div>
-        <div class="prof-desc">Especialista en climatización residencial y comercial. Instalación de splits, multisplits y sistemas ductos. 12 años de experiencia en CABA.</div>
+        <div class="prof-desc">Cámaras de seguridad y domótica. Configuro acceso remoto desde el celular antes de irme.</div>
         <div class="prof-pop">↑ Popular</div>
         <a href="https://hogarex.ar/solicitud-enviar?rubro=Instalaciones&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
       </div>
       <div class="prof-card">
-        <div class="prof-top"><div class="prof-av" style="background:var(--blue)">GS</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span></div>
-        <div class="prof-name">Gabriel Sosa</div>
-        <div class="prof-rub">Técnico en seguridad electrónica · <span style="color:var(--t3);font-weight:400">Buenos Aires (CABA)</span></div>
+        <div class="prof-top"><div class="prof-av" style="background:var(--blue)">YB</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span></div>
+        <div class="prof-name">Yamila Bravo</div>
+        <div class="prof-rub">Técnica en Instalaciones · <span style="color:var(--t3);font-weight:400">Recoleta, CABA</span></div>
         <div class="stars">★★★★★</div>
-        <div class="prof-desc">Instalación de cámaras IP, alarmas y control de acceso. Sistemas para casas, oficinas y comercios. Configuración de acceso remoto incluida.</div>
+        <div class="prof-desc">Instalación de aires acondicionados split e inverter. Trabajo prolijo, cañería oculta.</div>
         <div class="prof-pop">↑ Popular</div>
         <a href="https://hogarex.ar/solicitud-enviar?rubro=Instalaciones&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
       </div>
       <div class="prof-card">
-        <div class="prof-top"><div class="prof-av" style="background:#065f46">MR</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span></div>
-        <div class="prof-name">Martín Rodríguez</div>
-        <div class="prof-rub">Especialista en domótica y Smart Home · <span style="color:var(--t3);font-weight:400">CABA</span></div>
+        <div class="prof-top"><div class="prof-av" style="background:#065f46">SM</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span></div>
+        <div class="prof-name">Santiago Molina</div>
+        <div class="prof-rub">Técnico en Instalaciones · <span style="color:var(--t3);font-weight:400">Belgrano, CABA</span></div>
         <div class="stars">★★★★★</div>
-        <div class="prof-desc">Especialista certificado en automatización del hogar. Instalaciones compatibles con Alexa, Google y Apple HomeKit. Proyectos desde un ambiente hasta la casa completa.</div>
+        <div class="prof-desc">Redes WiFi y cableado estructurado. Elimino zonas muertas de señal en toda la casa.</div>
+        <div class="prof-pop">↑ Popular</div>
+        <a href="https://hogarex.ar/solicitud-enviar?rubro=Instalaciones&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top"><div class="prof-av" style="background:#0f766e">DR</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span></div>
+        <div class="prof-name">Daiana Rojas</div>
+        <div class="prof-rub">Técnica en Instalaciones · <span style="color:var(--t3);font-weight:400">Buenos Aires (CABA)</span></div>
+        <div class="stars">★★★★★</div>
+        <div class="prof-desc">Instalación de TV, audio y proyectores. Cableado oculto y prolijo sin romper paredes.</div>
+        <div class="prof-pop">↑ Popular</div>
+        <a href="https://hogarex.ar/solicitud-enviar?rubro=Instalaciones&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top"><div class="prof-av" style="background:#7c3aed">MC</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span></div>
+        <div class="prof-name">Matías Cabrera</div>
+        <div class="prof-rub">Técnico en Instalaciones · <span style="color:var(--t3);font-weight:400">Buenos Aires (GBA)</span></div>
+        <div class="stars">★★★★★</div>
+        <div class="prof-desc">Alarmas y sensores de movimiento con app para el celular. Presupuesto sin cargo.</div>
+        <div class="prof-pop">↑ Popular</div>
+        <a href="https://hogarex.ar/solicitud-enviar?rubro=Instalaciones&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top"><div class="prof-av" style="background:#b45309">LO</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span></div>
+        <div class="prof-name">Lucas Ortega</div>
+        <div class="prof-rub">Técnico en Instalaciones · <span style="color:var(--t3);font-weight:400">Villa Crespo, CABA</span></div>
+        <div class="stars">★★★★★</div>
+        <div class="prof-desc">Montaje de muebles y artefactos. Trabajo rápido y prolijo, con herramientas propias.</div>
+        <div class="prof-pop">↑ Popular</div>
+        <a href="https://hogarex.ar/solicitud-enviar?rubro=Instalaciones&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top"><div class="prof-av" style="background:#be123c">VS</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span></div>
+        <div class="prof-name">Victoria Sánchez</div>
+        <div class="prof-rub">Técnica en Instalaciones · <span style="color:var(--t3);font-weight:400">Colegiales, CABA</span></div>
+        <div class="stars">★★★★★</div>
+        <div class="prof-desc">Domótica: luces, cerraduras y persianas automatizadas desde una sola app.</div>
+        <div class="prof-pop">↑ Popular</div>
+        <a href="https://hogarex.ar/solicitud-enviar?rubro=Instalaciones&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top"><div class="prof-av" style="background:#0e7490">RG</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span></div>
+        <div class="prof-name">Rodrigo Giordano</div>
+        <div class="prof-rub">Técnico en Instalaciones · <span style="color:var(--t3);font-weight:400">Almagro, CABA</span></div>
+        <div class="stars">★★★★★</div>
+        <div class="prof-desc">Instalación de multisplit y equipos inverter de alta eficiencia. Garantía de fábrica.</div>
+        <div class="prof-pop">↑ Popular</div>
+        <a href="https://hogarex.ar/solicitud-enviar?rubro=Instalaciones&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top"><div class="prof-av" style="background:#4d7c0f">CP</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span></div>
+        <div class="prof-name">Camila Peralta</div>
+        <div class="prof-rub">Técnica en Instalaciones · <span style="color:var(--t3);font-weight:400">CABA</span></div>
+        <div class="stars">★★★★★</div>
+        <div class="prof-desc">Cámaras IP con grabación en la nube. Configuro todo antes de irme de tu casa.</div>
+        <div class="prof-pop">↑ Popular</div>
+        <a href="https://hogarex.ar/solicitud-enviar?rubro=Instalaciones&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top"><div class="prof-av" style="background:#9d174d">BH</div><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span></div>
+        <div class="prof-name">Bautista Herrera</div>
+        <div class="prof-rub">Técnico en Instalaciones · <span style="color:var(--t3);font-weight:400">Buenos Aires (CABA)</span></div>
+        <div class="stars">★★★★★</div>
+        <div class="prof-desc">Redes de cableado estructurado para oficinas y hogares. Certifico cada punto de red.</div>
         <div class="prof-pop">↑ Popular</div>
         <a href="https://hogarex.ar/solicitud-enviar?rubro=Instalaciones&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
       </div>
