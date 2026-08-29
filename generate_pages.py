@@ -204,6 +204,23 @@ def build_jsonld(post):
     return json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False)
 
 
+def build_image_credit_html(post):
+    """Arma la leyenda chica en gris debajo de la imagen citando la fuente,
+    cuando el post trae el campo opcional 'imageCredit' (ej. imagen real de
+    Argentina sacada de un portal periodístico). Si no hay 'imageCredit',
+    no se muestra nada (caso típico: foto "objeto" de Pexels sin personas
+    ni fachadas, que no necesita cita)."""
+    credit = (post.get("imageCredit") or "").strip()
+    if not credit:
+        return ""
+    credit_esc = html.escape(credit)
+    credit_url = (post.get("imageCreditUrl") or "").strip()
+    if credit_url:
+        url_esc = html.escape(credit_url)
+        return f'<p class="image-credit">{credit_esc} · <a href="{url_esc}" target="_blank" rel="noopener nofollow">ver fuente</a></p>'
+    return f'<p class="image-credit">{credit_esc}</p>'
+
+
 PAGE_TEMPLATE = """<!DOCTYPE html>
 <html lang="es-AR">
 <head>
@@ -261,6 +278,8 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     .article-meta {{ display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.85rem; color: var(--gray-500); margin-bottom: 20px; }}
     .article-thumb {{ max-width: 740px; margin: 0 auto; padding: 0 24px; }}
     .article-thumb img {{ width: 100%; max-height: 380px; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow); }}
+    .image-credit {{ font-size: 0.78rem; color: var(--gray-500); margin-top: 6px; text-align: right; }}
+    .image-credit a {{ color: var(--gray-500); text-decoration: underline; }}
     .article-content {{ max-width: 740px; margin: 0 auto; padding: 28px 24px 12px; }}
     .article-content h2 {{ font-family: 'Sora', sans-serif; font-size: 1.15rem; color: var(--navy); margin: 24px 0 10px; }}
     .article-content p {{ font-size: 0.98rem; line-height: 1.75; color: var(--gray-700); margin-bottom: 14px; }}
@@ -309,6 +328,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 
 <div class="article-thumb">
   <img src="{image}" alt="{tag_esc}" />
+  {image_credit_html}
 </div>
 
 <main class="article-content">
@@ -339,6 +359,7 @@ def render_page(post, logo_data_uri):
         jsonld=build_jsonld(post),
         content=post["content"],
         logo_data_uri=logo_data_uri,
+        image_credit_html=build_image_credit_html(post),
     )
 
 
