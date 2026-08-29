@@ -209,15 +209,13 @@ def build_image_credit_html(post):
     cuando el post trae el campo opcional 'imageCredit' (ej. imagen real de
     Argentina sacada de un portal periodístico). Si no hay 'imageCredit',
     no se muestra nada (caso típico: foto "objeto" de Pexels sin personas
-    ni fachadas, que no necesita cita)."""
+    ni fachadas, que no necesita cita). Solo se muestra el nombre de la
+    fuente como texto plano, sin link (decisión de Pedro, 2026-08-29):
+    el campo 'imageCreditUrl' ya no se renderiza aunque esté presente."""
     credit = (post.get("imageCredit") or "").strip()
     if not credit:
         return ""
     credit_esc = html.escape(credit)
-    credit_url = (post.get("imageCreditUrl") or "").strip()
-    if credit_url:
-        url_esc = html.escape(credit_url)
-        return f'<p class="image-credit">{credit_esc} · <a href="{url_esc}" target="_blank" rel="noopener nofollow">ver fuente</a></p>'
     return f'<p class="image-credit">{credit_esc}</p>'
 
 
