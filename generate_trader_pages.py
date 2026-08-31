@@ -17,10 +17,14 @@ import html
 import json
 import os
 import urllib.request
+from urllib.parse import quote
 
 REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
 PROFESIONAL_DIR = os.path.join(REPO_ROOT, "profesional")
 SITEMAP_PATH = os.path.join(REPO_ROOT, "sitemap-profesionales.xml")
+HUB_PAGE_PATH = os.path.join(REPO_ROOT, "electricistas", "index.html")
+HUB_CARDS_START = "<!-- TRADER_CARDS_START -->"
+HUB_CARDS_END = "<!-- TRADER_CARDS_END -->"
 SITE_ORIGIN = "https://app.hogarex.ar"
 API_URL = os.environ.get(
     "TRADERS_API_URL",
@@ -255,11 +259,110 @@ def generate_sitemap(urls):
         f.write("\n".join(lines))
 
 
+HUB_CARD_TEMPLATE = """      <div class="prof-card">
+        <div class="prof-top"><div class="prof-av"{avatar_style}>{initials}</div>{badge_html}</div>
+        <div class="prof-name"><a href="{url}" style="color:inherit;text-decoration:none">{name_esc}</a></div>
+        <div class="prof-rub">{oficio_esc} &middot; <span style="color:var(--t3);font-weight:400">{ubicacion_esc}</span></div>
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="prof-desc">{description_esc}</div>
+        <div class="prof-pop">&uarr; Popular</div>
+        <a href="{cta_url}" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+"""
+
+# Ciclo de colores de avatar solo decorativo (sin significado); None = color por
+# defecto (var(--navy)) definido en el CSS de .prof-av.
+HUB_AVATAR_COLORS = [
+    None, "var(--blue)", "#065f46", "#0f766e", "#7c3aed",
+    "#b45309", "#be123c", "#0e7490", "#4d7c0f", "#9d174d",
+]
+
+
+def get_initials(name):
+    parts = [p for p in name.split() if p]
+    if not parts:
+        return "??"
+    if len(parts) == 1:
+        return parts[0][:2].upper()
+    return (parts[0][0] + parts[1][0]).upper()
+
+
+def render_hub_card(trader, index):
+    slug = trader["Slug"]
+    url = f"{SITE_ORIGIN}/profesional/{slug}"
+    name = trader.get("user_name") or "Profesional"
+    oficio = trader.get("main_field") or ""
+    ubicacion = trader.get("ubicacion") or ""
+    description = sanitize_description(trader.get("description") or "")
+    verified = trader.get("verified") == "Si"
+
+    color = HUB_AVATAR_COLORS[index % len(HUB_AVATAR_COLORS)]
+    avatar_style = f' style="background:{color}"' if color else ""
+
+    # Unico badge real: solo se muestra si el dato `verified` de Bubble es "Si".
+    # No se fabrican afirmaciones de verificacion (identidad/matricula) sin dato
+    # real detras - ver discusion 2026-08-31.
+    badge_html = ""
+    if verified:
+        badge_html = (
+            '<div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">'
+            '<span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" '
+            'stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>'
+            "Perfil verificado</span></div>"
+        )
+
+    cta_url = f"https://hogarex.ar/solicitud-enviar?rubro={quote(oficio)}&ubicacion={quote(ubicacion)}"
+
+    return HUB_CARD_TEMPLATE.format(
+        avatar_style=avatar_style,
+        initials=html.escape(get_initials(name)),
+        badge_html=badge_html,
+        url=url,
+        name_esc=html.escape(name),
+        oficio_esc=html.escape(oficio),
+        ubicacion_esc=html.escape(ubicacion),
+        description_esc=html.escape(description),
+        cta_url=cta_url,
+    )
+
+
+def update_hub_page(traders):
+    """Reemplaza el carrusel de 'Profesionales Destacados' en electricistas/index.html
+    (marcadores TRADER_CARDS_START/END) con tarjetas reales de electricistas. No toca
+    el resto de la pagina."""
+    if not os.path.exists(HUB_PAGE_PATH):
+        print("Aviso: electricistas/index.html no encontrado, se omite actualizacion de tarjetas.")
+        return
+
+    with open(HUB_PAGE_PATH, encoding="utf-8") as f:
+        page_html = f.read()
+
+    start_idx = page_html.find(HUB_CARDS_START)
+    end_idx = page_html.find(HUB_CARDS_END)
+    if start_idx == -1 or end_idx == -1:
+        print("Aviso: marcadores TRADER_CARDS_START/END no encontrados, se omite actualizacion de tarjetas.")
+        return
+
+    electricistas = [t for t in traders if t.get("Slug") and t.get("main_field") == "Electricista"]
+    cards_html = "".join(render_hub_card(t, i) for i, t in enumerate(electricistas))
+
+    new_page_html = (
+        page_html[: start_idx + len(HUB_CARDS_START)]
+        + "\n"
+        + cards_html
+        + page_html[end_idx:]
+    )
+    with open(HUB_PAGE_PATH, "w", encoding="utf-8") as f:
+        f.write(new_page_html)
+    print(f"Tarjetas actualizadas en electricistas/index.html: {len(electricistas)} profesionales")
+
+
 def main():
     traders = fetch_traders()
     print(f"Traders recibidos del endpoint: {len(traders)}")
     urls = generate_pages(traders)
     generate_sitemap(urls)
+    update_hub_page(traders)
     print(f"Paginas de profesional generadas: {len(urls)}")
     print(f"Sitemap escrito en: {SITEMAP_PATH}")
 
