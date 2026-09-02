@@ -29,6 +29,7 @@
     body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--text); min-height: 100vh; }
     header { background: var(--navy); padding: 0 24px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
     .header-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    nav { display: flex; align-items: center; }
     .logo img { height: 36px; width: auto; display: block; }
     nav a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 500; margin-left: 24px; transition: color 0.2s; }
     nav a:hover, nav a.active { color: var(--yellow); }
@@ -101,7 +102,7 @@
       .blog-hero { padding: 40px 20px 60px; }
       .modal-content { padding: 20px; }
       .modal-header { padding: 20px 20px 18px; }
-      nav { display: flex; align-items: center; gap: 8px; } nav a { display: none; }
+      nav a { display: none; }
       .blog-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -123,6 +124,10 @@
       <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" style="background:var(--yellow);color:var(--navy);padding:8px 18px;border-radius:999px;font-weight:700;font-family:'Sora',sans-serif;margin-left:16px;">Recibir presupuesto gratis</a>
       <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
+
+  </div>
+</header>
+
 <div class="hgx-nm-overlay" id="hgx-nm-overlay"></div>
 <div class="hgx-nm-panel" id="hgx-nm-panel" aria-hidden="true">
   <div class="hgx-nm-panel-head">
@@ -182,9 +187,6 @@
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
 })();
 </script>
-
-  </div>
-</header>
 
 <div class="blog-hero">
   <span class="blog-hero-label">Blog Hogarex</span>
