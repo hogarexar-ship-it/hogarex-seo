@@ -1,21 +1,29 @@
 # -*- coding: utf-8 -*-
 """
-Genera una pagina estatica por cada profesional publico (por ahora: Electricista,
-scoring >= 30) consumiendo el endpoint get_traders_publicos de Bubble.
+Genera una pagina estatica por cada trader publico y utilizable (con Slug,
+nombre, rubro y ubicacion reales) de todos los rubros que devuelva el
+endpoint get_traders_publicos de Bubble - ya no se filtra por rubro ni por
+scoring, eso lo decide el endpoint del lado de Bubble.
+
+Traders sin nombre/rubro/ubicacion (perfiles de alta incompleta, ver
+is_usable) se omiten: no hay contenido real que publicar y una pagina vacia
+no ayuda al SEO, ademas de exponer publicamente un registro incompleto que
+la persona nunca termino de completar.
 
 Ubicacion de cada pagina generada:
-  - Electricista + ubicacion "Buenos Aires (CABA)" -> electricistas/<slug>/index.html
-    (nested bajo el hub /electricistas para agrupacion tematica de SEO; URL final
-    unica, sin contenido duplicado en /profesional/).
-  - Cualquier otro caso (otros rubros u otras ubicaciones)
+  - Rubro con hub propio (ver OFICIO_HUB) + ubicacion "Buenos Aires (CABA)"
+    -> <hub>/<slug>/index.html (ej. electricistas/<slug>/, gasistas/<slug>/)
+    (nested bajo el hub tematico correspondiente para agrupacion de SEO; URL
+    final unica, sin contenido duplicado en /profesional/).
+  - Cualquier otro caso (rubro sin hub propio todavia, u otra ubicacion)
     -> profesional/<slug>/index.html
 
 Tambien actualiza:
-  - sitemap-profesionales.xml (URLs de todas las paginas generadas, sea cual sea
-    su carpeta). No se mezcla con sitemap.xml, que sigue siendo del blog.
-  - electricistas/index.html: reemplaza el carrusel de tarjetas "Profesionales
-    Destacados" (marcadores TRADER_CARDS_START/END) con los electricistas reales
-    de CABA, linkeando a su pagina /electricistas/<slug>/.
+  - sitemap-profesionales.xml (URLs de todas las paginas generadas, sea cual
+    sea su carpeta). No se mezcla con sitemap.xml, que sigue siendo del blog.
+  - <hub>/index.html de cada rubro en OFICIO_HUB: reemplaza el carrusel de
+    tarjetas "Profesionales Destacados" (marcadores TRADER_CARDS_START/END)
+    con los traders reales de CABA de ese rubro, linkeando a su propia pagina.
 
 El endpoint de Bubble es un Workflow API y SOLO acepta POST (no GET).
 
@@ -28,14 +36,15 @@ Variable de entorno opcional:
 import html
 import json
 import os
+import shutil
+import unicodedata
 import urllib.request
+from collections import Counter
 from urllib.parse import quote
 
 REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
 PROFESIONAL_DIR = os.path.join(REPO_ROOT, "profesional")
-ELECTRICISTAS_DIR = os.path.join(REPO_ROOT, "electricistas")
 SITEMAP_PATH = os.path.join(REPO_ROOT, "sitemap-profesionales.xml")
-HUB_PAGE_PATH = os.path.join(ELECTRICISTAS_DIR, "index.html")
 HUB_CARDS_START = "<!-- TRADER_CARDS_START -->"
 HUB_CARDS_END = "<!-- TRADER_CARDS_END -->"
 SITE_ORIGIN = "https://app.hogarex.ar"
@@ -45,6 +54,22 @@ API_URL = os.environ.get(
     "https://hogarex.ar/api/1.1/wf/get_traders_publicos",
 )
 
+# Rubros con hub propio en el repo (carpeta + index.html con carrusel de
+# tarjetas ya existente). Un trader de CABA en uno de estos rubros se anida
+# bajo su hub; el resto cae en /profesional/. Agregar un rubro nuevo aca
+# requiere que exista <path>/index.html con los marcadores TRADER_CARDS.
+OFICIO_HUB = {
+    "Electricista": "/electricistas",
+    "Gasista": "/gasistas",
+    "Plomero": "/plomeros",
+    "Pintor": "/pintores",
+    "Carpintero": "/carpinteros",
+}
+# Rubros sin hub propio todavia (ej. Albañil, Jardinero, Herrero): la
+# breadcrumb y el link "ver mas" de esas paginas apuntan aca en vez de a un
+# hub inexistente.
+FALLBACK_HUB_URL = "https://hogarex.ar/busqueda"
+
 
 def fetch_traders():
     req = urllib.request.Request(API_URL, method="POST")
@@ -53,19 +78,82 @@ def fetch_traders():
     return data.get("response", {}).get("traders", [])
 
 
-def is_caba_electricista(trader):
-    return trader.get("main_field") == "Electricista" and trader.get("ubicacion") == CABA_UBICACION
+def _slug_token(text):
+    """Normaliza texto a como aparece dentro de un slug de Bubble: sin
+    acentos/diacriticos, minuscula (ej. 'Albañil' -> 'albanil',
+    'Sebastián' -> 'sebastian')."""
+    decomposed = unicodedata.normalize("NFKD", text)
+    return "".join(c for c in decomposed if not unicodedata.combining(c)).lower()
+
+
+def derive_name_from_slug(slug, oficio):
+    """Cuando `user_name` viene null en Bubble pero el slug si tiene el
+    nombre codificado (bug real observado: ~30 traders con main_field y
+    ubicacion completos pero user_name null - ej. 'yael-electricista-
+    buenos-aires-gba' con user_name=null), se recupera el nombre del slug
+    en vez de descartar un perfil que si tiene datos reales. No es una
+    fabricacion: es el mismo nombre que la persona eligio al darse de alta,
+    ya publico en la URL. Devuelve None si no se puede recuperar (slug sin
+    el token de rubro, ej. altas totalmente vacias como 'daniel----3')."""
+    if not slug or not oficio:
+        return None
+    tokens = slug.split("-")
+    oficio_token = _slug_token(oficio)
+    if oficio_token not in tokens:
+        return None
+    idx = tokens.index(oficio_token)
+    name_parts = [t for t in tokens[:idx] if t]
+    if not name_parts:
+        return None
+    return " ".join(p.capitalize() for p in name_parts)
+
+
+def get_display_name(trader):
+    return trader.get("user_name") or derive_name_from_slug(trader.get("Slug"), trader.get("main_field"))
+
+
+def is_usable(trader):
+    """Un trader es publicable si tiene los datos minimos para armar una
+    pagina real: slug, nombre (real o recuperable del slug), rubro y
+    ubicacion. Sin esto no hay nada que mostrar (son altas incompletas en
+    Bubble, no perfiles listos)."""
+    return bool(
+        trader.get("Slug")
+        and trader.get("main_field")
+        and trader.get("ubicacion")
+        and get_display_name(trader)
+    )
+
+
+def is_caba_with_hub(trader):
+    return trader.get("main_field") in OFICIO_HUB and trader.get("ubicacion") == CABA_UBICACION
+
+
+def oficio_hub_url_for(oficio):
+    path = OFICIO_HUB.get(oficio)
+    return f"{SITE_ORIGIN}{path}" if path else FALLBACK_HUB_URL
+
+
+def pluralize_oficio(oficio):
+    """Pluralizacion simple ('Electricista'->'Electricistas',
+    'Pintor'->'Pintores', 'Albañil'->'Albañiles'): agrega 's' si termina en
+    vocal, 'es' si termina en consonante. Cubre correctamente los 8 rubros
+    que devuelve el endpoint hoy."""
+    if oficio and oficio[-1].lower() in "aeiou":
+        return oficio + "s"
+    return oficio + "es"
 
 
 def target_for(trader):
     """Devuelve (carpeta_absoluta, url_publica) para un trader.
 
-    Electricistas de CABA se anidan bajo /electricistas/<slug>/ (agrupacion
-    tematica bajo el hub, URL canonica unica). El resto sigue en
+    Los rubros con hub propio (OFICIO_HUB) y ubicacion CABA se anidan bajo
+    ese hub (agrupacion tematica, URL canonica unica). El resto sigue en
     /profesional/<slug>/, como antes."""
     slug = trader["Slug"]
-    if is_caba_electricista(trader):
-        return os.path.join(ELECTRICISTAS_DIR, slug), f"{SITE_ORIGIN}/electricistas/{slug}"
+    if is_caba_with_hub(trader):
+        hub_path = OFICIO_HUB[trader["main_field"]].lstrip("/")
+        return os.path.join(REPO_ROOT, hub_path, slug), f"{SITE_ORIGIN}/{hub_path}/{slug}"
     return os.path.join(PROFESIONAL_DIR, slug), f"{SITE_ORIGIN}/profesional/{slug}"
 
 
@@ -130,7 +218,7 @@ def build_faq_items(trader, name, oficio_lower):
 
 
 def build_jsonld(trader, url, oficio_hub_url, faq_items):
-    name = trader.get("user_name") or "Profesional"
+    name = get_display_name(trader) or "Profesional"
     oficio = trader.get("main_field") or ""
     ubicacion = trader.get("ubicacion") or ""
     zonas = trader.get("zonaCobertura") or []
@@ -198,7 +286,8 @@ def build_jsonld(trader, url, oficio_hub_url, faq_items):
 # @media (min-width:640px) agrega/ajusta para tablet+desktop. La barra de CTA
 # fija abajo es el patron mobile habitual para perfiles de servicios locales;
 # en desktop se oculta a favor de la tarjeta de CTA normal en el flujo.
-PAGE_TEMPLATE = """<!DOCTYPE html>
+PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - no editar a mano -->
+<!DOCTYPE html>
 <html lang="es-AR">
 <head>
   <meta charset="UTF-8" />
@@ -260,6 +349,8 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     .faq-item summary::after {{ content: '+'; float: right; color: var(--gray-500); }}
     .faq-item[open] summary::after {{ content: '\\2212'; }}
     .faq-item p {{ font-size: 0.87rem; color: var(--gray-700); line-height: 1.6; padding-bottom: 12px; margin: 0; }}
+    .ver-mas-link {{ display: inline-block; color: var(--navy); font-weight: 600; font-size: 0.88rem; text-decoration: none; margin: 18px 0 4px; }}
+    .ver-mas-link:hover {{ text-decoration: underline; }}
     .modal-cta {{ display: none; }}
     .btn-yellow {{ background: var(--yellow); color: var(--navy); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.9rem; padding: 12px 22px; border-radius: 999px; text-decoration: none; border: none; cursor: pointer; white-space: nowrap; display: inline-block; text-align: center; }}
     .btn-yellow:hover {{ background: var(--yellow-hover); }}
@@ -324,11 +415,12 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     <h2>Preguntas frecuentes</h2>
     {faq_html}
   </section>
+  {ver_mas_html}
 </main>
 
 <div class="modal-cta">
   <p>&iquest;Necesit&aacute;s un {oficio_esc_lower} en {ubicacion_esc}?</p>
-  <a href="{cta_url}" class="btn-yellow">Pedir presupuesto gratis</a>
+  <a href="{cta_url}" class="btn-yellow">{cta_label_esc}</a>
 </div>
 
 <footer>
@@ -344,25 +436,15 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 </html>
 """
 
-OFICIO_HUB = {
-    "Electricista": "/electricistas",
-    "Gasista": "/gasistas",
-    "Plomero": "/plomeros",
-    "Pintor": "/pintores",
-    "Carpintero": "/carpinteros",
-}
-
-
 def render_page(trader, url):
-    name = trader.get("user_name") or "Profesional"
+    name = get_display_name(trader) or "Profesional"
     oficio = trader.get("main_field") or ""
     ubicacion = trader.get("ubicacion") or ""
     description = sanitize_description(trader.get("description") or "")
     zonas = trader.get("zonaCobertura") or []
     verified = trader.get("verified") == "Si"
     rating = get_rating(trader)
-    oficio_hub_path = OFICIO_HUB.get(oficio, "/")
-    oficio_hub_url = f"{SITE_ORIGIN}{oficio_hub_path}"
+    oficio_hub_url = oficio_hub_url_for(oficio)
 
     zonas_html = ""
     if zonas:
@@ -402,6 +484,13 @@ def render_page(trader, url):
 
     meta_desc = f"{name}, {oficio} en {ubicacion}. Pedi presupuesto gratis en Hogarex, sin intermediarios."
     cta_url = f"https://hogarex.ar/solicitud-enviar?rubro={quote(oficio)}&ubicacion={quote(ubicacion)}"
+    # CTA con texto especifico de rubro+ubicacion (no generico "pedir presupuesto")
+    # para intencion de busqueda alta y coincidencia semantica con la query.
+    cta_label = f"Pedir presupuesto a un {oficio.lower()} en {ubicacion}"
+    ver_mas_html = (
+        f'<a href="{oficio_hub_url}" class="ver-mas-link">'
+        f"Ver m&aacute;s {html.escape(pluralize_oficio(oficio).lower())} en {html.escape(ubicacion)} &rarr;</a>"
+    )
 
     page_html = PAGE_TEMPLATE.format(
         title_esc=html.escape(f"{name} - {oficio} en {ubicacion}"),
@@ -421,16 +510,55 @@ def render_page(trader, url):
         faq_html=faq_html,
         description_esc=html.escape(description),
         cta_url=cta_url,
+        cta_label_esc=html.escape(cta_label),
+        ver_mas_html=ver_mas_html,
     )
     return page_html
 
 
+GENERATED_MARKER = "<!-- generado automaticamente por generate_trader_pages.py"
+MANAGED_DIRS = [PROFESIONAL_DIR] + [os.path.join(REPO_ROOT, p.lstrip("/")) for p in OFICIO_HUB.values()]
+
+
+def cleanup_stale_pages(traders):
+    """Borra carpetas de perfiles generadas en corridas anteriores que ya no
+    corresponden a ningun trader actual del endpoint (ej. el trader fue dado
+    de baja o eliminado en Bubble - visto en la practica: 12 de 14
+    electricistas de CABA de una corrida anterior ya no estaban en el
+    endpoint). Solo borra carpetas cuyo index.html tiene GENERATED_MARKER
+    como primera linea: paginas de terceros hechas a mano (ej.
+    electricistas/caba/) nunca lo tienen y no se tocan."""
+    valid_dirs = {target_for(t)[0] for t in traders if is_usable(t)}
+    removed = []
+    for root in MANAGED_DIRS:
+        if not os.path.isdir(root):
+            continue
+        for name in sorted(os.listdir(root)):
+            path = os.path.join(root, name)
+            if not os.path.isdir(path) or path in valid_dirs:
+                continue
+            index_path = os.path.join(path, "index.html")
+            if not os.path.isfile(index_path):
+                continue
+            with open(index_path, encoding="utf-8") as f:
+                first_line = f.readline()
+            if GENERATED_MARKER not in first_line:
+                continue
+            shutil.rmtree(path)
+            removed.append(os.path.relpath(path, REPO_ROOT))
+    if removed:
+        print(f"Paginas obsoletas eliminadas ({len(removed)} - traders que ya no estan en el endpoint):")
+        for r in removed:
+            print(f"  - {r}")
+    return removed
+
+
 def generate_pages(traders):
     urls = []
-    skipped = 0
+    skipped_slugs = []
     for trader in traders:
-        if not trader.get("Slug"):
-            skipped += 1
+        if not is_usable(trader):
+            skipped_slugs.append(trader.get("Slug") or trader.get("_id") or "(sin slug ni id)")
             continue
         page_dir, url = target_for(trader)
         os.makedirs(page_dir, exist_ok=True)
@@ -438,8 +566,9 @@ def generate_pages(traders):
         with open(os.path.join(page_dir, "index.html"), "w", encoding="utf-8") as f:
             f.write(page_html)
         urls.append(url)
-    if skipped:
-        print(f"Aviso: {skipped} traders sin Slug fueron omitidos.")
+    if skipped_slugs:
+        print(f"Aviso: {len(skipped_slugs)} traders omitidos por datos incompletos "
+              f"(sin nombre, rubro o ubicacion): {', '.join(skipped_slugs)}")
     return urls
 
 
@@ -483,7 +612,7 @@ def get_initials(name):
 
 
 def render_hub_card(trader, index, url):
-    name = trader.get("user_name") or "Profesional"
+    name = get_display_name(trader) or "Profesional"
     oficio = trader.get("main_field") or ""
     ubicacion = trader.get("ubicacion") or ""
     description = sanitize_description(trader.get("description") or "")
@@ -519,27 +648,28 @@ def render_hub_card(trader, index, url):
     )
 
 
-def update_hub_page(traders):
-    """Reemplaza el carrusel de 'Profesionales Destacados' en electricistas/index.html
-    (marcadores TRADER_CARDS_START/END) con los electricistas reales de CABA
-    (misma cobertura geografica que declara la pagina), linkeando a su propia
-    pagina /electricistas/<slug>/. No toca el resto de la pagina."""
-    if not os.path.exists(HUB_PAGE_PATH):
-        print("Aviso: electricistas/index.html no encontrado, se omite actualizacion de tarjetas.")
+def update_hub_page(oficio, hub_path, traders):
+    """Reemplaza el carrusel de 'Profesionales Destacados' en <hub_path>/index.html
+    (marcadores TRADER_CARDS_START/END) con los traders reales de CABA de ese
+    rubro, linkeando a su propia pagina. No toca el resto de la pagina."""
+    page_path = os.path.join(REPO_ROOT, hub_path.lstrip("/"), "index.html")
+    if not os.path.exists(page_path):
+        print(f"Aviso: {hub_path}/index.html no encontrado, se omite actualizacion de tarjetas.")
         return
 
-    with open(HUB_PAGE_PATH, encoding="utf-8") as f:
+    with open(page_path, encoding="utf-8") as f:
         page_html = f.read()
 
     start_idx = page_html.find(HUB_CARDS_START)
     end_idx = page_html.find(HUB_CARDS_END)
     if start_idx == -1 or end_idx == -1:
-        print("Aviso: marcadores TRADER_CARDS_START/END no encontrados, se omite actualizacion de tarjetas.")
+        print(f"Aviso: marcadores TRADER_CARDS_START/END no encontrados en {hub_path}/index.html, se omite.")
         return
 
-    caba_electricistas = [t for t in traders if t.get("Slug") and is_caba_electricista(t)]
+    caba_traders = [t for t in traders if is_usable(t) and t.get("main_field") == oficio
+                     and t.get("ubicacion") == CABA_UBICACION]
     cards_html = "".join(
-        render_hub_card(t, i, target_for(t)[1]) for i, t in enumerate(caba_electricistas)
+        render_hub_card(t, i, target_for(t)[1]) for i, t in enumerate(caba_traders)
     )
 
     new_page_html = (
@@ -548,20 +678,29 @@ def update_hub_page(traders):
         + cards_html
         + page_html[end_idx:]
     )
-    with open(HUB_PAGE_PATH, "w", encoding="utf-8") as f:
+    with open(page_path, "w", encoding="utf-8") as f:
         f.write(new_page_html)
-    print(f"Tarjetas actualizadas en electricistas/index.html: {len(caba_electricistas)} profesionales de CABA")
+    print(f"Tarjetas actualizadas en {hub_path}/index.html: {len(caba_traders)} profesionales de CABA")
+
+
+def update_hub_pages(traders):
+    for oficio, hub_path in OFICIO_HUB.items():
+        update_hub_page(oficio, hub_path, traders)
 
 
 def main():
     traders = fetch_traders()
     print(f"Traders recibidos del endpoint: {len(traders)}")
-    caba_count = sum(1 for t in traders if is_caba_electricista(t) and t.get("Slug"))
-    print(f"De los cuales electricistas de CABA (-> /electricistas/<slug>/): {caba_count}")
+    usable = [t for t in traders if is_usable(t)]
+    print(f"Traders utilizables (con nombre, rubro y ubicacion): {len(usable)}")
+    por_rubro = Counter(t["main_field"] for t in usable)
+    for oficio, count in sorted(por_rubro.items()):
+        print(f"  - {oficio}: {count}")
+    cleanup_stale_pages(traders)
     urls = generate_pages(traders)
     generate_sitemap(urls)
-    update_hub_page(traders)
-    print(f"Paginas de profesional generadas: {len(urls)}")
+    update_hub_pages(traders)
+    print(f"Paginas generadas: {len(urls)}")
     print(f"Sitemap escrito en: {SITEMAP_PATH}")
 
 
