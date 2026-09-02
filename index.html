@@ -84,6 +84,7 @@
     .prof-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.08)}
     .prof-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
     .prof-av{width:44px;height:44px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#fff;flex-shrink:0}
+    .prof-av-img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;display:block}
     .vbadge{display:flex;align-items:center;gap:3px;background:#dcfce7;color:var(--green);font-size:11px;font-weight:700;padding:3px 9px;border-radius:var(--rp)}
     .vbadge-lic{display:flex;align-items:center;gap:3px;background:var(--blue-bg);color:var(--blue);font-size:11px;font-weight:700;padding:3px 9px;border-radius:var(--rp)}
     .prof-name{font-size:15px;font-weight:700;color:#111827;margin-bottom:2px}
@@ -412,143 +413,332 @@
 <!-- PROFESIONALES VERIFICADOS -->
 <section class="profesionales">
   <div class="container">
-    <p class="sec-label">Profesionales Verificados</p>
+    <p class="sec-label">Profesionales Destacados</p>
     <p style="text-align:center;font-size:14px;color:var(--t3);margin:-12px 0 24px">Elegís vos: mirá perfil, reseñas y verificaciones antes de contratar.</p>
     <div class="carousel-wrap">
       <button type="button" class="car-btn car-prev" onclick="carScroll(this,-1)" aria-label="Anterior">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
       <div class="prof-grid car-track" id="profTrack">
+      <!-- TRADER_CARDS_START -->
       <div class="prof-card">
         <div class="prof-top">
-          <div class="prof-av">LT</div>
-          <span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span>
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1761267899886x784058993786363100/inbound6540580712244416517.jpg" alt="Abel, Albañil en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">AB</div>
+          
         </div>
-        <div class="prof-name">Luis Torres</div>
-        <div class="prof-rub">Plomero</div>
-        <div class="prof-desc">Soy Luis. Realizo trabajos de la construcción y el mantenimiento general de la vivienda. Plomería en general.</div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/abel-albanil-buenos-aires-gba" style="color:inherit;text-decoration:none">Abel</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Soy una persona que le gusta ayudar en toda area de trabajo y facilitar todo al cliente</div>
         <div class="prof-meta">
-          <span class="prof-popular">↑ Popular</span>
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1770638539662x813718651992276400/IMG_20251026_101018141.jpg" alt="Adriano, Albañil en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">AD</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/adriano-albanil-buenos-aires-caba" style="color:inherit;text-decoration:none">Adriano</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Hola! Buen día, estamos para brindarle el mejor servicio posible, gracias por confiar!.</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
           <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
         </div>
       </div>
       <div class="prof-card">
         <div class="prof-top">
-          <div class="prof-av" style="background:#206ff7">MM</div>
-          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span><span class="vbadge-lic"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Matrícula verificada</span></div>
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1757019276033x934036298954053000/inbound8637805840850289483.jpg" alt="Alberto Javier, Albañil en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">AJ</div>
+          
         </div>
-        <div class="prof-name">Marcelino Martínez</div>
-        <div class="prof-rub">Gasista</div>
-        <div class="prof-desc">Trabajo de plomero hace 45 años. Soy gasista matriculado puedo reparar artefactos calcular instalaciones.</div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/alberto-javier-albanil-buenos-aires-gba" style="color:inherit;text-decoration:none">Alberto Javier</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Hago trabajos de albañilería, plomería y pintura</div>
         <div class="prof-meta">
-          <span class="prof-popular">↑ Popular</span>
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1774869776609x429014822369998340/1000104099.png" alt="Angel, Albañil en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">AN</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/angel-albanil-buenos-aires-gba" style="color:inherit;text-decoration:none">Angel</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Mantenimiento y Construcción en general. Más de 15 años de experiencia. 
+Presupuesto sin compromiso.</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1759695578050x739523444354928100/inbound51149769410527725.jpg" alt="Antonio, Albañil en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">AN</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/antonio-albanil-buenos-aires-caba" style="color:inherit;text-decoration:none">Antonio</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Soy Antonio</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
           <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
         </div>
       </div>
       <div class="prof-card">
         <div class="prof-top">
-          <div class="prof-av" style="background:#065f46">DF</div>
-          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span><span class="vbadge-lic"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Matrícula verificada</span></div>
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1760671374380x340374936256347700/825df3e162357eb4a71b26e6eb05683f_0.jpeg" alt="Antonio, Albañil en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">AN</div>
+          
         </div>
-        <div class="prof-name">Daniel Figueroa</div>
-        <div class="prof-rub">Electricista</div>
-        <div class="prof-desc">Soy Electricista matriculado y Técnico en refrigeración, trabajos garantizados y con total seriedad.</div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/antonio-albanil-buenos-aires-gba-1" style="color:inherit;text-decoration:none">Antonio</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Soy oficial de mantenimiento</div>
         <div class="prof-meta">
-          <span class="prof-popular">↑ Popular</span>
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1761869078046x131159817825466480/inbound6744508791443730083.jpg" alt="Antonio, Albañil en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">AN</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/antonio-albanil-buenos-aires-gba" style="color:inherit;text-decoration:none">Antonio</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Persona responsable 35 años Ciudad de Zárate</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1770681187520x203823886030104260/inbound7468891626434396382.jpg" alt="Arnol, Albañil en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">AR</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/arnol-albanil-buenos-aires-caba" style="color:inherit;text-decoration:none">Arnol</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Soy profesional el aria de refacción integral del hogar brindando servicios de muy buena calidad en tiempo y forma,años de experienciae abalan clientes satisfechos</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1760098752093x622382245652441500/20250929_185255.jpg" alt="CESAR ALEJANDRO, Albañil en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">CA</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/cesar-alejandro-albanil-buenos-aires-gba" style="color:inherit;text-decoration:none">CESAR ALEJANDRO</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Graziani2020</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1757944745353x204554625333989150/IMG-20250903-WA0044.jpeg" alt="Carlos, Albañil en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">CA</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/carlos-albanil-buenos-aires-caba" style="color:inherit;text-decoration:none">Carlos</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Trabajos de reparación y mantenimiento de albañilería,plomería, instalaciones y desinstalaciones de aires Acc. Hacemos trabajos de herrería en Gral.</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1760881671944x222951122384821730/1000209921.jpg" alt="Claudio, Albañil en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">CL</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/claudio-albanil-buenos-aires-gba-2" style="color:inherit;text-decoration:none">Claudio</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Somo un equipo dedicado  cubrí lo rubro de construcción  e obra tradicional y también en Steel Framing</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1762263678924x645872299977388700/b7575b1c-1030-4b1b-9c82-d2f7ef9e540a-1_all_680.jpg" alt="Claudio, Albañil en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">CL</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/claudio-albanil-buenos-aires-gba-1" style="color:inherit;text-decoration:none">Claudio</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Realizamos trabajos de ALBAÑILERÍA, ELECTRICIDAD,HERRERIA,PINTURA,PLOMERIA ,CARPINTERIA,CERRAJERIA,AIRE ACONDICIONADO,(INSTALACIÓN Y MANTENIMIENTO) PLANOS, PRESUPUESTOS SIN CARGO.
+Más de 15 años de experiencia en el rubro de la construcción avalan la trayectoria.
+Refacciones en general de HOGAR ,GALPONES ,OFICINAS.
+PERSONAL RQUIPADO CON HERRAMIENTAS Y SEGUROS DE TRABAJO.
+Se entrega GARANTIA POR ESCRITO 180 DIAS!!! para el trabajo realizado.</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://lh3.googleusercontent.com/a-/ALV-UjXY2ndcFY-0PSG-OVuhksqVcvYAXpGnF0-H3XEMvpGEXASk5eWEZUp5si1Gmo-QyDWXuWYT_IpGl2NswnhAcS-7kBOAvTMivi_npPgWoG5J9PSUrVNALUNBIuEbDqD1Cb4alqw81dc-__WHTZCD1z5E73z78r7se1rPaoUwKs_DrYTyYYqqbc5op-aKmjudSmoM16RiwFoq7kNGpmvpUBLYpwjgEnm5foDkSPOcFuzy2Zwc_zXXENt28OREcmb-V-p0FxwGQ68mdlr2ERujiHBNeX2LQnkExGGJKt42vEcOyZFm_csqczR1c-jeBdfkW-5_0Sz4qSGdpeQL86CUonrOHsWHjPmHOepT_Ghej6rThLYav_MY-Nt2Q8LMPRBoy25b2gub1W7gSKheGQaidj2ELjcQeHR8LdW3wy2O5pigwZrpTVPtlZFHNSlS0h2xF3KyyHZyg9PIA0C-tOWkeKhwOVYcx5bD0a60pE6DOU8vjg_wJhXbFe1zJDAxAv3mvDp3VpzEUCV-cRLCnp5r0u-SbgY5q86Xpr9T4eFtvYc-_wlk4QU8A2TgwTmfRh1qSNXCopxZAAO76mXYv31iFXUPWebyuRoZ7UTI6n59D_l1yHR3qnSd59O16aZa2g6kSRnrID__eUmC2uBXhqwMut_ZQmOh2Zx1eoFWKWpCHrA4VmonqUHGDSdDkak8MeUugw6DiGMvvD7JPgMcngWwyZgtYfEUe6d2EnHr4Q3mnZIcEl_mmQmQwYNUTwFa2vfAiNRedBjus6Sh6SC0qeq0gXl_8pgpHTWfTd4dlhkHOwkcEw7emHA41smMoXvIvRa4LoQd8nzWp9figM4Oh4_LiwuXyVFmVDK73Wccv7yZVWDh2wpRlipMsw_rdto7Zh6NdusZqPNWsDa3ScL2wZoM-glE17YzgDW1T9yxHCU23k5HLcMq2CFMcnij1wwTXzjtpmgwTzyNaZbi-uW6YyJ6qt2JOb6bvu1jjDGcZ3L6nMD1b8YHSpT3StJWmrR8zllO2RQXPsFH9lPN_9ZSyj1aJ4oMsAmrxExM5Fj-X1aywZ03b2-svTPTvk0a=s96-c" alt="Claudio, Albañil en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">CL</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/claudio-albanil-buenos-aires-gba" style="color:inherit;text-decoration:none">Claudio</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Soy Claudio Toledo albañil pint or plomero</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1764683217292x190258661665021250/1000093151.jpg" alt="Damián, Albañil en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">DA</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/damian-albanil-buenos-aires-gba" style="color:inherit;text-decoration:none">Damián</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Soy Damián Lareu, profesional de la construcción con experiencia en obras, reformas y mantenimiento. Realizo remodelaciones, reparaciones y mejoras del hogar con terminaciones prolijas. Ofrezco plomería, colocación de cerámicos y porcelanatos, pintura, revoques e instalación de sanitarios. Trabajo con electricista y gasista matriculado. Me destaco por responsabilidad, puntualidad y claridad en cada presupuesto.</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1778431677067x790952440118746200/1000051322.jpg" alt="Daniel, Albañil en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">DA</div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Perfil verificado</span></div>
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/daniel-albanil-buenos-aires-gba" style="color:inherit;text-decoration:none">Daniel</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Soy Daniel hago presupuesto sobre todo tipo de refacciones pintura plomería techos colocación de porcelanato y cerámicas</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1770936740358x148237794465893020/1002758810.png" alt="Daniel Marcelo, Albañil en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">DM</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/daniel-marcelo-albanil-buenos-aires-gba" style="color:inherit;text-decoration:none">Daniel Marcelo</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Hago construcción de viviendas 🏡.... Ampliaciones y Reformas</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1759750177250x456927034018590700/inbound3209001301249163952.jpg" alt="Esteban, Albañil en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">ES</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/esteban-albanil-buenos-aires-gba" style="color:inherit;text-decoration:none">Esteban</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Estoy ofreciendo mis servicios en construcción cualquier consulta al 1131284128</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1762923935362x841254593063255800/Screenshot_20251112_012244_Gallery.jpg" alt="Ezequiel, Albañil en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">EZ</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/ezequiel-albanil-buenos-aires-gba" style="color:inherit;text-decoration:none">Ezequiel</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Presupuesto sin cargo 11-6606-0772 ezequiel sandoval</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1777462853437x978055039839329000/03cdad12-fbf7-488f-a786-3ba2f7947731-1_all_71.jpg" alt="Fernando, Albañil en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">FE</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/fernando-albanil-buenos-aires-caba" style="color:inherit;text-decoration:none">Fernando</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Trabajos con responsabilidad y credibilidad dándole al client transparencia y a tiempo</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
+        </div>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1762779934092x233486298353365440/17627799065093597867169631008575.jpg" alt="Franco Nicolas, Albañil en Córdoba Capital" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">FN</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/franco-nicolas-albanil-cordoba-capital" style="color:inherit;text-decoration:none">Franco Nicolas</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Hola soy Franco ago trabajo de pintura, albañilería y Durlock soy responsable</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
           <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Córdoba Capital</span>
         </div>
       </div>
       <div class="prof-card">
         <div class="prof-top">
-          <div class="prof-av" style="background:#0f766e">MI</div>
-          <span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span>
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1764268276645x582471779305164800/20251105_195535_0000.png" alt="Gerard, Albañil en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">GE</div>
+          
         </div>
-        <div class="prof-name">Matías Ibarra</div>
-        <div class="prof-rub">Pintor</div>
-        <div class="prof-desc">Pintura de interiores y exteriores con acabados prolijos. Presupuesto sin cargo antes de empezar.</div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/gerard-albanil-buenos-aires-gba" style="color:inherit;text-decoration:none">Gerard</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">C I M A construcciones en general</div>
         <div class="prof-meta">
-          <span class="prof-popular">↑ Popular</span>
-          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
-        </div>
-      </div>
-      <div class="prof-card">
-        <div class="prof-top">
-          <div class="prof-av" style="background:#7c3aed">RF</div>
-          <span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span>
-        </div>
-        <div class="prof-name">Rosana Funes</div>
-        <div class="prof-rub">Carpintero</div>
-        <div class="prof-desc">Muebles y placares a medida. Trabajo con melamina y madera maciza, entrega e instalación incluida.</div>
-        <div class="prof-meta">
-          <span class="prof-popular">↑ Popular</span>
+          <span class="prof-popular">&uarr; Popular</span>
           <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
         </div>
       </div>
       <div class="prof-card">
         <div class="prof-top">
-          <div class="prof-av" style="background:#b45309">WC</div>
-          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span><span class="vbadge-lic"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Matrícula verificada</span></div>
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1756862582483x596682241187338200/20230820_211512.jpg" alt="German Eduardo, Albañil en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">GE</div>
+          
         </div>
-        <div class="prof-name">Walter Cabrera</div>
-        <div class="prof-rub">Electricista</div>
-        <div class="prof-desc">Instalaciones y reparaciones eléctricas para casas y comercios. Atiendo urgencias todos los días.</div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/german-eduardo--albanil-buenos-aires-caba" style="color:inherit;text-decoration:none">German Eduardo</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Hola que tal yo me dedico todo referente a la costruccion</div>
         <div class="prof-meta">
-          <span class="prof-popular">↑ Popular</span>
+          <span class="prof-popular">&uarr; Popular</span>
           <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
         </div>
       </div>
       <div class="prof-card">
         <div class="prof-top">
-          <div class="prof-av" style="background:#be123c">KL</div>
-          <span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span>
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1759889375523x658732888542979500/inbound781159191480496711.jpg" alt="Guillermo Fabian, Albañil en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">GF</div>
+          
         </div>
-        <div class="prof-name">Karina Loyola</div>
-        <div class="prof-rub">Plomero</div>
-        <div class="prof-desc">Destapes, pérdidas y cambio de grifería. Más de 8 años trabajando en obras y reformas.</div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/guillermo-fabian-albanil-buenos-aires-gba" style="color:inherit;text-decoration:none">Guillermo Fabian</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Soy oficial albañil en general , revestimiento cerámico y porcelanato más de 30.años de experiencia</div>
         <div class="prof-meta">
-          <span class="prof-popular">↑ Popular</span>
-          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Rosario</span>
-        </div>
-      </div>
-      <div class="prof-card">
-        <div class="prof-top">
-          <div class="prof-av" style="background:#0e7490">ER</div>
-          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span><span class="vbadge-lic"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Matrícula verificada</span></div>
-        </div>
-        <div class="prof-name">Esteban Ruiz</div>
-        <div class="prof-rub">Gasista</div>
-        <div class="prof-desc">Gasista matriculado. Instalaciones, certificados y service de calefones y calderas.</div>
-        <div class="prof-meta">
-          <span class="prof-popular">↑ Popular</span>
-          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
-        </div>
-      </div>
-      <div class="prof-card">
-        <div class="prof-top">
-          <div class="prof-av" style="background:#4d7c0f">YP</div>
-          <span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span>
-        </div>
-        <div class="prof-name">Yésica Paz</div>
-        <div class="prof-rub">Instalaciones</div>
-        <div class="prof-desc">Cámaras de seguridad, aires acondicionados y redes WiFi. Dejo todo configurado antes de irme.</div>
-        <div class="prof-meta">
-          <span class="prof-popular">↑ Popular</span>
+          <span class="prof-popular">&uarr; Popular</span>
           <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
         </div>
       </div>
       <div class="prof-card">
         <div class="prof-top">
-          <div class="prof-av" style="background:#9d174d">NO</div>
-          <span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span>
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1762699082622x202500912919191260/17626990554175524163084378158366.jpg" alt="Gustavo, Albañil en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">GU</div>
+          
         </div>
-        <div class="prof-name">Nahuel Ortega</div>
-        <div class="prof-rub">Pintor</div>
-        <div class="prof-desc">Fachadas, frentes y espacios comerciales. Trabajo con andamio propio y seguro al día.</div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/gustavo-albanil-buenos-aires-caba-1" style="color:inherit;text-decoration:none">Gustavo</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Hola soy Gustavo tengo 38 años soy oficial especializado en contruccion</div>
         <div class="prof-meta">
-          <span class="prof-popular">↑ Popular</span>
-          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>CABA</span>
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
         </div>
       </div>
+<!-- TRADER_CARDS_END -->
     </div>
       <button type="button" class="car-btn car-next" onclick="carScroll(this,1)" aria-label="Siguiente">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
