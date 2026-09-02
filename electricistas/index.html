@@ -318,9 +318,70 @@
     <div class="nav-links">
       <a href="https://hogarex.ar/registro_profesional" class="btn-sp">Soy Profesional</a>
       <a href="https://hogarex.ar/busqueda" class="btn-ol">Buscar Profesional</a>
+      <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </div>
   </div>
 </nav>
+<div class="hgx-nm-overlay" id="hgx-nm-overlay"></div>
+<div class="hgx-nm-panel" id="hgx-nm-panel" aria-hidden="true">
+  <div class="hgx-nm-panel-head">
+    <span class="hgx-nm-logo">Hogarex</span>
+    <button type="button" id="hgx-nm-close" class="hgx-nm-close" aria-label="Cerrar menú">&times;</button>
+  </div>
+  <nav class="hgx-nm-links" aria-label="Menú principal">
+    <a href="https://hogarex.ar">Inicio</a>
+    <a href="https://app.hogarex.ar/electricistas">Electricistas</a>
+    <a href="https://app.hogarex.ar/gasistas">Gasistas</a>
+    <a href="https://app.hogarex.ar/plomeros">Plomeros</a>
+    <a href="https://app.hogarex.ar/pintores">Pintores</a>
+    <a href="https://app.hogarex.ar/carpinteros">Carpinteros</a>
+    <a href="https://app.hogarex.ar/precios-mano-de-obra">Precios de mano de obra</a>
+    <a href="https://app.hogarex.ar/blog">Blog</a>
+  </nav>
+  <div class="hgx-nm-actions">
+    <a href="https://hogarex.ar/busqueda" class="hgx-nm-btn hgx-nm-btn-outline">Buscar profesional</a>
+    <a href="https://hogarex.ar/registro_profesional" class="hgx-nm-btn hgx-nm-btn-outline">Soy profesional</a>
+    <a href="https://hogarex.ar/solicitud-enviar" class="hgx-nm-btn hgx-nm-btn-yellow">Pedir presupuesto gratis</a>
+  </div>
+</div>
+<style>
+  .hgx-nm-toggle{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:38px;height:38px;background:transparent;border:none;cursor:pointer;flex-shrink:0;padding:0;margin-left:6px}
+  .hgx-nm-toggle span{display:block;width:22px;height:2.5px;background:#003366;border-radius:2px;transition:transform .25s ease,opacity .25s ease}
+  .hgx-nm-toggle.hgx-nm-toggle-dark span{background:#ffffff}
+  .hgx-nm-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+  .hgx-nm-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .hgx-nm-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+  .hgx-nm-overlay{position:fixed;inset:0;background:rgba(9,30,68,.5);opacity:0;visibility:hidden;transition:opacity .25s ease;z-index:998}
+  .hgx-nm-overlay.hgx-nm-open{opacity:1;visibility:visible}
+  .hgx-nm-panel{position:fixed;top:0;right:0;bottom:0;width:82%;max-width:320px;background:#fff;z-index:999;transform:translateX(100%);transition:transform .28s ease;display:flex;flex-direction:column;box-shadow:-8px 0 24px rgba(0,0,0,.15);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .hgx-nm-panel.hgx-nm-open{transform:translateX(0)}
+  .hgx-nm-panel-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid #eef1f6}
+  .hgx-nm-logo{font-weight:800;font-size:17px;color:#003366;font-family:inherit}
+  .hgx-nm-close{background:none;border:none;font-size:26px;line-height:1;color:#64708a;cursor:pointer;padding:4px 8px}
+  .hgx-nm-links{display:flex;flex-direction:column;padding:10px 8px;overflow-y:auto;flex:1}
+  .hgx-nm-links a{display:block;padding:13px 12px;color:#1a1a2e;text-decoration:none;font-weight:600;font-size:15px;border-radius:8px}
+  .hgx-nm-links a:hover,.hgx-nm-links a:active{background:#f0f2f5}
+  .hgx-nm-actions{display:flex;flex-direction:column;gap:8px;padding:14px 16px 20px;border-top:1px solid #eef1f6}
+  .hgx-nm-btn{display:block;text-align:center;padding:12px;border-radius:999px;font-weight:700;font-size:14px;text-decoration:none}
+  .hgx-nm-btn-outline{border:1.5px solid #003366;color:#003366;background:#fff}
+  .hgx-nm-btn-yellow{background:#F5C518;color:#003366}
+  @media (min-width:900px){.hgx-nm-panel{width:340px}}
+</style>
+<script>
+(function(){
+  var toggle=document.getElementById('hgx-nm-toggle');
+  var panel=document.getElementById('hgx-nm-panel');
+  var overlay=document.getElementById('hgx-nm-overlay');
+  var closeBtn=document.getElementById('hgx-nm-close');
+  function openMenu(){panel.classList.add('hgx-nm-open');overlay.classList.add('hgx-nm-open');panel.setAttribute('aria-hidden','false');toggle.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
+  function closeMenu(){panel.classList.remove('hgx-nm-open');overlay.classList.remove('hgx-nm-open');panel.setAttribute('aria-hidden','true');toggle.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  if(toggle){toggle.addEventListener('click',openMenu);}
+  if(closeBtn){closeBtn.addEventListener('click',closeMenu);}
+  if(overlay){overlay.addEventListener('click',closeMenu);}
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
+})();
+</script>
+
 
 <!-- BREADCRUMB -->
 <div class="bc">
