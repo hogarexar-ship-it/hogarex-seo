@@ -70,6 +70,7 @@ API_URL = os.environ.get(
     "https://hogarex.ar/api/1.1/wf/get_traders_publicos",
 )
 CSV_PATH = os.environ.get("TRADERS_CSV_PATH")
+USERS_CSV_PATH = os.environ.get("TRADERS_USERS_CSV_PATH")
 
 # Rubros con hub propio en el repo (carpeta + index.html con carrusel de
 # tarjetas ya existente). Un trader de CABA en uno de estos rubros se anida
@@ -118,8 +119,50 @@ def load_traders_from_csv(path):
                 "portfolio": (row.get("portfolio") or "").strip() or None,
                 "rating_count": _to_int(row.get("rating_count")),
                 "rating-sum": _to_int(row.get("rating-sum")),
+                "_uid": (row.get("unique id") or "").strip() or None,
             })
     return traders
+
+
+def load_photo_map(path):
+    """Lee un export CSV de la tabla User de Bubble y arma {uid_del_trader:
+    url_de_la_foto}, SOLO para cuentas account_type=Trader con foto de
+    perfil cargada. `trader_profile` en este CSV es el mismo id que `unique
+    id` en el export de Trader (o `_id` en la Live API) - es el join key.
+
+    Deliberadamente solo se leen las columnas `account_type`,
+    `trader_profile` y `foto perfil `: el resto del CSV de usuarios trae
+    email, nombre, apellido, googleID, whatsapp - datos sensibles que no
+    se cargan en memoria mas alla de esta funcion y jamas se exponen en el
+    HTML generado."""
+    photos = {}
+    with open(path, encoding="utf-8-sig", newline="") as f:
+        for row in csv.DictReader(f):
+            if row.get("account_type", "").strip('"') != "Trader":
+                continue
+            uid = (row.get("trader_profile") or "").strip()
+            photo = (row.get("foto perfil ") or "").strip()
+            if uid and photo:
+                photos[uid] = photo
+    return photos
+
+
+def attach_photos(traders):
+    """Suma trader['photo_url'] (https:// absoluta) cuando hay match real
+    en el CSV de usuarios. No fabrica nada: los traders sin foto cargada
+    simplemente no reciben el campo, y siguen usando el avatar con
+    iniciales como hasta ahora."""
+    if not USERS_CSV_PATH:
+        return
+    photo_map = load_photo_map(USERS_CSV_PATH)
+    matched = 0
+    for trader in traders:
+        uid = trader.get("_uid")
+        if uid and uid in photo_map:
+            url = photo_map[uid]
+            trader["photo_url"] = "https:" + url if url.startswith("//") else url
+            matched += 1
+    print(f"Fotos de perfil reales matcheadas: {matched}/{len(traders)}")
 
 
 def fetch_traders():
@@ -128,7 +171,10 @@ def fetch_traders():
     req = urllib.request.Request(API_URL, method="POST")
     with urllib.request.urlopen(req, timeout=30) as resp:
         data = json.load(resp)
-    return data.get("response", {}).get("traders", [])
+    traders = data.get("response", {}).get("traders", [])
+    for t in traders:
+        t["_uid"] = t.get("_id")
+    return traders
 
 
 def _slug_token(text):
@@ -287,6 +333,8 @@ def build_jsonld(trader, url, oficio_hub_url, faq_items):
         "worksFor": {"@type": "Organization", "name": "Hogarex", "url": "https://hogarex.ar"},
         "mainEntityOfPage": {"@id": f"{url}#webpage"},
     }
+    if trader.get("photo_url"):
+        person["image"] = trader["photo_url"]
     # aggregateRating solo cuando hay reseñas reales (rating_count > 0 en el
     # endpoint de Bubble). No es un self-rating de Hogarex sobre si misma
     # (el patron que Google restringe): son reseñas de clientes sobre un
@@ -355,6 +403,7 @@ PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - 
   <meta property="og:url" content="{url}" />
   <meta property="og:title" content="{title_esc} | Hogarex" />
   <meta property="og:description" content="{meta_desc_esc}" />
+  {og_image_html}
   <meta property="og:locale" content="es_AR" />
   <meta property="og:site_name" content="Hogarex" />
   <script type="application/ld+json">
@@ -389,6 +438,7 @@ PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - 
     .rating-badge {{ display: inline-flex; align-items: center; gap: 4px; color: #b45309; font-weight: 600; }}
     .hero-top {{ display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }}
     .profile-avatar {{ width: 52px; height: 52px; border-radius: 50%; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.05rem; flex-shrink: 0; }}
+    .profile-avatar-img {{ width: 52px; height: 52px; border-radius: 50%; object-fit: cover; flex-shrink: 0; display: block; }}
     .facts-card {{ background: var(--white); border: 1px solid var(--gray-100); border-radius: var(--radius); padding: 6px 16px; margin-bottom: 18px; }}
     .facts-row {{ display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 0.88rem; border-bottom: 1px solid var(--gray-100); }}
     .facts-row:last-child {{ border-bottom: none; }}
@@ -447,7 +497,7 @@ PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - 
 
 <div class="profile-hero">
   <div class="hero-top">
-    <div class="profile-avatar">{initials_esc}</div>
+    {avatar_html}
     <span class="profile-tag">{oficio_esc}</span>
   </div>
   <h1>{name_esc} &mdash; {oficio_esc} en {ubicacion_esc}</h1>
@@ -498,6 +548,20 @@ def render_page(trader, url):
     verified = trader.get("verified") == "Si"
     rating = get_rating(trader)
     oficio_hub_url = oficio_hub_url_for(oficio)
+    photo_url = trader.get("photo_url")
+    photo_alt = html.escape(f"{name}, {oficio} en {ubicacion}")
+
+    if photo_url:
+        avatar_html = (
+            f'<img src="{html.escape(photo_url)}" alt="{photo_alt}" class="profile-avatar-img" '
+            'loading="lazy" referrerpolicy="no-referrer" '
+            "onerror=\"this.style.display='none';this.nextElementSibling.style.display='flex'\">"
+            f'<div class="profile-avatar" style="display:none">{html.escape(get_initials(name))}</div>'
+        )
+        og_image_html = f'<meta property="og:image" content="{html.escape(photo_url)}" />'
+    else:
+        avatar_html = f'<div class="profile-avatar">{html.escape(get_initials(name))}</div>'
+        og_image_html = ""
 
     zonas_html = ""
     if zonas:
@@ -554,7 +618,8 @@ def render_page(trader, url):
         oficio_esc_lower=html.escape(oficio.lower()),
         oficio_hub_url=oficio_hub_url,
         name_esc=html.escape(name),
-        initials_esc=html.escape(get_initials(name)),
+        avatar_html=avatar_html,
+        og_image_html=og_image_html,
         ubicacion_esc=html.escape(ubicacion),
         verified_html=verified_html,
         rating_html=rating_html,
@@ -639,7 +704,7 @@ def generate_sitemap(urls):
 
 
 HUB_CARD_TEMPLATE = """      <div class="prof-card">
-        <div class="prof-top"><div class="prof-av"{avatar_style}>{initials}</div>{badge_html}</div>
+        <div class="prof-top">{avatar_html}{badge_html}</div>
         <div class="prof-name"><a href="{url}" style="color:inherit;text-decoration:none">{name_esc}</a></div>
         <div class="prof-rub">{oficio_esc} &middot; <span style="color:var(--t3);font-weight:400">{ubicacion_esc}</span></div>
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
@@ -673,8 +738,19 @@ def render_hub_card(trader, index, url):
     description = sanitize_description(trader.get("description") or "")
     verified = trader.get("verified") == "Si"
 
-    color = HUB_AVATAR_COLORS[index % len(HUB_AVATAR_COLORS)]
-    avatar_style = f' style="background:{color}"' if color else ""
+    photo_url = trader.get("photo_url")
+    if photo_url:
+        photo_alt = html.escape(f"{name}, {oficio} en {ubicacion}")
+        avatar_html = (
+            f'<img src="{html.escape(photo_url)}" alt="{photo_alt}" class="prof-av-img" '
+            'loading="lazy" referrerpolicy="no-referrer" '
+            "onerror=\"this.style.display='none';this.nextElementSibling.style.display='flex'\">"
+            f'<div class="prof-av" style="display:none">{html.escape(get_initials(name))}</div>'
+        )
+    else:
+        color = HUB_AVATAR_COLORS[index % len(HUB_AVATAR_COLORS)]
+        avatar_style = f' style="background:{color}"' if color else ""
+        avatar_html = f'<div class="prof-av"{avatar_style}>{html.escape(get_initials(name))}</div>'
 
     # Unico badge real: solo se muestra si el dato `verified` de Bubble es "Si".
     # No se fabrican afirmaciones de verificacion (identidad/matricula) sin dato
@@ -691,8 +767,7 @@ def render_hub_card(trader, index, url):
     cta_url = f"https://hogarex.ar/solicitud-enviar?rubro={quote(oficio)}&ubicacion={quote(ubicacion)}"
 
     return HUB_CARD_TEMPLATE.format(
-        avatar_style=avatar_style,
-        initials=html.escape(get_initials(name)),
+        avatar_html=avatar_html,
         badge_html=badge_html,
         url=url,
         name_esc=html.escape(name),
@@ -746,6 +821,7 @@ def update_hub_pages(traders):
 def main():
     traders = fetch_traders()
     print(f"Traders recibidos del endpoint: {len(traders)}")
+    attach_photos(traders)
     usable = [t for t in traders if is_usable(t)]
     print(f"Traders utilizables (con nombre, rubro y ubicacion): {len(usable)}")
     por_rubro = Counter(t["main_field"] for t in usable)
