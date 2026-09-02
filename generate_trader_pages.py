@@ -1049,9 +1049,10 @@ EXPLORE_PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pag
     header {{ background: var(--navy); padding: 0 16px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }}
     .header-inner {{ max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }}
     .logo {{ color: var(--white); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1rem; text-decoration: none; }}
+    nav {{ display: flex; align-items: center; gap: 8px; }}
     nav a {{ color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.85rem; font-weight: 500; }}
     nav .nav-home {{ display: none; }}
-    nav .nav-cta {{ background: var(--yellow); color: var(--navy); padding: 8px 16px; border-radius: 999px; font-weight: 700; font-family: 'Sora', sans-serif; font-size: 0.8rem; }}
+    nav .nav-cta {{ display: none; background: var(--yellow); color: var(--navy); padding: 8px 16px; border-radius: 999px; font-weight: 700; font-family: 'Sora', sans-serif; font-size: 0.8rem; }}
     .breadcrumb {{ max-width: 1100px; margin: 0 auto; padding: 16px 16px 0; }}
     .breadcrumb a {{ color: var(--gray-500); text-decoration: none; font-size: 0.82rem; font-weight: 500; }}
     .hero {{ max-width: 1100px; margin: 0 auto; padding: 14px 16px 4px; }}
@@ -1082,9 +1083,8 @@ EXPLORE_PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pag
       header {{ padding: 0 24px; }}
       .header-inner {{ height: 64px; }}
       .logo {{ font-size: 1.1rem; }}
-      nav {{ display: flex; align-items: center; }}
       nav .nav-home {{ display: inline; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 500; margin-right: 24px; }}
-      nav .nav-cta {{ padding: 8px 18px; font-size: 0.9rem; }}
+      nav .nav-cta {{ display: inline-block; padding: 8px 18px; font-size: 0.9rem; }}
       .breadcrumb, .hero, .filters, .ex-grid {{ max-width: 1100px; padding-left: 24px; padding-right: 24px; }}
       .hero {{ padding-top: 24px; }}
       .hero h1 {{ font-size: clamp(1.5rem, 3vw, 2rem); }}
