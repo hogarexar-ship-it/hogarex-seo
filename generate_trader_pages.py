@@ -78,11 +78,88 @@ def sanitize_description(text):
     return text
 
 
-def build_jsonld(trader, url, oficio_hub_url):
+def get_rating(trader):
+    """Devuelve (rating_value, review_count) solo si hay reseñas reales
+    (rating_count > 0), o None si no hay dato. No se fabrica ni se
+    interpola: 20 de los 22 traders actuales tienen 0 reseñas y no
+    muestran nada de rating, ni en HTML ni en JSON-LD."""
+    count = trader.get("rating_count")
+    total = trader.get("rating-sum")
+    if not count or not total:
+        return None
+    return round(total / count, 1), count
+
+
+def build_faq_items(trader, name, oficio_lower):
+    """Preguntas de alta intencion (tipo People Also Ask / AI Overviews),
+    todas respondidas con datos reales del trader o con informacion generica
+    y verdadera de como funciona Hogarex - nunca con afirmaciones inventadas
+    sobre la persona."""
+    ubicacion = trader.get("ubicacion") or ""
+    zonas = trader.get("zonaCobertura") or []
+    verified = trader.get("verified") == "Si"
+    rating = get_rating(trader)
+
+    items = [
+        (
+            f"¿En qué zonas trabaja {name}?",
+            ("Cubre " + ", ".join(zonas) + ".") if zonas else f"Trabaja en {ubicacion}.",
+        ),
+    ]
+    if rating:
+        value, count = rating
+        reseña_word = "reseña" if count == 1 else "reseñas"
+        items.append((
+            f"¿Qué calificación tiene {name} en Hogarex?",
+            f"{value} de 5, según {count} {reseña_word} de clientes en Hogarex.",
+        ))
+    if verified:
+        items.append((
+            f"¿{name} está verificado en Hogarex?",
+            "Sí, su perfil está verificado en Hogarex.",
+        ))
+    items.append((
+        f"¿Cuánto cuesta pedir un presupuesto a {name}?",
+        "Nada: pedir presupuesto en Hogarex es gratuito y sin compromiso.",
+    ))
+    items.append((
+        f"¿Cómo contacto a {name} por Hogarex?",
+        f"Completá el formulario de presupuesto y Hogarex te conecta directamente con {name} por WhatsApp, sin intermediarios.",
+    ))
+    return items
+
+
+def build_jsonld(trader, url, oficio_hub_url, faq_items):
     name = trader.get("user_name") or "Profesional"
     oficio = trader.get("main_field") or ""
     ubicacion = trader.get("ubicacion") or ""
     zonas = trader.get("zonaCobertura") or []
+    rating = get_rating(trader)
+
+    person = {
+        "@type": "Person",
+        "@id": f"{url}#person",
+        "name": name,
+        "jobTitle": oficio,
+        "address": {"@type": "PostalAddress", "addressLocality": ubicacion, "addressCountry": "AR"},
+        "areaServed": zonas if zonas else [ubicacion],
+        "worksFor": {"@type": "Organization", "name": "Hogarex", "url": "https://hogarex.ar"},
+        "mainEntityOfPage": {"@id": f"{url}#webpage"},
+    }
+    # aggregateRating solo cuando hay reseñas reales (rating_count > 0 en el
+    # endpoint de Bubble). No es un self-rating de Hogarex sobre si misma
+    # (el patron que Google restringe): son reseñas de clientes sobre un
+    # tercero (el profesional), el mismo uso que hacen los marketplaces de
+    # servicios (Yelp, Angi, etc.) al marcar a los negocios que listan.
+    if rating:
+        value, count = rating
+        person["aggregateRating"] = {
+            "@type": "AggregateRating",
+            "ratingValue": value,
+            "reviewCount": count,
+            "bestRating": 5,
+            "worstRating": 1,
+        }
 
     graph = [
         {
@@ -100,23 +177,20 @@ def build_jsonld(trader, url, oficio_hub_url):
                 ],
             },
         },
+        person,
         {
-            "@type": "Person",
-            "@id": f"{url}#person",
-            "name": name,
-            "jobTitle": oficio,
-            "address": {"@type": "PostalAddress", "addressLocality": ubicacion, "addressCountry": "AR"},
-            "areaServed": zonas if zonas else [ubicacion],
-            "worksFor": {"@type": "Organization", "name": "Hogarex", "url": "https://hogarex.ar"},
-            "mainEntityOfPage": {"@id": f"{url}#webpage"},
+            "@type": "FAQPage",
+            "@id": f"{url}#faq",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": q,
+                    "acceptedAnswer": {"@type": "Answer", "text": a},
+                }
+                for q, a in faq_items
+            ],
         },
     ]
-    # Nota deliberada: NO se agrega aggregateRating aca. Google bloquea estrellas
-    # para reviews auto-alojadas sobre Organization/LocalBusiness/Person propios
-    # (politica "self-serving reviews", 2019, reforzada en 2026 - ver
-    # claude/seo-reviews-estrellas-google-trustpilot.md). El camino real para
-    # estrellas es GBP / Trustpilot / schema SoftwareApplication a nivel Hogarex,
-    # no aca por-perfil.
     return json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False)
 
 
@@ -170,6 +244,22 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     .zonas {{ display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }}
     .zona-chip {{ background: var(--gray-100); color: var(--gray-700); font-size: 0.78rem; padding: 4px 12px; border-radius: 999px; }}
     .verified-badge {{ display: inline-flex; align-items: center; gap: 4px; color: #1a7a3c; font-size: 0.85rem; font-weight: 600; }}
+    .rating-badge {{ display: inline-flex; align-items: center; gap: 4px; color: #b45309; font-weight: 600; }}
+    .hero-top {{ display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }}
+    .profile-avatar {{ width: 52px; height: 52px; border-radius: 50%; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.05rem; flex-shrink: 0; }}
+    .facts-card {{ background: var(--white); border: 1px solid var(--gray-100); border-radius: var(--radius); padding: 6px 16px; margin-bottom: 18px; }}
+    .facts-row {{ display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 0.88rem; border-bottom: 1px solid var(--gray-100); }}
+    .facts-row:last-child {{ border-bottom: none; }}
+    .facts-row span {{ color: var(--gray-500); }}
+    .facts-row strong {{ color: var(--text); font-weight: 600; text-align: right; }}
+    .faq-section {{ margin-top: 22px; }}
+    .faq-section h2 {{ font-family: 'Sora', sans-serif; font-size: 1.05rem; color: var(--navy); margin-bottom: 10px; }}
+    .faq-item {{ background: var(--white); border: 1px solid var(--gray-100); border-radius: 10px; margin-bottom: 8px; padding: 2px 14px; }}
+    .faq-item summary {{ cursor: pointer; font-weight: 600; font-size: 0.9rem; padding: 12px 0; color: var(--text); list-style: none; }}
+    .faq-item summary::-webkit-details-marker {{ display: none; }}
+    .faq-item summary::after {{ content: '+'; float: right; color: var(--gray-500); }}
+    .faq-item[open] summary::after {{ content: '\\2212'; }}
+    .faq-item p {{ font-size: 0.87rem; color: var(--gray-700); line-height: 1.6; padding-bottom: 12px; margin: 0; }}
     .modal-cta {{ display: none; }}
     .btn-yellow {{ background: var(--yellow); color: var(--navy); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.9rem; padding: 12px 22px; border-radius: 999px; text-decoration: none; border: none; cursor: pointer; white-space: nowrap; display: inline-block; text-align: center; }}
     .btn-yellow:hover {{ background: var(--yellow-hover); }}
@@ -212,17 +302,28 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <div class="breadcrumb"><a href="{oficio_hub_url}">&larr; Volver a {oficio_esc_lower}</a></div>
 
 <div class="profile-hero">
-  <span class="profile-tag">{oficio_esc}</span>
+  <div class="hero-top">
+    <div class="profile-avatar">{initials_esc}</div>
+    <span class="profile-tag">{oficio_esc}</span>
+  </div>
   <h1>{name_esc} &mdash; {oficio_esc} en {ubicacion_esc}</h1>
   <div class="profile-meta">
     <span>&#128205; {ubicacion_esc}</span>
+    {rating_html}
     {verified_html}
   </div>
 </div>
 
 <main class="profile-content">
   {zonas_html}
+  <div class="facts-card">
+    {facts_html}
+  </div>
   <p>{description_esc}</p>
+  <section class="faq-section">
+    <h2>Preguntas frecuentes</h2>
+    {faq_html}
+  </section>
 </main>
 
 <div class="modal-cta">
@@ -259,6 +360,7 @@ def render_page(trader, url):
     description = sanitize_description(trader.get("description") or "")
     zonas = trader.get("zonaCobertura") or []
     verified = trader.get("verified") == "Si"
+    rating = get_rating(trader)
     oficio_hub_path = OFICIO_HUB.get(oficio, "/")
     oficio_hub_url = f"{SITE_ORIGIN}{oficio_hub_path}"
 
@@ -269,6 +371,35 @@ def render_page(trader, url):
 
     verified_html = '<span class="verified-badge">&check; Perfil verificado</span>' if verified else ""
 
+    rating_html = ""
+    if rating:
+        value, count = rating
+        reseña_word = "reseña" if count == 1 else "reseñas"
+        rating_html = (
+            f'<span class="rating-badge">&#9733; {value} '
+            f'<span style="color:var(--gray-500);font-weight:400">({count} {reseña_word})</span></span>'
+        )
+
+    facts_rows = [
+        ("Rubro", html.escape(oficio)),
+        ("Ubicación", html.escape(ubicacion)),
+    ]
+    if verified:
+        facts_rows.append(("Verificado", '<span style="color:#1a7a3c">&check; Sí</span>'))
+    if rating:
+        value, count = rating
+        facts_rows.append(("Calificación", f"&#9733; {value} ({count})"))
+    facts_html = "".join(
+        f'<div class="facts-row"><span>{label}</span><strong>{value}</strong></div>'
+        for label, value in facts_rows
+    )
+
+    faq_items = build_faq_items(trader, name, oficio.lower())
+    faq_html = "".join(
+        f'<details class="faq-item"><summary>{html.escape(q)}</summary><p>{html.escape(a)}</p></details>'
+        for q, a in faq_items
+    )
+
     meta_desc = f"{name}, {oficio} en {ubicacion}. Pedi presupuesto gratis en Hogarex, sin intermediarios."
     cta_url = f"https://hogarex.ar/solicitud-enviar?rubro={quote(oficio)}&ubicacion={quote(ubicacion)}"
 
@@ -276,14 +407,18 @@ def render_page(trader, url):
         title_esc=html.escape(f"{name} - {oficio} en {ubicacion}"),
         meta_desc_esc=html.escape(meta_desc),
         url=url,
-        jsonld=build_jsonld(trader, url, oficio_hub_url),
+        jsonld=build_jsonld(trader, url, oficio_hub_url, faq_items),
         oficio_esc=html.escape(oficio),
         oficio_esc_lower=html.escape(oficio.lower()),
         oficio_hub_url=oficio_hub_url,
         name_esc=html.escape(name),
+        initials_esc=html.escape(get_initials(name)),
         ubicacion_esc=html.escape(ubicacion),
         verified_html=verified_html,
+        rating_html=rating_html,
         zonas_html=zonas_html,
+        facts_html=facts_html,
+        faq_html=faq_html,
         description_esc=html.escape(description),
         cta_url=cta_url,
     )

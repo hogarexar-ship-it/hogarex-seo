@@ -16,7 +16,7 @@
   <meta property="og:locale" content="es_AR" />
   <meta property="og:site_name" content="Hogarex" />
   <script type="application/ld+json">
-{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://app.hogarex.ar/electricistas/alberto-electricista-buenos-aires-caba#webpage", "url": "https://app.hogarex.ar/electricistas/alberto-electricista-buenos-aires-caba", "name": "Alberto - Electricista en Buenos Aires (CABA) | Hogarex", "inLanguage": "es-AR", "breadcrumb": {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://hogarex.ar"}, {"@type": "ListItem", "position": 2, "name": "Electricista", "item": "https://app.hogarex.ar/electricistas"}, {"@type": "ListItem", "position": 3, "name": "Alberto", "item": "https://app.hogarex.ar/electricistas/alberto-electricista-buenos-aires-caba"}]}}, {"@type": "Person", "@id": "https://app.hogarex.ar/electricistas/alberto-electricista-buenos-aires-caba#person", "name": "Alberto", "jobTitle": "Electricista", "address": {"@type": "PostalAddress", "addressLocality": "Buenos Aires (CABA)", "addressCountry": "AR"}, "areaServed": ["En todo CABA"], "worksFor": {"@type": "Organization", "name": "Hogarex", "url": "https://hogarex.ar"}, "mainEntityOfPage": {"@id": "https://app.hogarex.ar/electricistas/alberto-electricista-buenos-aires-caba#webpage"}}]}
+{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://app.hogarex.ar/electricistas/alberto-electricista-buenos-aires-caba#webpage", "url": "https://app.hogarex.ar/electricistas/alberto-electricista-buenos-aires-caba", "name": "Alberto - Electricista en Buenos Aires (CABA) | Hogarex", "inLanguage": "es-AR", "breadcrumb": {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://hogarex.ar"}, {"@type": "ListItem", "position": 2, "name": "Electricista", "item": "https://app.hogarex.ar/electricistas"}, {"@type": "ListItem", "position": 3, "name": "Alberto", "item": "https://app.hogarex.ar/electricistas/alberto-electricista-buenos-aires-caba"}]}}, {"@type": "Person", "@id": "https://app.hogarex.ar/electricistas/alberto-electricista-buenos-aires-caba#person", "name": "Alberto", "jobTitle": "Electricista", "address": {"@type": "PostalAddress", "addressLocality": "Buenos Aires (CABA)", "addressCountry": "AR"}, "areaServed": ["En todo CABA"], "worksFor": {"@type": "Organization", "name": "Hogarex", "url": "https://hogarex.ar"}, "mainEntityOfPage": {"@id": "https://app.hogarex.ar/electricistas/alberto-electricista-buenos-aires-caba#webpage"}, "aggregateRating": {"@type": "AggregateRating", "ratingValue": 5.0, "reviewCount": 5, "bestRating": 5, "worstRating": 1}}, {"@type": "FAQPage", "@id": "https://app.hogarex.ar/electricistas/alberto-electricista-buenos-aires-caba#faq", "mainEntity": [{"@type": "Question", "name": "¿En qué zonas trabaja Alberto?", "acceptedAnswer": {"@type": "Answer", "text": "Cubre En todo CABA."}}, {"@type": "Question", "name": "¿Qué calificación tiene Alberto en Hogarex?", "acceptedAnswer": {"@type": "Answer", "text": "5.0 de 5, según 5 reseñas de clientes en Hogarex."}}, {"@type": "Question", "name": "¿Cuánto cuesta pedir un presupuesto a Alberto?", "acceptedAnswer": {"@type": "Answer", "text": "Nada: pedir presupuesto en Hogarex es gratuito y sin compromiso."}}, {"@type": "Question", "name": "¿Cómo contacto a Alberto por Hogarex?", "acceptedAnswer": {"@type": "Answer", "text": "Completá el formulario de presupuesto y Hogarex te conecta directamente con Alberto por WhatsApp, sin intermediarios."}}]}]}
   </script>
   <style>
     :root {
@@ -44,6 +44,22 @@
     .zonas { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
     .zona-chip { background: var(--gray-100); color: var(--gray-700); font-size: 0.78rem; padding: 4px 12px; border-radius: 999px; }
     .verified-badge { display: inline-flex; align-items: center; gap: 4px; color: #1a7a3c; font-size: 0.85rem; font-weight: 600; }
+    .rating-badge { display: inline-flex; align-items: center; gap: 4px; color: #b45309; font-weight: 600; }
+    .hero-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .profile-avatar { width: 52px; height: 52px; border-radius: 50%; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.05rem; flex-shrink: 0; }
+    .facts-card { background: var(--white); border: 1px solid var(--gray-100); border-radius: var(--radius); padding: 6px 16px; margin-bottom: 18px; }
+    .facts-row { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 0.88rem; border-bottom: 1px solid var(--gray-100); }
+    .facts-row:last-child { border-bottom: none; }
+    .facts-row span { color: var(--gray-500); }
+    .facts-row strong { color: var(--text); font-weight: 600; text-align: right; }
+    .faq-section { margin-top: 22px; }
+    .faq-section h2 { font-family: 'Sora', sans-serif; font-size: 1.05rem; color: var(--navy); margin-bottom: 10px; }
+    .faq-item { background: var(--white); border: 1px solid var(--gray-100); border-radius: 10px; margin-bottom: 8px; padding: 2px 14px; }
+    .faq-item summary { cursor: pointer; font-weight: 600; font-size: 0.9rem; padding: 12px 0; color: var(--text); list-style: none; }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: '+'; float: right; color: var(--gray-500); }
+    .faq-item[open] summary::after { content: '\2212'; }
+    .faq-item p { font-size: 0.87rem; color: var(--gray-700); line-height: 1.6; padding-bottom: 12px; margin: 0; }
     .modal-cta { display: none; }
     .btn-yellow { background: var(--yellow); color: var(--navy); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.9rem; padding: 12px 22px; border-radius: 999px; text-decoration: none; border: none; cursor: pointer; white-space: nowrap; display: inline-block; text-align: center; }
     .btn-yellow:hover { background: var(--yellow-hover); }
@@ -86,17 +102,28 @@
 <div class="breadcrumb"><a href="https://app.hogarex.ar/electricistas">&larr; Volver a electricista</a></div>
 
 <div class="profile-hero">
-  <span class="profile-tag">Electricista</span>
+  <div class="hero-top">
+    <div class="profile-avatar">AL</div>
+    <span class="profile-tag">Electricista</span>
+  </div>
   <h1>Alberto &mdash; Electricista en Buenos Aires (CABA)</h1>
   <div class="profile-meta">
     <span>&#128205; Buenos Aires (CABA)</span>
+    <span class="rating-badge">&#9733; 5.0 <span style="color:var(--gray-500);font-weight:400">(5 reseñas)</span></span>
     
   </div>
 </div>
 
 <main class="profile-content">
   <div class="zonas"><span class="zona-chip">En todo CABA</span></div>
+  <div class="facts-card">
+    <div class="facts-row"><span>Rubro</span><strong>Electricista</strong></div><div class="facts-row"><span>Ubicación</span><strong>Buenos Aires (CABA)</strong></div><div class="facts-row"><span>Calificación</span><strong>&#9733; 5.0 (5)</strong></div>
+  </div>
   <p>Somos CAZ, una empresa dedicada a darle solución a todo tipo de problemas que surgen en el hogar día a día. Contamos con más de 10 años de experiencia en el rubro contando con muy buenas referencias de nuestros clientes. Soluciones rápidas y eficientes al alcance del bolsillo del cliente.</p>
+  <section class="faq-section">
+    <h2>Preguntas frecuentes</h2>
+    <details class="faq-item"><summary>¿En qué zonas trabaja Alberto?</summary><p>Cubre En todo CABA.</p></details><details class="faq-item"><summary>¿Qué calificación tiene Alberto en Hogarex?</summary><p>5.0 de 5, según 5 reseñas de clientes en Hogarex.</p></details><details class="faq-item"><summary>¿Cuánto cuesta pedir un presupuesto a Alberto?</summary><p>Nada: pedir presupuesto en Hogarex es gratuito y sin compromiso.</p></details><details class="faq-item"><summary>¿Cómo contacto a Alberto por Hogarex?</summary><p>Completá el formulario de presupuesto y Hogarex te conecta directamente con Alberto por WhatsApp, sin intermediarios.</p></details>
+  </section>
 </main>
 
 <div class="modal-cta">
