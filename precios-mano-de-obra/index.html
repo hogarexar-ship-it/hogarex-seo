@@ -31,9 +31,10 @@
     header { background: var(--navy); padding: 0 16px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
     .header-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
     .logo { color: var(--white); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1rem; text-decoration: none; }
+    nav { display: flex; align-items: center; gap: 8px; }
     nav a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.85rem; font-weight: 500; }
     nav .nav-home { display: none; }
-    nav .nav-cta { background: var(--yellow); color: var(--navy); padding: 8px 16px; border-radius: 999px; font-weight: 700; font-family: 'Sora', sans-serif; font-size: 0.8rem; }
+    nav .nav-cta { display: none; background: var(--yellow); color: var(--navy); padding: 8px 16px; border-radius: 999px; font-weight: 700; font-family: 'Sora', sans-serif; font-size: 0.8rem; }
     .breadcrumb { max-width: 740px; margin: 0 auto; padding: 16px 16px 0; }
     .breadcrumb a { color: var(--gray-500); text-decoration: none; font-size: 0.82rem; font-weight: 500; }
     .hero { max-width: 740px; margin: 0 auto; padding: 18px 16px 8px; text-align: center; }
@@ -41,6 +42,9 @@
     .hero p { font-size: 0.95rem; color: var(--gray-700); line-height: 1.6; margin-bottom: 18px; }
     .btn-yellow { background: var(--yellow); color: var(--navy); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.9rem; padding: 13px 26px; border-radius: 999px; text-decoration: none; border: none; cursor: pointer; white-space: nowrap; display: inline-block; text-align: center; }
     .btn-yellow:hover { background: var(--yellow-hover); }
+    .btn-outline { background: rgba(0,51,102,.08); color: var(--navy); border: 1.5px solid var(--navy); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.85rem; padding: 11px 24px; border-radius: 999px; text-decoration: none; display: inline-block; text-align: center; margin-top: 10px; transition: background .2s; }
+    .btn-outline:hover { background: rgba(0,51,102,.15); }
+    html { scroll-behavior: smooth; }
     .content-wrap { max-width: 740px; margin: 0 auto; padding: 8px 16px; }
 
     .oficios-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 22px 0; }
@@ -70,9 +74,8 @@
       header { padding: 0 24px; }
       .header-inner { height: 64px; }
       .logo { font-size: 1.1rem; }
-      nav { display: flex; align-items: center; }
       nav .nav-home { display: inline; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 500; margin-right: 24px; }
-      nav .nav-cta { padding: 8px 18px; font-size: 0.9rem; }
+      nav .nav-cta { display: inline-block; padding: 8px 18px; font-size: 0.9rem; }
       .breadcrumb, .hero, .content-wrap { max-width: 780px; padding-left: 24px; padding-right: 24px; }
       .hero { padding-top: 28px; padding-bottom: 12px; }
       .hero h1 { font-size: clamp(1.6rem, 3.4vw, 2.1rem); }
@@ -164,6 +167,8 @@
   <h1>¿Cuánto cobra un electricista, gasista o plomero en 2026?</h1>
   <p>Consultá precios reales de mano de obra por rubro y por trabajo antes de contratar, así sabés cuánto te pueden cobrar. Después, pedí presupuesto gratis a profesionales verificados en tu zona.</p>
   <a href="https://hogarex.ar/solicitud-enviar" class="btn-yellow">Pedir presupuesto gratis &rarr;</a>
+  <br>
+  <a href="#hgx-tabs" class="btn-outline">Ver precios &darr;</a>
 </div>
 
 <div class="content-wrap">
@@ -226,6 +231,7 @@
     }
 
     #hgx-cuanto-cobrar .hgx-tabs {
+      scroll-margin-top: 70px;
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
