@@ -3,3 +3,4 @@ Allow: /
 
 Sitemap: https://app.hogarex.ar/sitemap.xml
 Sitemap: https://app.hogarex.ar/sitemap-profesionales.xml
+Sitemap: https://app.hogarex.ar/sitemap-paginas.xml
