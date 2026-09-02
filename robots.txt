@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://app.hogarex.ar/sitemap.xml
+Sitemap: https://app.hogarex.ar/sitemap-profesionales.xml

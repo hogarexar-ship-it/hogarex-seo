@@ -1,9 +1,21 @@
 # -*- coding: utf-8 -*-
 """
 Genera una pagina estatica por cada profesional publico (por ahora: Electricista,
-scoring >= 30) en profesional/<slug>/index.html, consumiendo el endpoint
-get_traders_publicos de Bubble. Genera tambien sitemap-profesionales.xml aparte
-(no toca sitemap.xml, que sigue siendo responsabilidad de generate_pages.py / blog).
+scoring >= 30) consumiendo el endpoint get_traders_publicos de Bubble.
+
+Ubicacion de cada pagina generada:
+  - Electricista + ubicacion "Buenos Aires (CABA)" -> electricistas/<slug>/index.html
+    (nested bajo el hub /electricistas para agrupacion tematica de SEO; URL final
+    unica, sin contenido duplicado en /profesional/).
+  - Cualquier otro caso (otros rubros u otras ubicaciones)
+    -> profesional/<slug>/index.html
+
+Tambien actualiza:
+  - sitemap-profesionales.xml (URLs de todas las paginas generadas, sea cual sea
+    su carpeta). No se mezcla con sitemap.xml, que sigue siendo del blog.
+  - electricistas/index.html: reemplaza el carrusel de tarjetas "Profesionales
+    Destacados" (marcadores TRADER_CARDS_START/END) con los electricistas reales
+    de CABA, linkeando a su pagina /electricistas/<slug>/.
 
 El endpoint de Bubble es un Workflow API y SOLO acepta POST (no GET).
 
@@ -21,11 +33,13 @@ from urllib.parse import quote
 
 REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
 PROFESIONAL_DIR = os.path.join(REPO_ROOT, "profesional")
+ELECTRICISTAS_DIR = os.path.join(REPO_ROOT, "electricistas")
 SITEMAP_PATH = os.path.join(REPO_ROOT, "sitemap-profesionales.xml")
-HUB_PAGE_PATH = os.path.join(REPO_ROOT, "electricistas", "index.html")
+HUB_PAGE_PATH = os.path.join(ELECTRICISTAS_DIR, "index.html")
 HUB_CARDS_START = "<!-- TRADER_CARDS_START -->"
 HUB_CARDS_END = "<!-- TRADER_CARDS_END -->"
 SITE_ORIGIN = "https://app.hogarex.ar"
+CABA_UBICACION = "Buenos Aires (CABA)"
 API_URL = os.environ.get(
     "TRADERS_API_URL",
     "https://hogarex.ar/api/1.1/wf/get_traders_publicos",
@@ -37,6 +51,22 @@ def fetch_traders():
     with urllib.request.urlopen(req, timeout=30) as resp:
         data = json.load(resp)
     return data.get("response", {}).get("traders", [])
+
+
+def is_caba_electricista(trader):
+    return trader.get("main_field") == "Electricista" and trader.get("ubicacion") == CABA_UBICACION
+
+
+def target_for(trader):
+    """Devuelve (carpeta_absoluta, url_publica) para un trader.
+
+    Electricistas de CABA se anidan bajo /electricistas/<slug>/ (agrupacion
+    tematica bajo el hub, URL canonica unica). El resto sigue en
+    /profesional/<slug>/, como antes."""
+    slug = trader["Slug"]
+    if is_caba_electricista(trader):
+        return os.path.join(ELECTRICISTAS_DIR, slug), f"{SITE_ORIGIN}/electricistas/{slug}"
+    return os.path.join(PROFESIONAL_DIR, slug), f"{SITE_ORIGIN}/profesional/{slug}"
 
 
 def sanitize_description(text):
@@ -90,6 +120,10 @@ def build_jsonld(trader, url, oficio_hub_url):
     return json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False)
 
 
+# Template mobile-first: los estilos base (sin media query) son los de mobile;
+# @media (min-width:640px) agrega/ajusta para tablet+desktop. La barra de CTA
+# fija abajo es el patron mobile habitual para perfiles de servicios locales;
+# en desktop se oculta a favor de la tarjeta de CTA normal en el flujo.
 PAGE_TEMPLATE = """<!DOCTYPE html>
 <html lang="es-AR">
 <head>
@@ -98,6 +132,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   <title>{title_esc} | Hogarex</title>
   <meta name="description" content="{meta_desc_esc}" />
   <link rel="canonical" href="{url}" />
+  <meta name="theme-color" content="#003366" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   <meta property="og:type" content="profile" />
@@ -117,28 +152,49 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
       --shadow: 0 2px 16px rgba(13,42,94,0.10);
     }}
     *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
-    body {{ font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--text); min-height: 100vh; }}
-    header {{ background: var(--navy); padding: 0 24px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }}
-    .header-inner {{ max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }}
-    .logo {{ color: var(--white); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.1rem; text-decoration: none; }}
-    nav a {{ color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 500; margin-left: 24px; }}
-    .breadcrumb {{ max-width: 740px; margin: 0 auto; padding: 20px 24px 0; }}
-    .breadcrumb a {{ color: var(--gray-500); text-decoration: none; font-size: 0.85rem; font-weight: 500; }}
-    .profile-hero {{ max-width: 740px; margin: 0 auto; padding: 16px 24px 8px; }}
-    .profile-tag {{ display: inline-block; background: var(--yellow); color: var(--navy); font-size: 0.72rem; font-weight: 700; padding: 3px 12px; border-radius: 999px; margin-bottom: 14px; }}
-    .profile-hero h1 {{ font-family: 'Sora', sans-serif; font-size: clamp(1.3rem, 3.2vw, 1.8rem); font-weight: 700; color: var(--navy); line-height: 1.3; margin-bottom: 10px; }}
-    .profile-meta {{ display: flex; gap: 16px; flex-wrap: wrap; align-items: center; font-size: 0.9rem; color: var(--gray-500); margin-bottom: 16px; }}
-    .profile-content {{ max-width: 740px; margin: 0 auto; padding: 12px 24px; }}
-    .profile-content p {{ font-size: 0.98rem; line-height: 1.75; color: var(--gray-700); margin-bottom: 14px; white-space: pre-line; }}
-    .zonas {{ display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }}
-    .zona-chip {{ background: var(--gray-100); color: var(--gray-700); font-size: 0.8rem; padding: 4px 12px; border-radius: 999px; }}
+    html {{ -webkit-text-size-adjust: 100%; }}
+    body {{ font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--text); min-height: 100vh; padding-bottom: 88px; }}
+    header {{ background: var(--navy); padding: 0 16px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }}
+    .header-inner {{ max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }}
+    .logo {{ color: var(--white); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1rem; text-decoration: none; }}
+    nav a {{ color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.85rem; font-weight: 500; }}
+    nav .nav-home {{ display: none; }}
+    .breadcrumb {{ max-width: 680px; margin: 0 auto; padding: 16px 16px 0; }}
+    .breadcrumb a {{ color: var(--gray-500); text-decoration: none; font-size: 0.82rem; font-weight: 500; }}
+    .profile-hero {{ max-width: 680px; margin: 0 auto; padding: 14px 16px 6px; }}
+    .profile-tag {{ display: inline-block; background: var(--yellow); color: var(--navy); font-size: 0.7rem; font-weight: 700; padding: 3px 12px; border-radius: 999px; margin-bottom: 12px; }}
+    .profile-hero h1 {{ font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--navy); line-height: 1.3; margin-bottom: 10px; }}
+    .profile-meta {{ display: flex; gap: 14px; flex-wrap: wrap; align-items: center; font-size: 0.88rem; color: var(--gray-500); margin-bottom: 16px; }}
+    .profile-content {{ max-width: 680px; margin: 0 auto; padding: 12px 16px; }}
+    .profile-content p {{ font-size: 0.95rem; line-height: 1.7; color: var(--gray-700); margin-bottom: 14px; white-space: pre-line; }}
+    .zonas {{ display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }}
+    .zona-chip {{ background: var(--gray-100); color: var(--gray-700); font-size: 0.78rem; padding: 4px 12px; border-radius: 999px; }}
     .verified-badge {{ display: inline-flex; align-items: center; gap: 4px; color: #1a7a3c; font-size: 0.85rem; font-weight: 600; }}
-    .modal-cta {{ margin: 24px auto 20px; max-width: 692px; padding: 20px 24px; background: var(--white); box-shadow: var(--shadow); border-radius: var(--radius); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }}
-    .modal-cta p {{ font-family: 'Sora', sans-serif; font-weight: 600; font-size: 0.95rem; color: var(--navy); margin: 0; }}
-    .btn-yellow {{ background: var(--yellow); color: var(--navy); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.9rem; padding: 12px 24px; border-radius: 999px; text-decoration: none; border: none; cursor: pointer; white-space: nowrap; display: inline-block; }}
+    .modal-cta {{ display: none; }}
+    .btn-yellow {{ background: var(--yellow); color: var(--navy); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.9rem; padding: 12px 22px; border-radius: 999px; text-decoration: none; border: none; cursor: pointer; white-space: nowrap; display: inline-block; text-align: center; }}
     .btn-yellow:hover {{ background: var(--yellow-hover); }}
-    footer {{ background: var(--navy-dark); color: rgba(255,255,255,0.5); text-align: center; padding: 28px 24px; font-size: 0.82rem; margin-top: 24px; }}
+    .cta-bar {{ position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; background: var(--white); border-top: 1px solid var(--gray-100); box-shadow: 0 -2px 14px rgba(13,42,94,0.10); padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); display: flex; align-items: center; justify-content: space-between; gap: 12px; }}
+    .cta-bar p {{ font-family: 'Sora', sans-serif; font-weight: 600; font-size: 0.85rem; color: var(--navy); margin: 0; line-height: 1.3; }}
+    .cta-bar .btn-yellow {{ flex-shrink: 0; }}
+    footer {{ background: var(--navy-dark); color: rgba(255,255,255,0.5); text-align: center; padding: 24px 16px; font-size: 0.8rem; margin-top: 20px; }}
     footer a {{ color: var(--yellow); text-decoration: none; }}
+
+    @media (min-width: 640px) {{
+      body {{ padding-bottom: 0; }}
+      header {{ padding: 0 24px; }}
+      .header-inner {{ height: 64px; }}
+      .logo {{ font-size: 1.1rem; }}
+      nav {{ display: flex; align-items: center; }}
+      nav .nav-home {{ display: inline; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 500; margin-right: 24px; }}
+      nav .nav-cta {{ background: var(--yellow); color: var(--navy); padding: 8px 18px; border-radius: 999px; font-weight: 700; font-family: 'Sora', sans-serif; }}
+      .breadcrumb, .profile-hero, .profile-content {{ max-width: 740px; padding-left: 24px; padding-right: 24px; }}
+      .profile-hero {{ padding-top: 16px; padding-bottom: 8px; }}
+      .profile-hero h1 {{ font-size: clamp(1.3rem, 3.2vw, 1.8rem); }}
+      .cta-bar {{ display: none; }}
+      .modal-cta {{ display: flex; margin: 24px auto 20px; max-width: 692px; padding: 20px 24px; background: var(--white); box-shadow: var(--shadow); border-radius: var(--radius); align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }}
+      .modal-cta p {{ font-family: 'Sora', sans-serif; font-weight: 600; font-size: 0.95rem; color: var(--navy); margin: 0; }}
+      footer {{ padding: 28px 24px; font-size: 0.82rem; margin-top: 24px; }}
+    }}
   </style>
 </head>
 <body>
@@ -147,8 +203,8 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   <div class="header-inner">
     <a href="https://hogarex.ar" class="logo">Hogarex</a>
     <nav>
-      <a href="https://hogarex.ar">Inicio</a>
-      <a href="https://hogarex.ar/solicitud-enviar" style="background:var(--yellow);color:var(--navy);padding:8px 18px;border-radius:999px;font-weight:700;font-family:'Sora',sans-serif;">Recibir presupuesto gratis</a>
+      <a href="https://hogarex.ar" class="nav-home">Inicio</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
     </nav>
   </div>
 </header>
@@ -171,12 +227,17 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 
 <div class="modal-cta">
   <p>&iquest;Necesit&aacute;s un {oficio_esc_lower} en {ubicacion_esc}?</p>
-  <a href="https://hogarex.ar/solicitud-enviar" class="btn-yellow">Pedir presupuesto gratis</a>
+  <a href="{cta_url}" class="btn-yellow">Pedir presupuesto gratis</a>
 </div>
 
 <footer>
   <p>&copy; 2026 <a href="https://hogarex.ar">Hogarex</a> &mdash; Conectamos profesionales del hogar con clientes en Argentina.</p>
 </footer>
+
+<div class="cta-bar">
+  <p>&iquest;Necesit&aacute;s un {oficio_esc_lower} en {ubicacion_esc}?</p>
+  <a href="{cta_url}" class="btn-yellow">Pedir presupuesto</a>
+</div>
 
 </body>
 </html>
@@ -191,9 +252,7 @@ OFICIO_HUB = {
 }
 
 
-def render_page(trader):
-    slug = trader["Slug"]
-    url = f"{SITE_ORIGIN}/profesional/{slug}"
+def render_page(trader, url):
     name = trader.get("user_name") or "Profesional"
     oficio = trader.get("main_field") or ""
     ubicacion = trader.get("ubicacion") or ""
@@ -211,6 +270,7 @@ def render_page(trader):
     verified_html = '<span class="verified-badge">&check; Perfil verificado</span>' if verified else ""
 
     meta_desc = f"{name}, {oficio} en {ubicacion}. Pedi presupuesto gratis en Hogarex, sin intermediarios."
+    cta_url = f"https://hogarex.ar/solicitud-enviar?rubro={quote(oficio)}&ubicacion={quote(ubicacion)}"
 
     page_html = PAGE_TEMPLATE.format(
         title_esc=html.escape(f"{name} - {oficio} en {ubicacion}"),
@@ -225,21 +285,21 @@ def render_page(trader):
         verified_html=verified_html,
         zonas_html=zonas_html,
         description_esc=html.escape(description),
+        cta_url=cta_url,
     )
-    return url, page_html
+    return page_html
 
 
 def generate_pages(traders):
-    os.makedirs(PROFESIONAL_DIR, exist_ok=True)
     urls = []
     skipped = 0
     for trader in traders:
         if not trader.get("Slug"):
             skipped += 1
             continue
-        url, page_html = render_page(trader)
-        page_dir = os.path.join(PROFESIONAL_DIR, trader["Slug"])
+        page_dir, url = target_for(trader)
         os.makedirs(page_dir, exist_ok=True)
+        page_html = render_page(trader, url)
         with open(os.path.join(page_dir, "index.html"), "w", encoding="utf-8") as f:
             f.write(page_html)
         urls.append(url)
@@ -287,9 +347,7 @@ def get_initials(name):
     return (parts[0][0] + parts[1][0]).upper()
 
 
-def render_hub_card(trader, index):
-    slug = trader["Slug"]
-    url = f"{SITE_ORIGIN}/profesional/{slug}"
+def render_hub_card(trader, index, url):
     name = trader.get("user_name") or "Profesional"
     oficio = trader.get("main_field") or ""
     ubicacion = trader.get("ubicacion") or ""
@@ -328,8 +386,9 @@ def render_hub_card(trader, index):
 
 def update_hub_page(traders):
     """Reemplaza el carrusel de 'Profesionales Destacados' en electricistas/index.html
-    (marcadores TRADER_CARDS_START/END) con tarjetas reales de electricistas. No toca
-    el resto de la pagina."""
+    (marcadores TRADER_CARDS_START/END) con los electricistas reales de CABA
+    (misma cobertura geografica que declara la pagina), linkeando a su propia
+    pagina /electricistas/<slug>/. No toca el resto de la pagina."""
     if not os.path.exists(HUB_PAGE_PATH):
         print("Aviso: electricistas/index.html no encontrado, se omite actualizacion de tarjetas.")
         return
@@ -343,8 +402,10 @@ def update_hub_page(traders):
         print("Aviso: marcadores TRADER_CARDS_START/END no encontrados, se omite actualizacion de tarjetas.")
         return
 
-    electricistas = [t for t in traders if t.get("Slug") and t.get("main_field") == "Electricista"]
-    cards_html = "".join(render_hub_card(t, i) for i, t in enumerate(electricistas))
+    caba_electricistas = [t for t in traders if t.get("Slug") and is_caba_electricista(t)]
+    cards_html = "".join(
+        render_hub_card(t, i, target_for(t)[1]) for i, t in enumerate(caba_electricistas)
+    )
 
     new_page_html = (
         page_html[: start_idx + len(HUB_CARDS_START)]
@@ -354,12 +415,14 @@ def update_hub_page(traders):
     )
     with open(HUB_PAGE_PATH, "w", encoding="utf-8") as f:
         f.write(new_page_html)
-    print(f"Tarjetas actualizadas en electricistas/index.html: {len(electricistas)} profesionales")
+    print(f"Tarjetas actualizadas en electricistas/index.html: {len(caba_electricistas)} profesionales de CABA")
 
 
 def main():
     traders = fetch_traders()
     print(f"Traders recibidos del endpoint: {len(traders)}")
+    caba_count = sum(1 for t in traders if is_caba_electricista(t) and t.get("Slug"))
+    print(f"De los cuales electricistas de CABA (-> /electricistas/<slug>/): {caba_count}")
     urls = generate_pages(traders)
     generate_sitemap(urls)
     update_hub_page(traders)
