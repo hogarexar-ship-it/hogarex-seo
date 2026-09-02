@@ -55,6 +55,7 @@ import shutil
 import unicodedata
 import urllib.request
 from collections import Counter
+from datetime import date
 from urllib.parse import quote
 
 REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -625,10 +626,12 @@ def generate_pages(traders):
 
 
 def generate_sitemap(urls):
+    today = date.today().isoformat()
     lines = ['<?xml version="1.0" encoding="UTF-8"?>',
               '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', ""]
     for url in urls:
-        lines += ["  <url>", f"    <loc>{url}</loc>", "    <changefreq>weekly</changefreq>",
+        lines += ["  <url>", f"    <loc>{url}</loc>", f"    <lastmod>{today}</lastmod>",
+                  "    <changefreq>weekly</changefreq>",
                   "    <priority>0.75</priority>", "  </url>", ""]
     lines.append("</urlset>")
     with open(SITEMAP_PATH, "w", encoding="utf-8") as f:
