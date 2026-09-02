@@ -764,7 +764,9 @@ def render_hub_card(trader, index, url):
             "Perfil verificado</span></div>"
         )
 
-    cta_url = f"https://hogarex.ar/solicitud-enviar?rubro={quote(oficio)}&ubicacion={quote(ubicacion)}"
+    # El boton de la tarjeta lleva al perfil real del trader en Bubble
+    # (mismo slug), no al formulario generico de solicitud.
+    cta_url = f"https://hogarex.ar/perfilprofesional/{quote(trader['Slug'])}"
 
     return HUB_CARD_TEMPLATE.format(
         avatar_html=avatar_html,
