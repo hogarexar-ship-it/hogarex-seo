@@ -383,6 +383,72 @@ def build_jsonld(trader, url, oficio_hub_url, faq_items):
     return json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False)
 
 
+HAMBURGER_MENU_HTML = """<div class="hgx-nm-overlay" id="hgx-nm-overlay"></div>
+<div class="hgx-nm-panel" id="hgx-nm-panel" aria-hidden="true">
+  <div class="hgx-nm-panel-head">
+    <span class="hgx-nm-logo">Hogarex</span>
+    <button type="button" id="hgx-nm-close" class="hgx-nm-close" aria-label="Cerrar menú">&times;</button>
+  </div>
+  <nav class="hgx-nm-links" aria-label="Menú principal">
+    <a href="https://hogarex.ar">Inicio</a>
+    <a href="https://app.hogarex.ar/electricistas">Electricistas</a>
+    <a href="https://app.hogarex.ar/gasistas">Gasistas</a>
+    <a href="https://app.hogarex.ar/plomeros">Plomeros</a>
+    <a href="https://app.hogarex.ar/pintores">Pintores</a>
+    <a href="https://app.hogarex.ar/carpinteros">Carpinteros</a>
+    <a href="https://app.hogarex.ar/instalaciones">Instalaciones</a>
+    <a href="https://app.hogarex.ar/profesionales">Explorar profesionales</a>
+    <a href="https://app.hogarex.ar/precios-mano-de-obra">Precios de mano de obra</a>
+    <a href="https://app.hogarex.ar/blog">Blog</a>
+  </nav>
+  <div class="hgx-nm-actions">
+    <a href="https://hogarex.ar/busqueda" class="hgx-nm-btn hgx-nm-btn-outline">Buscar profesional</a>
+    <a href="https://hogarex.ar/registro_profesional" class="hgx-nm-btn hgx-nm-btn-outline">Soy profesional</a>
+    <a href="https://hogarex.ar/solicitud-enviar" class="hgx-nm-btn hgx-nm-btn-yellow">Pedir presupuesto gratis</a>
+  </div>
+</div>
+<script>
+(function(){
+  var toggle=document.getElementById('hgx-nm-toggle');
+  var panel=document.getElementById('hgx-nm-panel');
+  var overlay=document.getElementById('hgx-nm-overlay');
+  var closeBtn=document.getElementById('hgx-nm-close');
+  function openMenu(){panel.classList.add('hgx-nm-open');overlay.classList.add('hgx-nm-open');panel.setAttribute('aria-hidden','false');toggle.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
+  function closeMenu(){panel.classList.remove('hgx-nm-open');overlay.classList.remove('hgx-nm-open');panel.setAttribute('aria-hidden','true');toggle.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  if(toggle){toggle.addEventListener('click',openMenu);}
+  if(closeBtn){closeBtn.addEventListener('click',closeMenu);}
+  if(overlay){overlay.addEventListener('click',closeMenu);}
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
+})();
+</script>"""
+
+HAMBURGER_MENU_CSS = """.hgx-nm-toggle{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:38px;height:38px;background:transparent;border:none;cursor:pointer;flex-shrink:0;padding:0;margin-left:6px}
+    .hgx-nm-toggle span{display:block;width:22px;height:2.5px;background:#003366;border-radius:2px;transition:transform .25s ease,opacity .25s ease}
+    .hgx-nm-toggle.hgx-nm-toggle-dark span{background:#ffffff}
+    .hgx-nm-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+    .hgx-nm-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+    .hgx-nm-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+    .hgx-nm-overlay{position:fixed;inset:0;background:rgba(9,30,68,.5);opacity:0;visibility:hidden;transition:opacity .25s ease;z-index:998}
+    .hgx-nm-overlay.hgx-nm-open{opacity:1;visibility:visible}
+    .hgx-nm-panel{position:fixed;top:0;right:0;bottom:0;width:82%;max-width:320px;background:#fff;z-index:999;transform:translateX(100%);transition:transform .28s ease;display:flex;flex-direction:column;box-shadow:-8px 0 24px rgba(0,0,0,.15);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+    .hgx-nm-panel.hgx-nm-open{transform:translateX(0)}
+    .hgx-nm-panel-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid #eef1f6}
+    .hgx-nm-logo{font-weight:800;font-size:17px;color:#003366;font-family:inherit}
+    .hgx-nm-close{background:none;border:none;font-size:26px;line-height:1;color:#64708a;cursor:pointer;padding:4px 8px}
+    .hgx-nm-links{display:flex;flex-direction:column;padding:10px 8px;overflow-y:auto;flex:1}
+    .hgx-nm-links a{display:block;padding:13px 12px;color:#1a1a2e;text-decoration:none;font-weight:600;font-size:15px;border-radius:8px}
+    .hgx-nm-links a:hover,.hgx-nm-links a:active{background:#f0f2f5}
+    .hgx-nm-actions{display:flex;flex-direction:column;gap:8px;padding:14px 16px 20px;border-top:1px solid #eef1f6}
+    .hgx-nm-btn{display:block;text-align:center;padding:12px;border-radius:999px;font-weight:700;font-size:14px;text-decoration:none}
+    .hgx-nm-btn-outline{border:1.5px solid #003366;color:#003366;background:#fff}
+    .hgx-nm-btn-yellow{background:#F5C518;color:#003366}
+    @media (min-width:900px){.hgx-nm-panel{width:340px}}"""
+
+HAMBURGER_TOGGLE_DARK = ('<button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" '
+                          'aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel">'
+                          '<span></span><span></span><span></span></button>')
+
+
 # Template mobile-first: los estilos base (sin media query) son los de mobile;
 # @media (min-width:640px) agrega/ajusta para tablet+desktop. La barra de CTA
 # fija abajo es el patron mobile habitual para perfiles de servicios locales;
@@ -820,6 +886,346 @@ def update_hub_pages(traders):
         update_hub_page(oficio, hub_path, traders)
 
 
+HOME_PAGE_PATH = os.path.join(REPO_ROOT, "index.html")
+# La home no es de un rubro puntual: se muestra una muestra cruzada de todos
+# los rubros, no los 682 (esto es una vidriera, el listado completo esta en
+# /profesionales). Tope arbitrario para que el carrusel no sea interminable.
+HOME_CARDS_CAP = 24
+
+HOME_CARD_TEMPLATE = """      <div class="prof-card">
+        <div class="prof-top">
+          {avatar_html}
+          {badge_html}
+        </div>
+        <div class="prof-name"><a href="{cta_url}" style="color:inherit;text-decoration:none">{name_esc}</a></div>
+        <div class="prof-rub">{oficio_esc}</div>
+        <div class="prof-desc">{description_esc}</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>{ubicacion_esc}</span>
+        </div>
+      </div>
+"""
+
+
+def render_home_card(trader, index):
+    name = get_display_name(trader) or "Profesional"
+    oficio = trader.get("main_field") or ""
+    ubicacion = trader.get("ubicacion") or ""
+    description = sanitize_description(trader.get("description") or "")
+    verified = trader.get("verified") == "Si"
+
+    photo_url = trader.get("photo_url")
+    if photo_url:
+        photo_alt = html.escape(f"{name}, {oficio} en {ubicacion}")
+        avatar_html = (
+            f'<img src="{html.escape(photo_url)}" alt="{photo_alt}" class="prof-av-img" '
+            'loading="lazy" referrerpolicy="no-referrer" '
+            "onerror=\"this.style.display='none';this.nextElementSibling.style.display='flex'\">"
+            f'<div class="prof-av" style="display:none">{html.escape(get_initials(name))}</div>'
+        )
+    else:
+        color = HUB_AVATAR_COLORS[index % len(HUB_AVATAR_COLORS)]
+        avatar_style = f' style="background:{color}"' if color else ""
+        avatar_html = f'<div class="prof-av"{avatar_style}>{html.escape(get_initials(name))}</div>'
+
+    badge_html = ""
+    if verified:
+        badge_html = (
+            '<div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">'
+            '<span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" '
+            'stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>'
+            "Perfil verificado</span></div>"
+        )
+
+    cta_url = f"https://hogarex.ar/perfilprofesional/{quote(trader['Slug'])}"
+
+    return HOME_CARD_TEMPLATE.format(
+        avatar_html=avatar_html,
+        badge_html=badge_html,
+        cta_url=cta_url,
+        name_esc=html.escape(name),
+        oficio_esc=html.escape(oficio),
+        ubicacion_esc=html.escape(ubicacion),
+        description_esc=html.escape(description),
+    )
+
+
+def update_home_page(traders):
+    """Reemplaza el carrusel 'Profesionales Verificados' de la home
+    (marcadores TRADER_CARDS_START/END) con una muestra real cruzada de
+    todos los rubros (hasta HOME_CARDS_CAP), en vez de las 10 tarjetas
+    ficticias originales."""
+    if not os.path.exists(HOME_PAGE_PATH):
+        print("Aviso: index.html no encontrado, se omite actualizacion de tarjetas de home.")
+        return
+
+    with open(HOME_PAGE_PATH, encoding="utf-8") as f:
+        page_html = f.read()
+
+    start_idx = page_html.find(HUB_CARDS_START)
+    end_idx = page_html.find(HUB_CARDS_END)
+    if start_idx == -1 or end_idx == -1:
+        print("Aviso: marcadores TRADER_CARDS_START/END no encontrados en index.html, se omite.")
+        return
+
+    usable = [t for t in traders if is_usable(t)]
+    # con foto primero (mejor primera impresion), despues el resto, orden
+    # estable por rubro+nombre.
+    usable.sort(key=lambda t: (t.get("photo_url") is None, t["main_field"], get_display_name(t) or ""))
+    sample = usable[:HOME_CARDS_CAP]
+
+    cards_html = "".join(render_home_card(t, i) for i, t in enumerate(sample))
+
+    new_page_html = (
+        page_html[: start_idx + len(HUB_CARDS_START)]
+        + "\n"
+        + cards_html
+        + page_html[end_idx:]
+    )
+    with open(HOME_PAGE_PATH, "w", encoding="utf-8") as f:
+        f.write(new_page_html)
+    print(f"Tarjetas actualizadas en index.html (home): {len(sample)} profesionales de distintos rubros")
+
+
+EXPLORE_DIR = os.path.join(REPO_ROOT, "profesionales")
+EXPLORE_PAGE_PATH = os.path.join(EXPLORE_DIR, "index.html")
+
+EXPLORE_CARD_TEMPLATE = """        <a class="ex-card" href="{profile_url}" data-oficio="{oficio_attr}" data-ubicacion="{ubicacion_attr}">
+          <div class="ex-top">
+            {avatar_html}
+            <div class="ex-id">
+              <div class="ex-name">{name_esc}</div>
+              <div class="ex-rub">{oficio_esc} &middot; {ubicacion_esc}</div>
+            </div>
+          </div>
+          <p class="ex-desc">{description_esc}</p>
+          <div class="ex-foot">
+            {rating_html}
+            {verified_html}
+          </div>
+        </a>
+"""
+
+EXPLORE_PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - no editar a mano -->
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explorá todos los profesionales de Hogarex | Electricistas, gasistas, plomeros y más</title>
+  <meta name="description" content="Buscá entre {total} profesionales de Hogarex: electricistas, gasistas, plomeros, pintores, carpinteros y más. Filtrá por rubro y zona." />
+  <link rel="canonical" href="https://app.hogarex.ar/profesionales" />
+  <meta name="theme-color" content="#003366" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://app.hogarex.ar/profesionales" />
+  <meta property="og:title" content="Explorá todos los profesionales de Hogarex" />
+  <meta property="og:description" content="Buscá entre {total} profesionales de Hogarex: electricistas, gasistas, plomeros, pintores, carpinteros y más." />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="Hogarex" />
+  <script type="application/ld+json">
+{{"@context":"https://schema.org","@graph":[{{"@type":"WebPage","@id":"https://app.hogarex.ar/profesionales#webpage","url":"https://app.hogarex.ar/profesionales","name":"Explorá todos los profesionales de Hogarex","inLanguage":"es-AR","breadcrumb":{{"@type":"BreadcrumbList","itemListElement":[{{"@type":"ListItem","position":1,"name":"Inicio","item":"https://hogarex.ar"}},{{"@type":"ListItem","position":2,"name":"Profesionales","item":"https://app.hogarex.ar/profesionales"}}]}}}}]}}
+  </script>
+  <style>
+    :root {{
+      --navy: #003366; --navy-dark: #091e44; --yellow: #F5C518; --yellow-hover: #e0b200;
+      --white: #ffffff; --gray-50: #f8f9fb; --gray-100: #f0f2f5;
+      --gray-500: #6b7280; --gray-700: #374151; --text: #1a1a2e; --radius: 12px;
+      --shadow: 0 2px 16px rgba(13,42,94,0.10);
+    }}
+    *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
+    html {{ -webkit-text-size-adjust: 100%; }}
+    body {{ font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--text); min-height: 100vh; }}
+    header {{ background: var(--navy); padding: 0 16px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }}
+    .header-inner {{ max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }}
+    .logo {{ color: var(--white); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1rem; text-decoration: none; }}
+    nav a {{ color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.85rem; font-weight: 500; }}
+    nav .nav-home {{ display: none; }}
+    nav .nav-cta {{ background: var(--yellow); color: var(--navy); padding: 8px 16px; border-radius: 999px; font-weight: 700; font-family: 'Sora', sans-serif; font-size: 0.8rem; }}
+    .breadcrumb {{ max-width: 1100px; margin: 0 auto; padding: 16px 16px 0; }}
+    .breadcrumb a {{ color: var(--gray-500); text-decoration: none; font-size: 0.82rem; font-weight: 500; }}
+    .hero {{ max-width: 1100px; margin: 0 auto; padding: 14px 16px 4px; }}
+    .hero h1 {{ font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--navy); line-height: 1.28; margin-bottom: 8px; }}
+    .hero p {{ font-size: 0.92rem; color: var(--gray-700); line-height: 1.6; }}
+    .filters {{ max-width: 1100px; margin: 0 auto; padding: 14px 16px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; position: sticky; top: 56px; background: var(--gray-50); z-index: 50; border-bottom: 1px solid var(--gray-100); }}
+    .filters select {{ flex: 1; min-width: 140px; padding: 10px 12px; border-radius: 10px; border: 1.5px solid var(--gray-100); background: var(--white); font-size: 0.88rem; font-family: inherit; color: var(--text); }}
+    .filters .ex-count {{ font-size: 0.82rem; color: var(--gray-500); width: 100%; order: 3; }}
+    .ex-grid {{ max-width: 1100px; margin: 0 auto; padding: 8px 16px 40px; display: grid; grid-template-columns: 1fr; gap: 12px; }}
+    .ex-card {{ display: block; background: var(--white); border: 1px solid var(--gray-100); border-radius: var(--radius); padding: 14px; text-decoration: none; color: inherit; transition: box-shadow .15s ease; }}
+    .ex-card:hover {{ box-shadow: var(--shadow); }}
+    .ex-top {{ display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }}
+    .ex-av {{ width: 42px; height: 42px; border-radius: 50%; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }}
+    .ex-av-img {{ width: 42px; height: 42px; border-radius: 50%; object-fit: cover; flex-shrink: 0; display: block; }}
+    .ex-name {{ font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--navy); }}
+    .ex-rub {{ font-size: 0.78rem; color: var(--gray-500); }}
+    .ex-desc {{ font-size: 0.85rem; color: var(--gray-700); line-height: 1.5; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }}
+    .ex-foot {{ display: flex; gap: 10px; flex-wrap: wrap; align-items: center; min-height: 18px; }}
+    .ex-rating {{ font-size: 0.8rem; color: #b45309; font-weight: 600; }}
+    .ex-verified {{ font-size: 0.8rem; color: #1a7a3c; font-weight: 600; }}
+    .ex-empty {{ text-align: center; color: var(--gray-500); font-size: 0.9rem; padding: 40px 16px; }}
+    footer {{ background: var(--navy-dark); color: rgba(255,255,255,0.5); text-align: center; padding: 24px 16px; font-size: 0.8rem; }}
+    footer a {{ color: var(--yellow); text-decoration: none; }}
+
+    {menu_css}
+
+    @media (min-width: 640px) {{
+      header {{ padding: 0 24px; }}
+      .header-inner {{ height: 64px; }}
+      .logo {{ font-size: 1.1rem; }}
+      nav {{ display: flex; align-items: center; }}
+      nav .nav-home {{ display: inline; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 500; margin-right: 24px; }}
+      nav .nav-cta {{ padding: 8px 18px; font-size: 0.9rem; }}
+      .breadcrumb, .hero, .filters, .ex-grid {{ max-width: 1100px; padding-left: 24px; padding-right: 24px; }}
+      .hero {{ padding-top: 24px; }}
+      .hero h1 {{ font-size: clamp(1.5rem, 3vw, 2rem); }}
+      .filters {{ top: 64px; }}
+      .ex-grid {{ grid-template-columns: repeat(2, 1fr); gap: 16px; }}
+    }}
+    @media (min-width: 960px) {{
+      .ex-grid {{ grid-template-columns: repeat(3, 1fr); }}
+    }}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="https://hogarex.ar" class="logo">Hogarex</a>
+    <nav>
+      <a href="https://hogarex.ar" class="nav-home">Inicio</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
+      <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
+    </nav>
+  </div>
+</header>
+
+<div class="breadcrumb"><a href="https://hogarex.ar">&larr; Inicio</a></div>
+
+<div class="hero">
+  <h1>Explorá todos los profesionales de Hogarex</h1>
+  <p>{total} profesionales listos para tu presupuesto. Filtrá por rubro y zona.</p>
+</div>
+
+<div class="filters">
+  <select id="filterOficio" onchange="hgxFilter()">
+    <option value="">Todos los rubros</option>
+{oficio_options}
+  </select>
+  <select id="filterUbicacion" onchange="hgxFilter()">
+    <option value="">Todas las zonas</option>
+{ubicacion_options}
+  </select>
+  <span class="ex-count" id="exCount">{total} profesionales encontrados</span>
+</div>
+
+<div class="ex-grid" id="exGrid">
+{cards_html}
+</div>
+<p class="ex-empty" id="exEmpty" style="display:none">Ningún profesional coincide con ese filtro. Probá con otra combinación.</p>
+
+<footer>
+  <p>&copy; 2026 <a href="https://hogarex.ar">Hogarex</a> &mdash; Conectamos profesionales del hogar con clientes en Argentina.</p>
+</footer>
+
+{menu_html}
+
+<script>
+function hgxFilter() {{
+  var oficio = document.getElementById('filterOficio').value;
+  var ubicacion = document.getElementById('filterUbicacion').value;
+  var cards = document.querySelectorAll('.ex-card');
+  var visible = 0;
+  cards.forEach(function(c) {{
+    var show = (!oficio || c.dataset.oficio === oficio) && (!ubicacion || c.dataset.ubicacion === ubicacion);
+    c.style.display = show ? '' : 'none';
+    if (show) visible++;
+  }});
+  document.getElementById('exCount').textContent = visible + ' profesional' + (visible === 1 ? '' : 'es') + ' encontrado' + (visible === 1 ? '' : 's');
+  document.getElementById('exEmpty').style.display = visible === 0 ? 'block' : 'none';
+}}
+</script>
+
+</body>
+</html>
+"""
+
+
+def render_explore_card(trader):
+    name = get_display_name(trader) or "Profesional"
+    oficio = trader.get("main_field") or ""
+    ubicacion = trader.get("ubicacion") or ""
+    description = sanitize_description(trader.get("description") or "")
+    verified = trader.get("verified") == "Si"
+    rating = get_rating(trader)
+    profile_url = target_for(trader)[1]
+
+    photo_url = trader.get("photo_url")
+    if photo_url:
+        photo_alt = html.escape(f"{name}, {oficio} en {ubicacion}")
+        avatar_html = (
+            f'<img src="{html.escape(photo_url)}" alt="{photo_alt}" class="ex-av-img" '
+            'loading="lazy" referrerpolicy="no-referrer" '
+            "onerror=\"this.style.display='none';this.nextElementSibling.style.display='flex'\">"
+            f'<div class="ex-av" style="display:none">{html.escape(get_initials(name))}</div>'
+        )
+    else:
+        avatar_html = f'<div class="ex-av">{html.escape(get_initials(name))}</div>'
+
+    rating_html = ""
+    if rating:
+        value, count = rating
+        reseña_word = "reseña" if count == 1 else "reseñas"
+        rating_html = f'<span class="ex-rating">&#9733; {value} ({count} {reseña_word})</span>'
+
+    verified_html = '<span class="ex-verified">&check; Verificado</span>' if verified else ""
+
+    return EXPLORE_CARD_TEMPLATE.format(
+        profile_url=profile_url,
+        oficio_attr=html.escape(oficio),
+        ubicacion_attr=html.escape(ubicacion),
+        avatar_html=avatar_html,
+        name_esc=html.escape(name),
+        oficio_esc=html.escape(oficio),
+        ubicacion_esc=html.escape(ubicacion),
+        description_esc=html.escape(description),
+        rating_html=rating_html,
+        verified_html=verified_html,
+    )
+
+
+def generate_explore_page(traders):
+    usable = [t for t in traders if is_usable(t)]
+    usable.sort(key=lambda t: (t["main_field"], get_display_name(t) or ""))
+
+    oficios = sorted({t["main_field"] for t in usable})
+    ubicaciones = sorted({t["ubicacion"] for t in usable})
+
+    oficio_options = "\n".join(
+        f'    <option value="{html.escape(o)}">{html.escape(o)}</option>' for o in oficios
+    )
+    ubicacion_options = "\n".join(
+        f'    <option value="{html.escape(u)}">{html.escape(u)}</option>' for u in ubicaciones
+    )
+    cards_html = "".join(render_explore_card(t) for t in usable)
+
+    os.makedirs(EXPLORE_DIR, exist_ok=True)
+    page_html = EXPLORE_PAGE_TEMPLATE.format(
+        total=len(usable),
+        oficio_options=oficio_options,
+        ubicacion_options=ubicacion_options,
+        cards_html=cards_html,
+        menu_css=HAMBURGER_MENU_CSS,
+        menu_html=HAMBURGER_MENU_HTML,
+    )
+    with open(EXPLORE_PAGE_PATH, "w", encoding="utf-8") as f:
+        f.write(page_html)
+    print(f"Pagina de exploracion generada: profesionales/index.html ({len(usable)} profesionales, "
+          f"{len(oficios)} rubros, {len(ubicaciones)} zonas)")
+    return f"{SITE_ORIGIN}/profesionales"
+
+
 def main():
     traders = fetch_traders()
     print(f"Traders recibidos del endpoint: {len(traders)}")
@@ -833,8 +1239,11 @@ def main():
     urls = generate_pages(traders)
     generate_sitemap(urls)
     update_hub_pages(traders)
+    update_home_page(traders)
+    explore_url = generate_explore_page(traders)
     print(f"Paginas generadas: {len(urls)}")
     print(f"Sitemap escrito en: {SITEMAP_PATH}")
+    return explore_url
 
 
 if __name__ == "__main__":
