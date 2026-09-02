@@ -1,9 +1,22 @@
 # -*- coding: utf-8 -*-
 """
 Genera una pagina estatica por cada trader publico y utilizable (con Slug,
-nombre, rubro y ubicacion reales) de todos los rubros que devuelva el
-endpoint get_traders_publicos de Bubble - ya no se filtra por rubro ni por
-scoring, eso lo decide el endpoint del lado de Bubble.
+nombre, rubro y ubicacion reales) de todos los rubros que devuelva la fuente
+de datos - ya no se filtra por rubro ni por scoring, eso lo decide Bubble.
+
+Fuente de datos (dos opciones, ver TRADERS_CSV_PATH mas abajo):
+  - Export CSV completo de la tabla Trader de Bubble (recomendado: el
+    Workflow API get_traders_publicos tiene un tope duro de 50 resultados
+    que ignora cualquier parametro de paginacion - confirmado probando
+    cursor/limit/page sin efecto - asi que no sirve para traer el total
+    real, que a esta fecha son cientos de traders). El CSV se filtra por
+    la columna `visibility` = "si" (autorizacion real de Bubble para
+    mostrar el perfil publicamente) y NUNCA se usan las columnas `user` /
+    `Creator` del CSV (son el email de la persona - dato sensible que no
+    debe terminar en ningun HTML publico ni commitearse en texto plano).
+  - Live API get_traders_publicos (POST), como fallback si no se pasa
+    TRADERS_CSV_PATH - trae como mucho 50 traders por la limitacion de
+    arriba.
 
 Traders sin nombre/rubro/ubicacion (perfiles de alta incompleta, ver
 is_usable) se omiten: no hay contenido real que publicar y una pagina vacia
@@ -25,14 +38,16 @@ Tambien actualiza:
     tarjetas "Profesionales Destacados" (marcadores TRADER_CARDS_START/END)
     con los traders reales de CABA de ese rubro, linkeando a su propia pagina.
 
-El endpoint de Bubble es un Workflow API y SOLO acepta POST (no GET).
-
 Uso: python3 generate_trader_pages.py   (ejecutar desde la raiz del repo)
 
-Variable de entorno opcional:
+Variables de entorno opcionales:
+  TRADERS_CSV_PATH -> ruta a un export CSV de la tabla Trader (columnas de
+                       Bubble tal cual, incluye header). Si se pasa, se usa
+                       esto en vez del Workflow API.
   TRADERS_API_URL  -> para apuntar a version-test en vez de Live, ej:
                        https://hogarex.ar/version-test/api/1.1/wf/get_traders_publicos
 """
+import csv
 import html
 import json
 import os
@@ -53,6 +68,7 @@ API_URL = os.environ.get(
     "TRADERS_API_URL",
     "https://hogarex.ar/api/1.1/wf/get_traders_publicos",
 )
+CSV_PATH = os.environ.get("TRADERS_CSV_PATH")
 
 # Rubros con hub propio en el repo (carpeta + index.html con carrusel de
 # tarjetas ya existente). Un trader de CABA en uno de estos rubros se anida
@@ -64,14 +80,50 @@ OFICIO_HUB = {
     "Plomero": "/plomeros",
     "Pintor": "/pintores",
     "Carpintero": "/carpinteros",
+    "Instalaciones": "/instalaciones",
 }
-# Rubros sin hub propio todavia (ej. Albañil, Jardinero, Herrero): la
+# Rubros sin hub propio todavia (ej. Albañil, Herrero, Cerrajero): la
 # breadcrumb y el link "ver mas" de esas paginas apuntan aca en vez de a un
 # hub inexistente.
 FALLBACK_HUB_URL = "https://hogarex.ar/busqueda"
 
 
+def _to_int(value):
+    value = (value or "").strip()
+    return int(value) if value.lstrip("-").isdigit() else None
+
+
+def load_traders_from_csv(path):
+    """Lee un export CSV de la tabla Trader de Bubble y lo normaliza al
+    mismo formato de dict que devuelve la Live API, filtrando de una por
+    `visibility` = "si". Deliberadamente NO mapea las columnas `user` ni
+    `Creator` (email de la persona) - ese dato no debe llegar a ningun HTML
+    generado."""
+    traders = []
+    with open(path, encoding="utf-8-sig", newline="") as f:
+        for row in csv.DictReader(f):
+            if (row.get("visibility") or "").strip().lower() != "si":
+                continue
+            zona_raw = (row.get("zonaCobertura") or "").strip()
+            zonas = [z.strip() for z in zona_raw.split(" , ") if z.strip()] if zona_raw else []
+            traders.append({
+                "Slug": (row.get("Slug") or "").strip(),
+                "main_field": (row.get("main_field") or "").strip() or None,
+                "ubicacion": (row.get("ubicacion") or "").strip() or None,
+                "user_name": (row.get("user_name") or "").strip() or None,
+                "description": (row.get("description") or "").strip() or None,
+                "zonaCobertura": zonas,
+                "verified": (row.get("verified") or "").strip() or None,
+                "portfolio": (row.get("portfolio") or "").strip() or None,
+                "rating_count": _to_int(row.get("rating_count")),
+                "rating-sum": _to_int(row.get("rating-sum")),
+            })
+    return traders
+
+
 def fetch_traders():
+    if CSV_PATH:
+        return load_traders_from_csv(CSV_PATH)
     req = urllib.request.Request(API_URL, method="POST")
     with urllib.request.urlopen(req, timeout=30) as resp:
         data = json.load(resp)
