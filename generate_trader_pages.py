@@ -520,6 +520,7 @@ PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - 
     .faq-item p {{ font-size: 0.87rem; color: var(--gray-700); line-height: 1.6; padding-bottom: 12px; margin: 0; }}
     .ver-mas-link {{ display: inline-block; color: var(--navy); font-weight: 600; font-size: 0.88rem; text-decoration: none; margin: 18px 0 4px; }}
     .ver-mas-link:hover {{ text-decoration: underline; }}
+    .btn-contact {{ display: block; width: 100%; text-align: center; margin: 6px 0 20px; }}
     .modal-cta {{ display: none; }}
     .btn-yellow {{ background: var(--yellow); color: var(--navy); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.9rem; padding: 12px 22px; border-radius: 999px; text-decoration: none; border: none; cursor: pointer; white-space: nowrap; display: inline-block; text-align: center; }}
     .btn-yellow:hover {{ background: var(--yellow-hover); }}
@@ -579,6 +580,7 @@ PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - 
   <div class="facts-card">
     {facts_html}
   </div>
+  <a href="{contact_url}" class="btn-yellow btn-contact">Contactar a {name_esc}</a>
   <p>{description_esc}</p>
   <section class="faq-section">
     <h2>Preguntas frecuentes</h2>
@@ -667,6 +669,10 @@ def render_page(trader, url):
 
     meta_desc = f"{name}, {oficio} en {ubicacion}. Pedi presupuesto gratis en Hogarex, sin intermediarios."
     cta_url = f"https://hogarex.ar/solicitud-enviar?rubro={quote(oficio)}&ubicacion={quote(ubicacion)}"
+    # Boton de contacto directo a ESTE trader puntual (no generico por
+    # rubro+ubicacion como cta_url): usa el mismo id que identifica al
+    # trader (_uid, columna "unique id" en el CSV / _id en la Live API).
+    contact_url = f"https://hogarex.ar/solicitud-enviar?trader={quote(trader['_uid'])}&rubro={quote(oficio)}"
     # CTA con texto especifico de rubro+ubicacion (no generico "pedir presupuesto")
     # para intencion de busqueda alta y coincidencia semantica con la query.
     cta_label = f"Pedir presupuesto a un {oficio.lower()} en {ubicacion}"
@@ -694,6 +700,7 @@ def render_page(trader, url):
         faq_html=faq_html,
         description_esc=html.escape(description),
         cta_url=cta_url,
+        contact_url=contact_url,
         cta_label_esc=html.escape(cta_label),
         ver_mas_html=ver_mas_html,
     )
@@ -904,6 +911,7 @@ HOME_CARD_TEMPLATE = """      <div class="prof-card">
           <span class="prof-popular">&uarr; Popular</span>
           <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>{ubicacion_esc}</span>
         </div>
+        <a href="{cta_url}" class="btn-pedir">Pedir presupuesto</a>
       </div>
 """
 
