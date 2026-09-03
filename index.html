@@ -1037,6 +1037,39 @@ window.addEventListener('resize', function(){
   clearTimeout(window._carResizeTO);
   window._carResizeTO = setTimeout(updateCarouselArrows, 150);
 });
+
+(function(){
+  // Autoplay solo para el carrusel de profesionales del index.
+  var track = document.getElementById('profTrack');
+  if(!track) return;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var timer;
+  function advance(){
+    var card = track.querySelector(':scope > *');
+    var amount = card ? card.offsetWidth + 14 : 300;
+    var atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+    track.scrollTo({left: atEnd ? 0 : track.scrollLeft + amount, behavior: 'smooth'});
+  }
+  function start(){
+    stop();
+    timer = setInterval(advance, 4000);
+  }
+  function stop(){
+    clearInterval(timer);
+  }
+
+  track.addEventListener('mouseenter', stop);
+  track.addEventListener('mouseleave', start);
+  track.addEventListener('touchstart', stop, {passive: true});
+  track.addEventListener('touchend', function(){ clearTimeout(window._profAutoTO); window._profAutoTO = setTimeout(start, 3000); });
+
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden) stop(); else start();
+  });
+
+  start();
+})();
 </script>
 </body>
 </html>
