@@ -67,10 +67,11 @@
 
     /* ── RUBROS ICONS ── */
     .rubros-bar{padding:24px 0 20px;background:#fff;border-bottom:1px solid var(--g2)}
-    .rubros-row{display:flex;gap:4px;justify-content:center;flex-wrap:wrap}
-    .rub-item{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 18px;border-radius:var(--r);cursor:pointer;transition:background .2s;min-width:84px}
+    .rubros-row{display:flex;gap:4px;justify-content:center;flex-wrap:nowrap}
+    .rub-item{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 14px;border-radius:var(--r);cursor:pointer;transition:background .2s;min-width:0}
     .rub-item:hover{background:var(--blue-bg)}
-    .rub-circle{width:54px;height:54px;border-radius:50%;background:var(--blue-bg);display:flex;align-items:center;justify-content:center;font-size:22px;transition:background .2s}
+    .rub-circle{width:60px;height:60px;border-radius:50%;background:var(--blue-bg);display:flex;align-items:center;justify-content:center;font-size:24px;transition:background .2s}
+    .rub-circle svg{width:24px;height:24px}
     .rub-item:hover .rub-circle{background:#dbeafe}
     .rub-name{font-size:12px;font-weight:600;color:var(--t2)}
     .rub-item.ver-todos .rub-circle{background:var(--g2)}
@@ -259,9 +260,9 @@
       .rubros-bar{padding:16px 0 14px}
       .rubros-bar .container{padding:0 8px}
       .rubros-row{gap:0;flex-wrap:nowrap;justify-content:space-between}
-      .rub-item{flex:1 1 0;min-width:0;padding:6px 2px}
-      .rub-circle{width:38px;height:38px;font-size:16px}
-      .rub-circle svg{width:16px;height:16px}
+      .rub-item{flex:1 1 0;min-width:0;padding:5px 1px}
+      .rub-circle{width:44px;height:44px;font-size:18px}
+      .rub-circle svg{width:18px;height:18px}
       .rub-name{font-size:9.5px;line-height:1.15;word-break:break-word;text-align:center}
 
       /* trabajos */
