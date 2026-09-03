@@ -30,7 +30,8 @@
     body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--text); min-height: 100vh; padding-bottom: 88px; }
     header { background: var(--navy); padding: 0 16px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
     .header-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
-    .logo { color: var(--white); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1rem; text-decoration: none; }
+    .logo { display: flex; align-items: center; text-decoration: none; }
+    .logo img { height: 26px; width: auto; display: block; }
     nav { display: flex; align-items: center; gap: 8px; }
     nav a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.85rem; font-weight: 500; }
     nav .nav-home { display: none; }
@@ -73,7 +74,7 @@
       body { padding-bottom: 0; }
       header { padding: 0 24px; }
       .header-inner { height: 64px; }
-      .logo { font-size: 1.1rem; }
+      .logo img { height: 32px; }
       nav .nav-home { display: inline; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 500; margin-right: 24px; }
       nav .nav-cta { display: inline-block; padding: 8px 18px; font-size: 0.9rem; }
       .breadcrumb, .hero, .content-wrap { max-width: 780px; padding-left: 24px; padding-right: 24px; }
@@ -92,7 +93,7 @@
 
 <header>
   <div class="header-inner">
-    <a href="https://hogarex.ar" class="logo">Hogarex</a>
+    <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
       <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
@@ -111,6 +112,8 @@
     <a href="https://app.hogarex.ar/plomeros">Plomeros</a>
     <a href="https://app.hogarex.ar/pintores">Pintores</a>
     <a href="https://app.hogarex.ar/carpinteros">Carpinteros</a>
+    <a href="https://app.hogarex.ar/instalaciones">Instalaciones</a>
+    <a href="https://app.hogarex.ar/profesionales">Explorar profesionales</a>
     <a href="https://app.hogarex.ar/precios-mano-de-obra">Precios de mano de obra</a>
     <a href="https://app.hogarex.ar/blog">Blog</a>
   </nav>

@@ -51,6 +51,7 @@ import csv
 import html
 import json
 import os
+import random
 import shutil
 import unicodedata
 import urllib.request
@@ -88,6 +89,15 @@ OFICIO_HUB = {
 # breadcrumb y el link "ver mas" de esas paginas apuntan aca en vez de a un
 # hub inexistente.
 FALLBACK_HUB_URL = "https://hogarex.ar/busqueda"
+
+# Icono decorativo por rubro, usado en la tarjeta de /profesionales para dar
+# identidad visual rapida sin depender de un set de SVGs por oficio.
+OFICIO_ICON = {
+    "Electricista": "⚡", "Gasista": "🔥", "Plomero": "💧", "Pintor": "🎨",
+    "Carpintero": "🪚", "Instalaciones": "🔧", "Albañil": "🧱",
+    "Cerrajero": "🔑", "Jardinero": "🌿", "Limpieza": "🧹",
+    "Mudanzas": "📦", "Herrero": "🔨",
+}
 
 
 def _to_int(value):
@@ -487,9 +497,13 @@ PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - 
     body {{ font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--text); min-height: 100vh; padding-bottom: 88px; }}
     header {{ background: var(--navy); padding: 0 16px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }}
     .header-inner {{ max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }}
-    .logo {{ color: var(--white); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1rem; text-decoration: none; }}
+    .logo {{ display: flex; align-items: center; text-decoration: none; }}
+    .logo img {{ height: 26px; width: auto; display: block; }}
+    nav {{ display: flex; align-items: center; gap: 8px; }}
     nav a {{ color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.85rem; font-weight: 500; }}
     nav .nav-home {{ display: none; }}
+    nav .nav-cta {{ display: none; }}
+    {menu_css}
     .breadcrumb {{ max-width: 680px; margin: 0 auto; padding: 16px 16px 0; }}
     .breadcrumb a {{ color: var(--gray-500); text-decoration: none; font-size: 0.82rem; font-weight: 500; }}
     .profile-hero {{ max-width: 680px; margin: 0 auto; padding: 14px 16px 6px; }}
@@ -534,10 +548,9 @@ PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - 
       body {{ padding-bottom: 0; }}
       header {{ padding: 0 24px; }}
       .header-inner {{ height: 64px; }}
-      .logo {{ font-size: 1.1rem; }}
-      nav {{ display: flex; align-items: center; }}
+      .logo img {{ height: 32px; }}
       nav .nav-home {{ display: inline; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 500; margin-right: 24px; }}
-      nav .nav-cta {{ background: var(--yellow); color: var(--navy); padding: 8px 18px; border-radius: 999px; font-weight: 700; font-family: 'Sora', sans-serif; }}
+      nav .nav-cta {{ display: inline-block; background: var(--yellow); color: var(--navy); padding: 8px 18px; border-radius: 999px; font-weight: 700; font-family: 'Sora', sans-serif; }}
       .breadcrumb, .profile-hero, .profile-content {{ max-width: 740px; padding-left: 24px; padding-right: 24px; }}
       .profile-hero {{ padding-top: 16px; padding-bottom: 8px; }}
       .profile-hero h1 {{ font-size: clamp(1.3rem, 3.2vw, 1.8rem); }}
@@ -552,13 +565,16 @@ PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - 
 
 <header>
   <div class="header-inner">
-    <a href="https://hogarex.ar" class="logo">Hogarex</a>
+    <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
       <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
+      <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
   </div>
 </header>
+
+{menu_html}
 
 <div class="breadcrumb"><a href="{oficio_hub_url}">&larr; Volver a {oficio_esc_lower}</a></div>
 
@@ -703,6 +719,8 @@ def render_page(trader, url):
         contact_url=contact_url,
         cta_label_esc=html.escape(cta_label),
         ver_mas_html=ver_mas_html,
+        menu_css=HAMBURGER_MENU_CSS,
+        menu_html=HAMBURGER_MENU_HTML,
     )
     return page_html
 
@@ -959,11 +977,37 @@ def render_home_card(trader, index):
     )
 
 
+def _interleave_by_oficio(items, oficio_key):
+    """Reordena una lista al azar de forma que nunca queden dos elementos
+    seguidos del mismo rubro (salvo que un rubro domine tanto la lista que
+    sea matematicamente inevitable)."""
+    groups = {}
+    for it in items:
+        groups.setdefault(oficio_key(it), []).append(it)
+    for g in groups.values():
+        random.shuffle(g)
+
+    result = []
+    last_oficio = None
+    while any(groups.values()):
+        candidates = [o for o, g in groups.items() if g and o != last_oficio]
+        if not candidates:
+            candidates = [o for o, g in groups.items() if g]
+        oficio = random.choice(candidates)
+        result.append(groups[oficio].pop())
+        last_oficio = oficio
+    return result
+
+
 def update_home_page(traders):
     """Reemplaza el carrusel 'Profesionales Verificados' de la home
     (marcadores TRADER_CARDS_START/END) con una muestra real cruzada de
     todos los rubros (hasta HOME_CARDS_CAP), en vez de las 10 tarjetas
-    ficticias originales."""
+    ficticias originales.
+
+    La muestra se arma repartiendo cupos parejos entre rubros (para que
+    ningun rubro domine el carrusel) y despues se reordena al azar sin
+    dejar dos tarjetas seguidas del mismo rubro."""
     if not os.path.exists(HOME_PAGE_PATH):
         print("Aviso: index.html no encontrado, se omite actualizacion de tarjetas de home.")
         return
@@ -978,10 +1022,27 @@ def update_home_page(traders):
         return
 
     usable = [t for t in traders if is_usable(t)]
-    # con foto primero (mejor primera impresion), despues el resto, orden
-    # estable por rubro+nombre.
-    usable.sort(key=lambda t: (t.get("photo_url") is None, t["main_field"], get_display_name(t) or ""))
-    sample = usable[:HOME_CARDS_CAP]
+
+    by_oficio = {}
+    for t in usable:
+        by_oficio.setdefault(t["main_field"], []).append(t)
+    for g in by_oficio.values():
+        # con foto primero (mejor primera impresion) dentro de cada rubro,
+        # con orden aleatorio entre los que empatan.
+        random.shuffle(g)
+        g.sort(key=lambda t: t.get("photo_url") is None)
+
+    oficios = list(by_oficio.keys())
+    random.shuffle(oficios)
+    pool = []
+    i = 0
+    while len(pool) < HOME_CARDS_CAP and any(by_oficio.values()):
+        oficio = oficios[i % len(oficios)]
+        if by_oficio[oficio]:
+            pool.append(by_oficio[oficio].pop(0))
+        i += 1
+
+    sample = _interleave_by_oficio(pool, lambda t: t["main_field"])
 
     cards_html = "".join(render_home_card(t, i) for i, t in enumerate(sample))
 
@@ -1004,14 +1065,16 @@ EXPLORE_CARD_TEMPLATE = """        <a class="ex-card" href="{profile_url}" data-
             {avatar_html}
             <div class="ex-id">
               <div class="ex-name">{name_esc}</div>
-              <div class="ex-rub">{oficio_esc} &middot; {ubicacion_esc}</div>
+              <span class="ex-badge">{oficio_icon} {oficio_esc}</span>
             </div>
           </div>
           <p class="ex-desc">{description_esc}</p>
+          <div class="ex-loc"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>{ubicacion_esc}</div>
           <div class="ex-foot">
             {rating_html}
             {verified_html}
           </div>
+          <div class="ex-cta"><span>Pedir presupuesto &rarr;</span></div>
         </a>
 """
 
@@ -1048,7 +1111,8 @@ EXPLORE_PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pag
     body {{ font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--text); min-height: 100vh; }}
     header {{ background: var(--navy); padding: 0 16px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }}
     .header-inner {{ max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }}
-    .logo {{ color: var(--white); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1rem; text-decoration: none; }}
+    .logo {{ display: flex; align-items: center; text-decoration: none; }}
+    .logo img {{ height: 26px; width: auto; display: block; }}
     nav {{ display: flex; align-items: center; gap: 8px; }}
     nav a {{ color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.85rem; font-weight: 500; }}
     nav .nav-home {{ display: none; }}
@@ -1061,18 +1125,24 @@ EXPLORE_PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pag
     .filters {{ max-width: 1100px; margin: 0 auto; padding: 14px 16px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; position: sticky; top: 56px; background: var(--gray-50); z-index: 50; border-bottom: 1px solid var(--gray-100); }}
     .filters select {{ flex: 1; min-width: 140px; padding: 10px 12px; border-radius: 10px; border: 1.5px solid var(--gray-100); background: var(--white); font-size: 0.88rem; font-family: inherit; color: var(--text); }}
     .filters .ex-count {{ font-size: 0.82rem; color: var(--gray-500); width: 100%; order: 3; }}
-    .ex-grid {{ max-width: 1100px; margin: 0 auto; padding: 8px 16px 40px; display: grid; grid-template-columns: 1fr; gap: 12px; }}
-    .ex-card {{ display: block; background: var(--white); border: 1px solid var(--gray-100); border-radius: var(--radius); padding: 14px; text-decoration: none; color: inherit; transition: box-shadow .15s ease; }}
-    .ex-card:hover {{ box-shadow: var(--shadow); }}
-    .ex-top {{ display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }}
-    .ex-av {{ width: 42px; height: 42px; border-radius: 50%; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.9rem; flex-shrink: 0; }}
-    .ex-av-img {{ width: 42px; height: 42px; border-radius: 50%; object-fit: cover; flex-shrink: 0; display: block; }}
-    .ex-name {{ font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--navy); }}
-    .ex-rub {{ font-size: 0.78rem; color: var(--gray-500); }}
-    .ex-desc {{ font-size: 0.85rem; color: var(--gray-700); line-height: 1.5; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }}
+    .ex-grid {{ max-width: 1100px; margin: 0 auto; padding: 8px 16px 40px; display: grid; grid-template-columns: 1fr; gap: 14px; }}
+    .ex-card {{ display: flex; flex-direction: column; min-width: 0; background: var(--white); border: 1px solid var(--gray-100); border-radius: 14px; padding: 16px; text-decoration: none; color: inherit; box-shadow: 0 1px 3px rgba(13,42,94,.06); transition: box-shadow .18s ease, transform .18s ease, border-color .18s ease; }}
+    .ex-card:hover {{ box-shadow: var(--shadow); transform: translateY(-2px); border-color: rgba(32,111,247,.25); }}
+    .ex-top {{ display: flex; align-items: center; gap: 12px; margin-bottom: 10px; min-width: 0; }}
+    .ex-av {{ width: 46px; height: 46px; border-radius: 50%; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.92rem; flex-shrink: 0; }}
+    .ex-av-img {{ width: 46px; height: 46px; border-radius: 50%; object-fit: cover; flex-shrink: 0; display: block; }}
+    .ex-id {{ min-width: 0; }}
+    .ex-name {{ font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.98rem; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }}
+    .ex-badge {{ display: inline-flex; align-items: center; gap: 4px; background: rgba(32,111,247,.08); color: var(--navy); font-size: 0.72rem; font-weight: 700; padding: 2px 9px 2px 7px; border-radius: 999px; margin-top: 4px; }}
+    .ex-desc {{ font-size: 0.85rem; color: var(--gray-700); line-height: 1.5; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-width: 0; }}
+    .ex-loc {{ display: flex; align-items: center; gap: 5px; font-size: 0.78rem; color: var(--gray-500); margin-bottom: 10px; }}
+    .ex-loc svg {{ flex-shrink: 0; color: var(--gray-500); }}
     .ex-foot {{ display: flex; gap: 10px; flex-wrap: wrap; align-items: center; min-height: 18px; }}
     .ex-rating {{ font-size: 0.8rem; color: #b45309; font-weight: 600; }}
-    .ex-verified {{ font-size: 0.8rem; color: #1a7a3c; font-weight: 600; }}
+    .ex-verified {{ display: inline-flex; align-items: center; gap: 3px; font-size: 0.78rem; color: #1a7a3c; font-weight: 700; background: rgba(26,122,60,.08); padding: 2px 9px; border-radius: 999px; }}
+    .ex-cta {{ display: block; text-align: center; margin-top: auto; padding-top: 12px; }}
+    .ex-cta span {{ display: inline-block; width: 100%; padding: 9px; border: 1.5px solid var(--navy); border-radius: 999px; color: var(--navy); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.82rem; text-align: center; transition: background .18s ease, color .18s ease; }}
+    .ex-card:hover .ex-cta span {{ background: var(--navy); color: #fff; }}
     .ex-empty {{ text-align: center; color: var(--gray-500); font-size: 0.9rem; padding: 40px 16px; }}
     footer {{ background: var(--navy-dark); color: rgba(255,255,255,0.5); text-align: center; padding: 24px 16px; font-size: 0.8rem; }}
     footer a {{ color: var(--yellow); text-decoration: none; }}
@@ -1082,7 +1152,7 @@ EXPLORE_PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pag
     @media (min-width: 640px) {{
       header {{ padding: 0 24px; }}
       .header-inner {{ height: 64px; }}
-      .logo {{ font-size: 1.1rem; }}
+      .logo img {{ height: 32px; }}
       nav .nav-home {{ display: inline; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 500; margin-right: 24px; }}
       nav .nav-cta {{ display: inline-block; padding: 8px 18px; font-size: 0.9rem; }}
       .breadcrumb, .hero, .filters, .ex-grid {{ max-width: 1100px; padding-left: 24px; padding-right: 24px; }}
@@ -1100,7 +1170,7 @@ EXPLORE_PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pag
 
 <header>
   <div class="header-inner">
-    <a href="https://hogarex.ar" class="logo">Hogarex</a>
+    <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
       <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
@@ -1196,6 +1266,7 @@ def render_explore_card(trader):
         avatar_html=avatar_html,
         name_esc=html.escape(name),
         oficio_esc=html.escape(oficio),
+        oficio_icon=OFICIO_ICON.get(oficio, "🛠️"),
         ubicacion_esc=html.escape(ubicacion),
         description_esc=html.escape(description),
         rating_html=rating_html,
