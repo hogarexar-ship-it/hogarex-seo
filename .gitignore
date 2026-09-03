@@ -1,2 +1,9 @@
 __pycache__/
 *.pyc
+
+# Exports de Bubble (Trader/User) usados como fuente de datos: traen columnas
+# sensibles (email, Creator, whatsapp) que jamas deben terminar versionadas,
+# aunque el generador solo lea un subconjunto de columnas de ellas.
+*.csv
+.env
+.env.*
