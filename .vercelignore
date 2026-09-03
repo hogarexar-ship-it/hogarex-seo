@@ -1,0 +1,8 @@
+# El deploy no usa build step: Vercel sirve el repo tal cual como sitio
+# estatico. Estos archivos son herramientas/documentacion internas del
+# generador, no paginas del sitio - no deben quedar descargables en
+# produccion (https://app.hogarex.ar/generate_trader_pages.py, etc).
+*.py
+__pycache__/
+SEO-GEO-ARCHITECTURE.md
+README.md

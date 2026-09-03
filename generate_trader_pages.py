@@ -625,7 +625,7 @@ PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - 
 
 {menu_html}
 
-<div class="breadcrumb"><a href="{oficio_hub_url}">&larr; Volver a {oficio_esc_lower}</a></div>
+<div class="breadcrumb"><a href="{busqueda_url}">&larr; Volver a {oficio_esc_lower}</a></div>
 
 <div class="profile-hero">
   <div class="hero-top">
@@ -679,6 +679,7 @@ def render_page(trader, url):
     verified = trader.get("verified") == "Si"
     rating = get_rating(trader)
     oficio_hub_url = oficio_hub_url_for(oficio)
+    busqueda_url = f"https://hogarex.ar/busqueda?rubro={quote(oficio)}&ubicacion={quote(ubicacion)}"
     photo_url = trader.get("photo_url")
     photo_alt = html.escape(f"{name}, {oficio} en {ubicacion}")
 
@@ -752,6 +753,7 @@ def render_page(trader, url):
         oficio_esc=html.escape(oficio),
         oficio_esc_lower=html.escape(oficio.lower()),
         oficio_hub_url=oficio_hub_url,
+        busqueda_url=busqueda_url,
         name_esc=html.escape(name),
         avatar_html=avatar_html,
         og_image_html=og_image_html,
