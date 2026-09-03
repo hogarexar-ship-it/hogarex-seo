@@ -27,19 +27,19 @@ FOOTER_HTML = """<footer>
     <div class="ft-grid">
       <div class="ft-col">
         <h5>Empresa</h5>
-        <a href="https://hogarex.ar">Contacto</a>
+        <a href="mailto:soporte@hogarex.ar">Contacto</a>
         <a href="https://app.hogarex.ar">Inicio</a>
       </div>
       <div class="ft-col">
         <h5>Soporte</h5>
-        <a href="https://hogarex.ar">Ayuda</a>
-        <a href="https://hogarex.ar">Preguntas Frecuentes</a>
-        <a href="https://hogarex.ar">Más información</a>
+        <a href="https://hogarex.ar/ayuda">Ayuda</a>
+        <a href="https://app.hogarex.ar/preguntas-frecuentes">Preguntas Frecuentes</a>
+        <a href="https://hogarex.ar/ayuda">Más información</a>
       </div>
       <div class="ft-col">
         <h5>Legal</h5>
-        <a href="https://hogarex.ar">Términos y Condiciones</a>
-        <a href="https://hogarex.ar">Privacidad</a>
+        <a href="https://hogarex.ar/terminos-condiciones">Términos y Condiciones</a>
+        <a href="https://hogarex.ar/terminos-condiciones">Privacidad</a>
       </div>
     </div>
     <div class="ft-directory">
@@ -86,6 +86,7 @@ STATIC_PAGES = [
     ("/", "daily", "1.0"),
     ("/profesionales", "weekly", "0.9"),
     ("/precios-mano-de-obra", "monthly", "0.8"),
+    ("/preguntas-frecuentes", "monthly", "0.8"),
     ("/electricistas", "monthly", "1.0"),
     ("/plomeros", "monthly", "1.0"),
     ("/gasistas", "monthly", "1.0"),

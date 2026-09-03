@@ -51,7 +51,7 @@
     .hgx-nm-panel-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid #eef1f6}
     .hgx-nm-logo{font-weight:800;font-size:17px;color:#003366;font-family:inherit}
     .hgx-nm-close{background:none;border:none;font-size:26px;line-height:1;color:#64708a;cursor:pointer;padding:4px 8px}
-    .hgx-nm-links{display:flex;flex-direction:column;padding:10px 8px;overflow-y:auto;flex:1}
+    .hgx-nm-links{display:flex;flex-direction:column;align-items:stretch;padding:10px 8px;overflow-y:auto;flex:1}
     .hgx-nm-links a{display:block;padding:13px 12px;color:#1a1a2e;text-decoration:none;font-weight:600;font-size:15px;border-radius:8px}
     .hgx-nm-links a:hover,.hgx-nm-links a:active{background:#f0f2f5}
     .hgx-nm-actions{display:flex;flex-direction:column;gap:8px;padding:14px 16px 20px;border-top:1px solid #eef1f6}
@@ -61,19 +61,20 @@
     @media (min-width:900px){.hgx-nm-panel{width:340px}}
     .breadcrumb { max-width: 680px; margin: 0 auto; padding: 16px 16px 0; }
     .breadcrumb a { color: var(--gray-500); text-decoration: none; font-size: 0.82rem; font-weight: 500; }
-    .profile-hero { max-width: 680px; margin: 0 auto; padding: 14px 16px 6px; }
-    .profile-tag { display: inline-block; background: var(--yellow); color: var(--navy); font-size: 0.7rem; font-weight: 700; padding: 3px 12px; border-radius: 999px; margin-bottom: 12px; }
-    .profile-hero h1 { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--navy); line-height: 1.3; margin-bottom: 10px; }
-    .profile-meta { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; font-size: 0.88rem; color: var(--gray-500); margin-bottom: 16px; }
+    .profile-hero { max-width: 680px; margin: 0 auto 4px; padding: 0 16px 22px; text-align: center; position: relative; }
+    .hero-banner { height: 56px; background: var(--navy); margin: 0 -16px; border-radius: 0 0 18px 18px; }
+    .hero-avatar-wrap { margin-top: -44px; margin-bottom: 12px; }
+    .profile-hero h1 { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--navy); line-height: 1.3; margin-bottom: 4px; }
+    .hero-subtitle { font-size: 0.95rem; font-weight: 600; color: #206ff7; margin-bottom: 14px; }
+    .hero-badges { display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap; }
     .profile-content { max-width: 680px; margin: 0 auto; padding: 12px 16px; }
     .profile-content p { font-size: 0.95rem; line-height: 1.7; color: var(--gray-700); margin-bottom: 14px; white-space: pre-line; }
     .zonas { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
     .zona-chip { background: var(--gray-100); color: var(--gray-700); font-size: 0.78rem; padding: 4px 12px; border-radius: 999px; }
-    .verified-badge { display: inline-flex; align-items: center; gap: 4px; color: #1a7a3c; font-size: 0.85rem; font-weight: 600; }
-    .rating-badge { display: inline-flex; align-items: center; gap: 4px; color: #b45309; font-weight: 600; }
-    .hero-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-    .profile-avatar { width: 52px; height: 52px; border-radius: 50%; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.05rem; flex-shrink: 0; }
-    .profile-avatar-img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; flex-shrink: 0; display: block; }
+    .verified-badge { display: inline-flex; align-items: center; gap: 5px; background: #e6f4ea; color: #1a7a3c; font-size: 0.8rem; font-weight: 700; padding: 6px 14px; border-radius: 999px; }
+    .rating-badge { display: inline-flex; align-items: center; gap: 5px; background: #fdf1de; color: #b45309; font-size: 0.8rem; font-weight: 700; padding: 6px 14px; border-radius: 999px; }
+    .profile-avatar { width: 92px; height: 92px; border-radius: 50%; background: var(--navy); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.6rem; border: 4px solid #fff; box-shadow: 0 3px 12px rgba(0,0,0,.18); margin: 0 auto; }
+    .profile-avatar-img { width: 92px; height: 92px; border-radius: 50%; object-fit: cover; display: block; border: 4px solid #fff; box-shadow: 0 3px 12px rgba(0,0,0,.18); margin: 0 auto; }
     .facts-card { background: var(--white); border: 1px solid var(--gray-100); border-radius: var(--radius); padding: 6px 16px; margin-bottom: 18px; }
     .facts-row { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 0.88rem; border-bottom: 1px solid var(--gray-100); }
     .facts-row:last-child { border-bottom: none; }
@@ -106,8 +107,12 @@
       nav .nav-home { display: inline; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 500; margin-right: 24px; }
       nav .nav-cta { display: inline-block; background: var(--yellow); color: var(--navy); padding: 8px 18px; border-radius: 999px; font-weight: 700; font-family: 'Sora', sans-serif; }
       .breadcrumb, .profile-hero, .profile-content { max-width: 740px; padding-left: 24px; padding-right: 24px; }
-      .profile-hero { padding-top: 16px; padding-bottom: 8px; }
-      .profile-hero h1 { font-size: clamp(1.3rem, 3.2vw, 1.8rem); }
+      .profile-hero { padding-bottom: 26px; }
+      .hero-banner { height: 76px; }
+      .hero-avatar-wrap { margin-top: -58px; }
+      .profile-avatar, .profile-avatar-img { width: 120px; height: 120px; }
+      .profile-hero h1 { font-size: clamp(1.6rem, 3.2vw, 2rem); }
+      .hero-subtitle { font-size: 1.05rem; }
       .cta-bar { display: none; }
       .modal-cta { display: flex; margin: 24px auto 20px; max-width: 692px; padding: 20px 24px; background: var(--white); box-shadow: var(--shadow); border-radius: var(--radius); align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
       .modal-cta p { font-family: 'Sora', sans-serif; font-weight: 600; font-size: 0.95rem; color: var(--navy); margin: 0; }
@@ -182,13 +187,13 @@
 <div class="breadcrumb"><a href="https://hogarex.ar/busqueda?rubro=Electricista&ubicacion=Buenos%20Aires%20%28GBA%29">&larr; Volver a electricista</a></div>
 
 <div class="profile-hero">
-  <div class="hero-top">
+  <div class="hero-banner"></div>
+  <div class="hero-avatar-wrap">
     <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1762505176398x800244772420181100/inbound8501768681106585594.jpg" alt="Ruben, Electricista en Buenos Aires (GBA)" class="profile-avatar-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="profile-avatar" style="display:none">RU</div>
-    <span class="profile-tag">Electricista</span>
   </div>
-  <h1>Ruben &mdash; Electricista en Buenos Aires (GBA)</h1>
-  <div class="profile-meta">
-    <span>&#128205; Buenos Aires (GBA)</span>
+  <h1>Ruben</h1>
+  <p class="hero-subtitle">Electricista en Buenos Aires (GBA)</p>
+  <div class="hero-badges">
     
     
   </div>
@@ -218,19 +223,19 @@
     <div class="ft-grid">
       <div class="ft-col">
         <h5>Empresa</h5>
-        <a href="https://hogarex.ar">Contacto</a>
+        <a href="mailto:soporte@hogarex.ar">Contacto</a>
         <a href="https://app.hogarex.ar">Inicio</a>
       </div>
       <div class="ft-col">
         <h5>Soporte</h5>
-        <a href="https://hogarex.ar">Ayuda</a>
-        <a href="https://hogarex.ar">Preguntas Frecuentes</a>
-        <a href="https://hogarex.ar">Más información</a>
+        <a href="https://hogarex.ar/ayuda">Ayuda</a>
+        <a href="https://app.hogarex.ar/preguntas-frecuentes">Preguntas Frecuentes</a>
+        <a href="https://hogarex.ar/ayuda">Más información</a>
       </div>
       <div class="ft-col">
         <h5>Legal</h5>
-        <a href="https://hogarex.ar">Términos y Condiciones</a>
-        <a href="https://hogarex.ar">Privacidad</a>
+        <a href="https://hogarex.ar/terminos-condiciones">Términos y Condiciones</a>
+        <a href="https://hogarex.ar/terminos-condiciones">Privacidad</a>
       </div>
     </div>
     <div class="ft-directory">
