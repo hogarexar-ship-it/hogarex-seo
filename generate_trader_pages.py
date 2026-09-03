@@ -90,14 +90,48 @@ OFICIO_HUB = {
 # hub inexistente.
 FALLBACK_HUB_URL = "https://app.hogarex.ar/profesionales"
 
-# Icono decorativo por rubro, usado en la tarjeta de /profesionales para dar
-# identidad visual rapida sin depender de un set de SVGs por oficio.
+def _icon_svg(paths, size=12):
+    return (
+        f'<svg width="{size}" height="{size}" viewBox="0 0 24 24" fill="none" '
+        f'stroke="currentColor" stroke-width="2" stroke-linecap="round" '
+        f'stroke-linejoin="round">{paths}</svg>'
+    )
+
+
+ICON_ZAP = '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>'
+ICON_FLAME = (
+    '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 '
+    '2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 '
+    '1-3a2.5 2.5 0 0 0 2.5 2.5z"/>'
+)
+ICON_DROPLET = '<path d="M12 22c3.87 0 7-3.13 7-7 0-4-3-7-7-13-4 6-7 9-7 13 0 3.87 3.13 7 7 7Z"/>'
+ICON_PAINTBRUSH = (
+    '<path d="M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 '
+    '0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3Z"/><path d="M9 8c-2 3-4 3.5-7 4l8 8c2.5-2.5 3-4.5 4-7"/>'
+)
+ICON_HAMMER = (
+    '<path d="m15 12-8.5 8.5a2.12 2.12 0 1 1-3-3L12 9"/><path d="M17.64 15 22 10.64"/>'
+    '<path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 '
+    '0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/>'
+)
+ICON_WRENCH = (
+    '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 '
+    '7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>'
+)
+
+# Icono decorativo por rubro (SVG en linea, sin emojis), usado en la tarjeta de
+# /profesionales para dar identidad visual rapida.
 OFICIO_ICON = {
-    "Electricista": "⚡", "Gasista": "🔥", "Plomero": "💧", "Pintor": "🎨",
-    "Carpintero": "🪚", "Instalaciones": "🔧", "Albañil": "🧱",
-    "Cerrajero": "🔑", "Jardinero": "🌿", "Limpieza": "🧹",
-    "Mudanzas": "📦", "Herrero": "🔨",
+    "Electricista": _icon_svg(ICON_ZAP),
+    "Gasista": _icon_svg(ICON_FLAME),
+    "Plomero": _icon_svg(ICON_DROPLET),
+    "Pintor": _icon_svg(ICON_PAINTBRUSH),
+    "Carpintero": _icon_svg(ICON_HAMMER),
+    "Instalaciones": _icon_svg(ICON_WRENCH),
 }
+# Oficios fuera del set principal de rubros (Albañil, Cerrajero, Jardinero,
+# Limpieza, Mudanzas, Herrero, etc.) usan un icono de herramienta generico.
+FALLBACK_OFICIO_ICON = _icon_svg(ICON_WRENCH)
 
 
 def _to_int(value):
@@ -403,12 +437,12 @@ HAMBURGER_MENU_HTML = """<div class="hgx-nm-overlay" id="hgx-nm-overlay"></div>
     <a href="https://hogarex.ar">Inicio</a>
     <span class="hgx-nm-label">Rubros</span>
     <div class="hgx-nm-grid">
-      <a href="https://app.hogarex.ar/electricistas">&#9889; Electricistas</a>
-      <a href="https://app.hogarex.ar/gasistas">&#128293; Gasistas</a>
-      <a href="https://app.hogarex.ar/plomeros">&#128167; Plomeros</a>
-      <a href="https://app.hogarex.ar/pintores">&#127912; Pintores</a>
-      <a href="https://app.hogarex.ar/carpinteros">&#129700; Carpinteros</a>
-      <a href="https://app.hogarex.ar/instalaciones">&#128295; Instalaciones</a>
+      <a href="https://app.hogarex.ar/electricistas"><svg class="hgx-nm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Electricistas</a>
+      <a href="https://app.hogarex.ar/gasistas"><svg class="hgx-nm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>Gasistas</a>
+      <a href="https://app.hogarex.ar/plomeros"><svg class="hgx-nm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c3.87 0 7-3.13 7-7 0-4-3-7-7-13-4 6-7 9-7 13 0 3.87 3.13 7 7 7Z"/></svg>Plomeros</a>
+      <a href="https://app.hogarex.ar/pintores"><svg class="hgx-nm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3Z"/><path d="M9 8c-2 3-4 3.5-7 4l8 8c2.5-2.5 3-4.5 4-7"/></svg>Pintores</a>
+      <a href="https://app.hogarex.ar/carpinteros"><svg class="hgx-nm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5a2.12 2.12 0 1 1-3-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg>Carpinteros</a>
+      <a href="https://app.hogarex.ar/instalaciones"><svg class="hgx-nm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Instalaciones</a>
     </div>
     <span class="hgx-nm-label">Explorar</span>
     <a href="https://app.hogarex.ar/profesionales">Explorar profesionales</a>
@@ -457,7 +491,8 @@ HAMBURGER_MENU_CSS = """.hgx-nm-toggle{display:flex;flex-direction:column;justif
     .hgx-nm-links a:hover,.hgx-nm-links a:active{background:#f0f2f5}
     .hgx-nm-label{display:block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9aa5b8;padding:16px 12px 6px}
     .hgx-nm-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:0 4px}
-    .hgx-nm-grid a{padding:11px 8px;font-size:13px;line-height:1.25}
+    .hgx-nm-grid a{padding:11px 8px;font-size:13px;line-height:1.25;display:flex;align-items:center;gap:6px}
+    .hgx-nm-ic{width:15px;height:15px;flex-shrink:0;color:#206ff7}
     .hgx-nm-actions{display:flex;flex-direction:column;gap:8px;padding:14px 16px 20px;border-top:1px solid #eef1f6}
     .hgx-nm-btn{display:block;text-align:center;padding:12px;border-radius:999px;font-weight:700;font-size:14px;text-decoration:none}
     .hgx-nm-btn-outline{border:1.5px solid #003366;color:#003366;background:#fff}
@@ -1160,7 +1195,7 @@ EXPLORE_CARD_TEMPLATE = """        <a class="ex-card" href="{profile_url}" data-
             {avatar_html}
             <div class="ex-id">
               <div class="ex-name">{name_esc}</div>
-              <span class="ex-badge">{oficio_icon} {oficio_esc}</span>
+              <span class="ex-badge">{oficio_icon}{oficio_esc}</span>
             </div>
           </div>
           <p class="ex-desc">{description_esc}</p>
@@ -1358,7 +1393,7 @@ def render_explore_card(trader):
         avatar_html=avatar_html,
         name_esc=html.escape(name),
         oficio_esc=html.escape(oficio),
-        oficio_icon=OFICIO_ICON.get(oficio, "🛠️"),
+        oficio_icon=OFICIO_ICON.get(oficio, FALLBACK_OFICIO_ICON),
         ubicacion_esc=html.escape(ubicacion),
         description_esc=html.escape(description),
         rating_html=rating_html,
