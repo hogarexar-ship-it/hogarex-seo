@@ -1039,21 +1039,46 @@ window.addEventListener('resize', function(){
 });
 
 (function(){
-  // Autoplay solo para el carrusel de profesionales del index.
+  // Autoplay solo para el carrusel de profesionales del index, en loop infinito.
   var track = document.getElementById('profTrack');
   if(!track) return;
   if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+  // Duplicamos las tarjetas una vez: al cruzar la mitad del recorrido saltamos
+  // instantáneamente al equivalente en el primer set (idéntico), logrando un
+  // loop continuo sin el "rebote" visual de volver de golpe al principio.
+  var originalCards = Array.prototype.slice.call(track.children);
+  if (originalCards.length > 1) {
+    originalCards.forEach(function(card){
+      var clone = card.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.querySelectorAll('a[href]').forEach(function(a){ a.setAttribute('tabindex', '-1'); });
+      track.appendChild(clone);
+    });
+  }
+
   var timer;
   function advance(){
+    var halfWidth = track.scrollWidth / 2;
+    var current = track.scrollLeft;
+    if (current >= halfWidth - 2) {
+      // scroll-snap-type ignora/objeta una asignación directa de scrollLeft;
+      // lo desactivamos un instante para poder saltar sin que se corrija solo.
+      // Ojo: leer track.scrollLeft justo después de asignarlo puede devolver
+      // el valor viejo, por eso seguimos usando la variable local "current".
+      current = current - halfWidth;
+      track.style.scrollSnapType = 'none';
+      track.scrollLeft = current;
+      void track.offsetWidth;
+      requestAnimationFrame(function(){ track.style.scrollSnapType = ''; });
+    }
     var card = track.querySelector(':scope > *');
     var amount = card ? card.offsetWidth + 14 : 300;
-    var atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
-    track.scrollTo({left: atEnd ? 0 : track.scrollLeft + amount, behavior: 'smooth'});
+    track.scrollTo({left: current + amount, behavior: 'smooth'});
   }
   function start(){
     stop();
-    timer = setInterval(advance, 2000);
+    timer = setInterval(advance, 1000);
   }
   function stop(){
     clearInterval(timer);
@@ -1061,8 +1086,6 @@ window.addEventListener('resize', function(){
 
   track.addEventListener('mouseenter', stop);
   track.addEventListener('mouseleave', start);
-  track.addEventListener('touchstart', stop, {passive: true});
-  track.addEventListener('touchend', function(){ clearTimeout(window._profAutoTO); window._profAutoTO = setTimeout(start, 3000); });
 
   document.addEventListener('visibilitychange', function(){
     if(document.hidden) stop(); else start();
