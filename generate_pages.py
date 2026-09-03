@@ -34,6 +34,7 @@ FOOTER_HTML = """<footer>
         <h5>Soporte</h5>
         <a href="https://hogarex.ar/ayuda">Ayuda</a>
         <a href="https://app.hogarex.ar/preguntas-frecuentes">Preguntas Frecuentes</a>
+        <a href="https://app.hogarex.ar/glosario">Glosario</a>
         <a href="https://hogarex.ar/ayuda">Más información</a>
       </div>
       <div class="ft-col">
@@ -87,6 +88,7 @@ STATIC_PAGES = [
     ("/profesionales", "weekly", "0.9"),
     ("/precios-mano-de-obra", "monthly", "0.8"),
     ("/preguntas-frecuentes", "monthly", "0.8"),
+    ("/glosario", "monthly", "0.7"),
     ("/electricistas", "monthly", "1.0"),
     ("/plomeros", "monthly", "1.0"),
     ("/gasistas", "monthly", "1.0"),
@@ -407,6 +409,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     <a href="https://app.hogarex.ar/profesionales">Explorar profesionales</a>
     <a href="https://app.hogarex.ar/precios-mano-de-obra">Precios de mano de obra</a>
     <a href="https://app.hogarex.ar/preguntas-frecuentes">Preguntas Frecuentes</a>
+    <a href="https://app.hogarex.ar/glosario">Glosario</a>
     <a href="https://app.hogarex.ar/blog" class="active">Blog</a>
   </nav>
   <div class="hgx-nm-actions">

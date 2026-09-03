@@ -410,6 +410,7 @@ HAMBURGER_MENU_HTML = """<div class="hgx-nm-overlay" id="hgx-nm-overlay"></div>
     <a href="https://app.hogarex.ar/profesionales">Explorar profesionales</a>
     <a href="https://app.hogarex.ar/precios-mano-de-obra">Precios de mano de obra</a>
     <a href="https://app.hogarex.ar/preguntas-frecuentes">Preguntas Frecuentes</a>
+    <a href="https://app.hogarex.ar/glosario">Glosario</a>
     <a href="https://app.hogarex.ar/blog">Blog</a>
   </nav>
   <div class="hgx-nm-actions">
@@ -474,6 +475,7 @@ FOOTER_HTML = """<footer>
         <h5>Soporte</h5>
         <a href="https://hogarex.ar/ayuda">Ayuda</a>
         <a href="https://app.hogarex.ar/preguntas-frecuentes">Preguntas Frecuentes</a>
+        <a href="https://app.hogarex.ar/glosario">Glosario</a>
         <a href="https://hogarex.ar/ayuda">Más información</a>
       </div>
       <div class="ft-col">
