@@ -19,6 +19,9 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Organization","name":"Hogarex","url":"https://hogarex.ar","description":"Marketplace de profesionales del hogar verificados en Argentina","areaServed":{"@type":"City","name":"Ciudad Autónoma de Buenos Aires"}}
   </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cómo funciona Hogarex?","acceptedAnswer":{"@type":"Answer","text":"Pedís presupuesto una sola vez contándonos el rubro y tu ubicación, y recibís propuestas de profesionales verificados de tu zona en menos de 2 horas en horario hábil. Revisás sus perfiles y contactás directamente por WhatsApp al que elijas, sin intermediarios."}},{"@type":"Question","name":"¿Pedir presupuesto tiene costo?","acceptedAnswer":{"@type":"Answer","text":"No. Para quien busca un profesional, pedir presupuesto en Hogarex es gratuito y sin compromiso de contratación."}},{"@type":"Question","name":"¿Cuánto cobra un electricista, gasista o plomero?","acceptedAnswer":{"@type":"Answer","text":"Según las cámaras del sector (AAIERIC y CAGP), en 2026 la hora de un electricista ronda los $54.310, la de un gasista los $112.062 y la de un plomero los $106.805, solo mano de obra sin materiales. El precio final depende del trabajo puntual."}},{"@type":"Question","name":"¿Qué significa la insignia Identidad Verificada?","acceptedAnswer":{"@type":"Answer","text":"Indica que Hogarex validó el documento de identidad del profesional y, cuando el rubro lo requiere (por ejemplo electricistas o gasistas matriculados), también su matrícula o habilitación profesional."}},{"@type":"Question","name":"¿En qué zonas trabaja Hogarex?","acceptedAnswer":{"@type":"Answer","text":"Hoy cubrimos la Ciudad Autónoma de Buenos Aires (CABA), el Gran Buenos Aires (GBA) y Córdoba Capital. Vamos sumando profesionales en más zonas de forma continua."}},{"@type":"Question","name":"¿Qué rubros puedo encontrar?","acceptedAnswer":{"@type":"Answer","text":"Electricistas, gasistas, plomeros, pintores, carpinteros, instalaciones, albañiles, cerrajeros, jardineros, limpieza, mudanzas y herreros."}},{"@type":"Question","name":"¿Cómo me registro como profesional?","acceptedAnswer":{"@type":"Answer","text":"Entrando a hogarex.ar/registro_profesional y completando tus datos y rubro. Una vez aprobado tu perfil, empezás a recibir pedidos de presupuesto de tu zona."}}]}
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
@@ -178,6 +181,20 @@
     .ctaf-acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
     .btn-blue{background:var(--blue);color:#fff;font-weight:700;font-size:15px;padding:12px 28px;border-radius:var(--rp);border:none;cursor:pointer;transition:opacity .2s}
     .btn-blue:hover{opacity:.88}
+
+    /* ── FAQ ── */
+    .faq-home{padding:48px 0;background:var(--g1)}
+    .faq-home .sec-sub{text-align:center;color:var(--t3);font-size:14px;margin-bottom:26px}
+    .faq-list{max-width:760px;margin:0 auto}
+    .faq-item{background:#fff;border:1px solid var(--g2);border-radius:var(--r);margin-bottom:10px;padding:2px 18px}
+    .faq-item summary{cursor:pointer;font-weight:700;font-family:inherit;font-size:15px;padding:16px 0;color:var(--navy);list-style:none}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';float:right;color:var(--t3);font-weight:400}
+    .faq-item[open] summary::after{content:'\2212'}
+    .faq-item p{font-size:14px;color:var(--t2);line-height:1.65;padding-bottom:16px;margin:0}
+    .faq-item p a{color:var(--blue);font-weight:600}
+    .faq-more{display:block;text-align:center;margin-top:20px;color:var(--navy);font-weight:700;font-size:14px;text-decoration:none}
+    .faq-more:hover{text-decoration:underline}
 
     footer{background:#fff;border-top:1px solid #eef1f6;padding:36px 16px 20px}
     .ft-wrap{max-width:1100px;margin:0 auto}
@@ -929,6 +946,24 @@ Trabajando en casa hoteles edificios country</div>
       <a href="https://hogarex.ar/solicitud-enviar?rubro=&ubicacion=" class="btn-blue">Comenzar</a>
       <a href="https://hogarex.ar/busqueda" class="btn-ol">Más Información</a>
     </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-home">
+  <div class="container">
+    <h2 class="sec-title">Preguntas frecuentes</h2>
+    <p class="sec-sub">Todo lo que necesitás saber antes de pedir presupuesto en Hogarex.</p>
+    <div class="faq-list">
+      <details class="faq-item"><summary>¿Cómo funciona Hogarex?</summary><p>Pedís presupuesto una sola vez contándonos el rubro y tu ubicación, y recibís propuestas de profesionales verificados de tu zona en menos de 2 horas en horario hábil. Revisás sus perfiles y contactás directamente por WhatsApp al que elijas, sin intermediarios.</p></details>
+      <details class="faq-item"><summary>¿Pedir presupuesto tiene costo?</summary><p>No. Para quien busca un profesional, pedir presupuesto en Hogarex es gratuito y sin compromiso de contratación.</p></details>
+      <details class="faq-item"><summary>¿Cuánto cobra un electricista, gasista o plomero?</summary><p>Según las cámaras del sector (AAIERIC y CAGP), en 2026 la hora de un electricista ronda los $54.310, la de un gasista los $112.062 y la de un plomero los $106.805, solo mano de obra sin materiales. El precio final depende del trabajo puntual — ver la <a href="https://app.hogarex.ar/precios-mano-de-obra">guía completa de precios por rubro</a>.</p></details>
+      <details class="faq-item"><summary>¿Qué significa la insignia "Identidad Verificada"?</summary><p>Indica que Hogarex validó el documento de identidad del profesional y, cuando el rubro lo requiere (por ejemplo electricistas o gasistas matriculados), también su matrícula o habilitación profesional.</p></details>
+      <details class="faq-item"><summary>¿En qué zonas trabaja Hogarex?</summary><p>Hoy cubrimos la Ciudad Autónoma de Buenos Aires (CABA), el Gran Buenos Aires (GBA) y Córdoba Capital. Vamos sumando profesionales en más zonas de forma continua.</p></details>
+      <details class="faq-item"><summary>¿Qué rubros puedo encontrar?</summary><p>Electricistas, gasistas, plomeros, pintores, carpinteros, instalaciones, albañiles, cerrajeros, jardineros, limpieza, mudanzas y herreros. Podés ver todos los perfiles en <a href="https://app.hogarex.ar/profesionales">Explorar profesionales</a>.</p></details>
+      <details class="faq-item"><summary>¿Cómo me registro como profesional?</summary><p>Entrando a <a href="https://hogarex.ar/registro_profesional">hogarex.ar/registro_profesional</a> y completando tus datos y rubro. Una vez aprobado tu perfil, empezás a recibir pedidos de presupuesto de tu zona.</p></details>
+    </div>
+    <a href="https://app.hogarex.ar/preguntas-frecuentes" class="faq-more">Ver todas las preguntas frecuentes &rarr;</a>
   </div>
 </section>
 
