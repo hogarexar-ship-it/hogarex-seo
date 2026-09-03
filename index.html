@@ -179,13 +179,19 @@
     .btn-blue{background:var(--blue);color:#fff;font-weight:700;font-size:15px;padding:12px 28px;border-radius:var(--rp);border:none;cursor:pointer;transition:opacity .2s}
     .btn-blue:hover{opacity:.88}
 
-    /* ── FOOTER ── */
-    footer{background:#fff;border-top:1px solid var(--g2);padding:32px 0 20px}
-    .ft-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-bottom:24px}
-    .ft-col h5{font-size:13px;font-weight:700;color:#111827;margin-bottom:10px}
-    .ft-col a{display:block;font-size:13px;color:var(--t3);margin-bottom:6px;transition:color .2s}
-    .ft-col a:hover{color:var(--blue)}
-    .ft-bot{display:flex;justify-content:flex-end;font-size:12px;color:var(--t3)}
+    footer{background:#fff;border-top:1px solid #eef1f6;padding:36px 16px 20px}
+    .ft-wrap{max-width:1100px;margin:0 auto}
+    .ft-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:20px}
+    .ft-col h5{font-size:13px;font-weight:700;color:#111827;margin:0 0 10px}
+    .ft-col a{display:block;font-size:13px;color:#6b7280;text-decoration:none;margin-bottom:6px}
+    .ft-col a:hover{color:#206ff7}
+    .ft-directory{margin-bottom:20px;padding-top:20px;border-top:1px solid #eef1f6}
+    .ft-directory-grid{display:flex;flex-wrap:wrap;gap:24px}
+    .ft-directory-grid .ft-col{min-width:120px}
+    .ft-bot{font-size:12px;color:#9ca3af}
+    .ft-bot a{color:#9ca3af;text-decoration:underline}
+    @media(max-width:640px){.ft-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:420px){.ft-grid{grid-template-columns:1fr}}
 
     /* ── CARRUSEL ── */
     .carousel-wrap{position:relative;display:flex;align-items:center;gap:10px}
@@ -202,9 +208,6 @@
     .car-track.trabajos-grid > .trab-card{flex:0 0 300px}
     .car-track.reviews-grid{display:flex}
     .car-track.reviews-grid > .rev-card{flex:0 0 320px}
-    .ft-directory{margin-bottom:24px;padding-top:24px;border-top:1px solid var(--g2)}
-    .ft-directory-grid{display:flex;flex-wrap:wrap;gap:32px}
-    .ft-directory-grid .ft-col{min-width:130px}
 
     /* ── RESPONSIVE ── */
     @media(max-width:900px){
@@ -214,7 +217,6 @@
       .car-track.trabajos-grid > .trab-card{flex:0 0 84%}
       .pro-grid{grid-template-columns:1fr}
       .pro-visual{display:none}
-            .ft-grid{grid-template-columns:1fr 1fr}
     }
     @media(max-width:600px){
       /* carrusel: solo swipe táctil, sin flechas */
@@ -255,10 +257,6 @@
       /* cta */
       .ctaf-acts{flex-direction:column;align-items:center}
       .ctaf-acts .btn-blue,.ctaf-acts .btn-ol{width:100%;justify-content:center;text-align:center}
-
-      /* footer */
-      .ft-grid{grid-template-columns:1fr}
-      .ft-bot{justify-content:center}
 
       /* cf */
       .cf-body{padding:28px 20px}
@@ -431,123 +429,21 @@
       <!-- TRADER_CARDS_START -->
       <div class="prof-card">
         <div class="prof-top">
-          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1765648703315x406455886272922800/1000056479.jpg" alt="Leonardo González, Electricista en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">LG</div>
-          
-        </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/leonardo-gonzalez--electricista-buenos-aires-gba" style="color:inherit;text-decoration:none">Leonardo González</a></div>
-        <div class="prof-rub">Electricista</div>
-        <div class="prof-desc">Técnico Electromecanico, Electricista industrial, comercial y residencial.</div>
-        <div class="prof-meta">
-          <span class="prof-popular">&uarr; Popular</span>
-          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
-        </div>
-        <a href="https://hogarex.ar/perfilprofesional/leonardo-gonzalez--electricista-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
-      </div>
-      <div class="prof-card">
-        <div class="prof-top">
-          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1763674830098x259669491450801300/IMG_4718.jpeg" alt="Monica, Limpieza en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">M</div>
-          
-        </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/monica-limpieza-buenos-aires-caba" style="color:inherit;text-decoration:none">Monica</a></div>
-        <div class="prof-rub">Limpieza</div>
-        <div class="prof-desc">Soy responsable , trabajadora , aprendo rapido y tengo disponibilidad inmediata..</div>
-        <div class="prof-meta">
-          <span class="prof-popular">&uarr; Popular</span>
-          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
-        </div>
-        <a href="https://hogarex.ar/perfilprofesional/monica-limpieza-buenos-aires-caba" class="btn-pedir">Pedir presupuesto</a>
-      </div>
-      <div class="prof-card">
-        <div class="prof-top">
-          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1760450261385x800010164414000100/Screenshot_20251010-064821.png" alt="Damian, Electricista en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">D</div>
-          
-        </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/damian-electricista-buenos-aires-caba" style="color:inherit;text-decoration:none">Damian</a></div>
-        <div class="prof-rub">Electricista</div>
-        <div class="prof-desc">Soy una persona puntual responsable y consiente del trabajo</div>
-        <div class="prof-meta">
-          <span class="prof-popular">&uarr; Popular</span>
-          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
-        </div>
-        <a href="https://hogarex.ar/perfilprofesional/damian-electricista-buenos-aires-caba" class="btn-pedir">Pedir presupuesto</a>
-      </div>
-      <div class="prof-card">
-        <div class="prof-top">
-          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1776386367691x761839354944296600/inbound5129575947870507360.png" alt="Imanol, Jardinero en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">I</div>
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1777554853979x758308959399179100/1000099192.jpg" alt="Marcelo, Instalaciones en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">MA</div>
           <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Perfil verificado</span></div>
         </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/imanol-jardinero-buenos-aires-gba" style="color:inherit;text-decoration:none">Imanol</a></div>
-        <div class="prof-rub">Jardinero</div>
-        <div class="prof-desc">Soy Imanol, jardinero en zona Vicente Lopez y San Isidro.</div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/marcelo-instalaciones-buenos-aires-gba" style="color:inherit;text-decoration:none">Marcelo</a></div>
+        <div class="prof-rub">Instalaciones</div>
+        <div class="prof-desc">Instalación y mantenimiento de ascensores</div>
         <div class="prof-meta">
           <span class="prof-popular">&uarr; Popular</span>
           <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
         </div>
-        <a href="https://hogarex.ar/perfilprofesional/imanol-jardinero-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
+        <a href="https://hogarex.ar/perfilprofesional/marcelo-instalaciones-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
       </div>
       <div class="prof-card">
         <div class="prof-top">
-          <img src="None" alt="Ramon, Pintor en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">R</div>
-          
-        </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/ramon-pintor-buenos-aires-caba" style="color:inherit;text-decoration:none">Ramon</a></div>
-        <div class="prof-rub">Pintor</div>
-        <div class="prof-desc">40 años trabajando en el oficio de pintura , mas otras tareas .</div>
-        <div class="prof-meta">
-          <span class="prof-popular">&uarr; Popular</span>
-          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
-        </div>
-        <a href="https://hogarex.ar/perfilprofesional/ramon-pintor-buenos-aires-caba" class="btn-pedir">Pedir presupuesto</a>
-      </div>
-      <div class="prof-card">
-        <div class="prof-top">
-          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1757527932411x809823771745215700/inbound4235024782590675852.jpg" alt="Ivan Matias, Carpintero en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">IM</div>
-          
-        </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/ivan-matias-carpintero-buenos-aires-caba" style="color:inherit;text-decoration:none">Ivan Matias</a></div>
-        <div class="prof-rub">Carpintero</div>
-        <div class="prof-desc">✨ Muebles a medida – Iván ✨
-Soy fabricante de muebles personalizados, pensados para cada espacio y necesidad.
-Diseño y construyo con dedicación: calidad, estilo y terminaciones prolijas.
-
-📐 Muebles a medida
-🪵 Materiales de primera
-🏡 Diseños modernos y funcionales
-
-Si tenés una idea, la hacemos realidad.
-
-📲 Consultame sin compromiso.</div>
-        <div class="prof-meta">
-          <span class="prof-popular">&uarr; Popular</span>
-          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
-        </div>
-        <a href="https://hogarex.ar/perfilprofesional/ivan-matias-carpintero-buenos-aires-caba" class="btn-pedir">Pedir presupuesto</a>
-      </div>
-      <div class="prof-card">
-        <div class="prof-top">
-          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1760136022271x762634361924774100/inbound3596968904389784020.jpg" alt="Victor, Jardinero en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">V</div>
-          
-        </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/victor-jardinero-buenos-aires-gba" style="color:inherit;text-decoration:none">Victor</a></div>
-        <div class="prof-rub">Jardinero</div>
-        <div class="prof-desc">Hola soy Victor lopez y me dedico a varios rubros, jardinería, plomería, carpintería, herrería artesanal, albañilería básica, etc</div>
-        <div class="prof-meta">
-          <span class="prof-popular">&uarr; Popular</span>
-          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
-        </div>
-        <a href="https://hogarex.ar/perfilprofesional/victor-jardinero-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
-      </div>
-      <div class="prof-card">
-        <div class="prof-top">
-          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1770938870842x399814284554935040/1000064201.webp" alt="Pablo, Cerrajero en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">P</div>
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1770938870842x399814284554935040/1000064201.webp" alt="Pablo, Cerrajero en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">PA</div>
           <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Perfil verificado</span></div>
         </div>
         <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/pablo-cerrajero-buenos-aires-caba" style="color:inherit;text-decoration:none">Pablo</a></div>
@@ -568,180 +464,175 @@ Picaportes. Manejamos un amplio catálogo de las mejores cerraduras y cerrojos d
       </div>
       <div class="prof-card">
         <div class="prof-top">
-          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1762633684090x999476207848725000/inbound2556031958074621245.jpg" alt="Micaela, Limpieza en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">M</div>
-          
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1760098270382x622474779547604000/IMG-20250927-WA0043.jpg" alt="Leandro, Albañil en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">LE</div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Perfil verificado</span></div>
         </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/micaela-limpieza-buenos-aires-caba" style="color:inherit;text-decoration:none">Micaela</a></div>
-        <div class="prof-rub">Limpieza</div>
-        <div class="prof-desc">Soy una mujer fuerte y trabajadora soy rápida responsable y ago bien mi trabajo</div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/leandro-albanil-buenos-aires-gba" style="color:inherit;text-decoration:none">Leandro</a></div>
+        <div class="prof-rub">Albañil</div>
+        <div class="prof-desc">Leandro mi nombre realizó trabajos de albañilería,plomería,pintura,Durlock ,steel framing</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+        <a href="https://hogarex.ar/perfilprofesional/leandro-albanil-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1759768266942x827088599685366100/inbound1145430905335809500.jpg" alt="Luis, Pintor en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">LU</div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Perfil verificado</span></div>
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/luis-pintor-buenos-aires-caba" style="color:inherit;text-decoration:none">Luis</a></div>
+        <div class="prof-rub">Pintor</div>
+        <div class="prof-desc">Soy Ceramista, Pintor, Plomero, Coloco pisos vinilicos, Paneles Pvc, apasionado de mi labor.</div>
         <div class="prof-meta">
           <span class="prof-popular">&uarr; Popular</span>
           <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
         </div>
-        <a href="https://hogarex.ar/perfilprofesional/micaela-limpieza-buenos-aires-caba" class="btn-pedir">Pedir presupuesto</a>
+        <a href="https://hogarex.ar/perfilprofesional/luis-pintor-buenos-aires-caba" class="btn-pedir">Pedir presupuesto</a>
       </div>
       <div class="prof-card">
         <div class="prof-top">
-          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1765219727648x817269003119223300/17652197010637855637535532506650.jpg" alt="Alvaro Martin, Cerrajero en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">AM</div>
-          
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1771016365632x297452958381113400/inbound989618520903409618.jpg" alt="Javier, Electricista en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">JA</div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Perfil verificado</span></div>
         </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/alvaro-martin-cerrajero-buenos-aires-gba" style="color:inherit;text-decoration:none">Alvaro Martin</a></div>
-        <div class="prof-rub">Cerrajero</div>
-        <div class="prof-desc">Cerrajeria en general, Instalacion de cerraduras Smart, Agente instalador certificado de cerraduras Phillips &amp; Ihub, garantia 12,24 y 36 meses segun marca y modelo, garantia escrita de los equipos. Instalador Matriculado de AA split, service y mantenimiento, Atendemos todo zona norte, Malvinas Argentinas, Tigre, Pilar, Escobar, San Miguel, Jose C Paz.</div>
-        <div class="prof-meta">
-          <span class="prof-popular">&uarr; Popular</span>
-          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
-        </div>
-        <a href="https://hogarex.ar/perfilprofesional/alvaro-martin-cerrajero-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
-      </div>
-      <div class="prof-card">
-        <div class="prof-top">
-          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1771246905140x496410086947854700/IMG-20251227-WA0006.jpg" alt="Miguel, Albañil en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">M</div>
-          
-        </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/miguel-albanil-buenos-aires-gba" style="color:inherit;text-decoration:none">Miguel</a></div>
-        <div class="prof-rub">Albañil</div>
-        <div class="prof-desc">🏗️   M Construcciones  nos especializamos en construcción en seco, terminaciones y trabajos integrales, brindando soluciones modernas, prolijas y duraderas para cada proyecto.
-
-Trabajamos en casas, departamentos, industrias, oficinas y locales comerciales, cuidando cada detalle</div>
-        <div class="prof-meta">
-          <span class="prof-popular">&uarr; Popular</span>
-          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
-        </div>
-        <a href="https://hogarex.ar/perfilprofesional/miguel-albanil-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
-      </div>
-      <div class="prof-card">
-        <div class="prof-top">
-          <img src="None" alt="Ariel, Plomero en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">A</div>
-          
-        </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/ariel-plomero-buenos-aires-gba" style="color:inherit;text-decoration:none">Ariel</a></div>
-        <div class="prof-rub">Plomero</div>
-        <div class="prof-desc">Servicio integral en la plomeria y gas</div>
-        <div class="prof-meta">
-          <span class="prof-popular">&uarr; Popular</span>
-          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
-        </div>
-        <a href="https://hogarex.ar/perfilprofesional/ariel-plomero-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
-      </div>
-      <div class="prof-card">
-        <div class="prof-top">
-          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1759968997792x922176003189243900/inbound7775442957522163546.jpg" alt="Kevin, Herrero en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">K</div>
-          
-        </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/kevin-herrero-buenos-aires-gba" style="color:inherit;text-decoration:none">Kevin</a></div>
-        <div class="prof-rub">Herrero</div>
-        <div class="prof-desc">Me dedico a todo lo que es techos con estructuras metálicas 
-Realizamos trabajos de pintura y durlock 
-Wap 1130635377</div>
-        <div class="prof-meta">
-          <span class="prof-popular">&uarr; Popular</span>
-          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
-        </div>
-        <a href="https://hogarex.ar/perfilprofesional/kevin-herrero-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
-      </div>
-      <div class="prof-card">
-        <div class="prof-top">
-          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1770765769084x807847907862997900/1000355450.jpg" alt="Braian, Carpintero en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">B</div>
-          
-        </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/braian-carpintero-buenos-aires-gba" style="color:inherit;text-decoration:none">Braian</a></div>
-        <div class="prof-rub">Carpintero</div>
-        <div class="prof-desc">Me llamo braian soy carpintero desde ase 15 años con conocimiento de electricidad y plomeria realizo diseños y amoblamiento y revestimiento de pared en madera</div>
-        <div class="prof-meta">
-          <span class="prof-popular">&uarr; Popular</span>
-          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
-        </div>
-        <a href="https://hogarex.ar/perfilprofesional/braian-carpintero-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
-      </div>
-      <div class="prof-card">
-        <div class="prof-top">
-          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1762991163097x566196458955618300/inbound7811726063592778094.png" alt="Roberto, Instalaciones en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">R</div>
-          
-        </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/roberto-instalaciones-buenos-aires-gba" style="color:inherit;text-decoration:none">Roberto</a></div>
-        <div class="prof-rub">Instalaciones</div>
-        <div class="prof-desc">Servicio técnico rojas 
-Realizamos mantenimiento y instalación de aires acondicionados , reparación de lavarropas y heladeras</div>
-        <div class="prof-meta">
-          <span class="prof-popular">&uarr; Popular</span>
-          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
-        </div>
-        <a href="https://hogarex.ar/perfilprofesional/roberto-instalaciones-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
-      </div>
-      <div class="prof-card">
-        <div class="prof-top">
-          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1761307589540x987581661705221800/inbound69721946589605300.jpg" alt="Manuel, Plomero en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">M</div>
-          
-        </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/manuel-plomero-buenos-aires-caba" style="color:inherit;text-decoration:none">Manuel</a></div>
-        <div class="prof-rub">Plomero</div>
-        <div class="prof-desc">Manuel plomero con vasta experiencia en el rubro capaz de solucionar cualquier tipo de problema.
-Destapacion, Instalación de artefactos.
-Reparación, colocación de bombas, sistemas, riegos. Etc no dudes en consultar disponibilidad</div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/javier-electricista-buenos-aires-caba" style="color:inherit;text-decoration:none">Javier</a></div>
+        <div class="prof-rub">Electricista</div>
+        <div class="prof-desc">Buenas, mí nombre es Javier y me dedico a instalar, mantener y reparar equipos de aire acondicionado, realizó trabajos de electricidad y herrería</div>
         <div class="prof-meta">
           <span class="prof-popular">&uarr; Popular</span>
           <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
         </div>
-        <a href="https://hogarex.ar/perfilprofesional/manuel-plomero-buenos-aires-caba" class="btn-pedir">Pedir presupuesto</a>
+        <a href="https://hogarex.ar/perfilprofesional/javier-electricista-buenos-aires-caba" class="btn-pedir">Pedir presupuesto</a>
       </div>
       <div class="prof-card">
         <div class="prof-top">
-          <img src="None" alt="Sergio, Instalaciones en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">S</div>
-          
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1778431677067x790952440118746200/1000051322.jpg" alt="Daniel, Albañil en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">DA</div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Perfil verificado</span></div>
         </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/sergio-instalaciones-buenos-aires-gba" style="color:inherit;text-decoration:none">Sergio</a></div>
-        <div class="prof-rub">Instalaciones</div>
-        <div class="prof-desc">Técnico en Refrigeración y emprendedor, experiencia en reparación, mantenimiento e instalación de equipos. Me destaco por la responsabilidad, la prolijidad en el trabajo y la capacidad para resolver problemas técnicos de manera práctica. Vocación de servicio, buen trato con clientes y compromiso.</div>
-        <div class="prof-meta">
-          <span class="prof-popular">&uarr; Popular</span>
-          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
-        </div>
-        <a href="https://hogarex.ar/perfilprofesional/sergio-instalaciones-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
-      </div>
-      <div class="prof-card">
-        <div class="prof-top">
-          <img src="None" alt="Jorge, Albañil en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">J</div>
-          
-        </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/jorge-albanil-buenos-aires-gba" style="color:inherit;text-decoration:none">Jorge</a></div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/daniel-albanil-buenos-aires-gba" style="color:inherit;text-decoration:none">Daniel</a></div>
         <div class="prof-rub">Albañil</div>
-        <div class="prof-desc">Hola soy oficial albañil hago tambien plomeria gas techos colocacion de ceramicas herreria pintura soy tecnico en refrigeracion y aire</div>
+        <div class="prof-desc">Soy Daniel hago presupuesto sobre todo tipo de refacciones pintura plomería techos colocación de porcelanato y cerámicas</div>
         <div class="prof-meta">
           <span class="prof-popular">&uarr; Popular</span>
           <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
         </div>
-        <a href="https://hogarex.ar/perfilprofesional/jorge-albanil-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
+        <a href="https://hogarex.ar/perfilprofesional/daniel-albanil-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
       </div>
       <div class="prof-card">
         <div class="prof-top">
-          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1761738720596x232170598188795600/Screenshot_20250705-161141.png" alt="Federico, Gasista en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">F</div>
-          
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1771291705466x821625035516661900/20250501_194553.jpg" alt="Ivan, Gasista en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">IV</div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Perfil verificado</span></div>
         </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/federico-gasista-buenos-aires-gba" style="color:inherit;text-decoration:none">Federico</a></div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/ivan-gasista-buenos-aires-gba" style="color:inherit;text-decoration:none">Ivan</a></div>
         <div class="prof-rub">Gasista</div>
-        <div class="prof-desc">Responsable, trabajo a conciencia, me considero una persona humilde y con ganas de progresar, respetuoso y hacer los trabajos para que los clientes estén satisfecho, desde ya muchas gracias 😊 mu contacto es 1133584146</div>
+        <div class="prof-desc">Me desempeño como gasista. Actualmente continúo capacitándome para poder ofrecer mas servicios como herrería, plomería, electricidad y mantenimiento de edificios.</div>
         <div class="prof-meta">
           <span class="prof-popular">&uarr; Popular</span>
           <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
         </div>
-        <a href="https://hogarex.ar/perfilprofesional/federico-gasista-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
+        <a href="https://hogarex.ar/perfilprofesional/ivan-gasista-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
       </div>
       <div class="prof-card">
         <div class="prof-top">
-          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1763554287611x841216497239728900/17635542691077436693719623032815.jpg" alt="Hugo, Mudanzas en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">H</div>
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1770929077000x561408291827961900/1000310251.jpg" alt="Walter Ariel, Carpintero en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">WA</div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Perfil verificado</span></div>
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/walter-ariel-carpintero-buenos-aires-gba" style="color:inherit;text-decoration:none">Walter Ariel</a></div>
+        <div class="prof-rub">Carpintero</div>
+        <div class="prof-desc">soy carpintero con mas de 15 años de experiencia en amoblamientos a medida</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+        <a href="https://hogarex.ar/perfilprofesional/walter-ariel-carpintero-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1776386367691x761839354944296600/inbound5129575947870507360.png" alt="Imanol, Jardinero en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">IM</div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Perfil verificado</span></div>
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/imanol-jardinero-buenos-aires-gba" style="color:inherit;text-decoration:none">Imanol</a></div>
+        <div class="prof-rub">Jardinero</div>
+        <div class="prof-desc">Soy Imanol, jardinero en zona Vicente Lopez y San Isidro.</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+        <a href="https://hogarex.ar/perfilprofesional/imanol-jardinero-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1777754781862x283855101738585960/Nuevo%20documento%2824%29_1.jpg" alt="Ricardo, Electricista en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">RI</div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Perfil verificado</span></div>
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/ricardo-electricista-buenos-aires-caba" style="color:inherit;text-decoration:none">Ricardo</a></div>
+        <div class="prof-rub">Electricista</div>
+        <div class="prof-desc">Electricista matriculado, técnico en refrigeración y aire acondicionado. Responsabilidad, garantía y asesoramiento.</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
+        </div>
+        <a href="https://hogarex.ar/perfilprofesional/ricardo-electricista-buenos-aires-caba" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1762915903498x763219207504930200/IMG-20251025-WA0003.jpg" alt="Adolfo Ramón, Instalaciones en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">AR</div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Perfil verificado</span></div>
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/adolfo-ramon-instalaciones-buenos-aires-gba" style="color:inherit;text-decoration:none">Adolfo Ramón</a></div>
+        <div class="prof-rub">Instalaciones</div>
+        <div class="prof-desc">Somos construccionesadol,nos dedicamos a brindar nuestro servicios en construcción, mantenimiento, reparación, instalaciónes,brindamos nuestros servicios con responsabilidad, honestidad,más de 15 años de experiencia haciendo los que nos gusta..</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+        <a href="https://hogarex.ar/perfilprofesional/adolfo-ramon-instalaciones-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1762735211270x589863464315405500/inbound3701398946512358187.jpg" alt="César Gustavo, Carpintero en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">CG</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/cesar-gustavo-carpintero-buenos-aires-gba" style="color:inherit;text-decoration:none">César Gustavo</a></div>
+        <div class="prof-rub">Carpintero</div>
+        <div class="prof-desc">Somos un emprendimiento que se dedica a todo tipo de amoblamientos en general.</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+        <a href="https://hogarex.ar/perfilprofesional/cesar-gustavo-carpintero-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1761600064248x635682261506296240/Captura-de-pantalla-2024-02-15-a-las-13.10.22.png" alt="Gustavo, Cerrajero en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">GU</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/gustavo-cerrajero-buenos-aires-caba" style="color:inherit;text-decoration:none">Gustavo</a></div>
+        <div class="prof-rub">Cerrajero</div>
+        <div class="prof-desc">Cerrajería gral, urgencias, control de accesos, cerraduras digitales, blindajes de puertas</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
+        </div>
+        <a href="https://hogarex.ar/perfilprofesional/gustavo-cerrajero-buenos-aires-caba" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1756929167066x928184913481015200/IMG_20250701_200739_694.webp" alt="Enzo, Plomero en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">EN</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/enzo-plomero-buenos-aires-caba" style="color:inherit;text-decoration:none">Enzo</a></div>
+        <div class="prof-rub">Plomero</div>
+        <div class="prof-desc">Plomero gasista reparación, nuevo servicio y más...</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
+        </div>
+        <a href="https://hogarex.ar/perfilprofesional/enzo-plomero-buenos-aires-caba" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1763554287611x841216497239728900/17635542691077436693719623032815.jpg" alt="Hugo, Mudanzas en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">HU</div>
           
         </div>
         <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/hugo-mudanzas-buenos-aires-caba" style="color:inherit;text-decoration:none">Hugo</a></div>
@@ -755,46 +646,81 @@ Reparación, colocación de bombas, sistemas, riegos. Etc no dudes en consultar 
       </div>
       <div class="prof-card">
         <div class="prof-top">
-          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1762813679605x563143268746334900/foto%20perfil%20adari%2091%25.jpg" alt="ADARI, Pintor en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">A</div>
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1762572687150x918736475131026600/inbound41300880721319377.jpg" alt="Emiliano, Jardinero en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">EM</div>
           
         </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/adari-pintor-buenos-aires-gba" style="color:inherit;text-decoration:none">ADARI</a></div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/emiliano-jardinero-buenos-aires-gba" style="color:inherit;text-decoration:none">Emiliano</a></div>
+        <div class="prof-rub">Jardinero</div>
+        <div class="prof-desc">Soy un joven jardinero padre de familia que necesita nuevos clientes para seguir creciendo de forma profesional, estoy en busca de clientes que necesiten un buen servicio completo y que busquen una persona responsable y confiable a la hora de trabajar. Tengo conocimiento en poda de altura , poda de cercos perimetrales poda de platas chicas y libustros, desmalezado de cesped con marcado de bordes formación de canteros y mantenimiento de los mismos, muchas gracias.</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
+        </div>
+        <a href="https://hogarex.ar/perfilprofesional/emiliano-jardinero-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1761682320770x245134753862866750/inbound5547685034120967961.jpg" alt="Ramiro, Pintor en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">RA</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/ramiro-pintor-buenos-aires-gba" style="color:inherit;text-decoration:none">Ramiro</a></div>
         <div class="prof-rub">Pintor</div>
-        <div class="prof-desc">🏭 *Somos ADARI, fabricantes de pinturas, membranas y revestimientos texturados Y MAS!!*  
-También hacemos mano de obra garantizada de pintura, impermeabilización, durlok, obra completa, piscinas. En *ADARI*, el *95% de las cotizaciones se concretan en obra 💪*
-Esto refleja la *confianza* que genera nuestra *calidad de materiales 🧱* y la *mano de obra especializada 👷‍♂️*
-
-Cada trabajo se entrega con *durabilidad, prolijidad y garantía comprobada ✅*
-Por eso, la mayoría de quienes nos consultan, *nos eligen y nos recomiendan 🔥*
-PRESUPUESTO S/CARGO. 
-WS 11-7831-0470</div>
+        <div class="prof-desc">Hola, nuestros servicios son, en especial, revestimientos acrílicos y de base cementicia y el maquillaje de hormigón visto. 
+Ofrecemos soluciones en todo lo que sea obra y final de obra.
+Su consulta no molesta y el presupuesto es sin cargo. 
+Trabajamos en CABA y GBA, y estamos ubicados en zona sur.</div>
         <div class="prof-meta">
           <span class="prof-popular">&uarr; Popular</span>
           <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
         </div>
-        <a href="https://hogarex.ar/perfilprofesional/adari-pintor-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
+        <a href="https://hogarex.ar/perfilprofesional/ramiro-pintor-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
       </div>
       <div class="prof-card">
         <div class="prof-top">
-          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1756920604473x197355007698360580/inbound7645386501447760670.jpg" alt="Nahuel, Herrero en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">N</div>
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1763511915268x679764399864180000/17635118800378232545395199222878.jpg" alt="Gilberto, Limpieza en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">GI</div>
           
         </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/nahuel-herrero-buenos-aires-gba" style="color:inherit;text-decoration:none">Nahuel</a></div>
-        <div class="prof-rub">Herrero</div>
-        <div class="prof-desc">Herrería, carpintería, plomería, electricidad, durlock, pintura y mantenimiento edilicio en general.
-Responsabilidad y garantía en todos los trabajos</div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/gilberto-limpieza-buenos-aires-caba" style="color:inherit;text-decoration:none">Gilberto</a></div>
+        <div class="prof-rub">Limpieza</div>
+        <div class="prof-desc">Me ofresco para trabajar en tares generales.  Limpieza de jardin. Pintura 
+Presupuesto sin cargo</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
+        </div>
+        <a href="https://hogarex.ar/perfilprofesional/gilberto-limpieza-buenos-aires-caba" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1762725279127x196301671984133950/inbound3952186976147888186.jpg" alt="Miguel, Mudanzas en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">MI</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/miguel-mudanzas-buenos-aires-gba" style="color:inherit;text-decoration:none">Miguel</a></div>
+        <div class="prof-rub">Mudanzas</div>
+        <div class="prof-desc">Transporte LyM logística y distribución</div>
         <div class="prof-meta">
           <span class="prof-popular">&uarr; Popular</span>
           <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
         </div>
-        <a href="https://hogarex.ar/perfilprofesional/nahuel-herrero-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
+        <a href="https://hogarex.ar/perfilprofesional/miguel-mudanzas-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
       </div>
       <div class="prof-card">
         <div class="prof-top">
-          <img src="https://lh3.googleusercontent.com/a/ACg8ocK9ip8_Kob_uryJbL761kDSfocqSX1YZ2BFqNQKLR7gF-x7Jg=s96-c" alt="Sebastian, Gasista en Córdoba Capital" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">S</div>
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1763480423635x647230797069731300/inbound1294728914977773640.png" alt="Marcos, Limpieza en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">MA</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/marcos-limpieza-buenos-aires-caba" style="color:inherit;text-decoration:none">Marcos</a></div>
+        <div class="prof-rub">Limpieza</div>
+        <div class="prof-desc">Visitá mi perfil de Hogarex -https://hogarex.ar/perfilprofesional/1763480233340x864172666474987500</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
+        </div>
+        <a href="https://hogarex.ar/perfilprofesional/marcos-limpieza-buenos-aires-caba" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://lh3.googleusercontent.com/a/ACg8ocK9ip8_Kob_uryJbL761kDSfocqSX1YZ2BFqNQKLR7gF-x7Jg=s96-c" alt="Sebastian, Gasista en Córdoba Capital" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">SE</div>
           
         </div>
         <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/sebastian-gasista-cordoba-capital" style="color:inherit;text-decoration:none">Sebastian</a></div>
@@ -808,18 +734,53 @@ Responsabilidad y garantía en todos los trabajos</div>
       </div>
       <div class="prof-card">
         <div class="prof-top">
-          <img src="None" alt="Martin, Mudanzas en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="prof-av" style="display:none">M</div>
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1759409852067x560029608908208200/1759409831971750501466254615377.jpg" alt="Franklin, Herrero en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">FR</div>
           
         </div>
-        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/martin-mudanzas-buenos-aires-gba" style="color:inherit;text-decoration:none">Martin</a></div>
-        <div class="prof-rub">Mudanzas</div>
-        <div class="prof-desc">Mensajería en moto, servicios de mantenimiento gral.</div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/franklin-herrero-buenos-aires-caba-1" style="color:inherit;text-decoration:none">Franklin</a></div>
+        <div class="prof-rub">Herrero</div>
+        <div class="prof-desc">Contamos con 14 años de experiencia de la mano de nuestra clientes nos  especializamos en fabricación y reparación 
+Fabricamos escaleras rectas, escaleras caracol,
+Portones levadizos portones corredizos 
+Puertas ventanas 
+Fabricamos y reparamos barandas para escaleras para balcón 
+Estructuras metálicas cerramientos con vidriería 
+Muebles a medidas
+Reparación de baranda socalos marcos de puertas y ventanas</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
+        </div>
+        <a href="https://hogarex.ar/perfilprofesional/franklin-herrero-buenos-aires-caba-1" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1762978445483x532117076467497400/1000024123.jpg" alt="Alejandro, Plomero en Buenos Aires (CABA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">AL</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/alejandro-plomero-buenos-aires-caba" style="color:inherit;text-decoration:none">Alejandro</a></div>
+        <div class="prof-rub">Plomero</div>
+        <div class="prof-desc">Soy un profesional en lo que tiene que ver con instalaciones del hogar : losa radiante plomería gasista matriculado y hago instalaciones eléctricas,también solucionando  cortocir uitos .
+Trabajando en casa hoteles edificios country</div>
+        <div class="prof-meta">
+          <span class="prof-popular">&uarr; Popular</span>
+          <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (CABA)</span>
+        </div>
+        <a href="https://hogarex.ar/perfilprofesional/alejandro-plomero-buenos-aires-caba" class="btn-pedir">Pedir presupuesto</a>
+      </div>
+      <div class="prof-card">
+        <div class="prof-top">
+          <img src="https://8eff0111f7f418bb4e1985ab0e8ac380.cdn.bubble.io/f1761094251307x246947119897249280/20250913_115130.jpg" alt="Javier, Herrero en Buenos Aires (GBA)" class="prof-av-img" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="prof-av" style="display:none">JA</div>
+          
+        </div>
+        <div class="prof-name"><a href="https://hogarex.ar/perfilprofesional/javier-herrero-buenos-aires-gba" style="color:inherit;text-decoration:none">Javier</a></div>
+        <div class="prof-rub">Herrero</div>
+        <div class="prof-desc">27051978jc</div>
         <div class="prof-meta">
           <span class="prof-popular">&uarr; Popular</span>
           <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Buenos Aires (GBA)</span>
         </div>
-        <a href="https://hogarex.ar/perfilprofesional/martin-mudanzas-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
+        <a href="https://hogarex.ar/perfilprofesional/javier-herrero-buenos-aires-gba" class="btn-pedir">Pedir presupuesto</a>
       </div>
 <!-- TRADER_CARDS_END -->
     </div>
@@ -972,12 +933,12 @@ Responsabilidad y garantía en todos los trabajos</div>
 
 <!-- FOOTER -->
 <footer>
-  <div class="container">
+  <div class="ft-wrap">
     <div class="ft-grid">
       <div class="ft-col">
         <h5>Empresa</h5>
         <a href="https://hogarex.ar">Contacto</a>
-        <a href="https://hogarex.ar">Inicio</a>
+        <a href="https://app.hogarex.ar">Inicio</a>
       </div>
       <div class="ft-col">
         <h5>Soporte</h5>
@@ -993,15 +954,15 @@ Responsabilidad y garantía en todos los trabajos</div>
     </div>
     <div class="ft-directory">
       <div class="ft-directory-grid">
-      <div class="ft-col"><h5>Electricistas</h5><a href="https://app.hogarex.ar/electricistas/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/electricistas/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/electricistas/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/electricistas/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/electricistas/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/electricistas/caba/almagro">Almagro</a></div>
-      <div class="ft-col"><h5>Plomeros</h5><a href="https://app.hogarex.ar/plomeros/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/plomeros/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/plomeros/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/plomeros/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/plomeros/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/plomeros/caba/almagro">Almagro</a></div>
-      <div class="ft-col"><h5>Gasistas</h5><a href="https://app.hogarex.ar/gasistas/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/gasistas/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/gasistas/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/gasistas/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/gasistas/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/gasistas/caba/almagro">Almagro</a></div>
-      <div class="ft-col"><h5>Pintores</h5><a href="https://app.hogarex.ar/pintores/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/pintores/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/pintores/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/pintores/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/pintores/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/pintores/caba/almagro">Almagro</a></div>
-      <div class="ft-col"><h5>Carpinteros</h5><a href="https://app.hogarex.ar/carpinteros/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/carpinteros/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/carpinteros/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/carpinteros/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/carpinteros/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/carpinteros/caba/almagro">Almagro</a></div>
-      <div class="ft-col"><h5>Instalaciones</h5><a href="https://app.hogarex.ar/instalaciones/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/instalaciones/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/instalaciones/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/instalaciones/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/instalaciones/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/instalaciones/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Electricistas</h5><a href="https://app.hogarex.ar/electricistas/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/electricistas/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/electricistas/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/electricistas/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/electricistas/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/electricistas/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Plomeros</h5><a href="https://app.hogarex.ar/plomeros/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/plomeros/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/plomeros/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/plomeros/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/plomeros/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/plomeros/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Gasistas</h5><a href="https://app.hogarex.ar/gasistas/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/gasistas/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/gasistas/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/gasistas/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/gasistas/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/gasistas/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Pintores</h5><a href="https://app.hogarex.ar/pintores/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/pintores/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/pintores/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/pintores/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/pintores/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/pintores/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Carpinteros</h5><a href="https://app.hogarex.ar/carpinteros/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/carpinteros/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/carpinteros/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/carpinteros/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/carpinteros/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/carpinteros/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Instalaciones</h5><a href="https://app.hogarex.ar/instalaciones/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/instalaciones/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/instalaciones/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/instalaciones/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/instalaciones/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/instalaciones/caba/almagro">Almagro</a></div>
       </div>
     </div>
-    <div class="ft-bot">©Hogarex2025</div>
+    <div class="ft-bot">&copy; 2026 <a href="https://hogarex.ar">Hogarex</a> &mdash; Conectamos profesionales del hogar con clientes en Argentina.</div>
   </div>
 </footer>
 
