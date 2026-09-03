@@ -84,7 +84,7 @@
     /* ── PROFESIONALES ── */
     .profesionales{padding:40px 0;background:var(--g1)}
     .prof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .prof-card{border:1px solid var(--g2);border-radius:var(--rl);padding:20px;background:#fff;transition:box-shadow .2s}
+    .prof-card{border:1px solid var(--g2);border-radius:var(--rl);padding:20px;background:#fff;transition:box-shadow .2s;display:flex;flex-direction:column}
     .prof-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.08)}
     .prof-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
     .prof-av{width:44px;height:44px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#fff;flex-shrink:0}
@@ -94,7 +94,7 @@
     .prof-name{font-size:15px;font-weight:700;color:#111827;margin-bottom:2px}
     .prof-rub{font-size:13px;font-weight:600;color:var(--blue);margin-bottom:8px}
     .prof-desc{font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-    .prof-meta{display:flex;align-items:center;justify-content:space-between;font-size:12px}
+    .prof-meta{display:flex;align-items:center;justify-content:space-between;font-size:12px;margin-top:auto}
     .prof-popular{color:var(--blue);font-weight:600}
     .prof-loc{color:var(--t3)}
     .btn-pedir{width:100%;border:1.5px solid var(--navy);color:var(--navy);font-weight:700;font-size:14px;padding:10px;border-radius:999px;background:transparent;cursor:pointer;transition:all .2s;text-align:center;display:block;text-decoration:none;margin-top:10px}
@@ -124,11 +124,12 @@
     /* ── RUBROS POPULARES ── */
     .trabajos{padding:40px 0;background:var(--g1)}
     .trabajos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .trab-card{background:#fff;border:1px solid var(--g2);border-radius:var(--rl);transition:box-shadow .2s}
+    .trab-card{background:#fff;border:1px solid var(--g2);border-radius:var(--rl);transition:box-shadow .2s;display:flex;flex-direction:column}
     .trab-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.08)}
-    .trab-body{padding:20px}
+    .trab-body{padding:20px;display:flex;flex-direction:column;flex:1}
     .trab-title{font-size:18px;font-weight:800;color:var(--navy);margin-bottom:6px}
     .trab-desc{font-size:13px;color:var(--t3);line-height:1.55;margin-bottom:16px}
+    .trab-body .btn-blue{margin-top:auto}
 
     /* ── SOS PROFESIONAL ── */
     .pro-section{padding:40px 0;background:#fff}
@@ -169,11 +170,11 @@
     /* ── REVIEWS ── */
     .reviews{padding:40px 0;background:var(--g1)}
     
-    .rev-card{border:1px solid var(--g2);border-radius:var(--rl);padding:20px;background:#fff;transition:box-shadow .2s}
+    .rev-card{border:1px solid var(--g2);border-radius:var(--rl);padding:20px;background:#fff;transition:box-shadow .2s;display:flex;flex-direction:column}
     .rev-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.06)}
     .rev-stars{color:var(--blue);font-size:15px;letter-spacing:2px;margin-bottom:10px}
     .rev-text{font-size:14px;color:var(--t2);line-height:1.65;margin-bottom:12px}
-    .rev-author{font-size:13px;font-weight:700;color:#111827}
+    .rev-author{font-size:13px;font-weight:700;color:#111827;margin-top:auto}
 
     /* ── CTA FINAL ── */
     .ctaf{padding:56px 0;text-align:center}
