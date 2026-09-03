@@ -458,6 +458,57 @@ HAMBURGER_TOGGLE_DARK = ('<button type="button" id="hgx-nm-toggle" class="hgx-nm
                           'aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel">'
                           '<span></span><span></span><span></span></button>')
 
+# Footer identico en todo el sitio (mismos links de "Empresa/Soporte/Legal"
+# y mismo directorio de barrios de CABA por rubro, para no fragmentar el link
+# equity y darle a Google/LLMs una arquitectura de sitio consistente).
+FOOTER_HTML = """<footer>
+  <div class="ft-wrap">
+    <div class="ft-grid">
+      <div class="ft-col">
+        <h5>Empresa</h5>
+        <a href="https://hogarex.ar">Contacto</a>
+        <a href="https://app.hogarex.ar">Inicio</a>
+      </div>
+      <div class="ft-col">
+        <h5>Soporte</h5>
+        <a href="https://hogarex.ar">Ayuda</a>
+        <a href="https://hogarex.ar">Preguntas Frecuentes</a>
+        <a href="https://hogarex.ar">Más información</a>
+      </div>
+      <div class="ft-col">
+        <h5>Legal</h5>
+        <a href="https://hogarex.ar">Términos y Condiciones</a>
+        <a href="https://hogarex.ar">Privacidad</a>
+      </div>
+    </div>
+    <div class="ft-directory">
+      <div class="ft-directory-grid">
+        <div class="ft-col"><h5>Electricistas</h5><a href="https://app.hogarex.ar/electricistas/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/electricistas/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/electricistas/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/electricistas/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/electricistas/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/electricistas/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Plomeros</h5><a href="https://app.hogarex.ar/plomeros/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/plomeros/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/plomeros/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/plomeros/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/plomeros/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/plomeros/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Gasistas</h5><a href="https://app.hogarex.ar/gasistas/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/gasistas/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/gasistas/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/gasistas/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/gasistas/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/gasistas/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Pintores</h5><a href="https://app.hogarex.ar/pintores/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/pintores/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/pintores/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/pintores/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/pintores/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/pintores/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Carpinteros</h5><a href="https://app.hogarex.ar/carpinteros/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/carpinteros/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/carpinteros/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/carpinteros/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/carpinteros/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/carpinteros/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Instalaciones</h5><a href="https://app.hogarex.ar/instalaciones/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/instalaciones/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/instalaciones/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/instalaciones/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/instalaciones/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/instalaciones/caba/almagro">Almagro</a></div>
+      </div>
+    </div>
+    <div class="ft-bot">&copy; 2026 <a href="https://hogarex.ar">Hogarex</a> &mdash; Conectamos profesionales del hogar con clientes en Argentina.</div>
+  </div>
+</footer>"""
+
+FOOTER_CSS = """footer{background:#fff;border-top:1px solid #eef1f6;padding:36px 16px 20px}
+    .ft-wrap{max-width:1100px;margin:0 auto}
+    .ft-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:20px}
+    .ft-col h5{font-size:13px;font-weight:700;color:#111827;margin:0 0 10px}
+    .ft-col a{display:block;font-size:13px;color:#6b7280;text-decoration:none;margin-bottom:6px}
+    .ft-col a:hover{color:#206ff7}
+    .ft-directory{margin-bottom:20px;padding-top:20px;border-top:1px solid #eef1f6}
+    .ft-directory-grid{display:flex;flex-wrap:wrap;gap:24px}
+    .ft-directory-grid .ft-col{min-width:120px}
+    .ft-bot{font-size:12px;color:#9ca3af}
+    .ft-bot a{color:#9ca3af;text-decoration:underline}
+    @media(max-width:640px){.ft-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:420px){.ft-grid{grid-template-columns:1fr}}"""
+
 
 # Template mobile-first: los estilos base (sin media query) son los de mobile;
 # @media (min-width:640px) agrega/ajusta para tablet+desktop. La barra de CTA
@@ -541,8 +592,7 @@ PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - 
     .cta-bar {{ position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; background: var(--white); border-top: 1px solid var(--gray-100); box-shadow: 0 -2px 14px rgba(13,42,94,0.10); padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); display: flex; align-items: center; justify-content: space-between; gap: 12px; }}
     .cta-bar p {{ font-family: 'Sora', sans-serif; font-weight: 600; font-size: 0.85rem; color: var(--navy); margin: 0; line-height: 1.3; }}
     .cta-bar .btn-yellow {{ flex-shrink: 0; }}
-    footer {{ background: var(--navy-dark); color: rgba(255,255,255,0.5); text-align: center; padding: 24px 16px; font-size: 0.8rem; margin-top: 20px; }}
-    footer a {{ color: var(--yellow); text-decoration: none; }}
+{footer_css}
 
     @media (min-width: 640px) {{
       body {{ padding-bottom: 0; }}
@@ -557,7 +607,6 @@ PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - 
       .cta-bar {{ display: none; }}
       .modal-cta {{ display: flex; margin: 24px auto 20px; max-width: 692px; padding: 20px 24px; background: var(--white); box-shadow: var(--shadow); border-radius: var(--radius); align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }}
       .modal-cta p {{ font-family: 'Sora', sans-serif; font-weight: 600; font-size: 0.95rem; color: var(--navy); margin: 0; }}
-      footer {{ padding: 28px 24px; font-size: 0.82rem; margin-top: 24px; }}
     }}
   </style>
 </head>
@@ -610,9 +659,7 @@ PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - 
   <a href="{cta_url}" class="btn-yellow">{cta_label_esc}</a>
 </div>
 
-<footer>
-  <p>&copy; 2026 <a href="https://hogarex.ar">Hogarex</a> &mdash; Conectamos profesionales del hogar con clientes en Argentina.</p>
-</footer>
+{footer_html}
 
 <div class="cta-bar">
   <p>&iquest;Necesit&aacute;s un {oficio_esc_lower} en {ubicacion_esc}?</p>
@@ -721,6 +768,8 @@ def render_page(trader, url):
         ver_mas_html=ver_mas_html,
         menu_css=HAMBURGER_MENU_CSS,
         menu_html=HAMBURGER_MENU_HTML,
+        footer_css=FOOTER_CSS,
+        footer_html=FOOTER_HTML,
     )
     return page_html
 
@@ -791,6 +840,25 @@ def generate_sitemap(urls):
                   "    <priority>0.75</priority>", "  </url>", ""]
     lines.append("</urlset>")
     with open(SITEMAP_PATH, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
+
+
+SITEMAP_INDEX_PATH = os.path.join(REPO_ROOT, "sitemap_index.xml")
+SITEMAP_MAIN_PATH = os.path.join(REPO_ROOT, "sitemap.xml")
+
+
+def generate_sitemap_index():
+    """sitemap_index.xml agrupa sitemap.xml (paginas fijas, hubs, barrios y
+    blog) y sitemap-profesionales.xml (682+ perfiles). Es el unico sitemap
+    que hace falta dar de alta en Search Console."""
+    today = date.today().isoformat()
+    lines = ['<?xml version="1.0" encoding="UTF-8"?>',
+              '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', ""]
+    for path in (SITEMAP_MAIN_PATH, SITEMAP_PATH):
+        lines += ["  <sitemap>", f"    <loc>{SITE_ORIGIN}/{os.path.basename(path)}</loc>",
+                   f"    <lastmod>{today}</lastmod>", "  </sitemap>", ""]
+    lines.append("</sitemapindex>")
+    with open(SITEMAP_INDEX_PATH, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
 
 
@@ -891,6 +959,8 @@ def update_hub_page(oficio, hub_path, traders):
 
     caba_traders = [t for t in traders if is_usable(t) and t.get("main_field") == oficio
                      and t.get("ubicacion") == CABA_UBICACION]
+    # perfiles verificados primero (siempre), el resto mantiene su orden.
+    caba_traders.sort(key=lambda t: t.get("verified") != "Si")
     cards_html = "".join(
         render_hub_card(t, i, target_for(t)[1]) for i, t in enumerate(caba_traders)
     )
@@ -1006,8 +1076,10 @@ def update_home_page(traders):
     ficticias originales.
 
     La muestra se arma repartiendo cupos parejos entre rubros (para que
-    ningun rubro domine el carrusel) y despues se reordena al azar sin
-    dejar dos tarjetas seguidas del mismo rubro."""
+    ningun rubro domine el carrusel) priorizando perfiles verificados
+    dentro de cada rubro, y despues se reordena al azar sin dejar dos
+    tarjetas seguidas del mismo rubro - pero siempre con los perfiles
+    verificados primero como bloque."""
     if not os.path.exists(HOME_PAGE_PATH):
         print("Aviso: index.html no encontrado, se omite actualizacion de tarjetas de home.")
         return
@@ -1027,10 +1099,10 @@ def update_home_page(traders):
     for t in usable:
         by_oficio.setdefault(t["main_field"], []).append(t)
     for g in by_oficio.values():
-        # con foto primero (mejor primera impresion) dentro de cada rubro,
-        # con orden aleatorio entre los que empatan.
+        # verificados primero, despues con foto primero (mejor primera
+        # impresion) dentro de cada rubro, con orden aleatorio entre empates.
         random.shuffle(g)
-        g.sort(key=lambda t: t.get("photo_url") is None)
+        g.sort(key=lambda t: (t.get("verified") != "Si", t.get("photo_url") is None))
 
     oficios = list(by_oficio.keys())
     random.shuffle(oficios)
@@ -1042,7 +1114,10 @@ def update_home_page(traders):
             pool.append(by_oficio[oficio].pop(0))
         i += 1
 
-    sample = _interleave_by_oficio(pool, lambda t: t["main_field"])
+    verified_pool = [t for t in pool if t.get("verified") == "Si"]
+    rest_pool = [t for t in pool if t.get("verified") != "Si"]
+    sample = (_interleave_by_oficio(verified_pool, lambda t: t["main_field"])
+              + _interleave_by_oficio(rest_pool, lambda t: t["main_field"]))
 
     cards_html = "".join(render_home_card(t, i) for i, t in enumerate(sample))
 
@@ -1144,8 +1219,7 @@ EXPLORE_PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pag
     .ex-cta span {{ display: inline-block; width: 100%; padding: 9px; border: 1.5px solid var(--navy); border-radius: 999px; color: var(--navy); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.82rem; text-align: center; transition: background .18s ease, color .18s ease; }}
     .ex-card:hover .ex-cta span {{ background: var(--navy); color: #fff; }}
     .ex-empty {{ text-align: center; color: var(--gray-500); font-size: 0.9rem; padding: 40px 16px; }}
-    footer {{ background: var(--navy-dark); color: rgba(255,255,255,0.5); text-align: center; padding: 24px 16px; font-size: 0.8rem; }}
-    footer a {{ color: var(--yellow); text-decoration: none; }}
+{footer_css}
 
     {menu_css}
 
@@ -1203,9 +1277,7 @@ EXPLORE_PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pag
 </div>
 <p class="ex-empty" id="exEmpty" style="display:none">Ningún profesional coincide con ese filtro. Probá con otra combinación.</p>
 
-<footer>
-  <p>&copy; 2026 <a href="https://hogarex.ar">Hogarex</a> &mdash; Conectamos profesionales del hogar con clientes en Argentina.</p>
-</footer>
+{footer_html}
 
 {menu_html}
 
@@ -1276,7 +1348,8 @@ def render_explore_card(trader):
 
 def generate_explore_page(traders):
     usable = [t for t in traders if is_usable(t)]
-    usable.sort(key=lambda t: (t["main_field"], get_display_name(t) or ""))
+    # perfiles verificados primero (siempre), despues agrupados por rubro y nombre.
+    usable.sort(key=lambda t: (t.get("verified") != "Si", t["main_field"], get_display_name(t) or ""))
 
     oficios = sorted({t["main_field"] for t in usable})
     ubicaciones = sorted({t["ubicacion"] for t in usable})
@@ -1297,6 +1370,8 @@ def generate_explore_page(traders):
         cards_html=cards_html,
         menu_css=HAMBURGER_MENU_CSS,
         menu_html=HAMBURGER_MENU_HTML,
+        footer_css=FOOTER_CSS,
+        footer_html=FOOTER_HTML,
     )
     with open(EXPLORE_PAGE_PATH, "w", encoding="utf-8") as f:
         f.write(page_html)
@@ -1320,8 +1395,10 @@ def main():
     update_hub_pages(traders)
     update_home_page(traders)
     explore_url = generate_explore_page(traders)
+    generate_sitemap_index()
     print(f"Paginas generadas: {len(urls)}")
     print(f"Sitemap escrito en: {SITEMAP_PATH}")
+    print(f"Sitemap index escrito en: {SITEMAP_INDEX_PATH}")
     return explore_url
 
 

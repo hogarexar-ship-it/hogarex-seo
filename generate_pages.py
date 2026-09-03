@@ -12,6 +12,7 @@ import os
 import re
 import html
 import unicodedata
+from datetime import date
 
 REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
 POSTS_PATH = os.path.join(REPO_ROOT, "blog", "posts.json")
@@ -19,6 +20,55 @@ BLOG_DIR = os.path.join(REPO_ROOT, "blog")
 SITEMAP_PATH = os.path.join(REPO_ROOT, "sitemap.xml")
 LOGO_PATH = os.path.join(REPO_ROOT, "blog", "assets", "logo-white.png")
 SITE_ORIGIN = "https://app.hogarex.ar"
+
+# Footer identico en todo el sitio (mismo bloque que usa generate_trader_pages.py).
+FOOTER_HTML = """<footer>
+  <div class="ft-wrap">
+    <div class="ft-grid">
+      <div class="ft-col">
+        <h5>Empresa</h5>
+        <a href="https://hogarex.ar">Contacto</a>
+        <a href="https://app.hogarex.ar">Inicio</a>
+      </div>
+      <div class="ft-col">
+        <h5>Soporte</h5>
+        <a href="https://hogarex.ar">Ayuda</a>
+        <a href="https://hogarex.ar">Preguntas Frecuentes</a>
+        <a href="https://hogarex.ar">Más información</a>
+      </div>
+      <div class="ft-col">
+        <h5>Legal</h5>
+        <a href="https://hogarex.ar">Términos y Condiciones</a>
+        <a href="https://hogarex.ar">Privacidad</a>
+      </div>
+    </div>
+    <div class="ft-directory">
+      <div class="ft-directory-grid">
+        <div class="ft-col"><h5>Electricistas</h5><a href="https://app.hogarex.ar/electricistas/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/electricistas/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/electricistas/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/electricistas/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/electricistas/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/electricistas/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Plomeros</h5><a href="https://app.hogarex.ar/plomeros/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/plomeros/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/plomeros/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/plomeros/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/plomeros/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/plomeros/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Gasistas</h5><a href="https://app.hogarex.ar/gasistas/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/gasistas/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/gasistas/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/gasistas/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/gasistas/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/gasistas/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Pintores</h5><a href="https://app.hogarex.ar/pintores/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/pintores/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/pintores/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/pintores/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/pintores/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/pintores/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Carpinteros</h5><a href="https://app.hogarex.ar/carpinteros/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/carpinteros/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/carpinteros/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/carpinteros/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/carpinteros/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/carpinteros/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Instalaciones</h5><a href="https://app.hogarex.ar/instalaciones/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/instalaciones/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/instalaciones/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/instalaciones/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/instalaciones/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/instalaciones/caba/almagro">Almagro</a></div>
+      </div>
+    </div>
+    <div class="ft-bot">&copy; 2026 <a href="https://hogarex.ar">Hogarex</a> &mdash; Conectamos profesionales del hogar con clientes en Argentina.</div>
+  </div>
+</footer>"""
+
+FOOTER_CSS = """footer{background:#fff;border-top:1px solid #eef1f6;padding:36px 16px 20px}
+    .ft-wrap{max-width:1100px;margin:0 auto}
+    .ft-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:20px}
+    .ft-col h5{font-size:13px;font-weight:700;color:#111827;margin:0 0 10px}
+    .ft-col a{display:block;font-size:13px;color:#6b7280;text-decoration:none;margin-bottom:6px}
+    .ft-col a:hover{color:#206ff7}
+    .ft-directory{margin-bottom:20px;padding-top:20px;border-top:1px solid #eef1f6}
+    .ft-directory-grid{display:flex;flex-wrap:wrap;gap:24px}
+    .ft-directory-grid .ft-col{min-width:120px}
+    .ft-bot{font-size:12px;color:#9ca3af}
+    .ft-bot a{color:#9ca3af;text-decoration:underline}
+    @media(max-width:640px){.ft-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:420px){.ft-grid{grid-template-columns:1fr}}"""
 
 
 def load_logo_data_uri():
@@ -33,6 +83,9 @@ MESES = {
 }
 
 STATIC_PAGES = [
+    ("/", "daily", "1.0"),
+    ("/profesionales", "weekly", "0.9"),
+    ("/precios-mano-de-obra", "monthly", "0.8"),
     ("/electricistas", "monthly", "1.0"),
     ("/plomeros", "monthly", "1.0"),
     ("/gasistas", "monthly", "1.0"),
@@ -312,8 +365,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     .back-link {{ max-width: 740px; margin: 8px auto 48px; padding: 0 24px; }}
     .back-link a {{ color: var(--navy); text-decoration: none; font-weight: 600; font-size: 0.9rem; }}
     .back-link a:hover {{ color: var(--yellow-hover); }}
-    footer {{ background: var(--navy-dark); color: rgba(255,255,255,0.5); text-align: center; padding: 28px 24px; font-size: 0.82rem; }}
-    footer a {{ color: var(--yellow); text-decoration: none; }}
+{footer_css}
     @media (max-width: 600px) {{
       nav a {{ display: none; }}
     }}
@@ -395,9 +447,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 
 <p class="back-link"><a href="/blog/">← Volver al blog</a></p>
 
-<footer>
-  <p>© 2026 <a href="https://hogarex.ar">Hogarex</a> — Conectamos profesionales del hogar con clientes en Argentina.</p>
-</footer>
+{footer_html}
 
 </body>
 </html>
@@ -418,6 +468,8 @@ def render_page(post, logo_data_uri):
         content=post["content"],
         logo_data_uri=logo_data_uri,
         image_credit_html=build_image_credit_html(post),
+        footer_css=FOOTER_CSS,
+        footer_html=FOOTER_HTML,
     )
 
 
@@ -436,12 +488,13 @@ def generate_pages(posts):
 
 
 def generate_sitemap(posts):
+    today = date.today().isoformat()
     lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', ""]
 
     for path, freq, prio in STATIC_PAGES:
         lines.append("  <url>")
         lines.append(f"    <loc>{SITE_ORIGIN}{path}</loc>")
-        lines.append("    <lastmod>2026-08-24</lastmod>")
+        lines.append(f"    <lastmod>{today}</lastmod>")
         lines.append(f"    <changefreq>{freq}</changefreq>")
         lines.append(f"    <priority>{prio}</priority>")
         lines.append("  </url>")
