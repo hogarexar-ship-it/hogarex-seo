@@ -88,7 +88,7 @@ OFICIO_HUB = {
 # Rubros sin hub propio todavia (ej. Albañil, Herrero, Cerrajero): la
 # breadcrumb y el link "ver mas" de esas paginas apuntan aca en vez de a un
 # hub inexistente.
-FALLBACK_HUB_URL = "https://hogarex.ar/busqueda"
+FALLBACK_HUB_URL = "https://app.hogarex.ar/profesionales"
 
 # Icono decorativo por rubro, usado en la tarjeta de /profesionales para dar
 # identidad visual rapida sin depender de un set de SVGs por oficio.
@@ -559,7 +559,7 @@ PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - 
     .breadcrumb {{ max-width: 680px; margin: 0 auto; padding: 16px 16px 0; }}
     .breadcrumb a {{ color: var(--gray-500); text-decoration: none; font-size: 0.82rem; font-weight: 500; }}
     .profile-hero {{ max-width: 680px; margin: 0 auto 4px; padding: 0 16px 22px; text-align: center; position: relative; }}
-    .hero-banner {{ height: 56px; background: var(--navy); margin: 0 -16px; border-radius: 0 0 18px 18px; }}
+    .hero-banner {{ height: 56px; background: var(--navy); margin: 0 -16px; }}
     .hero-avatar-wrap {{ margin-top: -44px; margin-bottom: 12px; }}
     .profile-hero h1 {{ font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--navy); line-height: 1.3; margin-bottom: 4px; }}
     .hero-subtitle {{ font-size: 0.95rem; font-weight: 600; color: #206ff7; margin-bottom: 14px; }}
@@ -631,7 +631,8 @@ PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - 
 
 {menu_html}
 
-<div class="breadcrumb"><a href="{busqueda_url}">&larr; Volver a {oficio_esc_lower}</a></div>
+<div class="breadcrumb"><a href="{oficio_hub_url}" id="hgx-back">&larr; Volver a {oficio_esc_lower}</a></div>
+<script>(function(){{var b=document.getElementById('hgx-back');if(document.referrer&&document.referrer.indexOf(location.hostname)!==-1&&history.length>1){{b.addEventListener('click',function(e){{e.preventDefault();history.back();}});}}}})();</script>
 
 <div class="profile-hero">
   <div class="hero-banner"></div>
@@ -685,7 +686,6 @@ def render_page(trader, url):
     verified = trader.get("verified") == "Si"
     rating = get_rating(trader)
     oficio_hub_url = oficio_hub_url_for(oficio)
-    busqueda_url = f"https://hogarex.ar/busqueda?rubro={quote(oficio)}&ubicacion={quote(ubicacion)}"
     photo_url = trader.get("photo_url")
     photo_alt = html.escape(f"{name}, {oficio} en {ubicacion}")
 
@@ -763,7 +763,6 @@ def render_page(trader, url):
         oficio_esc=html.escape(oficio),
         oficio_esc_lower=html.escape(oficio.lower()),
         oficio_hub_url=oficio_hub_url,
-        busqueda_url=busqueda_url,
         name_esc=html.escape(name),
         avatar_html=avatar_html,
         og_image_html=og_image_html,
