@@ -54,6 +54,9 @@
     .hgx-nm-links{display:flex;flex-direction:column;align-items:stretch;padding:10px 8px;overflow-y:auto;flex:1}
     .hgx-nm-links a{display:block;padding:13px 12px;color:#1a1a2e;text-decoration:none;font-weight:600;font-size:15px;border-radius:8px}
     .hgx-nm-links a:hover,.hgx-nm-links a:active{background:#f0f2f5}
+    .hgx-nm-label{display:block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9aa5b8;padding:16px 12px 6px}
+    .hgx-nm-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:0 4px}
+    .hgx-nm-grid a{padding:11px 8px;font-size:13px;line-height:1.25}
     .hgx-nm-actions{display:flex;flex-direction:column;gap:8px;padding:14px 16px 20px;border-top:1px solid #eef1f6}
     .hgx-nm-btn{display:block;text-align:center;padding:12px;border-radius:999px;font-weight:700;font-size:14px;text-decoration:none}
     .hgx-nm-btn-outline{border:1.5px solid #003366;color:#003366;background:#fff}
@@ -154,17 +157,22 @@
   </div>
   <nav class="hgx-nm-links" aria-label="Menú principal">
     <a href="https://hogarex.ar">Inicio</a>
-    <a href="https://app.hogarex.ar/electricistas">Electricistas</a>
-    <a href="https://app.hogarex.ar/gasistas">Gasistas</a>
-    <a href="https://app.hogarex.ar/plomeros">Plomeros</a>
-    <a href="https://app.hogarex.ar/pintores">Pintores</a>
-    <a href="https://app.hogarex.ar/carpinteros">Carpinteros</a>
-    <a href="https://app.hogarex.ar/instalaciones">Instalaciones</a>
+    <span class="hgx-nm-label">Rubros</span>
+    <div class="hgx-nm-grid">
+      <a href="https://app.hogarex.ar/electricistas">&#9889; Electricistas</a>
+      <a href="https://app.hogarex.ar/gasistas">&#128293; Gasistas</a>
+      <a href="https://app.hogarex.ar/plomeros">&#128167; Plomeros</a>
+      <a href="https://app.hogarex.ar/pintores">&#127912; Pintores</a>
+      <a href="https://app.hogarex.ar/carpinteros">&#129700; Carpinteros</a>
+      <a href="https://app.hogarex.ar/instalaciones">&#128295; Instalaciones</a>
+    </div>
+    <span class="hgx-nm-label">Explorar</span>
     <a href="https://app.hogarex.ar/profesionales">Explorar profesionales</a>
     <a href="https://app.hogarex.ar/precios-mano-de-obra">Precios de mano de obra</a>
+    <span class="hgx-nm-label">Recursos</span>
+    <a href="https://app.hogarex.ar/blog">Blog</a>
     <a href="https://app.hogarex.ar/preguntas-frecuentes">Preguntas Frecuentes</a>
     <a href="https://app.hogarex.ar/glosario">Glosario</a>
-    <a href="https://app.hogarex.ar/blog">Blog</a>
   </nav>
   <div class="hgx-nm-actions">
     <a href="https://hogarex.ar/busqueda" class="hgx-nm-btn hgx-nm-btn-outline">Buscar profesional</a>
