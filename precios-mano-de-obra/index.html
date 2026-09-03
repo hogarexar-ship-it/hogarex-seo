@@ -265,6 +265,9 @@
       margin-bottom: 16px;
     }
     #hgx-cuanto-cobrar .hgx-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       border: 1.5px solid var(--blue-light);
       background: #fff;
       color: var(--blue-light);
@@ -276,6 +279,9 @@
       transition: background .15s ease, color .15s ease, transform .1s ease;
       white-space: nowrap;
     }
+    #hgx-cuanto-cobrar .hgx-tico { width: 14px; height: 14px; flex-shrink: 0; }
+    #hgx-cuanto-cobrar .hgx-cat h3 { display: flex; align-items: center; gap: 7px; }
+    #hgx-cuanto-cobrar .hgx-cat h3 .hgx-tico { width: 15px; height: 15px; color: var(--blue-light); }
     #hgx-cuanto-cobrar .hgx-tab:active { transform: scale(0.97); }
     #hgx-cuanto-cobrar .hgx-tab.active {
       background: var(--blue-light);
@@ -438,10 +444,10 @@
   (function () {
     var DATA = {
       electricista: {
-        label: "⚡ Electricistas",
+        label: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'/></svg>Electricistas",
         fuente: "Fuente: AAIERIC (cámara oficial) · Julio 2026 (+1,90% vs. mes anterior) · CABA y GBA · Solo mano de obra, sin materiales.",
         categorias: [
-          { titulo: "🔧 Tarifas base", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='9'/><path d='M12 6v12'/><path d='M15 9.5c0-1.4-1.3-2.5-3-2.5s-3 1-3 2.2c0 1.1.8 1.7 2 2l2 .6c1.2.3 2 1 2 2.1 0 1.3-1.3 2.3-3 2.3s-3-1-3-2.3'/></svg>Tarifas base", items: [
             ["Visita / Diagnóstico / Presupuesto", "$54.310"],
             ["Hora de trabajo (mínimo y promedio)", "$54.310"],
             ["Boca completa", "$108.431"],
@@ -449,12 +455,12 @@
             ["Urgencia (Lun-Sáb desde 20hs / Dom y feriado)", "$130.203"],
             ["Atención inmediata (Lun-Sáb 8-20hs)", "$108.431"]
           ]},
-          { titulo: "🔌 Conexión de puntos y tomas", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg>Conexión de puntos y tomas", items: [
             ["Punto / toma simple / portalámpara", "$19.363"],
             ["Punto combinación", "$20.842"],
             ["Toma doble", "$24.525"]
           ]},
-          { titulo: "💡 Artefactos de iluminación", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M9 18h6'/><path d='M10 22h4'/><path d='M12 2a7 7 0 0 0-4 12.7c.7.6 1 1.4 1 2.3v1h6v-1c0-.9.3-1.7 1-2.3A7 7 0 0 0 12 2Z'/></svg>Artefactos de iluminación", items: [
             ["Aplique simple / Spot LED", "$29.715"],
             ["Colgante liviano 3 luces (1 efecto)", "$59.431"],
             ["Colgante liviano 5 luces (1 efecto)", "$78.730"],
@@ -467,7 +473,7 @@
             ["Ventilador de techo", "$108.431"],
             ["Ventilador de techo con luminaria", "$135.580"]
           ]},
-          { titulo: "🧱 Canalización y cableado", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg>Canalización y cableado", items: [
             ["Losa con caño metálico (x boca)", "$54.894"],
             ["Loseta con caño metálico (x boca)", "$57.637"],
             ["Mampostería ladrillo hueco (x boca)", "$60.900"],
@@ -483,7 +489,7 @@
             ["Recableado con artefactos (x boca)", "$55.707"],
             ["Recableado sin artefactos (x boca)", "$37.149"]
           ]},
-          { titulo: "🗂️ Tableros", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg>Tableros", items: [
             ["TP Monofásico (1 ID + 1 TM + PAT)", "$320.310"],
             ["TP Trifásico (1 ID + 1 TM + PAT)", "$433.760"],
             ["Solo PAT", "$162.585"],
@@ -495,7 +501,7 @@
             ["Tablero seccional 8–36 polos", "$910.719"],
             ["Tablero seccional 36–54 polos", "$1.366.016"]
           ]},
-          { titulo: "🏗️ Acometida y medidores", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg>Acometida y medidores", items: [
             ["Gabinete 1 medidor monofásico", "$227.652"],
             ["Gabinete 2 medidores monofásicos", "$325.340"],
             ["Gabinete 3 medidores monofásicos", "$758.988"],
@@ -504,13 +510,13 @@
             ["Pilar completo (Gabinete + TP + Caño + PAT)", "$894.456"],
             ["Caño de acometida (amurado + conexión)", "$227.652"]
           ]},
-          { titulo: "👷 Jornales (8 hs de labor)", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='7' width='20' height='14' rx='2'/><path d='M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16'/></svg>Jornales (8 hs de labor)", items: [
             ["Oficial Especializado", "$49.514"],
             ["Oficial Electricista", "$42.354"],
             ["Medio Oficial Electricista", "$39.140"],
             ["Ayudante", "$36.027"]
           ]},
-          { titulo: "📜 Certificados DCI (ref. CTPBA)", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><path d='M14 2v6h6'/><path d='M16 13H8'/><path d='M16 17H8'/><path d='M10 9H8'/></svg>Certificados DCI (ref. CTPBA)", items: [
             ["T1 Residencial / Comercial Monofásico", "$405.097"],
             ["T1 Residencial Trifásico", "$597.892"],
             ["T1 Comercial Trifásico", "$597.892"],
@@ -518,7 +524,7 @@
             ["Protocolo puesta a tierra Resid./Com.", "$636.071"],
             ["Protocolo puesta a tierra Industrial", "$636.071"]
           ]},
-          { titulo: "📐 Documentación", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><path d='M14 2v6h6'/><path d='M16 13H8'/><path d='M16 17H8'/><path d='M10 9H8'/></svg>Documentación", items: [
             ["Proyecto eléctrico por m² (mín. 30m²)", "$15.900/m² · Mín. $552.176"],
             ["Plano eléctrico por m² (mín. 30m²)", "$14.680/m² · Mín. $658.849"]
           ]}
@@ -526,10 +532,10 @@
       },
 
       plomero: {
-        label: "🔧 Plomeros",
+        label: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22c3.87 0 7-3.13 7-7 0-4-3-7-7-13-4 6-7 9-7 13 0 3.87 3.13 7 7 7Z'/></svg>Plomeros",
         fuente: "Fuente: CAGP (Círculo Argentino de Gasistas y Plomeros) · Agosto 2026 · Buenos Aires Capital y AMBA · Precios mínimos, sin movilidad, sin ayudante/s, sin viáticos.",
         categorias: [
-          { titulo: "💧 Agua y cloaca – instalaciones", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22c3.87 0 7-3.13 7-7 0-4-3-7-7-13-4 6-7 9-7 13 0 3.87 3.13 7 7 7Z'/></svg>Agua y cloaca – instalaciones", items: [
             ["Agua fría y caliente cañería fusión para 4 artefactos de baño", "$603.356,40"],
             ["Agua fría y caliente cañería fusión para bacha de cocina", "$201.115,59"],
             ["Agua fría y caliente cañería fusión para pileta y lavarropas", "$201.115,59"],
@@ -554,14 +560,14 @@
             ["Cámara inspección plástica (pluvial) sobre mortero de asiento", "$100.562,57"],
             ["Prueba hidráulica en desagües (tapón neumático)", "$160.890,57"]
           ]},
-          { titulo: "🔓 Desobstrucciones y limpieza", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22c3.87 0 7-3.13 7-7 0-4-3-7-7-13-4 6-7 9-7 13 0 3.87 3.13 7 7 7Z'/></svg>Desobstrucciones y limpieza", items: [
             ["Desobstrucción desagües horizontales x ml", "$90.511,16"],
             ["Desobstrucción desagües verticales x ml", "$80.440,51"],
             ["Limpieza de tanque de reserva hasta 1000 lts en planta baja", "$120.675,08"],
             ["Limpieza de tanque de reserva hasta 1000 lts en planta alta", "$201.115,59"],
             ["Limpieza de tanque de reserva de edificio", "$321.790,76"]
           ]},
-          { titulo: "🛢️ Tanques y cisternas", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22c3.87 0 7-3.13 7-7 0-4-3-7-7-13-4 6-7 9-7 13 0 3.87 3.13 7 7 7Z'/></svg>Tanques y cisternas", items: [
             ["Colocación de tanque de reserva en planta baja", "$241.340,62"],
             ["Colocación de tanque de reserva en planta alta", "$479.554,60"],
             ["Recambio tanque fibrocemento x plástico en planta baja", "$335.688,22"],
@@ -569,7 +575,7 @@
             ["Cisterna con bomba elevadora (sin automatización)", "$402.231,19"],
             ["Cisterna con bomba elevadora (con automatización)", "$643.581,43"]
           ]},
-          { titulo: "🔧 Reparaciones y cambios", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg>Reparaciones y cambios", items: [
             ["Recambio de llave de paso embutida (sin albañilería)", "$182.065,42"],
             ["Instalación de artefacto sanitario con grifería o mochila", "$118.349,21"],
             ["Instalación de bacha de cocina (grifería y desagüe)", "$103.372,70"],
@@ -587,7 +593,7 @@
             ["Cambio de termotanque sin modificar ventilación", "$125.573,44"],
             ["Cambio de termotanque con modificación en la ventilación", "$182.851,43"]
           ]},
-          { titulo: "♨️ Calefacción", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z'/></svg>Calefacción", items: [
             ["Cálculo y balance térmico para radiadores (hasta 80 m2)", "$181.003,08"],
             ["Cálculo y balance térmico para piso radiante", "$201.115,59"],
             ["Desarrollo cañería bi-tubo por par de boca sistema pex", "$160.890,57"],
@@ -632,7 +638,7 @@
             ["Automatización por termostato", "$136.960,78"],
             ["Montaje de radiador", "$63.003,87"]
           ]},
-          { titulo: "👷 Jornales", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='7' width='20' height='14' rx='2'/><path d='M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16'/></svg>Jornales", items: [
             ["Oficial sanitarista", "$106.805,34"],
             ["Ayudante sanitarista", "$77.337,29"]
           ]}
@@ -640,10 +646,10 @@
       },
 
       gasista: {
-        label: "🔥 Gasistas",
+        label: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z'/></svg>Gasistas",
         fuente: "Fuente: CAGP (Círculo Argentino de Gasistas y Plomeros) · Agosto 2026 · Buenos Aires Capital y AMBA · Precios mínimos, sin movilidad, sin ayudante/s, sin viáticos.",
         categorias: [
-          { titulo: "🔩 Instalación de gas", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z'/></svg>Instalación de gas", items: [
             ["Cañería epoxi por mt zanjeado", "$60.328,00"],
             ["Cañería epoxi por mt canalizado", "$60.328,00"],
             ["Cañería epoxi por mt aéreo y engrampado", "$40.225,03"],
@@ -653,19 +659,19 @@
             ["Cañería fusión por mt aéreo y engrampado", "$40.225,03"],
             ["Cañería fusión por boca", "$321.790,76"]
           ]},
-          { titulo: "🛖 Calefactores y estufas", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z'/></svg>Calefactores y estufas", items: [
             ["Instalación de leño", "$91.809,10"],
             ["Instalación de pantalla IR", "$91.809,10"],
             ["Instalación de calefactor sin salida", "$102.836,28"],
             ["Instalación de calefactor TBH", "$147.959,68"],
             ["Instalación de calefactor TBU (hasta 6 mts)", "$201.115,59"]
           ]},
-          { titulo: "🚿 Calentadores de agua", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22c3.87 0 7-3.13 7-7 0-4-3-7-7-13-4 6-7 9-7 13 0 3.87 3.13 7 7 7Z'/></svg>Calentadores de agua", items: [
             ["Calentador instantáneo (calefón) tiro natural", "$147.959,68"],
             ["Calentador instantáneo (calefón) tiro balanceado", "$205.663,03"],
             ["Calentador por acumulación (termotanque)", "$148.745,68"]
           ]},
-          { titulo: "🍳 Cocción", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z'/></svg>Cocción", items: [
             ["Cocina doméstica", "$136.837,82"],
             ["Cocina industrial", "$171.122,29"],
             ["Anafe", "$91.023,17"],
@@ -673,14 +679,14 @@
             ["Caldera", "$281.565,65"],
             ["Colocación de par de rejas de ventilación", "$79.654,59"]
           ]},
-          { titulo: "🧹 Limpieza de artefactos", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg>Limpieza de artefactos", items: [
             ["Calefactor sin salida", "$91.023,17"],
             ["Calefactor TBH", "$91.809,10"],
             ["Calefactor TBU", "$102.836,28"],
             ["Calefón", "$120.675,08"],
             ["Termotanque", "$108.861,97"]
           ]},
-          { titulo: "🔄 Cambios y reparaciones", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg>Cambios y reparaciones", items: [
             ["Termocupla de calentador de agua", "$97.232,57"],
             ["Termocupla de cocina", "$97.766,81"],
             ["Termocupla de calefactor sin salida", "$101.506,53"],
@@ -690,7 +696,7 @@
             ["Armado de planta reguladora", "$402.231,19"],
             ["Colocación de medidor con regulador", "$97.493,39"]
           ]},
-          { titulo: "📋 Pruebas y trámites", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/><path d='M14 2v6h6'/><path d='M16 13H8'/><path d='M16 17H8'/><path d='M10 9H8'/></svg>Pruebas y trámites", items: [
             ["Prueba manométrica hasta 3 artefactos", "$120.675,08"],
             ["Prueba manométrica hasta 6 artefactos", "$181.003,08"],
             ["Detección de fuga de gas", "$120.675,08"],
@@ -702,7 +708,7 @@
             ["Plano completo en Autocad", "$133.989,69"],
             ["Informe de conformidad para inmobiliarias", "$140.787,68"]
           ]},
-          { titulo: "👷 Jornales", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='7' width='20' height='14' rx='2'/><path d='M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16'/></svg>Jornales", items: [
             ["Oficial gasista", "$112.061,73"],
             ["Ayudante gasista", "$77.337,29"]
           ]}
@@ -710,10 +716,10 @@
       },
 
       pintor: {
-        label: "🎨 Pintores",
+        label: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3Z'/><path d='M9 8c-2 3-4 3.5-7 4l8 8c2.5-2.5 3-4.5 4-7'/></svg>Pintores",
         fuente: "No existe cámara gremial que publique lista oficial para pintura. Valores de mercado relevados sobre presupuestos reales en CABA, GBA, Córdoba, Rosario y La Plata · Agosto 2026 · Rangos mín-máx, solo mano de obra.",
         categorias: [
-          { titulo: "📐 Por metro cuadrado (m²)", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3Z'/><path d='M9 8c-2 3-4 3.5-7 4l8 8c2.5-2.5 3-4.5 4-7'/></svg>Por metro cuadrado (m²)", items: [
             ["Pintura interior lisa (por m²)", "$5.500 – $18.000"],
             ["Pintura de cielorraso (por m²)", "$5.000 – $13.000"],
             ["Enduido plástico + pintura (por m²)", "$7.500 – $17.000"],
@@ -730,7 +736,7 @@
             ["Remoción de papel tapiz (por m²)", "$10.000 – $14.000"],
             ["Reparación de paredes (sellado, grietas) (por m²)", "$6.500 – $15.000"]
           ]},
-          { titulo: "🏠 Por ambiente", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3Z'/><path d='M9 8c-2 3-4 3.5-7 4l8 8c2.5-2.5 3-4.5 4-7'/></svg>Por ambiente", items: [
             ["Pintura monoambiente (solo mano de obra)", "$65.000 – $140.000"],
             ["Pintura 2 ambientes + baño", "$105.000 – $230.000"],
             ["Colocación de papel tapiz (por m²)", "$7.800 – $10.000"],
@@ -740,22 +746,22 @@
       },
 
       carpintero: {
-        label: "🪵 Carpinteros",
+        label: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='m15 12-8.5 8.5a2.12 2.12 0 1 1-3-3L12 9'/><path d='M17.64 15 22 10.64'/><path d='m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91'/></svg>Carpinteros",
         fuente: "No hay cámara gremial con lista de precios pública para este rubro. Valores de mercado relevados sobre presupuestos reales en CABA, GBA, Córdoba, Rosario y La Plata · Agosto 2026 · Rangos mín-máx, solo mano de obra (salvo aclaración).",
         categorias: [
-          { titulo: "🪵 Pisos de madera (por m²)", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='m15 12-8.5 8.5a2.12 2.12 0 1 1-3-3L12 9'/><path d='M17.64 15 22 10.64'/><path d='m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91'/></svg>Pisos de madera (por m²)", items: [
             ["Lijado y barnizado (1 mano)", "$3.400 – $8.700"],
             ["Lijado y barnizado (3 manos / completo)", "$13.600 – $24.500"],
             ["Lijado y plastificado (base al agua)", "$13.600 – $24.000"],
             ["Colocación de parquet", "$4.700 – $7.200"],
             ["Colocación de piso flotante", "$5.300 – $8.200"]
           ]},
-          { titulo: "🚪 Puertas y aberturas", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='m15 12-8.5 8.5a2.12 2.12 0 1 1-3-3L12 9'/><path d='M17.64 15 22 10.64'/><path d='m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91'/></svg>Puertas y aberturas", items: [
             ["Ajuste de puerta que no cierra bien", "$19.000 – $30.000"],
             ["Colocación de puerta placa (sin material)", "$40.000 – $92.000"],
             ["Cambio de cerradura (sin cerradura)", "$15.000 – $36.000"]
           ]},
-          { titulo: "🛠️ Muebles y construcciones", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='m15 12-8.5 8.5a2.12 2.12 0 1 1-3-3L12 9'/><path d='M17.64 15 22 10.64'/><path d='m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91'/></svg>Muebles y construcciones", items: [
             ["Mueble de cocina a medida en melamina, por metro lineal (material incluido)", "$185.000 – $460.000"],
             ["Reparación de mueble o cajón", "$10.000 – $32.000"],
             ["Construcción de deck de madera, por m² (varía mucho según madera)", "$21.500 – $655.000"]
@@ -764,10 +770,10 @@
       },
 
       albanil: {
-        label: "🧱 Albañiles",
+        label: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='16' rx='1'/><line x1='3' y1='10' x2='21' y2='10'/><line x1='3' y1='16' x2='21' y2='16'/><line x1='9' y1='4' x2='9' y2='10'/><line x1='15' y1='10' x2='15' y2='16'/><line x1='9' y1='16' x2='9' y2='20'/></svg>Albañiles",
         fuente: "No hay cámara gremial con lista de precios pública para este rubro. Valores de mercado relevados sobre presupuestos reales en CABA, GBA, Córdoba, Rosario y La Plata · Agosto 2026 · Rangos mín-máx, solo mano de obra (salvo aclaración).",
         categorias: [
-          { titulo: "🧱 Pisos y revestimientos (por m²)", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='16' rx='1'/><line x1='3' y1='10' x2='21' y2='10'/><line x1='3' y1='16' x2='21' y2='16'/><line x1='9' y1='4' x2='9' y2='10'/><line x1='15' y1='10' x2='15' y2='16'/><line x1='9' y1='16' x2='9' y2='20'/></svg>Pisos y revestimientos (por m²)", items: [
             ["Colocación de cerámica", "$9.000 – $16.500"],
             ["Colocación de porcellanato", "$21.000 – $28.000"],
             ["Colocación de baldosas", "$15.500 – $22.000"],
@@ -775,7 +781,7 @@
             ["Microcemento alisado", "$10.500 – $21.000"],
             ["Carpeta y contrapiso", "$9.700 – $19.000"]
           ]},
-          { titulo: "🧱 Paredes y revoques", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='16' rx='1'/><line x1='3' y1='10' x2='21' y2='10'/><line x1='3' y1='16' x2='21' y2='16'/><line x1='9' y1='4' x2='9' y2='10'/><line x1='15' y1='10' x2='15' y2='16'/><line x1='9' y1='16' x2='9' y2='20'/></svg>Paredes y revoques", items: [
             ["Revoque completo (por m²)", "$10.000 – $20.000"],
             ["Revoque Tarquini / fino (por m²)", "$7.400 – $40.000"],
             ["Pared de ladrillo hueco (por metro lineal)", "$8.500 – $12.000"],
@@ -785,11 +791,11 @@
             ["Encadenado (por metro lineal)", "$14.000 – $21.000"],
             ["Revestimiento base cemento (por m²)", "$8.200 – $12.500"]
           ]},
-          { titulo: "💧 Impermeabilización", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22c3.87 0 7-3.13 7-7 0-4-3-7-7-13-4 6-7 9-7 13 0 3.87 3.13 7 7 7Z'/></svg>Impermeabilización", items: [
             ["Impermeabilización de azotea, incluye membrana (por m²)", "$25.000 – $62.000"],
             ["Pintura de piscina (por m²)", "$9.000 – $15.000"]
           ]},
-          { titulo: "🏗️ Reformas y jornada", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='7' width='20' height='14' rx='2'/><path d='M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16'/></svg>Reformas y jornada", items: [
             ["Reforma completa de baño (solo mano de obra y demolición)", "$950.000 – $2.900.000"],
             ["Bajada de cordón estándar", "$17.600 – $27.500"],
             ["Jornal por reparaciones varias (por día)", "$21.000 – $37.000"]
@@ -798,10 +804,10 @@
       },
 
       aire: {
-        label: "❄️ Aire Acondicionado",
+        label: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><line x1='12' y1='2' x2='12' y2='22'/><line x1='2' y1='7' x2='22' y2='17'/><line x1='2' y1='17' x2='22' y2='7'/></svg>Aire Acondicionado",
         fuente: "No hay cámara gremial con lista de precios pública para este rubro. Valores de mercado relevados sobre presupuestos reales en CABA, GBA, Córdoba, Rosario y La Plata · Agosto 2026 · Rangos mín-máx, solo mano de obra.",
         categorias: [
-          { titulo: "❄️ Instalación de split", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><line x1='12' y1='2' x2='12' y2='22'/><line x1='2' y1='7' x2='22' y2='17'/><line x1='2' y1='17' x2='22' y2='7'/></svg>Instalación de split", items: [
             ["Instalación split hasta 3.000 frigorías (sin equipo)", "$90.000 – $175.000"],
             ["Instalación split 3.000 a 4.500 frigorías", "$130.000 – $200.000"],
             ["Instalación split más de 4.500 frigorías", "$155.000 – $195.000"],
@@ -809,12 +815,12 @@
             ["Instalación equipo industrial / comercial", "$142.000 – $200.000"],
             ["Conexión eléctrica para A/C", "$43.000 – $78.000"]
           ]},
-          { titulo: "🔧 Mantenimiento y reparación", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg>Mantenimiento y reparación", items: [
             ["Limpieza y mantenimiento preventivo", "$47.000 – $128.000"],
             ["Carga de gas refrigerante", "$48.000 – $82.000"],
             ["Diagnóstico y reparación de fallas", "$35.000 – $90.000"]
           ]},
-          { titulo: "📤 Desinstalación", items: [
+          { titulo: "<svg class='hgx-tico' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg>Desinstalación", items: [
             ["Desinstalación de split", "$60.000 – $83.000"],
             ["Desinstalación de equipo de pared", "$70.000 – $140.000"]
           ]}
@@ -832,7 +838,7 @@
       ORDEN.forEach(function (key) {
         var btn = document.createElement("button");
         btn.className = "hgx-tab" + (key === active ? " active" : "");
-        btn.textContent = DATA[key].label;
+        btn.innerHTML = DATA[key].label;
         btn.onclick = function () { renderContent(key); };
         tabsEl.appendChild(btn);
       });
