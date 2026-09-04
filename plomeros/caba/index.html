@@ -715,7 +715,7 @@
       <div class="faq-item"><button class="faq-btn" onclick="tFaq(this)">¿Cuánto cobra un plomero en CABA?<span class="faq-chev"><svg width="10" height="6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></span></button><div class="faq-body">Según AAIERIC 2026: boca eléctrica $80.000–$120.000, jornal de 8 horas $180.000–$220.000, tablero completo $300.000–$600.000, certificado T1 desde $367.992. Todos son valores de mano de obra sin materiales.</div></div>
       <div class="faq-item"><button class="faq-btn" onclick="tFaq(this)">¿Cuándo necesito un plomero matriculado en CABA?<span class="faq-chev"><svg width="10" height="6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></span></button><div class="faq-body">Para obras nuevas, ampliaciones sanitarias, habilitaciones comerciales o documentación para venta de propiedades. Para trabajos menores como destapes, pérdidas o cambio de grifería no hace falta matrícula.</div></div>
       <div class="faq-item"><button class="faq-btn" onclick="tFaq(this)">¿Cuánto tarda en llegar un plomero en CABA?<span class="faq-chev"><svg width="10" height="6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></span></button><div class="faq-body">Por Hogarex recibís presupuestos en menos de 2 horas en horario hábil. Para urgencias de plomería hay profesionales disponibles el mismo día en la mayoría de los barrios de CABA.</div></div>
-      <div class="faq-item"><button class="faq-btn" onclick="tFaq(this)">¿Los plomeros de Hogarex están verificados?<span class="faq-chev"><svg width="10" height="6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></span></button><div class="faq-body">Sí. Todos los plomeros de Hogarex pasan por verificación de identidad. Los matriculados tienen su matrícula activa confirmada. Podés ver reseñas reales de otros clientes en cada perfil antes de contratar.</div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="tFaq(this)">¿Los plomeros de Hogarex están verificados?<span class="faq-chev"><svg width="10" height="6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></span></button><div class="faq-body">Aquellos que pasaron el proceso de verificación muestran su insignia correspondiente, tanto de identidad como de matrícula. Vos elegís.</div></div>
       <div class="faq-item"><button class="faq-btn" onclick="tFaq(this)">¿El presupuesto tiene algún costo?<span class="faq-chev"><svg width="10" height="6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></span></button><div class="faq-body">No. Solicitar presupuesto en Hogarex es completamente gratuito. Solo pagás cuando decidís contratar al profesional, directamente con él. Hogarex no cobra comisión al cliente.</div></div>
       <div class="faq-item"><button class="faq-btn" onclick="tFaq(this)">¿Los plomeros trabajan en todos los barrios de CABA?<span class="faq-chev"><svg width="10" height="6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></span></button><div class="faq-body">Sí. Tenemos plomeros en los 48 barrios de CABA: Palermo, Belgrano, Caballito, Almagro, Recoleta, Flores, Villa Urquiza, Boedo, Balvanera, San Telmo, Barracas, La Boca, Saavedra, Devoto, Mataderos, Liniers y más. También GBA.</div></div>
     </div>
@@ -792,6 +792,67 @@ window.addEventListener('resize', function(){
   clearTimeout(window._carResizeTO);
   window._carResizeTO = setTimeout(updateCarouselArrows, 150);
 });
+
+(function(){
+  // Autoplay para el carrusel de profesionales de esta pagina, en loop infinito.
+  var track = document.getElementById('profTrack2');
+  if(!track) return;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // Duplicamos las tarjetas una vez: al cruzar la mitad del recorrido saltamos
+  // instantáneamente al equivalente en el primer set (idéntico), logrando un
+  // loop continuo sin el "rebote" visual de volver de golpe al principio.
+  var originalCards = Array.prototype.slice.call(track.children);
+  if (originalCards.length > 1) {
+    originalCards.forEach(function(card){
+      var clone = card.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.querySelectorAll('a[href]').forEach(function(a){ a.setAttribute('tabindex', '-1'); });
+      track.appendChild(clone);
+    });
+  }
+
+  var timer;
+  function advance(){
+    var halfWidth = track.scrollWidth / 2;
+    var current = track.scrollLeft;
+    if (current >= halfWidth - 2) {
+      // scroll-snap-type ignora/objeta una asignacion directa de scrollLeft;
+      // lo desactivamos un instante para poder saltar sin que se corrija solo.
+      // Ojo: leer track.scrollLeft justo despues de asignarlo puede devolver
+      // el valor viejo, por eso seguimos usando la variable local "current".
+      current = current - halfWidth;
+      track.style.scrollSnapType = 'none';
+      track.scrollLeft = current;
+      void track.offsetWidth;
+      requestAnimationFrame(function(){ track.style.scrollSnapType = ''; });
+    }
+    var card = track.querySelector(':scope > *');
+    var amount = card ? card.offsetWidth + 16 : 300;
+    track.scrollTo({left: current + amount, behavior: 'smooth'});
+  }
+  function start(){
+    stop();
+    timer = setInterval(advance, 1800);
+  }
+  function stop(){
+    clearInterval(timer);
+  }
+
+  track.addEventListener('mouseenter', stop);
+  track.addEventListener('mouseleave', start);
+  track.addEventListener('touchstart', stop, {passive: true});
+  track.addEventListener('touchend', function(){
+    clearTimeout(window._profAutoTO2);
+    window._profAutoTO2 = setTimeout(start, 1500);
+  });
+
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden) stop(); else start();
+  });
+
+  start();
+})();
 </script>
 </body>
 </html>

@@ -291,7 +291,6 @@
  const POSTS_PER_PAGE = 9;
 let currentPage = 1;
 let currentFilter = "all";
-let paginationRenderedOnce = false;
 
 const CAT_ICON_PATHS = {
   electricidad: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
@@ -405,12 +404,6 @@ function renderPagination(totalPages) {
   wrap.appendChild(track);
   wrap.appendChild(next);
   document.getElementById("blog-grid").after(wrap);
-
-  const activeBtn = track.querySelector(".pagination-btn.active");
-  if (activeBtn && paginationRenderedOnce) {
-    activeBtn.scrollIntoView({ inline: "center", block: "nearest" });
-  }
-  paginationRenderedOnce = true;
 }
 
   document.querySelectorAll(".filter-btn").forEach(btn => {

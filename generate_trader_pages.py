@@ -632,7 +632,9 @@ PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - 
     .faq-item p {{ font-size: 0.87rem; color: var(--gray-700); line-height: 1.6; padding-bottom: 12px; margin: 0; }}
     .ver-mas-link {{ display: inline-block; color: var(--navy); font-weight: 600; font-size: 0.88rem; text-decoration: none; margin: 18px 0 4px; }}
     .ver-mas-link:hover {{ text-decoration: underline; }}
-    .btn-contact {{ display: block; width: 100%; text-align: center; margin: 6px 0 20px; }}
+    .btn-contact {{ display: block; width: 100%; text-align: center; margin: 6px 0 8px; }}
+    .btn-full-profile {{ display: block; text-align: center; color: var(--navy); font-weight: 600; font-size: 0.85rem; text-decoration: none; margin: 0 0 20px; }}
+    .btn-full-profile:hover {{ text-decoration: underline; }}
     .modal-cta {{ display: none; }}
     .btn-yellow {{ background: var(--yellow); color: var(--navy); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.9rem; padding: 12px 22px; border-radius: 999px; text-decoration: none; border: none; cursor: pointer; white-space: nowrap; display: inline-block; text-align: center; }}
     .btn-yellow:hover {{ background: var(--yellow-hover); }}
@@ -697,6 +699,7 @@ PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - 
     {facts_html}
   </div>
   <a href="{contact_url}" class="btn-yellow btn-contact">Contactar a {name_esc}</a>
+  <a href="{main_profile_url}" class="btn-full-profile">Ver perfil completo &rarr;</a>
   <p>{description_esc}</p>
   <section class="faq-section">
     <h2>Preguntas frecuentes</h2>
@@ -791,6 +794,9 @@ def render_page(trader, url):
     # rubro+ubicacion como cta_url): usa el mismo id que identifica al
     # trader (_uid, columna "unique id" en el CSV / _id en la Live API).
     contact_url = f"https://hogarex.ar/solicitud-enviar?trader={quote(trader['_uid'])}&rubro={quote(oficio)}"
+    # Perfil completo del trader en el dominio principal (hogarex.ar), distinto
+    # de esta pagina del subdominio app.hogarex.ar/{oficio}/{slug}.
+    main_profile_url = f"https://hogarex.ar/perfilprofesional/{quote(trader['Slug'])}"
     # CTA con texto especifico de rubro+ubicacion (no generico "pedir presupuesto")
     # para intencion de busqueda alta y coincidencia semantica con la query.
     cta_label = f"Pedir presupuesto a un {oficio.lower()} en {ubicacion}"
@@ -819,6 +825,7 @@ def render_page(trader, url):
         description_esc=html.escape(description),
         cta_url=cta_url,
         contact_url=contact_url,
+        main_profile_url=main_profile_url,
         cta_label_esc=html.escape(cta_label),
         ver_mas_html=ver_mas_html,
         menu_css=HAMBURGER_MENU_CSS,
@@ -924,7 +931,7 @@ HUB_CARD_TEMPLATE = """      <div class="prof-card">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <div class="prof-desc">{description_esc}</div>
         <div class="prof-pop">&uarr; Popular</div>
-        <a href="{cta_url}" class="btn-pedir">Pedir presupuesto</a>
+        <a href="{pedir_url}" class="btn-pedir">Pedir presupuesto</a>
       </div>
 """
 
@@ -978,9 +985,11 @@ def render_hub_card(trader, index, url):
             "Perfil verificado</span></div>"
         )
 
-    # El boton de la tarjeta lleva al perfil real del trader en Bubble
-    # (mismo slug), no al formulario generico de solicitud.
+    # El nombre linkea al perfil real del trader en Bubble (mismo slug); el
+    # boton "Pedir presupuesto" va al formulario generico filtrado por rubro
+    # y ubicacion, no al perfil de un trader puntual.
     cta_url = f"https://hogarex.ar/perfilprofesional/{quote(trader['Slug'])}"
+    pedir_url = f"https://hogarex.ar/solicitud-enviar?rubro={quote(oficio)}&ubicacion={quote(ubicacion)}"
 
     return HUB_CARD_TEMPLATE.format(
         avatar_html=avatar_html,
@@ -991,6 +1000,7 @@ def render_hub_card(trader, index, url):
         ubicacion_esc=html.escape(ubicacion),
         description_esc=html.escape(description),
         cta_url=cta_url,
+        pedir_url=pedir_url,
     )
 
 
@@ -1054,7 +1064,7 @@ HOME_CARD_TEMPLATE = """      <div class="prof-card">
           <span class="prof-popular">&uarr; Popular</span>
           <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>{ubicacion_esc}</span>
         </div>
-        <a href="{cta_url}" class="btn-pedir">Pedir presupuesto</a>
+        <a href="{pedir_url}" class="btn-pedir">Pedir presupuesto</a>
       </div>
 """
 
@@ -1089,12 +1099,16 @@ def render_home_card(trader, index):
             "Perfil verificado</span></div>"
         )
 
+    # El nombre linkea al perfil real del trader; el boton "Pedir presupuesto"
+    # va al formulario generico filtrado por rubro y ubicacion (no al perfil).
     cta_url = f"https://hogarex.ar/perfilprofesional/{quote(trader['Slug'])}"
+    pedir_url = f"https://hogarex.ar/solicitud-enviar?rubro={quote(oficio)}&ubicacion={quote(ubicacion)}"
 
     return HOME_CARD_TEMPLATE.format(
         avatar_html=avatar_html,
         badge_html=badge_html,
         cta_url=cta_url,
+        pedir_url=pedir_url,
         name_esc=html.escape(name),
         oficio_esc=html.escape(oficio),
         ubicacion_esc=html.escape(ubicacion),
