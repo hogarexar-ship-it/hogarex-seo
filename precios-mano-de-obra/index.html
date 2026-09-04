@@ -852,7 +852,7 @@
         return;
       }
 
-      var rubroTexto = rubro.label.replace(/[^\w\sáéíóúÁÉÍÓÚñÑ]/gi, '').trim().toLowerCase();
+      var rubroTexto = rubro.label.replace(/<[^>]*>/g, '').trim().toLowerCase();
 
       var ctaHtml = '<div class="hgx-cta">' +
         '<p class="hgx-cta-text">¿Buscando ' + rubroTexto + '?</p>' +
