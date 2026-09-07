@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pedir presupuesto gratis | Hogarex</title>
+  <meta name="description" content="Contanos qué necesitás y recibí un estimado al instante. Enviá tu solicitud y recibí hasta 3 presupuestos de profesionales verificados por WhatsApp, sin costo." />
+  <link rel="canonical" href="https://app.hogarex.ar/solicitud-enviar" />
+  <meta name="robots" content="noindex, follow" />
+  <meta name="theme-color" content="#003366" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://app.hogarex.ar/solicitud-enviar" />
+  <meta property="og:title" content="Pedir presupuesto gratis | Hogarex" />
+  <meta property="og:description" content="Contanos qué necesitás y recibí un estimado al instante. Hasta 3 presupuestos por WhatsApp, sin costo." />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="Hogarex" />
+  <style>
+    :root {
+      --navy: #003366; --navy-dark: #091e44; --blue: #206ff7; --blue-bg: #eaf1ff;
+      --yellow: #F5C518; --yellow-hover: #e0b200;
+      --white: #ffffff; --gray-50: #f8f9fb; --gray-100: #f0f2f5; --gray-200: #e5e9f0;
+      --gray-500: #6b7280; --gray-700: #374151; --text: #1a1a2e; --radius: 12px;
+      --green: #1a7a3c; --green-bg: #e6f4ea;
+      --shadow: 0 2px 16px rgba(13,42,94,0.10);
+      --shadow-lg: 0 12px 40px rgba(13,42,94,0.22);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--gray-50); color: var(--text); min-height: 100vh; }
+    header { background: var(--navy); padding: 0 16px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
+    .header-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+    .logo { display: flex; align-items: center; text-decoration: none; }
+    .logo img { height: 26px; width: auto; display: block; }
+    nav { display: flex; align-items: center; gap: 8px; }
+    nav a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.85rem; font-weight: 500; }
+    nav .nav-home { display: none; }
+    @media (min-width: 640px) {
+      header { padding: 0 24px; }
+      .header-inner { height: 64px; }
+      .logo img { height: 32px; }
+      nav .nav-home { display: inline; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 500; margin-right: 24px; }
+    }
+
+    /* ── HERO ── */
+    .sr-hero { max-width: 720px; margin: 0 auto; padding: 40px 20px 32px; text-align: center; }
+    .sr-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--green-bg); color: var(--green); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.78rem; padding: 6px 14px; border-radius: 999px; margin-bottom: 18px; }
+    .sr-hero h1 { font-family: 'Sora', sans-serif; font-size: 1.7rem; font-weight: 800; color: var(--navy); line-height: 1.25; margin-bottom: 12px; }
+    .sr-hero p { font-size: 1rem; color: var(--gray-700); line-height: 1.6; max-width: 480px; margin: 0 auto 28px; }
+    .btn-start { display: inline-flex; align-items: center; gap: 8px; background: var(--yellow); color: var(--navy); font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.02rem; padding: 16px 30px; border-radius: 999px; border: none; cursor: pointer; box-shadow: 0 8px 24px rgba(245,197,24,.35); transition: transform .15s ease, box-shadow .15s ease; }
+    .btn-start:hover { transform: translateY(-1px); box-shadow: 0 10px 28px rgba(245,197,24,.45); }
+    .btn-start svg { flex-shrink: 0; }
+    .sr-trust { display: flex; flex-direction: column; gap: 10px; margin-top: 28px; max-width: 340px; margin-left: auto; margin-right: auto; text-align: left; }
+    .sr-trust div { display: flex; align-items: center; gap: 8px; font-size: 0.88rem; color: var(--gray-700); font-weight: 500; }
+    .sr-trust svg { color: var(--green); flex-shrink: 0; }
+    @media (min-width: 640px) {
+      .sr-hero h1 { font-size: clamp(2rem, 4vw, 2.5rem); }
+      .sr-hero p { font-size: 1.08rem; }
+      .sr-trust { flex-direction: row; justify-content: center; max-width: none; gap: 22px; }
+    }
+
+    /* ── COMO FUNCIONA ── */
+    .sr-steps { max-width: 900px; margin: 0 auto; padding: 8px 20px 48px; }
+    .sr-steps-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    .sr-step-card { background: var(--white); border: 1px solid var(--gray-100); border-radius: var(--radius); padding: 20px; }
+    .sr-step-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--blue-bg); color: var(--blue); font-family: 'Sora', sans-serif; font-weight: 800; font-size: 0.85rem; border-radius: 50%; margin-bottom: 10px; }
+    .sr-step-card h3 { font-family: 'Sora', sans-serif; font-size: 0.98rem; color: var(--navy); margin-bottom: 6px; }
+    .sr-step-card p { font-size: 0.86rem; color: var(--gray-700); line-height: 1.55; }
+    @media (min-width: 640px) { .sr-steps-grid { grid-template-columns: repeat(3,1fr); } }
+
+    /* ── MODAL / WIZARD ── */
+    .sr-overlay { position: fixed; inset: 0; background: rgba(9,30,68,.55); opacity: 0; visibility: hidden; transition: opacity .25s ease; z-index: 998; }
+    .sr-overlay.open { opacity: 1; visibility: visible; }
+    .sr-modal { position: fixed; inset: 0; background: var(--white); z-index: 999; display: flex; flex-direction: column; opacity: 0; visibility: hidden; transform: translateY(16px); transition: opacity .25s ease, transform .25s ease, visibility .25s; }
+    .sr-modal.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    @media (min-width: 640px) {
+      .sr-modal { inset: auto; top: 50%; left: 50%; width: 100%; max-width: 560px; max-height: 88vh; height: auto; border-radius: 20px; box-shadow: var(--shadow-lg); transform: translate(-50%, -46%); }
+      .sr-modal.open { transform: translate(-50%, -50%); }
+    }
+    .sr-modal-head { flex-shrink: 0; padding: 16px 18px 0; }
+    .sr-head-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .sr-progress { flex: 1; height: 6px; background: var(--gray-100); border-radius: 999px; overflow: hidden; }
+    .sr-progress-bar { height: 100%; width: 0%; background: var(--blue); border-radius: 999px; transition: width .3s ease; }
+    .sr-close { background: none; border: none; font-size: 24px; line-height: 1; color: var(--gray-500); cursor: pointer; padding: 4px 6px; flex-shrink: 0; }
+    .sr-back { background: none; border: none; display: inline-flex; align-items: center; gap: 4px; color: var(--gray-500); font-size: 0.85rem; font-weight: 600; cursor: pointer; padding: 4px 0 10px; visibility: hidden; }
+    .sr-back.show { visibility: visible; }
+    .sr-direct-banner { display: none; align-items: center; gap: 8px; background: var(--blue-bg); color: var(--navy); font-size: 0.82rem; font-weight: 700; padding: 10px 14px; border-radius: 10px; margin: 0 18px 12px; }
+    .sr-direct-banner.show { display: flex; }
+    .sr-direct-banner svg { flex-shrink: 0; color: var(--blue); }
+
+    .sr-body { flex: 1; overflow-y: auto; padding: 4px 18px 18px; }
+    .sr-step { display: none; }
+    .sr-step.active { display: block; animation: srFadeIn .2s ease; }
+    @keyframes srFadeIn { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: translateX(0); } }
+    .sr-step-title { font-family: 'Sora', sans-serif; font-size: 1.25rem; font-weight: 800; color: var(--navy); margin-bottom: 4px; line-height: 1.3; }
+    .sr-step-sub { font-size: 0.88rem; color: var(--gray-500); margin-bottom: 18px; }
+
+    .sr-options { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+    .sr-options.sr-options-1col { grid-template-columns: 1fr; }
+    .sr-opt { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; background: var(--white); border: 1.5px solid var(--gray-200); border-radius: 12px; padding: 14px; cursor: pointer; text-align: left; font-family: inherit; transition: border-color .15s ease, background .15s ease; }
+    .sr-opt:hover { border-color: var(--blue); background: var(--blue-bg); }
+    .sr-opt.selected { border-color: var(--blue); background: var(--blue-bg); box-shadow: inset 0 0 0 1px var(--blue); }
+    .sr-opt-icon { width: 34px; height: 34px; border-radius: 9px; background: var(--blue-bg); color: var(--blue); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .sr-opt.selected .sr-opt-icon { background: var(--blue); color: #fff; }
+    .sr-opt-label { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.88rem; color: var(--navy); line-height: 1.3; }
+    .sr-opt-note { font-size: 0.74rem; color: var(--gray-500); }
+    .sr-opt-row { flex-direction: row; align-items: center; }
+    .sr-opt-row .sr-opt-icon { margin-bottom: 0; }
+
+    .sr-field { margin-bottom: 16px; }
+    .sr-field label { display: block; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.85rem; color: var(--navy); margin-bottom: 8px; }
+    .sr-input, .sr-select, .sr-textarea { width: 100%; border: 1.5px solid var(--gray-200); border-radius: 10px; padding: 13px 14px; font-size: 0.95rem; font-family: inherit; color: var(--text); background: var(--white); }
+    .sr-input:focus, .sr-select:focus, .sr-textarea:focus { outline: none; border-color: var(--blue); }
+    .sr-textarea { resize: vertical; min-height: 80px; }
+    .sr-hint { font-size: 0.76rem; color: var(--gray-500); margin-top: 6px; }
+
+    .sr-estimate-card { background: linear-gradient(135deg, var(--navy) 0%, #0a4a8c 100%); color: #fff; border-radius: 16px; padding: 24px 20px; text-align: center; margin-bottom: 18px; }
+    .sr-estimate-label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; opacity: .8; margin-bottom: 8px; }
+    .sr-estimate-price { font-family: 'Sora', sans-serif; font-size: 1.7rem; font-weight: 800; margin-bottom: 6px; }
+    .sr-estimate-note { font-size: 0.82rem; opacity: .85; }
+    .sr-summary { background: var(--gray-50); border: 1px solid var(--gray-100); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; }
+    .sr-summary-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; font-size: 0.85rem; }
+    .sr-summary-row + .sr-summary-row { border-top: 1px solid var(--gray-100); }
+    .sr-summary-row span:first-child { color: var(--gray-500); }
+    .sr-summary-row span:last-child { color: var(--navy); font-weight: 700; text-align: right; }
+    .sr-summary-edit { background: none; border: none; color: var(--blue); font-weight: 700; font-size: 0.78rem; cursor: pointer; padding: 0; }
+
+    .sr-time-row { display: flex; align-items: center; gap: 10px; background: var(--green-bg); color: var(--green); border-radius: 10px; padding: 12px 14px; font-size: 0.85rem; font-weight: 600; margin-bottom: 16px; }
+    .sr-time-row svg { flex-shrink: 0; }
+
+    .sr-footer { flex-shrink: 0; padding: 14px 18px; border-top: 1px solid var(--gray-100); display: flex; gap: 10px; }
+    .sr-btn { flex: 1; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.95rem; padding: 14px; border-radius: 999px; cursor: pointer; border: none; text-align: center; }
+    .sr-btn-yellow { background: var(--yellow); color: var(--navy); }
+    .sr-btn-yellow:hover { background: var(--yellow-hover); }
+    .sr-btn-yellow:disabled { background: var(--gray-200); color: var(--gray-500); cursor: not-allowed; }
+    .sr-btn-outline { flex: 0 0 auto; background: #fff; color: var(--navy); border: 1.5px solid var(--gray-200); padding: 14px 18px; }
+
+    .sr-success { text-align: center; padding: 20px 0; }
+    .sr-success-icon { width: 68px; height: 68px; border-radius: 50%; background: var(--green-bg); color: var(--green); display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; }
+    .sr-success h2 { font-family: 'Sora', sans-serif; font-size: 1.3rem; color: var(--navy); margin-bottom: 10px; }
+    .sr-success p { font-size: 0.92rem; color: var(--gray-700); line-height: 1.6; margin-bottom: 6px; }
+
+    body.sr-locked { overflow: hidden; }
+
+    footer { background: #fff; border-top: 1px solid #eef1f6; padding: 36px 16px 20px; }
+    .ft-wrap { max-width: 1100px; margin: 0 auto; }
+    .ft-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-bottom: 20px; }
+    .ft-col h5 { font-size: 13px; font-weight: 700; color: #111827; margin: 0 0 10px; }
+    .ft-col a { display: block; font-size: 13px; color: #6b7280; text-decoration: none; margin-bottom: 6px; }
+    .ft-col a:hover { color: #206ff7; }
+    .ft-directory { margin-bottom: 20px; padding-top: 20px; border-top: 1px solid #eef1f6; }
+    .ft-directory-grid { display: flex; flex-wrap: wrap; gap: 24px; }
+    .ft-directory-grid .ft-col { min-width: 120px; }
+    .ft-bot { font-size: 12px; color: #9ca3af; }
+    .ft-bot a { color: #9ca3af; text-decoration: underline; }
+    @media(max-width:640px){ .ft-grid{ grid-template-columns: 1fr 1fr; } }
+    @media(max-width:420px){ .ft-grid{ grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
+    <nav>
+      <a href="https://hogarex.ar" class="nav-home">Inicio</a>
+      <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
+    </nav>
+  </div>
+</header>
+
+<div class="hgx-nm-overlay" id="hgx-nm-overlay"></div>
+<div class="hgx-nm-panel" id="hgx-nm-panel" aria-hidden="true">
+  <div class="hgx-nm-panel-head">
+    <span class="hgx-nm-logo">Hogarex</span>
+    <button type="button" id="hgx-nm-close" class="hgx-nm-close" aria-label="Cerrar menú">&times;</button>
+  </div>
+  <nav class="hgx-nm-links" aria-label="Menú principal">
+    <a href="https://hogarex.ar">Inicio</a>
+    <span class="hgx-nm-label">Rubros</span>
+    <div class="hgx-nm-grid">
+      <a href="https://app.hogarex.ar/electricistas"><svg class="hgx-nm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Electricistas</a>
+      <a href="https://app.hogarex.ar/gasistas"><svg class="hgx-nm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>Gasistas</a>
+      <a href="https://app.hogarex.ar/plomeros"><svg class="hgx-nm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c3.87 0 7-3.13 7-7 0-4-3-7-7-13-4 6-7 9-7 13 0 3.87 3.13 7 7 7Z"/></svg>Plomeros</a>
+      <a href="https://app.hogarex.ar/pintores"><svg class="hgx-nm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3Z"/><path d="M9 8c-2 3-4 3.5-7 4l8 8c2.5-2.5 3-4.5 4-7"/></svg>Pintores</a>
+      <a href="https://app.hogarex.ar/carpinteros"><svg class="hgx-nm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5a2.12 2.12 0 1 1-3-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg>Carpinteros</a>
+      <a href="https://app.hogarex.ar/instalaciones"><svg class="hgx-nm-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Instalaciones</a>
+    </div>
+    <span class="hgx-nm-label">Explorar</span>
+    <a href="https://app.hogarex.ar/profesionales">Explorar profesionales</a>
+    <a href="https://app.hogarex.ar/precios-mano-de-obra">Precios de mano de obra</a>
+    <span class="hgx-nm-label">Recursos</span>
+    <a href="https://app.hogarex.ar/blog">Blog</a>
+    <a href="https://app.hogarex.ar/preguntas-frecuentes">Preguntas Frecuentes</a>
+    <a href="https://app.hogarex.ar/glosario">Glosario</a>
+  </nav>
+  <div class="hgx-nm-actions">
+    <a href="https://hogarex.ar/busqueda" class="hgx-nm-btn hgx-nm-btn-outline">Buscar profesional</a>
+    <a href="https://hogarex.ar/registro_profesional" class="hgx-nm-btn hgx-nm-btn-outline">Soy profesional</a>
+    <a href="https://app.hogarex.ar/solicitud-enviar" class="hgx-nm-btn hgx-nm-btn-yellow">Pedir presupuesto gratis</a>
+  </div>
+</div>
+<style>
+  .hgx-nm-toggle{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:38px;height:38px;background:transparent;border:none;cursor:pointer;flex-shrink:0;padding:0;margin-left:6px}
+  .hgx-nm-toggle span{display:block;width:22px;height:2.5px;background:#003366;border-radius:2px;transition:transform .25s ease,opacity .25s ease}
+  .hgx-nm-toggle.hgx-nm-toggle-dark span{background:#ffffff}
+  .hgx-nm-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+  .hgx-nm-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .hgx-nm-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+  .hgx-nm-overlay{position:fixed;inset:0;background:rgba(9,30,68,.5);opacity:0;visibility:hidden;transition:opacity .25s ease;z-index:998}
+  .hgx-nm-overlay.hgx-nm-open{opacity:1;visibility:visible}
+  .hgx-nm-panel{position:fixed;top:0;right:0;bottom:0;width:82%;max-width:320px;background:#fff;z-index:999;transform:translateX(100%);transition:transform .28s ease;display:flex;flex-direction:column;box-shadow:-8px 0 24px rgba(0,0,0,.15);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  .hgx-nm-panel.hgx-nm-open{transform:translateX(0)}
+  .hgx-nm-panel-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid #eef1f6}
+  .hgx-nm-logo{font-weight:800;font-size:17px;color:#003366;font-family:inherit}
+  .hgx-nm-close{background:none;border:none;font-size:26px;line-height:1;color:#64708a;cursor:pointer;padding:4px 8px}
+  .hgx-nm-links{display:flex;flex-direction:column;align-items:stretch;padding:10px 8px;overflow-y:auto;flex:1}
+  .hgx-nm-links a{display:block;padding:13px 12px;color:#1a1a2e;text-decoration:none;font-weight:600;font-size:15px;border-radius:8px}
+  .hgx-nm-links a:hover,.hgx-nm-links a:active{background:#f0f2f5}
+  .hgx-nm-label{display:block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#9aa5b8;padding:16px 12px 6px}
+  .hgx-nm-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:0 4px}
+  .hgx-nm-grid a{padding:11px 8px;font-size:13px;line-height:1.25;display:flex;align-items:center;gap:6px}
+  .hgx-nm-ic{width:15px;height:15px;flex-shrink:0;color:#206ff7}
+  .hgx-nm-actions{display:flex;flex-direction:column;gap:8px;padding:14px 16px 20px;border-top:1px solid #eef1f6}
+  .hgx-nm-btn{display:block;text-align:center;padding:12px;border-radius:999px;font-weight:700;font-size:14px;text-decoration:none}
+  .hgx-nm-btn-outline{border:1.5px solid #003366;color:#003366;background:#fff}
+  .hgx-nm-btn-yellow{background:#F5C518;color:#003366}
+  @media (min-width:900px){.hgx-nm-panel{width:340px}}
+</style>
+<script>
+(function(){
+  var toggle=document.getElementById('hgx-nm-toggle');
+  var panel=document.getElementById('hgx-nm-panel');
+  var overlay=document.getElementById('hgx-nm-overlay');
+  var closeBtn=document.getElementById('hgx-nm-close');
+  function openMenu(){panel.classList.add('hgx-nm-open');overlay.classList.add('hgx-nm-open');panel.setAttribute('aria-hidden','false');toggle.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
+  function closeMenu(){panel.classList.remove('hgx-nm-open');overlay.classList.remove('hgx-nm-open');panel.setAttribute('aria-hidden','true');toggle.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  if(toggle){toggle.addEventListener('click',openMenu);}
+  if(closeBtn){closeBtn.addEventListener('click',closeMenu);}
+  if(overlay){overlay.addEventListener('click',closeMenu);}
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenu();});
+})();
+</script>
+
+<section class="sr-hero">
+  <span class="sr-badge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Gratis · Sin compromiso</span>
+  <h1>Pedí presupuesto a profesionales verificados</h1>
+  <p>Contanos qué necesitás en menos de un minuto y te damos un estimado al instante. Elegís enviar tu solicitud a hasta 3 profesionales o a uno en particular.</p>
+  <button type="button" class="btn-start" id="srOpenBtn">
+    Iniciar solicitud
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </button>
+  <div class="sr-trust">
+    <div><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Hasta 3 presupuestos por WhatsApp</div>
+    <div><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Profesionales verificados</div>
+    <div><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>100% gratis para vos</div>
+  </div>
+</section>
+
+<section class="sr-steps">
+  <div class="sr-steps-grid">
+    <div class="sr-step-card">
+      <div class="sr-step-num">1</div>
+      <h3>Contanos qué necesitás</h3>
+      <p>Elegís el rubro y el tipo de trabajo con un par de clics. Sin formularios largos.</p>
+    </div>
+    <div class="sr-step-card">
+      <div class="sr-step-num">2</div>
+      <h3>Mirá el estimado al instante</h3>
+      <p>Te mostramos un rango de precio de referencia antes de que envíes nada.</p>
+    </div>
+    <div class="sr-step-card">
+      <div class="sr-step-num">3</div>
+      <h3>Recibí presupuestos por WhatsApp</h3>
+      <p>Hasta 3 profesionales verificados de tu zona te contactan directamente.</p>
+    </div>
+  </div>
+</section>
+
+<div class="sr-overlay" id="srOverlay"></div>
+<div class="sr-modal" id="srModal" role="dialog" aria-modal="true" aria-label="Solicitar presupuesto">
+  <div class="sr-modal-head">
+    <div class="sr-head-top">
+      <button type="button" class="sr-back" id="srBackBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        Atrás
+      </button>
+      <div class="sr-progress"><div class="sr-progress-bar" id="srProgressBar"></div></div>
+      <button type="button" class="sr-close" id="srCloseBtn" aria-label="Cerrar">&times;</button>
+    </div>
+    <div class="sr-direct-banner" id="srDirectBanner">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg>
+      <span id="srDirectBannerText">Solicitud directa</span>
+    </div>
+  </div>
+  <div class="sr-body" id="srBody"></div>
+  <div class="sr-footer" id="srFooter">
+    <button type="button" class="sr-btn sr-btn-yellow" id="srNextBtn" disabled>Continuar</button>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-wrap">
+    <div class="ft-grid">
+      <div class="ft-col">
+        <h5>Empresa</h5>
+        <a href="mailto:soporte@hogarex.ar">Contacto</a>
+        <a href="https://app.hogarex.ar">Inicio</a>
+      </div>
+      <div class="ft-col">
+        <h5>Soporte</h5>
+        <a href="https://hogarex.ar/ayuda">Ayuda</a>
+        <a href="https://app.hogarex.ar/preguntas-frecuentes">Preguntas Frecuentes</a>
+        <a href="https://app.hogarex.ar/glosario">Glosario</a>
+        <a href="https://hogarex.ar/ayuda">Más información</a>
+      </div>
+      <div class="ft-col">
+        <h5>Legal</h5>
+        <a href="https://hogarex.ar/terminos-condiciones">Términos y Condiciones</a>
+        <a href="https://hogarex.ar/terminos-condiciones">Privacidad</a>
+      </div>
+    </div>
+    <div class="ft-directory">
+      <div class="ft-directory-grid">
+        <div class="ft-col"><h5>Electricistas</h5><a href="https://app.hogarex.ar/electricistas/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/electricistas/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/electricistas/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/electricistas/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/electricistas/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/electricistas/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Plomeros</h5><a href="https://app.hogarex.ar/plomeros/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/plomeros/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/plomeros/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/plomeros/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/plomeros/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/plomeros/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Gasistas</h5><a href="https://app.hogarex.ar/gasistas/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/gasistas/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/gasistas/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/gasistas/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/gasistas/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/gasistas/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Pintores</h5><a href="https://app.hogarex.ar/pintores/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/pintores/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/pintores/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/pintores/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/pintores/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/pintores/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Carpinteros</h5><a href="https://app.hogarex.ar/carpinteros/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/carpinteros/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/carpinteros/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/carpinteros/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/carpinteros/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/carpinteros/caba/almagro">Almagro</a></div>
+        <div class="ft-col"><h5>Instalaciones</h5><a href="https://app.hogarex.ar/instalaciones/caba/palermo">Palermo</a><a href="https://app.hogarex.ar/instalaciones/caba/belgrano">Belgrano</a><a href="https://app.hogarex.ar/instalaciones/caba/recoleta">Recoleta</a><a href="https://app.hogarex.ar/instalaciones/caba/villa-crespo">Villa Crespo</a><a href="https://app.hogarex.ar/instalaciones/caba/colegiales">Colegiales</a><a href="https://app.hogarex.ar/instalaciones/caba/almagro">Almagro</a></div>
+      </div>
+    </div>
+    <div class="ft-bot">&copy; 2026 <a href="https://hogarex.ar">Hogarex</a> &mdash; Conectamos profesionales del hogar con clientes en Argentina.</div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   Datos de precios: extraídos de /precios-mano-de-obra (misma
+   fuente que el resto del sitio: AAIERIC, CAGP y relevamiento de
+   mercado 2026). Rangos aproximados, orientativos, no vinculantes:
+   el presupuesto final lo confirma cada profesional.
+   ============================================================ */
+var ICONS = {
+  zap: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+  flame: '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>',
+  droplet: '<path d="M12 22c3.87 0 7-3.13 7-7 0-4-3-7-7-13-4 6-7 9-7 13 0 3.87 3.13 7 7 7Z"/>',
+  brush: '<path d="M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3Z"/><path d="M9 8c-2 3-4 3.5-7 4l8 8c2.5-2.5 3-4.5 4-7"/>',
+  hammer: '<path d="m15 12-8.5 8.5a2.12 2.12 0 1 1-3-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/>',
+  wrench: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  plus: '<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>',
+  alert: '<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+  doc: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/>',
+  check: '<circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/>',
+  snow: '<line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="7" x2="22" y2="17"/><line x1="2" y1="17" x2="22" y2="7"/>',
+  cam: '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2Z"/><circle cx="12" cy="13" r="4"/>',
+  box: '<path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="M3.27 6.96 12 12l8.73-5.04"/><line x1="12" y1="22.08" x2="12" y2="12"/>',
+  dots: '<circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/>'
+};
+function ic(name, size) {
+  size = size || 20;
+  return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + ICONS[name] + '</svg>';
+}
+
+var RUBROS = [
+  { id: 'electricista', label: 'Electricista', icon: 'zap' },
+  { id: 'gasista', label: 'Gasista', icon: 'flame' },
+  { id: 'plomero', label: 'Plomero', icon: 'droplet' },
+  { id: 'pintor', label: 'Pintor', icon: 'brush' },
+  { id: 'carpintero', label: 'Carpintero', icon: 'hammer' },
+  { id: 'instalaciones', label: 'Instalaciones', icon: 'wrench' }
+];
+var RUBRO_LABELS = {};
+RUBROS.forEach(function (r) { RUBRO_LABELS[r.id] = r.label; });
+
+var UBICACIONES = ['Buenos Aires (CABA)', 'Buenos Aires (GBA)', 'Córdoba Capital'];
+
+/* rango de tiempo de respuesta: mismo texto ya publicado en el resto del sitio */
+var TIEMPO_NORMAL = 'Recibís respuesta en menos de 2 horas en horario hábil.';
+var TIEMPO_URGENTE = 'Es una urgencia: en general hay profesionales disponibles el mismo día.';
+
+/* categorias[] -> "¿Qué necesitás?" · detalle[] dentro de cada categoria -> precio */
+var JOB_TREE = {
+  electricista: {
+    categorias: [
+      { id: 'instalar', label: 'Instalar algo nuevo', icon: 'plus' },
+      { id: 'falla', label: 'Arreglar una falla', icon: 'alert' },
+      { id: 'certificado', label: 'Certificado eléctrico', icon: 'doc' },
+      { id: 'mantenimiento', label: 'Mantenimiento / revisión', icon: 'check' }
+    ],
+    detalles: {
+      instalar: [
+        { id: 'toma', label: 'Toma o boca eléctrica', price: [19000, 108000] },
+        { id: 'tablero', label: 'Tablero eléctrico completo', price: [320000, 910000] },
+        { id: 'iluminacion', label: 'Luces / artefactos LED', price: [30000, 136000] },
+        { id: 'aire', label: 'Punto para aire acondicionado', price: [43000, 78000] },
+        { id: 'pat', label: 'Puesta a tierra', price: [150000, 180000] }
+      ],
+      falla: [
+        { id: 'corte', label: 'Se corta la luz / salta la térmica', price: [54000, 130000] },
+        { id: 'chispas', label: 'Chispas, olor a quemado', price: [80000, 150000], urgente: true },
+        { id: 'tomacorriente', label: 'Un tomacorriente no funciona', price: [19000, 55000] },
+        { id: 'otro', label: 'Otro problema', price: [54000, 110000] }
+      ],
+      certificado: [
+        { id: 'alquilarvender', label: 'Para alquilar o vender', price: [400000, 600000] },
+        { id: 'renovar', label: 'Para renovar el contrato de luz', price: [400000, 600000] },
+        { id: 'noseguro', label: 'No estoy seguro cuál necesito', price: [54000, 600000] }
+      ],
+      mantenimiento: [
+        { id: 'revision', label: 'Revisión general del tablero', price: [54000, 162000] },
+        { id: 'pat', label: 'Puesta a tierra', price: [150000, 180000] },
+        { id: 'otro', label: 'Otro', price: [54000, 130000] }
+      ]
+    }
+  },
+  gasista: {
+    categorias: [
+      { id: 'instalar', label: 'Instalar algo nuevo', icon: 'plus' },
+      { id: 'falla', label: 'Arreglar una falla', icon: 'alert' },
+      { id: 'certificado', label: 'Certificado de gas', icon: 'doc' },
+      { id: 'mantenimiento', label: 'Mantenimiento / limpieza', icon: 'check' }
+    ],
+    detalles: {
+      instalar: [
+        { id: 'calefon', label: 'Calefón o termotanque', price: [148000, 206000] },
+        { id: 'cocina', label: 'Cocina o anafe', price: [91000, 171000] },
+        { id: 'calefactor', label: 'Calefactor o estufa', price: [92000, 201000] },
+        { id: 'canieria', label: 'Cañería de gas nueva', price: [280000, 400000] }
+      ],
+      falla: [
+        { id: 'olor', label: 'Olor a gas / pérdida', price: [90000, 150000], urgente: true },
+        { id: 'calefonapagado', label: 'El calefón no enciende', price: [90000, 150000] },
+        { id: 'otro', label: 'Otro problema', price: [90000, 180000] }
+      ],
+      certificado: [
+        { id: 'gas3', label: 'Instalación de hasta 3 bocas', price: [520000, 725000] },
+        { id: 'gas10', label: 'Instalación de hasta 10 bocas', price: [520000, 725000] },
+        { id: 'noseguro', label: 'No estoy seguro', price: [200000, 725000] }
+      ],
+      mantenimiento: [
+        { id: 'limpieza', label: 'Limpieza de artefactos', price: [90000, 150000] },
+        { id: 'otro', label: 'Otro', price: [90000, 150000] }
+      ]
+    }
+  },
+  plomero: {
+    categorias: [
+      { id: 'instalar', label: 'Instalar algo nuevo', icon: 'plus' },
+      { id: 'falla', label: 'Arreglar una falla', icon: 'alert' },
+      { id: 'destape', label: 'Destape / caño tapado', icon: 'droplet' },
+      { id: 'mantenimiento', label: 'Mantenimiento', icon: 'check' }
+    ],
+    detalles: {
+      instalar: [
+        { id: 'artefacto', label: 'Inodoro, bacha o grifería', price: [98000, 148000] },
+        { id: 'termotanque', label: 'Termotanque nuevo', price: [125000, 183000] },
+        { id: 'tanque', label: 'Tanque de agua', price: [241000, 480000] },
+        { id: 'bomba', label: 'Bomba presurizadora', price: [109000, 240000] }
+      ],
+      falla: [
+        { id: 'perdida', label: 'Pérdida de agua / caño roto', price: [69000, 182000], urgente: true },
+        { id: 'canilla', label: 'Canilla que gotea', price: [20000, 91000] },
+        { id: 'otro', label: 'Otro problema', price: [80000, 160000] }
+      ],
+      destape: [
+        { id: 'horizontal', label: 'Cañería horizontal tapada', price: [90000, 140000] },
+        { id: 'vertical', label: 'Cañería vertical tapada', price: [80000, 140000], urgente: true },
+        { id: 'otro', label: 'No estoy seguro', price: [80000, 150000] }
+      ],
+      mantenimiento: [
+        { id: 'tanquelimp', label: 'Limpieza de tanque de agua', price: [120000, 322000] },
+        { id: 'otro', label: 'Revisión general', price: [90000, 160000] }
+      ]
+    }
+  },
+  pintor: {
+    categorias: [
+      { id: 'interior', label: 'Pintura de interior', icon: 'brush' },
+      { id: 'exterior', label: 'Pintura de exterior / frente', icon: 'brush' },
+      { id: 'reparacion', label: 'Reparación de paredes', icon: 'wrench' },
+      { id: 'impermeabilizacion', label: 'Impermeabilización', icon: 'droplet' }
+    ],
+    detalles: {
+      interior: [
+        { id: 'monoambiente', label: '1 ambiente', price: [65000, 140000] },
+        { id: 'dosambientes', label: '2 ambientes + baño', price: [105000, 230000] },
+        { id: 'cielorraso', label: 'Solo cielorrasos', price: [40000, 100000] },
+        { id: 'noseguro', label: 'Todavía no sé', price: [65000, 230000] }
+      ],
+      exterior: [
+        { id: 'frente', label: 'Frente de casa o PH', price: [90000, 250000] },
+        { id: 'altura', label: 'Pintura en altura', price: [110000, 280000], urgente: false },
+        { id: 'noseguro', label: 'Todavía no sé', price: [90000, 280000] }
+      ],
+      reparacion: [
+        { id: 'grietas', label: 'Grietas o humedad puntual', price: [40000, 110000] },
+        { id: 'enduido', label: 'Enduido y repintado', price: [60000, 150000] }
+      ],
+      impermeabilizacion: [
+        { id: 'azotea', label: 'Azotea o terraza', price: [90000, 220000] },
+        { id: 'membrana', label: 'Colocación de membrana', price: [80000, 200000] }
+      ]
+    }
+  },
+  carpintero: {
+    categorias: [
+      { id: 'instalar', label: 'Mueble o instalación nueva', icon: 'plus' },
+      { id: 'reparar', label: 'Reparar o restaurar', icon: 'wrench' },
+      { id: 'puertas', label: 'Puertas y aberturas', icon: 'hammer' },
+      { id: 'pisos', label: 'Pisos de madera', icon: 'hammer' }
+    ],
+    detalles: {
+      instalar: [
+        { id: 'cocina', label: 'Mueble de cocina a medida', price: [185000, 460000] },
+        { id: 'placard', label: 'Placard o vestidor a medida', price: [200000, 450000] },
+        { id: 'estanteria', label: 'Estantería o biblioteca', price: [80000, 250000] },
+        { id: 'noseguro', label: 'Todavía no sé', price: [80000, 460000] }
+      ],
+      reparar: [
+        { id: 'mueble', label: 'Mueble o cajón roto', price: [10000, 32000] },
+        { id: 'restaurar', label: 'Restaurar mueble antiguo', price: [40000, 150000] }
+      ],
+      puertas: [
+        { id: 'ajuste', label: 'Puerta que no cierra bien', price: [19000, 30000] },
+        { id: 'colocar', label: 'Colocar puerta nueva', price: [40000, 92000] },
+        { id: 'cerradura', label: 'Cambiar cerradura', price: [15000, 36000] }
+      ],
+      pisos: [
+        { id: 'lijado', label: 'Lijado y barnizado (por m²)', price: [3400, 24500] },
+        { id: 'colocacion', label: 'Colocación de piso nuevo (por m²)', price: [4700, 8200] },
+        { id: 'reparar-tablas', label: 'Cambiar tablas dañadas (por m²)', price: [40000, 90000] }
+      ]
+    }
+  },
+  instalaciones: {
+    categorias: [
+      { id: 'aire', label: 'Aire acondicionado', icon: 'snow' },
+      { id: 'seguridad', label: 'Cámaras / videoportero', icon: 'cam' },
+      { id: 'mantenimiento', label: 'Mantenimiento', icon: 'check' },
+      { id: 'otro', label: 'Otra instalación', icon: 'dots' }
+    ],
+    detalles: {
+      aire: [
+        { id: 'split-chico', label: 'Split hasta 3.000 frigorías', price: [90000, 175000] },
+        { id: 'split-mediano', label: 'Split 3.000 a 4.500 frigorías', price: [130000, 200000] },
+        { id: 'split-grande', label: 'Split más de 4.500 frigorías', price: [155000, 200000] },
+        { id: 'desinstalar', label: 'Desinstalar equipo', price: [60000, 140000] }
+      ],
+      seguridad: [
+        { id: 'camaras', label: 'Cámaras de seguridad', price: [90000, 180000] },
+        { id: 'videoportero', label: 'Videoportero', price: [90000, 180000] }
+      ],
+      mantenimiento: [
+        { id: 'limpieza-ac', label: 'Limpieza de aire acondicionado', price: [47000, 128000] },
+        { id: 'gas-ac', label: 'Carga de gas refrigerante', price: [48000, 82000] },
+        { id: 'diagnostico', label: 'Diagnóstico de falla', price: [35000, 90000] }
+      ],
+      otro: [
+        { id: 'domotica', label: 'Domótica / automatización', price: [80000, 250000] },
+        { id: 'noseguro', label: 'Prefiero contarlo con mis palabras', price: [60000, 200000] }
+      ]
+    }
+  }
+};
+
+/* ============================================================
+   Estado del wizard
+   ============================================================ */
+var qp = new URLSearchParams(window.location.search);
+var presetRubro = normalizeRubro(qp.get('rubro'));
+var presetUbicacion = qp.get('ubicacion') || '';
+var presetTrader = qp.get('trader') || '';
+var presetNombre = qp.get('nombre') || '';
+
+function normalizeRubro(v) {
+  if (!v) return '';
+  var map = {
+    electricista: 'electricista', electricistas: 'electricista',
+    gasista: 'gasista', gasistas: 'gasista',
+    plomero: 'plomero', plomeros: 'plomero',
+    pintor: 'pintor', pintores: 'pintor',
+    carpintero: 'carpintero', carpinteros: 'carpintero',
+    instalaciones: 'instalaciones', instalacion: 'instalaciones'
+  };
+  return map[v.toLowerCase()] || '';
+}
+
+var state = {
+  isDirect: !!presetTrader,
+  trader: presetTrader,
+  nombreProfesional: presetNombre,
+  rubro: presetRubro || '',
+  categoria: '',
+  detalle: '',
+  ubicacion: presetUbicacion || '',
+  descripcion: '',
+  nombre: '',
+  telefono: ''
+};
+
+/* El orden de pasos se calcula UNA sola vez, en base a lo que vino
+   preseteado por query string (no en base a "state", que cambia en
+   cada paso) - si no, cambiar de rubro a mitad del wizard correría
+   los índices y desincronizaría stepIndex con STEP_ORDER. */
+var STEP_ORDER = [];
+function buildSteps() {
+  STEP_ORDER = [];
+  if (!presetRubro) STEP_ORDER.push('rubro');
+  STEP_ORDER.push('categoria');
+  STEP_ORDER.push('detalle');
+  if (!presetUbicacion) STEP_ORDER.push('ubicacion');
+  STEP_ORDER.push('estimate');
+  STEP_ORDER.push('contacto');
+  STEP_ORDER.push('success');
+}
+buildSteps();
+var stepIndex = 0;
+
+var srOverlay = document.getElementById('srOverlay');
+var srModal = document.getElementById('srModal');
+var srBody = document.getElementById('srBody');
+var srNextBtn = document.getElementById('srNextBtn');
+var srBackBtn = document.getElementById('srBackBtn');
+var srCloseBtn = document.getElementById('srCloseBtn');
+var srProgressBar = document.getElementById('srProgressBar');
+var srDirectBanner = document.getElementById('srDirectBanner');
+var srDirectBannerText = document.getElementById('srDirectBannerText');
+var srFooter = document.getElementById('srFooter');
+
+function fmtPrice(n) {
+  return '$' + Math.round(n).toLocaleString('es-AR');
+}
+
+function openWizard() {
+  document.body.classList.add('sr-locked');
+  srOverlay.classList.add('open');
+  srModal.classList.add('open');
+  renderStep();
+}
+function closeWizard() {
+  document.body.classList.remove('sr-locked');
+  srOverlay.classList.remove('open');
+  srModal.classList.remove('open');
+}
+document.getElementById('srOpenBtn').addEventListener('click', openWizard);
+srOverlay.addEventListener('click', closeWizard);
+srCloseBtn.addEventListener('click', closeWizard);
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && srModal.classList.contains('open')) closeWizard();
+});
+
+srBackBtn.addEventListener('click', function () {
+  if (stepIndex > 0) {
+    stepIndex--;
+    renderStep();
+  }
+});
+srNextBtn.addEventListener('click', function () {
+  goNext();
+});
+
+function currentStepId() {
+  return STEP_ORDER[stepIndex];
+}
+
+function updateChrome() {
+  var pct = Math.round(((stepIndex + 1) / STEP_ORDER.length) * 100);
+  srProgressBar.style.width = pct + '%';
+  srBackBtn.classList.toggle('show', stepIndex > 0 && currentStepId() !== 'success');
+  if (state.isDirect) {
+    srDirectBannerText.textContent = 'Solicitud directa' + (state.nombreProfesional ? ' a ' + state.nombreProfesional : ' a este profesional');
+    srDirectBanner.classList.add('show');
+  } else {
+    srDirectBanner.classList.remove('show');
+  }
+}
+
+function renderStep() {
+  if (stepIndex >= STEP_ORDER.length) stepIndex = STEP_ORDER.length - 1;
+  updateChrome();
+  var id = currentStepId();
+  srBody.innerHTML = STEP_RENDERERS[id]();
+  bindStepEvents(id);
+  validateStep();
+  srFooter.style.display = (id === 'success') ? 'none' : 'flex';
+  srBody.scrollTop = 0;
+}
+
+function goNext() {
+  var id = currentStepId();
+  if (id === 'contacto') {
+    submitSolicitud();
+    return;
+  }
+  if (stepIndex < STEP_ORDER.length - 1) {
+    stepIndex++;
+    renderStep();
+  }
+}
+
+function selectAndAdvance() {
+  setTimeout(function () {
+    if (stepIndex < STEP_ORDER.length - 1) {
+      stepIndex++;
+      renderStep();
+    }
+  }, 220);
+}
+
+/* ---------- validación por paso ---------- */
+function validateStep() {
+  var id = currentStepId();
+  var ok = true;
+  if (id === 'rubro') ok = !!state.rubro;
+  else if (id === 'categoria') ok = !!state.categoria;
+  else if (id === 'detalle') ok = !!state.detalle;
+  else if (id === 'ubicacion') ok = !!state.ubicacion;
+  else if (id === 'estimate') ok = true;
+  else if (id === 'contacto') ok = !!state.nombre && isValidPhone(state.telefono);
+  srNextBtn.disabled = !ok;
+  srNextBtn.textContent = id === 'contacto' ? 'Enviar solicitud' : (id === 'estimate' ? 'Continuar' : 'Continuar');
+}
+function isValidPhone(v) {
+  var digits = (v || '').replace(/[^0-9]/g, '');
+  return digits.length >= 8;
+}
+
+/* ---------- renderers ---------- */
+var STEP_RENDERERS = {
+  rubro: function () {
+    var html = '<div class="sr-step-title">¿Qué tipo de profesional necesitás?</div>' +
+      '<div class="sr-step-sub">Elegí el rubro que mejor describe tu problema.</div>' +
+      '<div class="sr-options" data-group="rubro">';
+    RUBROS.forEach(function (r) {
+      html += optCard('rubro', r.id, r.label, r.icon, state.rubro === r.id);
+    });
+    html += '</div>';
+    return html;
+  },
+  categoria: function () {
+    var tree = JOB_TREE[state.rubro];
+    var html = '<div class="sr-step-title">¿Qué necesitás?</div>' +
+      '<div class="sr-step-sub">' + RUBRO_LABELS[state.rubro] + ' &middot; elegí una opción</div>' +
+      '<div class="sr-options" data-group="categoria">';
+    tree.categorias.forEach(function (c) {
+      html += optCard('categoria', c.id, c.label, c.icon, state.categoria === c.id);
+    });
+    html += '</div>';
+    return html;
+  },
+  detalle: function () {
+    var opts = JOB_TREE[state.rubro].detalles[state.categoria] || [];
+    var html = '<div class="sr-step-title">Un poco más de detalle</div>' +
+      '<div class="sr-step-sub">Así calculamos un estimado más preciso.</div>' +
+      '<div class="sr-options sr-options-1col" data-group="detalle">';
+    opts.forEach(function (o) {
+      var note = o.urgente ? 'Puede haber recargo por urgencia' : fmtPrice(o.price[0]) + ' – ' + fmtPrice(o.price[1]);
+      html += optRow('detalle', o.id, o.label, note, state.detalle === o.id);
+    });
+    html += '</div>';
+    return html;
+  },
+  ubicacion: function () {
+    var html = '<div class="sr-step-title">¿Dónde es el trabajo?</div>' +
+      '<div class="sr-step-sub">Buscamos profesionales cerca de tu zona.</div>' +
+      '<div class="sr-field"><select class="sr-select" id="srUbicacionSelect">' +
+      '<option value="" disabled ' + (!state.ubicacion ? 'selected' : '') + '>Elegí tu ubicación</option>';
+    UBICACIONES.forEach(function (u) {
+      html += '<option value="' + u + '"' + (state.ubicacion === u ? ' selected' : '') + '>' + u + '</option>';
+    });
+    html += '</select></div>';
+    return html;
+  },
+  estimate: function () {
+    var detalleObj = (JOB_TREE[state.rubro].detalles[state.categoria] || []).filter(function (o) { return o.id === state.detalle; })[0];
+    var price = detalleObj ? detalleObj.price : [0, 0];
+    var urgente = detalleObj && detalleObj.urgente;
+    var html = '<div class="sr-step-title">Tu estimado</div>' +
+      '<div class="sr-step-sub">Precio de referencia según valores 2026 de mano de obra en CABA/GBA.</div>' +
+      '<div class="sr-estimate-card">' +
+        '<div class="sr-estimate-label">Rango estimado</div>' +
+        '<div class="sr-estimate-price">' + fmtPrice(price[0]) + ' &ndash; ' + fmtPrice(price[1]) + '</div>' +
+        '<div class="sr-estimate-note">Orientativo. El profesional confirma el precio final tras ver el trabajo.</div>' +
+      '</div>' +
+      '<div class="sr-time-row">' + ic('check', 18) + '<span>' + (urgente ? TIEMPO_URGENTE : TIEMPO_NORMAL) + '</span></div>' +
+      '<div class="sr-summary">' +
+        summaryRow('Rubro', RUBRO_LABELS[state.rubro], presetRubro ? null : 'rubro') +
+        summaryRow('Trabajo', detalleObj ? detalleObj.label : '', 'detalle') +
+        summaryRow('Ubicación', state.ubicacion, presetUbicacion ? null : 'ubicacion') +
+      '</div>' +
+      '<div class="sr-field"><label for="srDescripcion">Contanos más (opcional)</label>' +
+      '<textarea class="sr-textarea" id="srDescripcion" placeholder="Ej: el corte pasa solo cuando prendo el microondas...">' + escapeHtml(state.descripcion) + '</textarea></div>';
+    return html;
+  },
+  contacto: function () {
+    var html = '<div class="sr-step-title">Último paso</div>' +
+      '<div class="sr-step-sub">' + (state.isDirect ? 'Para que ' + (state.nombreProfesional || 'el profesional') + ' te contacte por WhatsApp.' : 'Para que los profesionales te contacten por WhatsApp.') + '</div>' +
+      '<div class="sr-field"><label for="srNombre">Tu nombre</label>' +
+      '<input class="sr-input" type="text" id="srNombre" placeholder="Nombre y apellido" value="' + escapeHtml(state.nombre) + '" /></div>' +
+      '<div class="sr-field"><label for="srTelefono">WhatsApp</label>' +
+      '<input class="sr-input" type="tel" id="srTelefono" placeholder="11 1234 5678" value="' + escapeHtml(state.telefono) + '" />' +
+      '<div class="sr-hint">Solo lo va' + (state.isDirect ? '' : 'n') + ' a usar para contactarte por este trabajo.</div></div>';
+    return html;
+  },
+  success: function () {
+    var msg = state.isDirect
+      ? 'Tu solicitud va a llegar directo a <strong>' + escapeHtml(state.nombreProfesional || 'este profesional') + '</strong> por WhatsApp.'
+      : 'Vas a recibir hasta <strong>3 presupuestos por WhatsApp</strong> de profesionales verificados de tu zona.';
+    return '<div class="sr-success">' +
+      '<div class="sr-success-icon">' + ic('check', 32) + '</div>' +
+      '<h2>¡Listo, ' + escapeHtml(state.nombre || '') + '!</h2>' +
+      '<p>Registramos tu solicitud de <strong>' + RUBRO_LABELS[state.rubro] + '</strong> en <strong>' + escapeHtml(state.ubicacion) + '</strong>.</p>' +
+      '<p>' + msg + '</p>' +
+      '<p>' + (JOB_TREE[state.rubro].detalles[state.categoria].filter(function(o){return o.id===state.detalle;})[0].urgente ? TIEMPO_URGENTE : TIEMPO_NORMAL) + '</p>' +
+      '</div>' +
+      '<div class="sr-footer" style="border-top:none;padding-top:4px">' +
+      '<button type="button" class="sr-btn sr-btn-yellow" onclick="window.location.href=\'https://app.hogarex.ar\'">Volver al inicio</button>' +
+      '</div>';
+  }
+};
+
+function optCard(group, id, label, iconName, selected) {
+  return '<button type="button" class="sr-opt' + (selected ? ' selected' : '') + '" data-group="' + group + '" data-id="' + id + '">' +
+    '<span class="sr-opt-icon">' + ic(iconName, 18) + '</span>' +
+    '<span class="sr-opt-label">' + escapeHtml(label) + '</span>' +
+    '</button>';
+}
+function optRow(group, id, label, note, selected) {
+  return '<button type="button" class="sr-opt sr-opt-row' + (selected ? ' selected' : '') + '" data-group="' + group + '" data-id="' + id + '">' +
+    '<span class="sr-opt-icon">' + ic('dots', 16) + '</span>' +
+    '<span style="flex:1"><span class="sr-opt-label" style="display:block">' + escapeHtml(label) + '</span>' +
+    '<span class="sr-opt-note">' + note + '</span></span>' +
+    '</button>';
+}
+function summaryRow(label, value, editTarget) {
+  var editBtn = editTarget ? ' <button type="button" class="sr-summary-edit" data-edit="' + editTarget + '">Cambiar</button>' : '';
+  return '<div class="sr-summary-row"><span>' + label + '</span><span>' + escapeHtml(value || '') + editBtn + '</span></div>';
+}
+function escapeHtml(s) {
+  return (s || '').replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+
+function bindStepEvents(id) {
+  if (id === 'rubro' || id === 'categoria' || id === 'detalle') {
+    var opts = srBody.querySelectorAll('.sr-opt');
+    opts.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var group = btn.getAttribute('data-group');
+        var val = btn.getAttribute('data-id');
+        if (group === 'rubro') { state.rubro = val; state.categoria = ''; state.detalle = ''; }
+        if (group === 'categoria') { state.categoria = val; state.detalle = ''; }
+        if (group === 'detalle') { state.detalle = val; }
+        opts.forEach(function (b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        validateStep();
+        selectAndAdvance();
+      });
+    });
+  } else if (id === 'ubicacion') {
+    var sel = document.getElementById('srUbicacionSelect');
+    sel.addEventListener('change', function () { state.ubicacion = sel.value; validateStep(); });
+  } else if (id === 'estimate') {
+    var ta = document.getElementById('srDescripcion');
+    ta.addEventListener('input', function () { state.descripcion = ta.value; });
+    srBody.querySelectorAll('[data-edit]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var idx = STEP_ORDER.indexOf(btn.getAttribute('data-edit'));
+        if (idx === -1) return;
+        stepIndex = idx;
+        renderStep();
+      });
+    });
+  } else if (id === 'contacto') {
+    var nombre = document.getElementById('srNombre');
+    var tel = document.getElementById('srTelefono');
+    nombre.addEventListener('input', function () { state.nombre = nombre.value; validateStep(); });
+    tel.addEventListener('input', function () { state.telefono = tel.value; validateStep(); });
+  }
+}
+
+/* ============================================================
+   Envío. TODO: reemplazar por integración real con Bubble
+   (API workflow que reciba este payload y notifique por WhatsApp
+   a los profesionales correspondientes). Por ahora solo arma el
+   payload estructurado y muestra la confirmación local.
+   ============================================================ */
+function buildPayload() {
+  var detalleObj = (JOB_TREE[state.rubro].detalles[state.categoria] || []).filter(function (o) { return o.id === state.detalle; })[0];
+  return {
+    tipo: state.isDirect ? 'directa' : 'general',
+    trader_uid: state.trader || null,
+    nombre_profesional: state.nombreProfesional || null,
+    rubro: state.rubro,
+    categoria: state.categoria,
+    detalle: state.detalle,
+    detalle_label: detalleObj ? detalleObj.label : '',
+    estimado_min: detalleObj ? detalleObj.price[0] : null,
+    estimado_max: detalleObj ? detalleObj.price[1] : null,
+    urgente: !!(detalleObj && detalleObj.urgente),
+    ubicacion: state.ubicacion,
+    descripcion: state.descripcion,
+    nombre_cliente: state.nombre,
+    telefono_cliente: state.telefono,
+    origen: window.location.href
+  };
+}
+function submitSolicitud() {
+  var payload = buildPayload();
+  // console.log('Hogarex solicitud (preview, aún sin backend Bubble):', payload);
+  window._hogarexUltimaSolicitud = payload;
+  stepIndex = STEP_ORDER.indexOf('success');
+  renderStep();
+}
+
+/* Si llega con rubro/trader por query string, abrir el wizard automáticamente */
+if (presetRubro || presetTrader) {
+  window.addEventListener('DOMContentLoaded', function () {
+    openWizard();
+  });
+}
+</script>
+
+</body>
+</html>
