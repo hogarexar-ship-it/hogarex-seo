@@ -87,6 +87,7 @@ STATIC_PAGES = [
     ("/", "daily", "1.0"),
     ("/profesionales", "weekly", "0.9"),
     ("/precios-mano-de-obra", "monthly", "0.8"),
+    ("/sumate", "monthly", "0.9"),
     ("/preguntas-frecuentes", "monthly", "0.8"),
     ("/glosario", "monthly", "0.7"),
     ("/electricistas", "monthly", "1.0"),
@@ -424,7 +425,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   </nav>
   <div class="hgx-nm-actions">
     <a href="https://hogarex.ar/busqueda" class="hgx-nm-btn hgx-nm-btn-outline">Buscar profesional</a>
-    <a href="https://hogarex.ar/registro_profesional" class="hgx-nm-btn hgx-nm-btn-outline">Soy profesional</a>
+    <a href="https://app.hogarex.ar/sumate" class="hgx-nm-btn hgx-nm-btn-outline">Soy profesional</a>
     <a href="https://hogarex.ar/solicitud-enviar" class="hgx-nm-btn hgx-nm-btn-yellow">Pedir presupuesto gratis</a>
   </div>
 </div>
