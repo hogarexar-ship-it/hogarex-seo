@@ -720,6 +720,7 @@ PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - 
   <a href="{cta_url}" class="btn-yellow">Pedir presupuesto</a>
 </div>
 
+<script src="/assets/wizard-cta.js" defer></script>
 </body>
 </html>
 """
@@ -1366,6 +1367,7 @@ function hgxFilter() {{
 }}
 </script>
 
+<script src="/assets/wizard-cta.js" defer></script>
 </body>
 </html>
 """
