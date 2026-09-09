@@ -180,7 +180,7 @@
   <div class="hgx-nm-actions">
     <a href="https://hogarex.ar/busqueda" class="hgx-nm-btn hgx-nm-btn-outline">Buscar profesional</a>
     <a href="https://app.hogarex.ar/sumate" class="hgx-nm-btn hgx-nm-btn-outline">Soy profesional</a>
-    <a href="https://hogarex.ar/solicitud-enviar" class="hgx-nm-btn hgx-nm-btn-yellow">Pedir presupuesto gratis</a>
+    <a href="https://hogarex.ar/solicitud-enviar" class="hgx-nm-btn hgx-nm-btn-yellow" onclick="event.preventDefault();document.getElementById('hgx-nm-panel').classList.remove('hgx-nm-open');document.getElementById('hgx-nm-overlay').classList.remove('hgx-nm-open');document.body.style.overflow='';openWizardFresh();">Pedir presupuesto gratis</a>
   </div>
 </div>
 <script>
@@ -230,7 +230,7 @@ Que se especializan en otros rubros también.</p>
 
 <div class="modal-cta">
   <p>&iquest;Necesit&aacute;s un gasista en Buenos Aires (GBA)?</p>
-  <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28GBA%29" class="btn-yellow">Pedir presupuesto a un gasista en Buenos Aires (GBA)</a>
+  <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28GBA%29" onclick="event.preventDefault();hgxOpenBudget('Gasista','Buenos Aires (GBA)');" class="btn-yellow">Pedir presupuesto a un gasista en Buenos Aires (GBA)</a>
 </div>
 
 <footer>
@@ -270,7 +270,7 @@ Que se especializan en otros rubros también.</p>
 
 <div class="cta-bar">
   <p>&iquest;Necesit&aacute;s un gasista en Buenos Aires (GBA)?</p>
-  <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28GBA%29" class="btn-yellow">Pedir presupuesto</a>
+  <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28GBA%29" onclick="event.preventDefault();hgxOpenBudget('Gasista','Buenos Aires (GBA)');" class="btn-yellow">Pedir presupuesto</a>
 </div>
 
 <script src="/assets/wizard-cta.js" defer></script>

@@ -360,7 +360,7 @@
   <div class="hgx-nm-actions">
     <a href="https://hogarex.ar/busqueda" class="hgx-nm-btn hgx-nm-btn-outline">Buscar profesional</a>
     <a href="https://app.hogarex.ar/sumate" class="hgx-nm-btn hgx-nm-btn-outline">Soy profesional</a>
-    <a href="https://hogarex.ar/solicitud-enviar" class="hgx-nm-btn hgx-nm-btn-yellow">Pedir presupuesto gratis</a>
+    <a href="https://hogarex.ar/solicitud-enviar" class="hgx-nm-btn hgx-nm-btn-yellow" onclick="event.preventDefault();document.getElementById('hgx-nm-panel').classList.remove('hgx-nm-open');document.getElementById('hgx-nm-overlay').classList.remove('hgx-nm-open');document.body.style.overflow='';openWizardFresh();">Pedir presupuesto gratis</a>
   </div>
 </div>
 <style>
@@ -499,7 +499,7 @@
         <div class="stars">★★★★★</div>
         <div class="prof-desc">Gasista matriculado con 12 años de experiencia. Calefones, estufas y certificados. Trabajo prolijo y con garantía.</div>
         <div class="prof-pop">↑ Popular</div>
-        <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
+        <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28CABA%29" onclick="event.preventDefault();hgxOpenBudget('Gasista','Buenos Aires (CABA)');" class="btn-pedir">Pedir presupuesto</a>
       </div>
       <div class="prof-card">
         <div class="prof-top"><div class="prof-av" style="background:var(--blue)">DM</div><div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span><span class="vbadge-lic"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Matrícula verificada</span></div></div>
@@ -508,7 +508,7 @@
         <div class="stars">★★★★★</div>
         <div class="prof-desc">Especialista en calefacción y certificados de gas. Atiendo CABA y GBA. Disponible fines de semana.</div>
         <div class="prof-pop">↑ Popular</div>
-        <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
+        <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28CABA%29" onclick="event.preventDefault();hgxOpenBudget('Gasista','Buenos Aires (CABA)');" class="btn-pedir">Pedir presupuesto</a>
       </div>
       <div class="prof-card">
         <div class="prof-top"><div class="prof-av" style="background:#065f46">PV</div><div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span><span class="vbadge-lic"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Matrícula verificada</span></div></div>
@@ -517,7 +517,7 @@
         <div class="stars">★★★★★</div>
         <div class="prof-desc">Instalaciones de gas natural y certificaciones ante Metrogas. Presupuesto sin cargo.</div>
         <div class="prof-pop">↑ Popular</div>
-        <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
+        <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28CABA%29" onclick="event.preventDefault();hgxOpenBudget('Gasista','Buenos Aires (CABA)');" class="btn-pedir">Pedir presupuesto</a>
       </div>
       <div class="prof-card">
         <div class="prof-top"><div class="prof-av" style="background:#0f766e">OP</div><div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span><span class="vbadge-lic"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Matrícula verificada</span></div></div>
@@ -526,7 +526,7 @@
         <div class="stars">★★★★★</div>
         <div class="prof-desc">Certificaciones de gas para habilitaciones y alquileres. Turnos en 48-72hs según disponibilidad.</div>
         <div class="prof-pop">↑ Popular</div>
-        <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
+        <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28CABA%29" onclick="event.preventDefault();hgxOpenBudget('Gasista','Buenos Aires (CABA)');" class="btn-pedir">Pedir presupuesto</a>
       </div>
       <div class="prof-card">
         <div class="prof-top"><div class="prof-av" style="background:#7c3aed">NM</div><div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span><span class="vbadge-lic"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Matrícula verificada</span></div></div>
@@ -535,7 +535,7 @@
         <div class="stars">★★★★★</div>
         <div class="prof-desc">Instalación y service de calefones y calderas. Trabajo con matrícula habilitante vigente.</div>
         <div class="prof-pop">↑ Popular</div>
-        <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
+        <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28CABA%29" onclick="event.preventDefault();hgxOpenBudget('Gasista','Buenos Aires (CABA)');" class="btn-pedir">Pedir presupuesto</a>
       </div>
       <div class="prof-card">
         <div class="prof-top"><div class="prof-av" style="background:#b45309">FT</div><div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span><span class="vbadge-lic"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Matrícula verificada</span></div></div>
@@ -544,7 +544,7 @@
         <div class="stars">★★★★★</div>
         <div class="prof-desc">Urgencias por olor a gas o pérdidas, disponible todos los días. Prioridad a casos de riesgo.</div>
         <div class="prof-pop">↑ Popular</div>
-        <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
+        <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28CABA%29" onclick="event.preventDefault();hgxOpenBudget('Gasista','Buenos Aires (CABA)');" class="btn-pedir">Pedir presupuesto</a>
       </div>
       <div class="prof-card">
         <div class="prof-top"><div class="prof-av" style="background:#be123c">RG</div><div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span><span class="vbadge-lic"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Matrícula verificada</span></div></div>
@@ -553,7 +553,7 @@
         <div class="stars">★★★★★</div>
         <div class="prof-desc">Instalación de estufas de tiro balanceado. Certifico ante Metrogas y Naturgy según corresponda.</div>
         <div class="prof-pop">↑ Popular</div>
-        <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
+        <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28CABA%29" onclick="event.preventDefault();hgxOpenBudget('Gasista','Buenos Aires (CABA)');" class="btn-pedir">Pedir presupuesto</a>
       </div>
       <div class="prof-card">
         <div class="prof-top"><div class="prof-av" style="background:#0e7490">AS</div><div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span><span class="vbadge-lic"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Matrícula verificada</span></div></div>
@@ -562,7 +562,7 @@
         <div class="stars">★★★★★</div>
         <div class="prof-desc">Detección de fugas con equipo certificado. Presupuesto en el momento, sin vueltas.</div>
         <div class="prof-pop">↑ Popular</div>
-        <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
+        <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28CABA%29" onclick="event.preventDefault();hgxOpenBudget('Gasista','Buenos Aires (CABA)');" class="btn-pedir">Pedir presupuesto</a>
       </div>
       <div class="prof-card">
         <div class="prof-top"><div class="prof-av" style="background:#4d7c0f">IM</div><div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span><span class="vbadge-lic"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Matrícula verificada</span></div></div>
@@ -571,7 +571,7 @@
         <div class="stars">★★★★★</div>
         <div class="prof-desc">Cambio de artefactos a gas y adecuación de instalaciones viejas a la normativa vigente.</div>
         <div class="prof-pop">↑ Popular</div>
-        <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
+        <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28CABA%29" onclick="event.preventDefault();hgxOpenBudget('Gasista','Buenos Aires (CABA)');" class="btn-pedir">Pedir presupuesto</a>
       </div>
       <div class="prof-card">
         <div class="prof-top"><div class="prof-av" style="background:#9d174d">CB</div><div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="vbadge"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"/></svg>Identidad verificada</span><span class="vbadge-lic"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>Matrícula verificada</span></div></div>
@@ -580,7 +580,7 @@
         <div class="stars">★★★★★</div>
         <div class="prof-desc">Certificados de gas para escrituras y alquileres. Trabajo con turno confirmado por WhatsApp.</div>
         <div class="prof-pop">↑ Popular</div>
-        <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28CABA%29" class="btn-pedir">Pedir presupuesto</a>
+        <a href="https://hogarex.ar/solicitud-enviar?rubro=Gasista&ubicacion=Buenos%20Aires%20%28CABA%29" onclick="event.preventDefault();hgxOpenBudget('Gasista','Buenos Aires (CABA)');" class="btn-pedir">Pedir presupuesto</a>
       </div>
     </div>
       <button type="button" class="car-btn car-next" onclick="carScroll(this,1)" aria-label="Siguiente"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>

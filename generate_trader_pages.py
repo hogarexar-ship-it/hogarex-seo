@@ -59,6 +59,13 @@ from collections import Counter
 from datetime import date
 from urllib.parse import quote
 
+def js_str(s):
+    """Escapa un string para embeberlo entre comillas simples dentro de un
+    atributo onclick="..." (HTML con comillas dobles). Usado por los botones
+    "Pedir presupuesto" que llaman a hgxOpenBudget('rubro','ubicacion')."""
+    return (s or "").replace("\\", "\\\\").replace("'", "\\'")
+
+
 REPO_ROOT = os.path.dirname(os.path.abspath(__file__))
 PROFESIONAL_DIR = os.path.join(REPO_ROOT, "profesional")
 SITEMAP_PATH = os.path.join(REPO_ROOT, "sitemap-profesionales.xml")
@@ -455,7 +462,7 @@ HAMBURGER_MENU_HTML = """<div class="hgx-nm-overlay" id="hgx-nm-overlay"></div>
   <div class="hgx-nm-actions">
     <a href="https://hogarex.ar/busqueda" class="hgx-nm-btn hgx-nm-btn-outline">Buscar profesional</a>
     <a href="https://hogarex.ar/registro_profesional" class="hgx-nm-btn hgx-nm-btn-outline">Soy profesional</a>
-    <a href="https://hogarex.ar/solicitud-enviar" class="hgx-nm-btn hgx-nm-btn-yellow">Pedir presupuesto gratis</a>
+    <a href="https://hogarex.ar/solicitud-enviar" class="hgx-nm-btn hgx-nm-btn-yellow" onclick="event.preventDefault();document.getElementById('hgx-nm-panel').classList.remove('hgx-nm-open');document.getElementById('hgx-nm-overlay').classList.remove('hgx-nm-open');document.body.style.overflow='';openWizardFresh();">Pedir presupuesto gratis</a>
   </div>
 </div>
 <script>
@@ -710,14 +717,14 @@ PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - 
 
 <div class="modal-cta">
   <p>&iquest;Necesit&aacute;s un {oficio_esc_lower} en {ubicacion_esc}?</p>
-  <a href="{cta_url}" class="btn-yellow">{cta_label_esc}</a>
+  <a href="{cta_url}" onclick="{cta_onclick}" class="btn-yellow">{cta_label_esc}</a>
 </div>
 
 {footer_html}
 
 <div class="cta-bar">
   <p>&iquest;Necesit&aacute;s un {oficio_esc_lower} en {ubicacion_esc}?</p>
-  <a href="{cta_url}" class="btn-yellow">Pedir presupuesto</a>
+  <a href="{cta_url}" onclick="{cta_onclick}" class="btn-yellow">Pedir presupuesto</a>
 </div>
 
 <script src="/assets/wizard-cta.js" defer></script>
@@ -801,6 +808,9 @@ def render_page(trader, url):
     # CTA con texto especifico de rubro+ubicacion (no generico "pedir presupuesto")
     # para intencion de busqueda alta y coincidencia semantica con la query.
     cta_label = f"Pedir presupuesto a un {oficio.lower()} en {ubicacion}"
+    # El boton "Pedir presupuesto" abre el wizard en la misma pagina (no
+    # redirige); cta_url queda como fallback href para navegadores sin JS.
+    cta_onclick = f"event.preventDefault();hgxOpenBudget('{js_str(oficio)}','{js_str(ubicacion)}');"
     ver_mas_html = (
         f'<a href="{oficio_hub_url}" class="ver-mas-link">'
         f"Ver m&aacute;s {html.escape(pluralize_oficio(oficio).lower())} en {html.escape(ubicacion)} &rarr;</a>"
@@ -825,6 +835,7 @@ def render_page(trader, url):
         faq_html=faq_html,
         description_esc=html.escape(description),
         cta_url=cta_url,
+        cta_onclick=cta_onclick,
         contact_url=contact_url,
         main_profile_url=main_profile_url,
         cta_label_esc=html.escape(cta_label),
@@ -932,7 +943,7 @@ HUB_CARD_TEMPLATE = """      <div class="prof-card">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <div class="prof-desc">{description_esc}</div>
         <div class="prof-pop">&uarr; Popular</div>
-        <a href="{pedir_url}" class="btn-pedir">Pedir presupuesto</a>
+        <a href="{pedir_url}" onclick="{pedir_onclick}" class="btn-pedir">Pedir presupuesto</a>
       </div>
 """
 
@@ -991,6 +1002,7 @@ def render_hub_card(trader, index, url):
     # y ubicacion, no al perfil de un trader puntual.
     cta_url = f"https://hogarex.ar/perfilprofesional/{quote(trader['Slug'])}"
     pedir_url = f"https://hogarex.ar/solicitud-enviar?rubro={quote(oficio)}&ubicacion={quote(ubicacion)}"
+    pedir_onclick = f"event.preventDefault();hgxOpenBudget('{js_str(oficio)}','{js_str(ubicacion)}');"
 
     return HUB_CARD_TEMPLATE.format(
         avatar_html=avatar_html,
@@ -1002,6 +1014,7 @@ def render_hub_card(trader, index, url):
         description_esc=html.escape(description),
         cta_url=cta_url,
         pedir_url=pedir_url,
+        pedir_onclick=pedir_onclick,
     )
 
 
@@ -1065,7 +1078,7 @@ HOME_CARD_TEMPLATE = """      <div class="prof-card">
           <span class="prof-popular">&uarr; Popular</span>
           <span class="prof-loc" style="display:inline-flex;align-items:center;gap:4px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>{ubicacion_esc}</span>
         </div>
-        <a href="{pedir_url}" class="btn-pedir">Pedir presupuesto</a>
+        <a href="{pedir_url}" onclick="{pedir_onclick}" class="btn-pedir">Pedir presupuesto</a>
       </div>
 """
 
@@ -1104,12 +1117,14 @@ def render_home_card(trader, index):
     # va al formulario generico filtrado por rubro y ubicacion (no al perfil).
     cta_url = f"https://hogarex.ar/perfilprofesional/{quote(trader['Slug'])}"
     pedir_url = f"https://hogarex.ar/solicitud-enviar?rubro={quote(oficio)}&ubicacion={quote(ubicacion)}"
+    pedir_onclick = f"event.preventDefault();hgxOpenBudget('{js_str(oficio)}','{js_str(ubicacion)}');"
 
     return HOME_CARD_TEMPLATE.format(
         avatar_html=avatar_html,
         badge_html=badge_html,
         cta_url=cta_url,
         pedir_url=pedir_url,
+        pedir_onclick=pedir_onclick,
         name_esc=html.escape(name),
         oficio_esc=html.escape(oficio),
         ubicacion_esc=html.escape(ubicacion),

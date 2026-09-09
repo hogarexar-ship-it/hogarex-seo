@@ -748,6 +748,21 @@ if (presetRubro || presetTrader) {
        tener que mantener su propia copia de estos datos. */
     window.HGX_JOB_TREE = JOB_TREE;
     window.hgxNormalizeRubro = normalizeRubro;
+    /* Punto de entrada único para todos los botones "Pedir presupuesto"
+       del sitio (tarjetas de profesionales, CTAs de rubro/ubicación,
+       barra fija de perfil, etc.): si el rubro tiene datos de precio
+       en el wizard lo abre directo ahí con la ubicación ya cargada; si
+       no (rubro no cubierto, o sin datos), abre el wizard genérico
+       desde el principio en vez de redirigir a otra página. */
+    function openBudget(rubroLabel, ubicacion) {
+      var norm = rubroLabel ? normalizeRubro(rubroLabel) : '';
+      if (norm && JOB_TREE[norm]) {
+        openWizardWithRubro(norm, ubicacion || '');
+      } else {
+        openWizardFresh();
+      }
+    }
+    window.hgxOpenBudget = openBudget;
   }
 
   if (!document.getElementById('srPopup') && !window.HGX_NO_POPUP) {
