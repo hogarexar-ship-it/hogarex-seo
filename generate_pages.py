@@ -465,6 +465,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 
 {footer_html}
 
+<script src="/assets/wizard-cta.js" defer></script>
 </body>
 </html>
 """
