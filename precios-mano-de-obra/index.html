@@ -139,7 +139,7 @@
   <div class="hgx-nm-actions">
     <a href="https://hogarex.ar/busqueda" class="hgx-nm-btn hgx-nm-btn-outline">Buscar profesional</a>
     <a href="https://app.hogarex.ar/sumate" class="hgx-nm-btn hgx-nm-btn-outline">Soy profesional</a>
-    <a href="https://hogarex.ar/solicitud-enviar" class="hgx-nm-btn hgx-nm-btn-yellow">Pedir presupuesto gratis</a>
+    <a href="https://hogarex.ar/solicitud-enviar" class="hgx-nm-btn hgx-nm-btn-yellow" onclick="event.preventDefault();document.getElementById('hgx-nm-panel').classList.remove('hgx-nm-open');document.getElementById('hgx-nm-overlay').classList.remove('hgx-nm-open');document.body.style.overflow='';openWizardFresh();">Pedir presupuesto gratis</a>
   </div>
 </div>
 <style>
@@ -192,7 +192,7 @@
 <div class="hero">
   <h1>¿Cuánto cobra un electricista, gasista o plomero en 2026?</h1>
   <p>Consultá precios reales de mano de obra por rubro y por trabajo antes de contratar, así sabés cuánto te pueden cobrar. Después, pedí presupuesto gratis a profesionales verificados en tu zona.</p>
-  <a href="https://hogarex.ar/solicitud-enviar" class="btn-yellow">Pedir presupuesto gratis &rarr;</a>
+  <a href="https://hogarex.ar/solicitud-enviar" onclick="event.preventDefault();openWizardFresh();" class="btn-yellow">Pedir presupuesto gratis &rarr;</a>
   <br>
   <a href="#hgx-tabs" class="btn-outline">Ver precios &darr;</a>
 </div>
@@ -856,7 +856,7 @@
 
       var ctaHtml = '<div class="hgx-cta">' +
         '<p class="hgx-cta-text">¿Buscando ' + rubroTexto + '?</p>' +
-        '<a href="https://hogarex.ar/solicitud-enviar" target="_blank" rel="noopener" class="hgx-cta-btn">Pedir presupuesto</a>' +
+        '<a href="https://hogarex.ar/solicitud-enviar" onclick="event.preventDefault();hgxOpenBudget(\'' + rubroTexto.replace(/'/g, "\\'") + '\');" class="hgx-cta-btn">Pedir presupuesto</a>' +
         '</div>';
 
       var middleIndex = Math.floor(rubro.categorias.length / 2);
@@ -901,7 +901,7 @@
 
 <div class="modal-cta">
   <p>&iquest;Ya sab&eacute;s cu&aacute;nto cuesta? Ped&iacute; presupuesto gratis ahora</p>
-  <a href="https://hogarex.ar/solicitud-enviar" class="btn-yellow">Pedir presupuesto gratis</a>
+  <a href="https://hogarex.ar/solicitud-enviar" onclick="event.preventDefault();openWizardFresh();" class="btn-yellow">Pedir presupuesto gratis</a>
 </div>
 
 <footer>
@@ -941,7 +941,7 @@
 
 <div class="cta-bar">
   <p>&iquest;Necesit&aacute;s un profesional?</p>
-  <a href="https://hogarex.ar/solicitud-enviar" class="btn-yellow">Pedir presupuesto</a>
+  <a href="https://hogarex.ar/solicitud-enviar" onclick="event.preventDefault();openWizardFresh();" class="btn-yellow">Pedir presupuesto</a>
 </div>
 
 <script src="/assets/wizard-cta.js" defer></script>

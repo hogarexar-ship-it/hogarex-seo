@@ -180,7 +180,7 @@
   <div class="hgx-nm-actions">
     <a href="https://hogarex.ar/busqueda" class="hgx-nm-btn hgx-nm-btn-outline">Buscar profesional</a>
     <a href="https://app.hogarex.ar/sumate" class="hgx-nm-btn hgx-nm-btn-outline">Soy profesional</a>
-    <a href="https://hogarex.ar/solicitud-enviar" class="hgx-nm-btn hgx-nm-btn-yellow">Pedir presupuesto gratis</a>
+    <a href="https://hogarex.ar/solicitud-enviar" class="hgx-nm-btn hgx-nm-btn-yellow" onclick="event.preventDefault();document.getElementById('hgx-nm-panel').classList.remove('hgx-nm-open');document.getElementById('hgx-nm-overlay').classList.remove('hgx-nm-open');document.body.style.overflow='';openWizardFresh();">Pedir presupuesto gratis</a>
   </div>
 </div>
 <script>
@@ -234,7 +234,7 @@ Sestrancamos cloacas</p>
 
 <div class="modal-cta">
   <p>&iquest;Necesit&aacute;s un plomero en Córdoba Capital?</p>
-  <a href="https://hogarex.ar/solicitud-enviar?rubro=Plomero&ubicacion=C%C3%B3rdoba%20Capital" class="btn-yellow">Pedir presupuesto a un plomero en Córdoba Capital</a>
+  <a href="https://hogarex.ar/solicitud-enviar?rubro=Plomero&ubicacion=C%C3%B3rdoba%20Capital" onclick="event.preventDefault();hgxOpenBudget('Plomero','Córdoba Capital');" class="btn-yellow">Pedir presupuesto a un plomero en Córdoba Capital</a>
 </div>
 
 <footer>
@@ -274,7 +274,7 @@ Sestrancamos cloacas</p>
 
 <div class="cta-bar">
   <p>&iquest;Necesit&aacute;s un plomero en Córdoba Capital?</p>
-  <a href="https://hogarex.ar/solicitud-enviar?rubro=Plomero&ubicacion=C%C3%B3rdoba%20Capital" class="btn-yellow">Pedir presupuesto</a>
+  <a href="https://hogarex.ar/solicitud-enviar?rubro=Plomero&ubicacion=C%C3%B3rdoba%20Capital" onclick="event.preventDefault();hgxOpenBudget('Plomero','Córdoba Capital');" class="btn-yellow">Pedir presupuesto</a>
 </div>
 
 <script src="/assets/wizard-cta.js" defer></script>

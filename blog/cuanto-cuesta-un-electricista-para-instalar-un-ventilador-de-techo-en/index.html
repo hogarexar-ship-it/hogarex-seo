@@ -160,7 +160,7 @@ footer{background:#fff;border-top:1px solid #eef1f6;padding:36px 16px 20px}
   <div class="hgx-nm-actions">
     <a href="https://hogarex.ar/busqueda" class="hgx-nm-btn hgx-nm-btn-outline">Buscar profesional</a>
     <a href="https://app.hogarex.ar/sumate" class="hgx-nm-btn hgx-nm-btn-outline">Soy profesional</a>
-    <a href="https://hogarex.ar/solicitud-enviar" class="hgx-nm-btn hgx-nm-btn-yellow">Pedir presupuesto gratis</a>
+    <a href="https://hogarex.ar/solicitud-enviar" class="hgx-nm-btn hgx-nm-btn-yellow" onclick="event.preventDefault();document.getElementById('hgx-nm-panel').classList.remove('hgx-nm-open');document.getElementById('hgx-nm-overlay').classList.remove('hgx-nm-open');document.body.style.overflow='';openWizardFresh();">Pedir presupuesto gratis</a>
   </div>
 </div>
 <script>
