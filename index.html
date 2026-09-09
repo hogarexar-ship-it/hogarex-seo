@@ -297,13 +297,14 @@
     .problema-head { text-align: center; max-width: 640px; margin: 0 auto 24px; }
     .problema-head h2 { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--navy); margin-bottom: 8px; text-wrap: balance; }
     .problema-head p { font-size: 0.94rem; color: var(--t2); }
-    .problema-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; max-width: 900px; margin: 0 auto; }
+    .problema-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; max-width: 900px; margin: 0 auto; transition: opacity .25s ease; }
+    .problema-grid.problema-fade { opacity: 0; }
     .problema-chip { display: flex; align-items: center; gap: 10px; background: var(--g1); border: 1.5px solid var(--g2); border-radius: 14px; padding: 14px; cursor: pointer; text-align: left; font-family: inherit; transition: border-color .15s ease, background .15s ease, transform .15s ease; }
     .problema-chip:hover { border-color: var(--blue); background: var(--blue-bg); transform: translateY(-1px); }
     .problema-chip-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--blue-bg); color: var(--blue); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .problema-chip-label { display: block; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.88rem; color: var(--navy); line-height: 1.3; }
     .problema-chip-sub { display: block; font-size: 0.76rem; color: var(--t3); margin-top: 2px; }
-    .problema-otro { grid-column: 1 / -1; text-align: center; }
+    .problema-otro { max-width: 900px; margin: 0 auto; text-align: center; }
     .problema-otro button { background: none; border: none; color: var(--blue); font-weight: 700; font-size: 0.88rem; cursor: pointer; padding: 10px; }
     @media (min-width: 640px) {
       .problema-head h2 { font-size: 1.7rem; }
@@ -475,7 +476,7 @@
       <h2>¿Cuál es tu problema hoy?</h2>
       <p>Elegí la opción que más se parece a lo que necesitás y te mostramos un estimado al instante.</p>
     </div>
-    <div class="problema-grid">
+    <div class="problema-grid" id="problemaGrid">
       <button type="button" class="problema-chip" onclick="openWizardForTask('electricista','falla','corte')">
         <span class="problema-chip-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
         <span><span class="problema-chip-label">Se cortó la luz</span><span class="problema-chip-sub">Electricista</span></span>
@@ -508,9 +509,9 @@
         <span class="problema-chip-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c3.87 0 7-3.13 7-7 0-4-3-7-7-13-4 6-7 9-7 13 0 3.87 3.13 7 7 7Z"/></svg></span>
         <span><span class="problema-chip-label">Canilla que gotea</span><span class="problema-chip-sub">Plomero</span></span>
       </button>
-      <div class="problema-otro">
-        <button type="button" onclick="openWizardFresh()">Es otra cosa / no estoy seguro →</button>
-      </div>
+    </div>
+    <div class="problema-otro">
+      <button type="button" onclick="openWizardFresh()">Es otra cosa / no estoy seguro →</button>
     </div>
   </div>
 </section>
@@ -1188,6 +1189,137 @@ function heroSubmit() {
     window.location.href = 'https://hogarex.ar/solicitud-enviar?rubro=' + encodeURIComponent(r) + '&ubicacion=' + encodeURIComponent(u);
   }
 }
+</script>
+<script>
+/* ============================================================
+   "¿Cuál es tu problema hoy?" — cada 5s rota a un grupo distinto
+   de 8 problemas frecuentes, cubriendo los 6 rubros. Los grupos son
+   fijos (no aleatorios) y están armados a partir del propio catálogo
+   de precios del wizard (JOB_TREE en assets/wizard-cta.js, que a su
+   vez sale de AAIERIC/CAGP y relevamiento de mercado 2026), eligiendo
+   en cada rubro los motivos de consulta más habituales: fallas
+   urgentes (corte de luz, pérdida de agua, olor a gas), instalaciones
+   más pedidas (aire acondicionado, placards, tableros) y trámites
+   recurrentes (certificados, mantenimiento).
+   ============================================================ */
+(function () {
+  var grid = document.getElementById('problemaGrid');
+  if (!grid) return;
+
+  var PI = {
+    zap: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+    flame: '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>',
+    droplet: '<path d="M12 22c3.87 0 7-3.13 7-7 0-4-3-7-7-13-4 6-7 9-7 13 0 3.87 3.13 7 7 7Z"/>',
+    brush: '<path d="M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3Z"/><path d="M9 8c-2 3-4 3.5-7 4l8 8c2.5-2.5 3-4.5 4-7"/>',
+    hammer: '<path d="m15 12-8.5 8.5a2.12 2.12 0 1 1-3-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/>',
+    snow: '<line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="7" x2="22" y2="17"/><line x1="2" y1="17" x2="22" y2="7"/>',
+    cam: '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2Z"/><circle cx="12" cy="13" r="4"/>',
+    doc: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/>',
+    check: '<circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/>',
+    alert: '<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+    wrench: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+    plus: '<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>'
+  };
+  function pIcon(name) {
+    return '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + PI[name] + '</svg>';
+  }
+
+  var PROBLEMA_GROUPS = [
+    [
+      { rubro: 'electricista', categoria: 'falla', detalle: 'corte', label: 'Se cortó la luz', sub: 'Electricista', icon: 'zap' },
+      { rubro: 'plomero', categoria: 'falla', detalle: 'perdida', label: 'Pérdida de agua', sub: 'Plomero', icon: 'droplet' },
+      { rubro: 'gasista', categoria: 'falla', detalle: 'olor', label: 'Huele a gas', sub: 'Gasista', icon: 'flame' },
+      { rubro: 'pintor', categoria: 'interior', detalle: 'monoambiente', label: 'Quiero pintar un ambiente', sub: 'Pintor', icon: 'brush' },
+      { rubro: 'instalaciones', categoria: 'aire', detalle: 'split-mediano', label: 'Instalar aire acondicionado', sub: 'Instalaciones', icon: 'snow' },
+      { rubro: 'carpintero', categoria: 'instalar', detalle: 'placard', label: 'Instalar un placard a medida', sub: 'Carpintero', icon: 'hammer' },
+      { rubro: 'electricista', categoria: 'instalar', detalle: 'tablero', label: 'Instalar un tablero eléctrico', sub: 'Electricista', icon: 'plus' },
+      { rubro: 'plomero', categoria: 'falla', detalle: 'canilla', label: 'Canilla que gotea', sub: 'Plomero', icon: 'droplet' }
+    ],
+    [
+      { rubro: 'electricista', categoria: 'falla', detalle: 'chispas', label: 'Chispas o olor a quemado', sub: 'Electricista', icon: 'alert' },
+      { rubro: 'plomero', categoria: 'destape', detalle: 'horizontal', label: 'Caño de desagüe tapado', sub: 'Plomero', icon: 'droplet' },
+      { rubro: 'gasista', categoria: 'falla', detalle: 'calefonapagado', label: 'El calefón no enciende', sub: 'Gasista', icon: 'flame' },
+      { rubro: 'pintor', categoria: 'exterior', detalle: 'frente', label: 'Pintar el frente de la casa', sub: 'Pintor', icon: 'brush' },
+      { rubro: 'instalaciones', categoria: 'seguridad', detalle: 'camaras', label: 'Instalar cámaras de seguridad', sub: 'Instalaciones', icon: 'cam' },
+      { rubro: 'carpintero', categoria: 'puertas', detalle: 'ajuste', label: 'Puerta que no cierra bien', sub: 'Carpintero', icon: 'hammer' },
+      { rubro: 'electricista', categoria: 'falla', detalle: 'tomacorriente', label: 'Un tomacorriente no funciona', sub: 'Electricista', icon: 'zap' },
+      { rubro: 'gasista', categoria: 'instalar', detalle: 'calefon', label: 'Instalar un calefón nuevo', sub: 'Gasista', icon: 'plus' }
+    ],
+    [
+      { rubro: 'electricista', categoria: 'certificado', detalle: 'alquilarvender', label: 'Certificado eléctrico para alquilar o vender', sub: 'Electricista', icon: 'doc' },
+      { rubro: 'plomero', categoria: 'instalar', detalle: 'termotanque', label: 'Instalar un termotanque', sub: 'Plomero', icon: 'plus' },
+      { rubro: 'gasista', categoria: 'certificado', detalle: 'gas3', label: 'Certificado de gas', sub: 'Gasista', icon: 'doc' },
+      { rubro: 'pintor', categoria: 'reparacion', detalle: 'grietas', label: 'Grietas o humedad en la pared', sub: 'Pintor', icon: 'alert' },
+      { rubro: 'instalaciones', categoria: 'mantenimiento', detalle: 'limpieza-ac', label: 'Limpieza de aire acondicionado', sub: 'Instalaciones', icon: 'check' },
+      { rubro: 'carpintero', categoria: 'pisos', detalle: 'lijado', label: 'Lijar y barnizar el piso', sub: 'Carpintero', icon: 'hammer' },
+      { rubro: 'electricista', categoria: 'mantenimiento', detalle: 'revision', label: 'Revisión del tablero eléctrico', sub: 'Electricista', icon: 'check' },
+      { rubro: 'plomero', categoria: 'instalar', detalle: 'bomba', label: 'Instalar una bomba presurizadora', sub: 'Plomero', icon: 'plus' }
+    ],
+    [
+      { rubro: 'electricista', categoria: 'instalar', detalle: 'iluminacion', label: 'Cambiar a luces LED', sub: 'Electricista', icon: 'zap' },
+      { rubro: 'plomero', categoria: 'instalar', detalle: 'artefacto', label: 'Cambiar inodoro o grifería', sub: 'Plomero', icon: 'droplet' },
+      { rubro: 'gasista', categoria: 'instalar', detalle: 'cocina', label: 'Instalar cocina o anafe a gas', sub: 'Gasista', icon: 'flame' },
+      { rubro: 'pintor', categoria: 'impermeabilizacion', detalle: 'azotea', label: 'Impermeabilizar azotea o terraza', sub: 'Pintor', icon: 'droplet' },
+      { rubro: 'instalaciones', categoria: 'aire', detalle: 'split-chico', label: 'Instalar aire acondicionado chico', sub: 'Instalaciones', icon: 'snow' },
+      { rubro: 'carpintero', categoria: 'instalar', detalle: 'cocina', label: 'Mueble de cocina a medida', sub: 'Carpintero', icon: 'hammer' },
+      { rubro: 'electricista', categoria: 'instalar', detalle: 'pat', label: 'Puesta a tierra', sub: 'Electricista', icon: 'zap' },
+      { rubro: 'gasista', categoria: 'mantenimiento', detalle: 'limpieza', label: 'Limpieza de artefactos a gas', sub: 'Gasista', icon: 'check' }
+    ],
+    [
+      { rubro: 'plomero', categoria: 'destape', detalle: 'vertical', label: 'Cañería vertical tapada', sub: 'Plomero', icon: 'alert' },
+      { rubro: 'carpintero', categoria: 'reparar', detalle: 'mueble', label: 'Mueble o cajón roto', sub: 'Carpintero', icon: 'wrench' },
+      { rubro: 'instalaciones', categoria: 'mantenimiento', detalle: 'diagnostico', label: 'Diagnóstico de falla en el aire', sub: 'Instalaciones', icon: 'wrench' },
+      { rubro: 'pintor', categoria: 'interior', detalle: 'dosambientes', label: 'Pintar 2 ambientes + baño', sub: 'Pintor', icon: 'brush' },
+      { rubro: 'gasista', categoria: 'instalar', detalle: 'calefactor', label: 'Instalar calefactor o estufa', sub: 'Gasista', icon: 'flame' },
+      { rubro: 'electricista', categoria: 'instalar', detalle: 'aire', label: 'Punto eléctrico para el aire', sub: 'Electricista', icon: 'zap' },
+      { rubro: 'plomero', categoria: 'mantenimiento', detalle: 'tanquelimp', label: 'Limpieza del tanque de agua', sub: 'Plomero', icon: 'droplet' },
+      { rubro: 'carpintero', categoria: 'puertas', detalle: 'cerradura', label: 'Cambiar una cerradura', sub: 'Carpintero', icon: 'hammer' }
+    ]
+  ];
+
+  function renderGroup(idx) {
+    grid.innerHTML = PROBLEMA_GROUPS[idx].map(function (it) {
+      return '<button type="button" class="problema-chip" onclick="openWizardForTask(\'' + it.rubro + '\',\'' + it.categoria + '\',\'' + it.detalle + '\')">' +
+        '<span class="problema-chip-icon">' + pIcon(it.icon) + '</span>' +
+        '<span><span class="problema-chip-label">' + it.label + '</span><span class="problema-chip-sub">' + it.sub + '</span></span>' +
+        '</button>';
+    }).join('');
+  }
+
+  var groupIndex = 0;
+  var timer = null;
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function next() {
+    groupIndex = (groupIndex + 1) % PROBLEMA_GROUPS.length;
+    grid.classList.add('problema-fade');
+    setTimeout(function () {
+      renderGroup(groupIndex);
+      grid.classList.remove('problema-fade');
+    }, 220);
+  }
+  function start() {
+    if (reduced) return;
+    stop();
+    timer = setInterval(next, 5000);
+  }
+  function stop() {
+    clearInterval(timer);
+  }
+
+  grid.addEventListener('mouseenter', stop);
+  grid.addEventListener('mouseleave', start);
+  grid.addEventListener('touchstart', stop, { passive: true });
+  grid.addEventListener('touchend', function () {
+    clearTimeout(window._problemaTouchTO);
+    window._problemaTouchTO = setTimeout(start, 1500);
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) stop(); else start();
+  });
+
+  start();
+})();
 </script>
 <script src="/assets/wizard-cta.js" defer></script>
 </body>
