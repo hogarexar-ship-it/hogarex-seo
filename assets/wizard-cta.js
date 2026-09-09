@@ -290,7 +290,9 @@ function buildSteps() {
   STEP_ORDER = [];
   if (!presetRubro) STEP_ORDER.push('rubro');
   if (!presetCategoria) STEP_ORDER.push('categoria');
-  if (!presetDetalle) STEP_ORDER.push('detalle');
+  /* Si el usuario contó el problema con sus palabras en "categoria", no
+     tiene sentido pedirle que elija un detalle de una lista que no aplica. */
+  if (!presetDetalle && state.categoria !== '__manual__') STEP_ORDER.push('detalle');
   if (!presetUbicacion) STEP_ORDER.push('ubicacion');
   STEP_ORDER.push('estimate');
   STEP_ORDER.push('contacto');
@@ -453,8 +455,8 @@ function validateStep() {
   var id = currentStepId();
   var ok = true;
   if (id === 'rubro') ok = !!state.rubro;
-  else if (id === 'categoria') ok = !!state.categoria;
-  else if (id === 'detalle') ok = !!state.detalle;
+  else if (id === 'categoria') ok = !!state.categoria && (state.categoria !== '__manual__' || !!(state.descripcion && state.descripcion.trim()));
+  else if (id === 'detalle') ok = !!state.detalle && (state.detalle !== '__manual__' || !!(state.descripcion && state.descripcion.trim()));
   else if (id === 'ubicacion') ok = !!state.ubicacion;
   else if (id === 'estimate') ok = true;
   else if (id === 'contacto') ok = !!state.nombre && isValidPhone(state.telefono);
@@ -464,6 +466,14 @@ function validateStep() {
 function isValidPhone(v) {
   var digits = (v || '').replace(/[^0-9]/g, '');
   return digits.length >= 8;
+}
+
+/* Busca el detalle elegido en el catálogo de precios. Devuelve undefined
+   si el usuario contó el trabajo con sus palabras (categoria o detalle
+   "__manual__"), o si por algún motivo no matchea ningún id conocido. */
+function getDetalleObj() {
+  var list = (JOB_TREE[state.rubro] && JOB_TREE[state.rubro].detalles[state.categoria]) || [];
+  return list.filter(function (o) { return o.id === state.detalle; })[0];
 }
 
 /* ---------- renderers ---------- */
@@ -486,7 +496,12 @@ var STEP_RENDERERS = {
     tree.categorias.forEach(function (c) {
       html += optCard('categoria', c.id, c.label, c.icon, state.categoria === c.id);
     });
+    html += optCard('categoria', '__manual__', 'Otro / no lo encuentro', 'dots', state.categoria === '__manual__');
     html += '</div>';
+    if (state.categoria === '__manual__') {
+      html += '<div class="sr-field" style="margin-top:14px"><label for="srCategoriaManual">Contanos qué necesitás</label>' +
+        '<textarea class="sr-textarea" id="srCategoriaManual" placeholder="Ej: se me rompió la cañería del patio y pierde agua...">' + escapeHtml(state.descripcion) + '</textarea></div>';
+    }
     return html;
   },
   detalle: function () {
@@ -498,7 +513,12 @@ var STEP_RENDERERS = {
       var note = o.urgente ? 'Puede haber recargo por urgencia' : fmtPrice(o.price[0]) + ' – ' + fmtPrice(o.price[1]);
       html += optRow('detalle', o.id, o.label, note, state.detalle === o.id);
     });
+    html += optRow('detalle', '__manual__', 'Otro / no lo encuentro', 'Contanos con tus palabras', state.detalle === '__manual__');
     html += '</div>';
+    if (state.detalle === '__manual__') {
+      html += '<div class="sr-field" style="margin-top:14px"><label for="srDetalleManual">Contanos más</label>' +
+        '<textarea class="sr-textarea" id="srDetalleManual" placeholder="Describí el trabajo que necesitás...">' + escapeHtml(state.descripcion) + '</textarea></div>';
+    }
     return html;
   },
   ubicacion: function () {
@@ -513,23 +533,34 @@ var STEP_RENDERERS = {
     return html;
   },
   estimate: function () {
-    var detalleObj = (JOB_TREE[state.rubro].detalles[state.categoria] || []).filter(function (o) { return o.id === state.detalle; })[0];
-    var price = detalleObj ? detalleObj.price : [0, 0];
+    var detalleObj = getDetalleObj();
+    var isManual = !detalleObj;
+    var price = detalleObj ? detalleObj.price : null;
     var urgente = detalleObj && detalleObj.urgente;
+    var trabajoLabel = detalleObj ? detalleObj.label : 'A confirmar con el profesional';
     var html = '<div class="sr-step-title">Tu estimado</div>' +
-      '<div class="sr-step-sub">Precio de referencia según valores 2026 de mano de obra en CABA/GBA.</div>' +
-      '<div class="sr-estimate-card">' +
-        '<div class="sr-estimate-label">Rango estimado</div>' +
-        '<div class="sr-estimate-price">' + fmtPrice(price[0]) + ' &ndash; ' + fmtPrice(price[1]) + '</div>' +
-        '<div class="sr-estimate-note">Orientativo. El profesional confirma el precio final tras ver el trabajo.</div>' +
-      '</div>' +
-      '<div class="sr-time-row">' + ic('check', 18) + '<span>' + (urgente ? TIEMPO_URGENTE : TIEMPO_NORMAL) + '</span></div>' +
+      '<div class="sr-step-sub">' + (isManual
+        ? 'Nos contaste el trabajo con tus palabras: un profesional confirma el precio.'
+        : 'Precio de referencia según valores 2026 de mano de obra en CABA/GBA.') + '</div>';
+    if (isManual) {
+      html += '<div class="sr-estimate-card">' +
+          '<div class="sr-estimate-label">Sin estimado de referencia</div>' +
+          '<div class="sr-estimate-note" style="opacity:1;font-size:.92rem">Como el trabajo no está en nuestra lista, el profesional revisa el detalle y te confirma el precio.</div>' +
+        '</div>';
+    } else {
+      html += '<div class="sr-estimate-card">' +
+          '<div class="sr-estimate-label">Rango estimado</div>' +
+          '<div class="sr-estimate-price">' + fmtPrice(price[0]) + ' &ndash; ' + fmtPrice(price[1]) + '</div>' +
+          '<div class="sr-estimate-note">Orientativo. El profesional confirma el precio final tras ver el trabajo.</div>' +
+        '</div>';
+    }
+    html += '<div class="sr-time-row">' + ic('check', 18) + '<span>' + (urgente ? TIEMPO_URGENTE : TIEMPO_NORMAL) + '</span></div>' +
       '<div class="sr-summary">' +
         summaryRow('Rubro', RUBRO_LABELS[state.rubro], presetRubro ? null : 'rubro') +
-        summaryRow('Trabajo', detalleObj ? detalleObj.label : '', presetDetalle ? null : 'detalle') +
+        summaryRow('Trabajo', trabajoLabel, presetDetalle ? null : (state.categoria === '__manual__' ? 'categoria' : 'detalle')) +
         summaryRow('Ubicación', state.ubicacion, presetUbicacion ? null : 'ubicacion') +
       '</div>' +
-      '<div class="sr-field"><label for="srDescripcion">Contanos más (opcional)</label>' +
+      '<div class="sr-field"><label for="srDescripcion">Contanos más' + (isManual ? '' : ' (opcional)') + '</label>' +
       '<textarea class="sr-textarea" id="srDescripcion" placeholder="Ej: el corte pasa solo cuando prendo el microondas...">' + escapeHtml(state.descripcion) + '</textarea></div>';
     return html;
   },
@@ -554,7 +585,7 @@ var STEP_RENDERERS = {
       '<p>Preparamos tu solicitud de <strong>' + RUBRO_LABELS[state.rubro] + '</strong> en <strong>' + escapeHtml(state.ubicacion) + '</strong> y abrimos WhatsApp con todo cargado.</p>' +
       '<p>Si no se abrió solo, tocá el botón de abajo y confirmá el envío desde WhatsApp.</p>' +
       '<p>' + msg + '</p>' +
-      '<p>' + (JOB_TREE[state.rubro].detalles[state.categoria].filter(function(o){return o.id===state.detalle;})[0].urgente ? TIEMPO_URGENTE : TIEMPO_NORMAL) + '</p>' +
+      '<p>' + ((getDetalleObj() || {}).urgente ? TIEMPO_URGENTE : TIEMPO_NORMAL) + '</p>' +
       '</div>' +
       '<div class="sr-footer" style="border-top:none;padding-top:4px;flex-direction:column;gap:10px">' +
       '<a class="sr-btn sr-btn-whatsapp" href="' + waUrl + '" target="_blank" rel="noopener">' +
@@ -597,14 +628,24 @@ function bindStepEvents(id) {
         var group = btn.getAttribute('data-group');
         var val = btn.getAttribute('data-id');
         if (group === 'rubro') { state.rubro = val; state.categoria = ''; state.detalle = ''; }
-        if (group === 'categoria') { state.categoria = val; state.detalle = ''; }
+        if (group === 'categoria') { state.categoria = val; state.detalle = ''; buildSteps(); }
         if (group === 'detalle') { state.detalle = val; }
         opts.forEach(function (b) { b.classList.remove('selected'); });
         btn.classList.add('selected');
         validateStep();
-        selectAndAdvance();
+        /* La opción manual necesita que el usuario escriba antes de avanzar:
+           re-renderizamos el paso para mostrar el textarea, sin auto-avance. */
+        if (val === '__manual__') {
+          renderStep();
+        } else {
+          selectAndAdvance();
+        }
       });
     });
+    var catManual = document.getElementById('srCategoriaManual');
+    if (catManual) catManual.addEventListener('input', function () { state.descripcion = catManual.value; validateStep(); });
+    var detManual = document.getElementById('srDetalleManual');
+    if (detManual) detManual.addEventListener('input', function () { state.descripcion = detManual.value; validateStep(); });
   } else if (id === 'ubicacion') {
     var sel = document.getElementById('srUbicacionSelect');
     sel.addEventListener('change', function () { state.ubicacion = sel.value; validateStep(); });
@@ -634,7 +675,7 @@ function bindStepEvents(id) {
    payload estructurado y muestra la confirmación local.
    ============================================================ */
 function buildPayload() {
-  var detalleObj = (JOB_TREE[state.rubro].detalles[state.categoria] || []).filter(function (o) { return o.id === state.detalle; })[0];
+  var detalleObj = getDetalleObj();
   return {
     tipo: state.isDirect ? 'directa' : 'general',
     trader_uid: state.trader || null,
@@ -642,7 +683,7 @@ function buildPayload() {
     rubro: state.rubro,
     categoria: state.categoria,
     detalle: state.detalle,
-    detalle_label: detalleObj ? detalleObj.label : '',
+    detalle_label: detalleObj ? detalleObj.label : (state.categoria === '__manual__' || state.detalle === '__manual__' ? 'Otro (ver descripción)' : ''),
     estimado_min: detalleObj ? detalleObj.price[0] : null,
     estimado_max: detalleObj ? detalleObj.price[1] : null,
     urgente: !!(detalleObj && detalleObj.urgente),
@@ -701,9 +742,15 @@ if (presetRubro || presetTrader) {
     window.openWizardFresh = openWizardFresh;
     window.openWizardForTask = openWizardForTask;
     window.openWizardWithRubro = openWizardWithRubro;
+    /* Expuestos para que páginas con lógica propia (ej. el formulario del
+       hero en index.html) puedan chequear si un rubro tiene datos de
+       precio antes de decidir si abren el wizard acá o redirigen, sin
+       tener que mantener su propia copia de estos datos. */
+    window.HGX_JOB_TREE = JOB_TREE;
+    window.hgxNormalizeRubro = normalizeRubro;
   }
 
-  if (!document.getElementById('srPopup')) {
+  if (!document.getElementById('srPopup') && !window.HGX_NO_POPUP) {
     injectStyle("\n.sr-popup { position: fixed; bottom: 16px; right: 16px; left: 16px; max-width: 360px; margin-left: auto; background: #fff; border-radius: 16px; box-shadow: 0 12px 40px rgba(13,42,94,0.25); padding: 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; z-index: 500; transform: translateY(24px); opacity: 0; visibility: hidden; transition: transform .3s ease, opacity .3s ease, visibility .3s; font-family: 'Inter', -apple-system, sans-serif; }\n.sr-popup.show { transform: translateY(0); opacity: 1; visibility: visible; }\n.sr-popup-close { position: absolute; top: 8px; right: 10px; background: none; border: none; font-size: 18px; line-height: 1; color: #6b7280; cursor: pointer; padding: 4px; }\n.sr-popup-icon { width: 36px; height: 36px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }\n.sr-popup-body { flex: 1; min-width: 180px; }\n.sr-popup-body strong { display: block; font-family: 'Sora', sans-serif; font-size: 0.88rem; color: #003366; margin-bottom: 2px; }\n.sr-popup-body span { display: block; font-size: 0.78rem; color: #6b7280; line-height: 1.4; }\n.sr-popup-btn { width: 100%; text-align: center; background: #F5C518; color: #003366; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.85rem; padding: 10px; border-radius: 999px; text-decoration: none; border: none; cursor: pointer; }\n@media (min-width: 480px) { .sr-popup-btn { width: auto; } }\n");
     document.body.insertAdjacentHTML('beforeend', "<div class=\"sr-popup\" id=\"srPopup\">\n  <button type=\"button\" class=\"sr-popup-close\" id=\"srPopupClose\" aria-label=\"Cerrar\">&times;</button>\n  <div class=\"sr-popup-icon\">\n    <svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z\"/></svg>\n  </div>\n  <div class=\"sr-popup-body\">\n    <strong>\u00bfNecesit\u00e1s un profesional?</strong>\n    <span>Envi\u00e1 tu solicitud gratis y recib\u00ed hasta 3 presupuestos por WhatsApp.</span>\n  </div>\n  <button type=\"button\" class=\"sr-popup-btn\" id=\"srPopupBtn\">Enviar solicitud</button>\n</div>");
 
@@ -735,7 +782,7 @@ if (presetRubro || presetTrader) {
       }
     });
 
-    var initTimer = setTimeout(showPopup, 20000);
+    var initTimer = setTimeout(showPopup, 2000);
     window.addEventListener('scroll', function () {
       var max = document.body.scrollHeight - window.innerHeight;
       var scrolled = max > 0 ? window.scrollY / max : 0;
