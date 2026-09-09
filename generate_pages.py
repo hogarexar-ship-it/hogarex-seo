@@ -452,8 +452,8 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   <div class="article-meta"><span style="display:inline-flex;align-items:center;gap:5px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>{date_esc}</span><span style="display:inline-flex;align-items:center;gap:5px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>{readtime_esc} de lectura</span></div>
 </div>
 
-<div class="article-thumb">
-  <img src="{image}" alt="{tag_esc}" />
+<div class="article-thumb" id="articleThumb">
+  <img src="{image}" alt="{tag_esc}" loading="lazy" onerror="document.getElementById('articleThumb').style.display='none'" />
   {image_credit_html}
 </div>
 
