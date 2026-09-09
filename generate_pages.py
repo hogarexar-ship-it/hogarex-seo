@@ -233,7 +233,7 @@ def build_jsonld(post):
             "@id": f"{url}#article",
             "headline": post["title"],
             "description": post["excerpt"],
-            "image": post["image"],
+            **({"image": post["image"]} if post.get("image") else {}),
             "datePublished": iso_date,
             "dateModified": iso_date,
             "inLanguage": "es-AR",
@@ -261,21 +261,6 @@ def build_jsonld(post):
     return json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False)
 
 
-def build_image_credit_html(post):
-    """Arma la leyenda chica en gris debajo de la imagen citando la fuente,
-    cuando el post trae el campo opcional 'imageCredit' (ej. imagen real de
-    Argentina sacada de un portal periodístico). Si no hay 'imageCredit',
-    no se muestra nada (caso típico: foto "objeto" de Pexels sin personas
-    ni fachadas, que no necesita cita). Solo se muestra el nombre de la
-    fuente como texto plano, sin link (decisión de Pedro, 2026-08-29):
-    el campo 'imageCreditUrl' ya no se renderiza aunque esté presente."""
-    credit = (post.get("imageCredit") or "").strip()
-    if not credit:
-        return ""
-    credit_esc = html.escape(credit)
-    return f'<p class="image-credit">{credit_esc}</p>'
-
-
 PAGE_TEMPLATE = """<!DOCTYPE html>
 <html lang="es-AR">
 <head>
@@ -290,13 +275,11 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   <meta property="og:url" content="{url}" />
   <meta property="og:title" content="{title_esc} | Hogarex" />
   <meta property="og:description" content="{excerpt_esc}" />
-  <meta property="og:image" content="{image}" />
   <meta property="og:locale" content="es_AR" />
   <meta property="og:site_name" content="Hogarex" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="{title_esc} | Hogarex" />
   <meta name="twitter:description" content="{excerpt_esc}" />
-  <meta name="twitter:image" content="{image}" />
   <script type="application/ld+json">
 {jsonld}
   </script>
@@ -357,10 +340,6 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     .article-tag {{ display: inline-block; background: var(--yellow); color: var(--navy); font-size: 0.72rem; font-weight: 700; padding: 3px 12px; border-radius: 999px; margin-bottom: 14px; }}
     .article-hero h1 {{ font-family: 'Sora', sans-serif; font-size: clamp(1.4rem, 3.2vw, 1.9rem); font-weight: 700; color: var(--navy); line-height: 1.3; margin-bottom: 14px; }}
     .article-meta {{ display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.85rem; color: var(--gray-500); margin-bottom: 20px; }}
-    .article-thumb {{ max-width: 740px; margin: 0 auto; padding: 0 24px; }}
-    .article-thumb img {{ width: 100%; max-height: 380px; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow); }}
-    .image-credit {{ font-size: 0.78rem; color: var(--gray-500); margin-top: 6px; text-align: right; }}
-    .image-credit a {{ color: var(--gray-500); text-decoration: underline; }}
     .article-content {{ max-width: 740px; margin: 0 auto; padding: 28px 24px 12px; }}
     .article-content h2 {{ font-family: 'Sora', sans-serif; font-size: 1.15rem; color: var(--navy); margin: 24px 0 10px; }}
     .article-content p {{ font-size: 0.98rem; line-height: 1.75; color: var(--gray-700); margin-bottom: 14px; }}
@@ -452,11 +431,6 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
   <div class="article-meta"><span style="display:inline-flex;align-items:center;gap:5px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>{date_esc}</span><span style="display:inline-flex;align-items:center;gap:5px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>{readtime_esc} de lectura</span></div>
 </div>
 
-<div class="article-thumb" id="articleThumb">
-  <img src="{image}" alt="{tag_esc}" loading="lazy" onerror="document.getElementById('articleThumb').style.display='none'" />
-  {image_credit_html}
-</div>
-
 <main class="article-content">
 {content}
 </main>
@@ -480,11 +454,9 @@ def render_page(post, logo_data_uri):
         date_esc=html.escape(post["date"]),
         readtime_esc=html.escape(post["readTime"]),
         url=url,
-        image=post["image"],
         jsonld=build_jsonld(post),
         content=post["content"],
         logo_data_uri=logo_data_uri,
-        image_credit_html=build_image_credit_html(post),
         footer_css=FOOTER_CSS,
         footer_html=FOOTER_HTML,
     )
