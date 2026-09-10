@@ -678,7 +678,7 @@ PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - 
     <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
-      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" onclick="event.preventDefault();openWizardFresh();">Recibir presupuesto gratis</a>
       <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
   </div>
@@ -705,7 +705,7 @@ PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pages.py - 
   <div class="facts-card">
     {facts_html}
   </div>
-  <a href="{contact_url}" class="btn-yellow btn-contact">Contactar a {name_esc}</a>
+  <a href="{contact_url}" onclick="{contact_onclick}" class="btn-yellow btn-contact">Contactar a {name_esc}</a>
   <a href="{main_profile_url}" class="btn-full-profile">Ver perfil completo &rarr;</a>
   <p>{description_esc}</p>
   <section class="faq-section">
@@ -802,6 +802,12 @@ def render_page(trader, url):
     # rubro+ubicacion como cta_url): usa el mismo id que identifica al
     # trader (_uid, columna "unique id" en el CSV / _id en la Live API).
     contact_url = f"https://hogarex.ar/solicitud-enviar?trader={quote(trader['_uid'])}&rubro={quote(oficio)}"
+    # El boton "Contactar a {name}" abre el wizard en modo solicitud
+    # directa en la misma pagina (no redirige); contact_url queda como
+    # fallback href para navegadores sin JS.
+    contact_onclick = (
+        f"event.preventDefault();openWizardDirect('{js_str(trader['_uid'])}','{js_str(name)}','{js_str(oficio)}');"
+    )
     # Perfil completo del trader en el dominio principal (hogarex.ar), distinto
     # de esta pagina del subdominio app.hogarex.ar/{oficio}/{slug}.
     main_profile_url = f"https://hogarex.ar/perfilprofesional/{quote(trader['Slug'])}"
@@ -837,6 +843,7 @@ def render_page(trader, url):
         cta_url=cta_url,
         cta_onclick=cta_onclick,
         contact_url=contact_url,
+        contact_onclick=contact_onclick,
         main_profile_url=main_profile_url,
         cta_label_esc=html.escape(cta_label),
         ver_mas_html=ver_mas_html,
@@ -1332,7 +1339,7 @@ EXPLORE_PAGE_TEMPLATE = """<!-- generado automaticamente por generate_trader_pag
     <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
-      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" onclick="event.preventDefault();openWizardFresh();">Recibir presupuesto gratis</a>
       <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
   </div>

@@ -146,7 +146,7 @@
     <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
-      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" onclick="event.preventDefault();openWizardFresh();">Recibir presupuesto gratis</a>
       <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
   </div>
@@ -217,7 +217,7 @@
   <div class="facts-card">
     <div class="facts-row"><span>Rubro</span><strong>Pintor</strong></div><div class="facts-row"><span>Ubicación</span><strong>Buenos Aires (GBA)</strong></div>
   </div>
-  <a href="https://hogarex.ar/solicitud-enviar?trader=1771409986684x747481209727615000&rubro=Pintor" class="btn-yellow btn-contact">Contactar a Walter Antonio</a>
+  <a href="https://hogarex.ar/solicitud-enviar?trader=1771409986684x747481209727615000&rubro=Pintor" onclick="event.preventDefault();openWizardDirect('1771409986684x747481209727615000','Walter Antonio','Pintor');" class="btn-yellow btn-contact">Contactar a Walter Antonio</a>
   <a href="https://hogarex.ar/perfilprofesional/walter-antonio-pintor-buenos-aires-gba" class="btn-full-profile">Ver perfil completo &rarr;</a>
   <p>Soy un trabajador con conocimiento en construcción y con más de 20 años de experiencia en empresas llave en mano y construcción de piscinas</p>
   <section class="faq-section">

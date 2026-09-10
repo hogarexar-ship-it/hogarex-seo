@@ -146,7 +146,7 @@
     <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
-      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" onclick="event.preventDefault();openWizardFresh();">Recibir presupuesto gratis</a>
       <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
   </div>
@@ -217,7 +217,7 @@
   <div class="facts-card">
     <div class="facts-row"><span>Rubro</span><strong>Electricista</strong></div><div class="facts-row"><span>Ubicación</span><strong>Buenos Aires (GBA)</strong></div>
   </div>
-  <a href="https://hogarex.ar/solicitud-enviar?trader=1756951205476x842331819107942400&rubro=Electricista" class="btn-yellow btn-contact">Contactar a Diego</a>
+  <a href="https://hogarex.ar/solicitud-enviar?trader=1756951205476x842331819107942400&rubro=Electricista" onclick="event.preventDefault();openWizardDirect('1756951205476x842331819107942400','Diego','Electricista');" class="btn-yellow btn-contact">Contactar a Diego</a>
   <a href="https://hogarex.ar/perfilprofesional/diego-electricista-buenos-aires-gba-5" class="btn-full-profile">Ver perfil completo &rarr;</a>
   <p>instalaciones de aires acondicionados.
 Venta de equipos nuevos y usados con garantía.</p>

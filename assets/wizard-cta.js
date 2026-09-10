@@ -386,6 +386,36 @@ function openWizardWithRubro(rubro, ubicacion) {
   stepIndex = 0;
   openWizard();
 }
+/* Abre el wizard en modo "solicitud directa" a un profesional puntual
+   (botón "Contactar a {nombre}" de cada perfil), en vez de redirigir a
+   /solicitud-enviar?trader=...&rubro=.... Si el rubro del profesional
+   tiene datos de precio en el wizard, lo salta directo a "categoria"
+   (como cualquier otra solicitud); si no (rubro sin catálogo propio,
+   ej. Herrero/Jardinero/Limpieza), saltea rubro/categoria/detalle por
+   completo y va directo a ubicación, igual que cuando el cliente elige
+   "Otro" a mano dentro del wizard. */
+function openWizardDirect(trader, nombre, rubroLabel) {
+  var norm = rubroLabel ? normalizeRubro(rubroLabel) : '';
+  resetWizardState();
+  state.isDirect = true;
+  presetTrader = trader;
+  presetNombre = nombre || '';
+  state.trader = trader;
+  state.nombreProfesional = nombre || '';
+  if (norm && JOB_TREE[norm]) {
+    presetRubro = norm;
+    state.rubro = norm;
+  } else if (rubroLabel) {
+    presetRubro = rubroLabel;
+    state.rubro = rubroLabel;
+    presetCategoria = '__manual__';
+    state.categoria = '__manual__';
+    state.descripcion = 'Necesito un ' + rubroLabel.toLowerCase() + '.';
+  }
+  buildSteps();
+  stepIndex = 0;
+  openWizard();
+}
 srOverlay.addEventListener('click', closeWizard);
 srCloseBtn.addEventListener('click', closeWizard);
 document.addEventListener('keydown', function (e) {
@@ -491,7 +521,7 @@ var STEP_RENDERERS = {
   categoria: function () {
     var tree = JOB_TREE[state.rubro];
     var html = '<div class="sr-step-title">¿Qué necesitás?</div>' +
-      '<div class="sr-step-sub">' + RUBRO_LABELS[state.rubro] + ' &middot; elegí una opción</div>' +
+      '<div class="sr-step-sub">' + escapeHtml(RUBRO_LABELS[state.rubro] || state.rubro) + ' &middot; elegí una opción</div>' +
       '<div class="sr-options" data-group="categoria">';
     tree.categorias.forEach(function (c) {
       html += optCard('categoria', c.id, c.label, c.icon, state.categoria === c.id);
@@ -556,7 +586,7 @@ var STEP_RENDERERS = {
     }
     html += '<div class="sr-time-row">' + ic('check', 18) + '<span>' + (urgente ? TIEMPO_URGENTE : TIEMPO_NORMAL) + '</span></div>' +
       '<div class="sr-summary">' +
-        summaryRow('Rubro', RUBRO_LABELS[state.rubro], presetRubro ? null : 'rubro') +
+        summaryRow('Rubro', RUBRO_LABELS[state.rubro] || state.rubro, presetRubro ? null : 'rubro') +
         summaryRow('Trabajo', trabajoLabel, presetDetalle ? null : (state.categoria === '__manual__' ? 'categoria' : 'detalle')) +
         summaryRow('Ubicación', state.ubicacion, presetUbicacion ? null : 'ubicacion') +
       '</div>' +
@@ -582,7 +612,7 @@ var STEP_RENDERERS = {
     return '<div class="sr-success">' +
       '<div class="sr-success-icon">' + ic('check', 32) + '</div>' +
       '<h2>¡Ya casi, ' + escapeHtml(state.nombre || '') + '!</h2>' +
-      '<p>Preparamos tu solicitud de <strong>' + RUBRO_LABELS[state.rubro] + '</strong> en <strong>' + escapeHtml(state.ubicacion) + '</strong> y abrimos WhatsApp con todo cargado.</p>' +
+      '<p>Preparamos tu solicitud de <strong>' + escapeHtml(RUBRO_LABELS[state.rubro] || state.rubro) + '</strong> en <strong>' + escapeHtml(state.ubicacion) + '</strong> y abrimos WhatsApp con todo cargado.</p>' +
       '<p>Si no se abrió solo, tocá el botón de abajo y confirmá el envío desde WhatsApp.</p>' +
       '<p>' + msg + '</p>' +
       '<p>' + ((getDetalleObj() || {}).urgente ? TIEMPO_URGENTE : TIEMPO_NORMAL) + '</p>' +
@@ -742,6 +772,7 @@ if (presetRubro || presetTrader) {
     window.openWizardFresh = openWizardFresh;
     window.openWizardForTask = openWizardForTask;
     window.openWizardWithRubro = openWizardWithRubro;
+    window.openWizardDirect = openWizardDirect;
     /* Expuestos para que páginas con lógica propia (ej. el formulario del
        hero en index.html) puedan chequear si un rubro tiene datos de
        precio antes de decidir si abren el wizard acá o redirigen, sin

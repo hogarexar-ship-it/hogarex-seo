@@ -146,7 +146,7 @@
     <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
-      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" onclick="event.preventDefault();openWizardFresh();">Recibir presupuesto gratis</a>
       <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
   </div>
@@ -217,7 +217,7 @@
   <div class="facts-card">
     <div class="facts-row"><span>Rubro</span><strong>Electricista</strong></div><div class="facts-row"><span>Ubicación</span><strong>Buenos Aires (CABA)</strong></div>
   </div>
-  <a href="https://hogarex.ar/solicitud-enviar?trader=1760273625146x160975167823544320&rubro=Electricista" class="btn-yellow btn-contact">Contactar a Nereo Nolazco</a>
+  <a href="https://hogarex.ar/solicitud-enviar?trader=1760273625146x160975167823544320&rubro=Electricista" onclick="event.preventDefault();openWizardDirect('1760273625146x160975167823544320','Nereo Nolazco','Electricista');" class="btn-yellow btn-contact">Contactar a Nereo Nolazco</a>
   <a href="https://hogarex.ar/perfilprofesional/nereo-nolazco-electricista-buenos-aires-caba" class="btn-full-profile">Ver perfil completo &rarr;</a>
   <p>Electricista electrisolucion electricista matriculado servi hornos y anafes electricos. 1164700707</p>
   <section class="faq-section">

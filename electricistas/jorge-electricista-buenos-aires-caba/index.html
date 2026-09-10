@@ -146,7 +146,7 @@
     <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
-      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" onclick="event.preventDefault();openWizardFresh();">Recibir presupuesto gratis</a>
       <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
   </div>
@@ -217,7 +217,7 @@
   <div class="facts-card">
     <div class="facts-row"><span>Rubro</span><strong>Electricista</strong></div><div class="facts-row"><span>Ubicación</span><strong>Buenos Aires (CABA)</strong></div>
   </div>
-  <a href="https://hogarex.ar/solicitud-enviar?trader=1781116438991x132542488759500800&rubro=Electricista" class="btn-yellow btn-contact">Contactar a Jorge</a>
+  <a href="https://hogarex.ar/solicitud-enviar?trader=1781116438991x132542488759500800&rubro=Electricista" onclick="event.preventDefault();openWizardDirect('1781116438991x132542488759500800','Jorge','Electricista');" class="btn-yellow btn-contact">Contactar a Jorge</a>
   <a href="https://hogarex.ar/perfilprofesional/jorge-electricista-buenos-aires-caba" class="btn-full-profile">Ver perfil completo &rarr;</a>
   <p>soy jorge electricista</p>
   <section class="faq-section">

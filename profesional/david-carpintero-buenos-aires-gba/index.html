@@ -146,7 +146,7 @@
     <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
-      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" onclick="event.preventDefault();openWizardFresh();">Recibir presupuesto gratis</a>
       <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
   </div>
@@ -217,7 +217,7 @@
   <div class="facts-card">
     <div class="facts-row"><span>Rubro</span><strong>Carpintero</strong></div><div class="facts-row"><span>Ubicación</span><strong>Buenos Aires (GBA)</strong></div>
   </div>
-  <a href="https://hogarex.ar/solicitud-enviar?trader=1763426423837x832374671226175500&rubro=Carpintero" class="btn-yellow btn-contact">Contactar a David</a>
+  <a href="https://hogarex.ar/solicitud-enviar?trader=1763426423837x832374671226175500&rubro=Carpintero" onclick="event.preventDefault();openWizardDirect('1763426423837x832374671226175500','David','Carpintero');" class="btn-yellow btn-contact">Contactar a David</a>
   <a href="https://hogarex.ar/perfilprofesional/david-carpintero-buenos-aires-gba" class="btn-full-profile">Ver perfil completo &rarr;</a>
   <p>Soy constructor,me dedico a la construcción tradicional y en wood frame desde hace 15 años con más de 50 proyectos en mi aber.</p>
   <section class="faq-section">

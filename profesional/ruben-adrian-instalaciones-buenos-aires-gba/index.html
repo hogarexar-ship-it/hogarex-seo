@@ -146,7 +146,7 @@
     <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
-      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" onclick="event.preventDefault();openWizardFresh();">Recibir presupuesto gratis</a>
       <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
   </div>
@@ -217,7 +217,7 @@
   <div class="facts-card">
     <div class="facts-row"><span>Rubro</span><strong>Instalaciones</strong></div><div class="facts-row"><span>Ubicación</span><strong>Buenos Aires (GBA)</strong></div>
   </div>
-  <a href="https://hogarex.ar/solicitud-enviar?trader=1763325585715x188297241456803840&rubro=Instalaciones" class="btn-yellow btn-contact">Contactar a Ruben Adrian</a>
+  <a href="https://hogarex.ar/solicitud-enviar?trader=1763325585715x188297241456803840&rubro=Instalaciones" onclick="event.preventDefault();openWizardDirect('1763325585715x188297241456803840','Ruben Adrian','Instalaciones');" class="btn-yellow btn-contact">Contactar a Ruben Adrian</a>
   <a href="https://hogarex.ar/perfilprofesional/ruben-adrian-instalaciones-buenos-aires-gba" class="btn-full-profile">Ver perfil completo &rarr;</a>
   <p>Soy de zona sur . Claypole.me desempeño en mantenimiento de electricidad domiciliaria e instalación de aire acondicionado</p>
   <section class="faq-section">

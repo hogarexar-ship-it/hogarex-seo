@@ -146,7 +146,7 @@
     <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
-      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" onclick="event.preventDefault();openWizardFresh();">Recibir presupuesto gratis</a>
       <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
   </div>
@@ -217,7 +217,7 @@
   <div class="facts-card">
     <div class="facts-row"><span>Rubro</span><strong>Carpintero</strong></div><div class="facts-row"><span>Ubicación</span><strong>Córdoba Capital</strong></div>
   </div>
-  <a href="https://hogarex.ar/solicitud-enviar?trader=1756989183184x184725683007389700&rubro=Carpintero" class="btn-yellow btn-contact">Contactar a Jose</a>
+  <a href="https://hogarex.ar/solicitud-enviar?trader=1756989183184x184725683007389700&rubro=Carpintero" onclick="event.preventDefault();openWizardDirect('1756989183184x184725683007389700','Jose','Carpintero');" class="btn-yellow btn-contact">Contactar a Jose</a>
   <a href="https://hogarex.ar/perfilprofesional/jose--carpintero-cordoba-capital" class="btn-full-profile">Ver perfil completo &rarr;</a>
   <p>Me presento soy José soy carpintero de aluminio trabaje mucho tiempo en empresa ahora trabajo por mi cuenta ..tengo mi humilde taller soy responsable con mi trabajo y me gusta cumplir con todo tipo de desafíos</p>
   <section class="faq-section">

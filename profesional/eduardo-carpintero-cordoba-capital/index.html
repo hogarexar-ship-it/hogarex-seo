@@ -146,7 +146,7 @@
     <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
-      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" onclick="event.preventDefault();openWizardFresh();">Recibir presupuesto gratis</a>
       <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
   </div>
@@ -217,7 +217,7 @@
   <div class="facts-card">
     <div class="facts-row"><span>Rubro</span><strong>Carpintero</strong></div><div class="facts-row"><span>Ubicación</span><strong>Córdoba Capital</strong></div>
   </div>
-  <a href="https://hogarex.ar/solicitud-enviar?trader=1762908059237x958724030367531000&rubro=Carpintero" class="btn-yellow btn-contact">Contactar a Eduardo</a>
+  <a href="https://hogarex.ar/solicitud-enviar?trader=1762908059237x958724030367531000&rubro=Carpintero" onclick="event.preventDefault();openWizardDirect('1762908059237x958724030367531000','Eduardo','Carpintero');" class="btn-yellow btn-contact">Contactar a Eduardo</a>
   <a href="https://hogarex.ar/perfilprofesional/eduardo-carpintero-cordoba-capital" class="btn-full-profile">Ver perfil completo &rarr;</a>
   <p>Fabricante de muebles</p>
   <section class="faq-section">

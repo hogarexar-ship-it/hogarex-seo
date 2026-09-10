@@ -146,7 +146,7 @@
     <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
-      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" onclick="event.preventDefault();openWizardFresh();">Recibir presupuesto gratis</a>
       <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
   </div>
@@ -217,7 +217,7 @@
   <div class="facts-card">
     <div class="facts-row"><span>Rubro</span><strong>Electricista</strong></div><div class="facts-row"><span>Ubicación</span><strong>Buenos Aires (CABA)</strong></div>
   </div>
-  <a href="https://hogarex.ar/solicitud-enviar?trader=1761405028923x524285921022705660&rubro=Electricista" class="btn-yellow btn-contact">Contactar a Juan</a>
+  <a href="https://hogarex.ar/solicitud-enviar?trader=1761405028923x524285921022705660&rubro=Electricista" onclick="event.preventDefault();openWizardDirect('1761405028923x524285921022705660','Juan','Electricista');" class="btn-yellow btn-contact">Contactar a Juan</a>
   <a href="https://hogarex.ar/perfilprofesional/juan-electricista-buenos-aires-caba-2" class="btn-full-profile">Ver perfil completo &rarr;</a>
   <p>Soy electricista domiciliario e industrial, también reparaciones de lavarropas microondas hornos</p>
   <section class="faq-section">

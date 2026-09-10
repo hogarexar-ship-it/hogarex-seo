@@ -146,7 +146,7 @@
     <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
-      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" onclick="event.preventDefault();openWizardFresh();">Recibir presupuesto gratis</a>
       <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
   </div>
@@ -217,7 +217,7 @@
   <div class="facts-card">
     <div class="facts-row"><span>Rubro</span><strong>Herrero</strong></div><div class="facts-row"><span>Ubicación</span><strong>Buenos Aires (GBA)</strong></div>
   </div>
-  <a href="https://hogarex.ar/solicitud-enviar?trader=1763511549492x714269944558387200&rubro=Herrero" class="btn-yellow btn-contact">Contactar a Martin</a>
+  <a href="https://hogarex.ar/solicitud-enviar?trader=1763511549492x714269944558387200&rubro=Herrero" onclick="event.preventDefault();openWizardDirect('1763511549492x714269944558387200','Martin','Herrero');" class="btn-yellow btn-contact">Contactar a Martin</a>
   <a href="https://hogarex.ar/perfilprofesional/martin-herrero-buenos-aires-gba" class="btn-full-profile">Ver perfil completo &rarr;</a>
   <p>Herrería de obra reparaciones en general</p>
   <section class="faq-section">

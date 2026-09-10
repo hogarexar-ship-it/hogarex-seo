@@ -146,7 +146,7 @@
     <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
-      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" onclick="event.preventDefault();openWizardFresh();">Recibir presupuesto gratis</a>
       <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
   </div>
@@ -217,7 +217,7 @@
   <div class="facts-card">
     <div class="facts-row"><span>Rubro</span><strong>Pintor</strong></div><div class="facts-row"><span>Ubicación</span><strong>Buenos Aires (GBA)</strong></div>
   </div>
-  <a href="https://hogarex.ar/solicitud-enviar?trader=1770670831401x668155160849285100&rubro=Pintor" class="btn-yellow btn-contact">Contactar a Pablo Marcelo</a>
+  <a href="https://hogarex.ar/solicitud-enviar?trader=1770670831401x668155160849285100&rubro=Pintor" onclick="event.preventDefault();openWizardDirect('1770670831401x668155160849285100','Pablo Marcelo','Pintor');" class="btn-yellow btn-contact">Contactar a Pablo Marcelo</a>
   <a href="https://hogarex.ar/perfilprofesional/pablo-marcelo-pintor-buenos-aires-gba" class="btn-full-profile">Ver perfil completo &rarr;</a>
   <p>Trabajamos a consiencia connuam experiencia de más de 15 años en el rubro de pintura y mantenimiento de casas</p>
   <section class="faq-section">

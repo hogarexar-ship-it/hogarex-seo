@@ -146,7 +146,7 @@
     <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
-      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" onclick="event.preventDefault();openWizardFresh();">Recibir presupuesto gratis</a>
       <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
   </div>
@@ -217,7 +217,7 @@
   <div class="facts-card">
     <div class="facts-row"><span>Rubro</span><strong>Albañil</strong></div><div class="facts-row"><span>Ubicación</span><strong>Buenos Aires (GBA)</strong></div><div class="facts-row"><span>Verificado</span><strong><span style="color:#1a7a3c">&check; Sí</span></strong></div>
   </div>
-  <a href="https://hogarex.ar/solicitud-enviar?trader=1762306340508x658437520513564700&rubro=Alba%C3%B1il" class="btn-yellow btn-contact">Contactar a Jose</a>
+  <a href="https://hogarex.ar/solicitud-enviar?trader=1762306340508x658437520513564700&rubro=Alba%C3%B1il" onclick="event.preventDefault();openWizardDirect('1762306340508x658437520513564700','Jose','Albañil');" class="btn-yellow btn-contact">Contactar a Jose</a>
   <a href="https://hogarex.ar/perfilprofesional/jose-albanil-buenos-aires-gba-1" class="btn-full-profile">Ver perfil completo &rarr;</a>
   <p>Soy jose soy oficial albañil con conocimiento en electricidad plomeria cerrajeria pintura y herreria</p>
   <section class="faq-section">
