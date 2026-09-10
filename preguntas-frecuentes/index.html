@@ -95,7 +95,7 @@
     <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
-      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" onclick="event.preventDefault();openWizardFresh();">Recibir presupuesto gratis</a>
       <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
   </div>
@@ -231,7 +231,7 @@
     </details>
     <details class="faq-item" id="contacto-profesional">
       <summary>¿Cómo contacto a un profesional?</summary>
-      <p>Tenés dos opciones: <a href="https://hogarex.ar/solicitud-enviar?rubro=&ubicacion=">enviar una solicitud de presupuesto</a>, con la que recibís hasta 3 presupuestos de profesionales distintos, o buscar en nuestro directorio y enviarle una solicitud directa a un profesional en particular. Una vez que el o los profesionales acepten la solicitud, se van a comunicar con vos por WhatsApp.</p>
+      <p>Tenés dos opciones: <a href="https://hogarex.ar/solicitud-enviar?rubro=&ubicacion=" onclick="event.preventDefault();openWizardFresh();">enviar una solicitud de presupuesto</a>, con la que recibís hasta 3 presupuestos de profesionales distintos, o buscar en nuestro directorio y enviarle una solicitud directa a un profesional en particular. Una vez que el o los profesionales acepten la solicitud, se van a comunicar con vos por WhatsApp.</p>
     </details>
     <details class="faq-item" id="tiempo-respuesta">
       <summary>¿Cuánto tarda en llegar un presupuesto?</summary>

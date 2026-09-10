@@ -146,7 +146,7 @@
     <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
-      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" onclick="event.preventDefault();openWizardFresh();">Recibir presupuesto gratis</a>
       <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
   </div>
@@ -217,7 +217,7 @@
   <div class="facts-card">
     <div class="facts-row"><span>Rubro</span><strong>Gasista</strong></div><div class="facts-row"><span>Ubicación</span><strong>Buenos Aires (GBA)</strong></div>
   </div>
-  <a href="https://hogarex.ar/solicitud-enviar?trader=1757688780728x683124724834500600&rubro=Gasista" class="btn-yellow btn-contact">Contactar a Leonardo Javier</a>
+  <a href="https://hogarex.ar/solicitud-enviar?trader=1757688780728x683124724834500600&rubro=Gasista" onclick="event.preventDefault();openWizardDirect('1757688780728x683124724834500600','Leonardo Javier','Gasista');" class="btn-yellow btn-contact">Contactar a Leonardo Javier</a>
   <a href="https://hogarex.ar/perfilprofesional/leonardo-javier--gasista-buenos-aires-gba" class="btn-full-profile">Ver perfil completo &rarr;</a>
   <p>Soy plomero gasista de 2 categoría 
 Ago todo tipo de trámites ante metrogas.

@@ -146,7 +146,7 @@
     <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
-      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" onclick="event.preventDefault();openWizardFresh();">Recibir presupuesto gratis</a>
       <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
   </div>
@@ -217,7 +217,7 @@
   <div class="facts-card">
     <div class="facts-row"><span>Rubro</span><strong>Instalaciones</strong></div><div class="facts-row"><span>Ubicación</span><strong>Buenos Aires (GBA)</strong></div>
   </div>
-  <a href="https://hogarex.ar/solicitud-enviar?trader=1757532639910x797068245076541400&rubro=Instalaciones" class="btn-yellow btn-contact">Contactar a Axel</a>
+  <a href="https://hogarex.ar/solicitud-enviar?trader=1757532639910x797068245076541400&rubro=Instalaciones" onclick="event.preventDefault();openWizardDirect('1757532639910x797068245076541400','Axel','Instalaciones');" class="btn-yellow btn-contact">Contactar a Axel</a>
   <a href="https://hogarex.ar/perfilprofesional/axel-instalaciones-buenos-aires-gba" class="btn-full-profile">Ver perfil completo &rarr;</a>
   <p>Hola me dedico a la instalación, reparación y mantenimiento de aires acondicionados y heladeras, algo de herrería y reparación de pequeños electrodomésticos. Soy muy dedicado y siempre busco realizar el trabajo lo mejor posible al menor costo, me gusta lo que hago, y con gusto te voy a ayudar en lo que necesites.</p>
   <section class="faq-section">

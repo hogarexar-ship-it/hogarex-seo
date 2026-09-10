@@ -371,7 +371,7 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
     <nav>
       <a href="https://hogarex.ar">Inicio</a>
       <a href="https://app.hogarex.ar/blog" class="active">Blog</a>
-      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" style="background:var(--yellow);color:var(--navy);padding:8px 18px;border-radius:999px;font-weight:700;font-family:'Sora',sans-serif;margin-left:16px;">Recibir presupuesto gratis</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" style="background:var(--yellow);color:var(--navy);padding:8px 18px;border-radius:999px;font-weight:700;font-family:'Sora',sans-serif;margin-left:16px;" onclick="event.preventDefault();openWizardFresh();">Recibir presupuesto gratis</a>
       <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
   </div>

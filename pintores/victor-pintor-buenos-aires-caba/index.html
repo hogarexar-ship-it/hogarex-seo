@@ -146,7 +146,7 @@
     <a href="https://hogarex.ar" class="logo"><img src="/blog/assets/logo-white.png" alt="Hogarex" /></a>
     <nav>
       <a href="https://hogarex.ar" class="nav-home">Inicio</a>
-      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta">Recibir presupuesto gratis</a>
+      <a href="https://hogarex.ar/solicitud-enviar" class="nav-cta" onclick="event.preventDefault();openWizardFresh();">Recibir presupuesto gratis</a>
       <button type="button" id="hgx-nm-toggle" class="hgx-nm-toggle hgx-nm-toggle-dark" aria-label="Abrir menú" aria-expanded="false" aria-controls="hgx-nm-panel"><span></span><span></span><span></span></button>
     </nav>
   </div>
@@ -217,7 +217,7 @@
   <div class="facts-card">
     <div class="facts-row"><span>Rubro</span><strong>Pintor</strong></div><div class="facts-row"><span>Ubicación</span><strong>Buenos Aires (CABA)</strong></div>
   </div>
-  <a href="https://hogarex.ar/solicitud-enviar?trader=1760218219111x293721923416227840&rubro=Pintor" class="btn-yellow btn-contact">Contactar a Víctor</a>
+  <a href="https://hogarex.ar/solicitud-enviar?trader=1760218219111x293721923416227840&rubro=Pintor" onclick="event.preventDefault();openWizardDirect('1760218219111x293721923416227840','Víctor','Pintor');" class="btn-yellow btn-contact">Contactar a Víctor</a>
   <a href="https://hogarex.ar/perfilprofesional/victor-pintor-buenos-aires-caba" class="btn-full-profile">Ver perfil completo &rarr;</a>
   <p>Me especializo en la construcción en general ofreciendo soluciones completas para hogares, oficinas y espacios comerciales. He trabajado en múltiples proyectos que abarcan desde remodelaciones integrales hasta intervenciones específicas, como instalaciones eléctricas, diseño de interiores, aplicación de pintura decorativa y sistemas de impermeabilización.</p>
   <section class="faq-section">
