@@ -63,11 +63,25 @@
     .bc-inner{display:flex;gap:6px;font-size:13px;color:var(--t3)}
     .bc-inner a{color:var(--blue)}.bc-inner a:hover{text-decoration:underline}
     /* HERO */
-    .hero{background:var(--navy);padding:56px 0 64px;border-radius:0 0 32px 32px}
-    .hero-in{text-align:center;max-width:680px;margin:0 auto}
+    .hero{background:var(--navy);padding:56px 0 64px;border-radius:0 0 32px 32px;position:relative;overflow:hidden}
+    .hero::before{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='42'%3E%3Ccircle cx='2' cy='2' r='1.6' fill='%23ffffff'/%3E%3C/svg%3E");opacity:.07;pointer-events:none}
+    .hero::after{content:"";position:absolute;top:-40%;right:-8%;width:55%;height:170%;background:radial-gradient(circle,rgba(32,111,247,.35),transparent 70%);pointer-events:none}
+    .hero-in{position:relative;z-index:1;text-align:center;max-width:680px;margin:0 auto;animation:heroUp .6s ease both}
     .hero h1{font-size:clamp(28px,4vw,38px);font-weight:800;color:#fff;line-height:1.15;letter-spacing:-.5px;margin-bottom:16px}
     .hero-sub{font-size:17px;color:rgba(255,255,255,.75);margin-bottom:32px;line-height:1.6}
-    .hero-acts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+    .hero-acts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
+    .btn-ylg{position:relative}
+    .btn-ylg::after{content:"";position:absolute;inset:0;border-radius:var(--rp);box-shadow:0 0 0 0 rgba(255,204,0,.55);animation:ctaPulse 2.6s ease-out 1.4s 3}
+    .hero-trust{display:inline-flex;align-items:center;gap:12px;padding:10px 18px 10px 10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:999px;backdrop-filter:blur(2px)}
+    .hero-trust-avs{display:flex}
+    .hero-trust-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;background:#7c3aed;border:2px solid var(--navy);margin-left:-8px;flex-shrink:0}
+    .hero-trust-av:first-child{margin-left:0}
+    .hero-trust-av.more{background:rgba(255,255,255,.16);font-size:10px}
+    .hero-trust-txt{font-size:13.5px;color:rgba(255,255,255,.92);text-align:left;line-height:1.3}
+    .hero-trust-txt strong{color:#fff}
+    @keyframes heroUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes ctaPulse{to{box-shadow:0 0 0 14px rgba(255,204,0,0)}}
+    @media (prefers-reduced-motion: reduce){.hero-in{animation:none}.btn-ylg::after{animation:none;display:none}}
     /* RUBROS BAR */
     .rbar{padding:20px 0;background:#fff;border-bottom:1px solid var(--g2)}
     .rbar-in{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;align-items:center}
@@ -417,6 +431,16 @@
       <div class="hero-acts">
         <a href="https://hogarex.ar/solicitud-enviar?rubro=Electricista&ubicacion=Buenos%20Aires%20%28CABA%29" onclick="event.preventDefault();hgxOpenBudget('Electricista','Buenos Aires (CABA)');" class="btn-ylg">Recibir Presupuestos →</a>
         <a href="https://hogarex.ar/busqueda" class="btn-olw">Buscar Profesionales</a>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-avs">
+          <span class="hero-trust-av">JM</span>
+          <span class="hero-trust-av" style="background:var(--blue)">RM</span>
+          <span class="hero-trust-av" style="background:#065f46">AL</span>
+          <span class="hero-trust-av" style="background:#0f766e">SP</span>
+          <span class="hero-trust-av more">+5</span>
+        </div>
+        <span class="hero-trust-txt"><strong>9 electricistas verificados</strong><br>ya trabajan en Palermo</span>
       </div>
       </div>
   </div>
